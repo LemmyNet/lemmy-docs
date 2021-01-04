@@ -1,6 +1,11 @@
 [book]
 authors = ["Felix Ableitner"]
-language = "en"
-multilingual = false
 src = "src"
+
+[language.en]
+name = "English"
 title = "Lemmy Documentation"
+
+#[language.es]
+#name = "Español"
+#title = "Documentación Lemmy"
