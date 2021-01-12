@@ -12,9 +12,18 @@ psql -U lemmy -c "DROP SCHEMA public CASCADE; CREATE SCHEMA public;"
 
 ### Federation
 
-Install the [Docker development dependencies](docker_development.md), and execute:
+Install the [Local development dependencies](local_development.md), and add the following lines to `/etc/hosts`:
 
 ```
-cd docker/federation
-./run-tests.bash
+127.0.0.1       lemmy-alpha
+127.0.0.1       lemmy-beta
+127.0.0.1       lemmy-gamma
+127.0.0.1       lemmy-delta
+127.0.0.1       lemmy-epsilon
+```
+
+Then use the following script to run the tests:
+```
+cd api_tests
+./run-federation-test.bash
 ```
