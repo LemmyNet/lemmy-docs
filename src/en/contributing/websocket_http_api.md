@@ -1,6 +1,6 @@
 # Lemmy API
 
-*Note: this may lag behind the actual API endpoints [here](../src/api). The API should be considered unstable and may change any time.*
+*Note: this may lag behind the actual API endpoints [here](https://github.com/LemmyNet/lemmy-js-client/blob/main/src/http.ts). The API should be considered unstable and may change any time.*
 
 <!-- toc -->
 
@@ -68,11 +68,13 @@ These go wherever there is a `sort` field. The available sort types are:
 
 ## Default Rate limits
 
-These can be edited in your `lemmy.hjson` file.
+These can be edited in your [lemmy.hjson](https://github.com/LemmyNet/lemmy/blob/main/config/defaults.hjson) file.
 
-- 1 per hour for signups and community creation.
-- 1 per 10 minutes for post creation.
-- 30 actions per minute for post voting and comment creation.
+- 3 per hour for signups and community creation.
+- 6 per hour for image posting.
+- 6 per 10 minutes for post creation.
+- 180 actions per minute for post voting and comment creation.
+- 
 - Everything else is not rate-limited.
 
 ## Errors
@@ -86,7 +88,16 @@ These can be edited in your `lemmy.hjson` file.
 
 ### Undoing actions
 
-Whenever you see a `deleted: bool`, `removed: bool`, `read: bool`, `locked: bool`, etc, you can undo this action by sending `false`.
+Whenever you see a `deleted: bool`, `removed: bool`, `read: bool`, `locked: bool`, etc, you can undo this action by sending `false`:
+
+```ts
+// Un-delete a post
+let form: DeletePost = {
+  edit_id: ...
+  deleted: false,
+  auth: ...
+}
+```
 
 ## Websocket vs HTTP
 
@@ -95,9 +106,9 @@ Whenever you see a `deleted: bool`, `removed: bool`, `read: bool`, `locked: bool
 
 ## HTTP 
 
-[http.ts](https://github.com/LemmyNet/lemmy-js-client/blob/v2_api/src/http.ts) has the http methods.
+For documentation of the HTTP API, look at the [http.ts file in lemmy-js-client](https://github.com/LemmyNet/lemmy-js-client/blob/v2_api/src/http.ts).
 
-Endpoints are at `http://host/api/v2/endpoint`
+Endpoints are at `http(s)://host/api/v2/endpoint`
 
 ### Example
 
@@ -107,17 +118,15 @@ async editComment(form: EditComment): Promise<CommentResponse> {
 }
 ```
 
-Type | url | Body Type | Return Type 
-- | - | - | -
-`PUT` | `/comment` | `EditComment` | `CommentResponse`
+| Type | url | Body Type | Return Type |
+| --- | --- | --- | --- |
+| `PUT` | `/comment` | `EditComment` | `CommentResponse` |
 
 ### Testing with Curl
 
 #### Get Example
 
-```
-curl /community/list?sort=Hot
-```
+`curl "http://localhost:8536/api/v2/community/list?sort=Hot"`
 
 #### Post Example
 
@@ -127,10 +136,10 @@ curl -i -H \
 -X POST \
 -d '{
   "comment_id": X,
-  "score": X, // 1 or -1
-  "auth": "..."
+  "score": X,
+  "auth": X
 }' \
-/comment/like
+http://localhost:8536/api/v2/comment/like
 ```
 
 ## Websocket
