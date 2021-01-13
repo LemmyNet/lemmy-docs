@@ -68,7 +68,7 @@ These go wherever there is a `sort` field. The available sort types are:
 
 ## Default Rate limits
 
-These can be edited in your [lemmy.hjson](https://github.com/LemmyNet/lemmy/blob/main/config/defaults.hjson) file.
+These can be edited in your `lemmy.hjson` file, by copying the relevant section from [defaults.hjson](https://github.com/LemmyNet/lemmy/blob/main/config/defaults.hjson).
 
 - 3 per hour for signups and community creation.
 - 6 per hour for image posting.
