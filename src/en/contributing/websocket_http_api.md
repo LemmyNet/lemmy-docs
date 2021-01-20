@@ -42,10 +42,10 @@ Request and response strings are in [JSON format](https://www.json.org).
 
 ### Lemmy Types
 
-- [Source tables, that have the columns / fields](https://github.com/LemmyNet/lemmy-js-client/blob/v2_api/src/interfaces/source.ts)
-- [Aggregates (for things like scores)](https://github.com/LemmyNet/lemmy-js-client/blob/v2_api/src/interfaces/aggregates.ts)
-- [Views - The main lemmy return types](https://github.com/LemmyNet/lemmy-js-client/blob/v2_api/src/interfaces/views.ts)
-- [Request Forms / Responses are in this folder](https://github.com/LemmyNet/lemmy-js-client/tree/v2_api/src/interfaces/api)
+- [Source tables, that have the columns / fields](https://github.com/LemmyNet/lemmy-js-client/blob/main/src/interfaces/source.ts)
+- [Aggregates (for things like scores)](https://github.com/LemmyNet/lemmy-js-client/blob/main/src/interfaces/aggregates.ts)
+- [Views - The main lemmy return types](https://github.com/LemmyNet/lemmy-js-client/blob/main/src/interfaces/views.ts)
+- [Request Forms / Responses are in this folder](https://github.com/LemmyNet/lemmy-js-client/tree/main/src/interfaces/api)
 
 ### Lower-level types
 
@@ -93,7 +93,7 @@ Whenever you see a `deleted: bool`, `removed: bool`, `read: bool`, `locked: bool
 ```ts
 // Un-delete a post
 let form: DeletePost = {
-  edit_id: ...
+  post_id: ...
   deleted: false,
   auth: ...
 }
@@ -106,7 +106,7 @@ let form: DeletePost = {
 
 ## HTTP 
 
-For documentation of the HTTP API, look at the [http.ts file in lemmy-js-client](https://github.com/LemmyNet/lemmy-js-client/blob/v2_api/src/http.ts).
+For documentation of the HTTP API, look at the [http.ts file in lemmy-js-client](https://github.com/LemmyNet/lemmy-js-client/blob/main/src/http.ts).
 
 Endpoints are at `http(s)://host/api/v2/endpoint`
 
@@ -144,7 +144,7 @@ http://localhost:8536/api/v2/comment/like
 
 ## Websocket
 
-The websocket commands are in [websocket.ts](https://github.com/LemmyNet/lemmy-js-client/blob/v2_api/src/websocket.ts), and exactly match the http commands, 
+The websocket commands are in [websocket.ts](https://github.com/LemmyNet/lemmy-js-client/blob/main/src/websocket.ts), and exactly match the http commands, 
 
 Connect to <code>ws://***host***/api/v2/ws</code> to get started.
 
