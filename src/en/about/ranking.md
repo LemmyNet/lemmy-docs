@@ -1,5 +1,7 @@
 # Trending / Hot / Best Sorting algorithm
+
 ## Goals
+
 - During the day, new posts and comments should be near the top, so they can be voted on.
 - After a day or so, the time factor should go away.
 - Use a log scale, since votes tend to snowball, and so the first 10 votes are just as important as the next hundred.
@@ -7,6 +9,7 @@
 ## Implementations
 
 ### Reddit
+
 Does not take the lifetime of the thread into account, [giving early comments an overwhelming advantage over later ones,](https://minimaxir.com/2016/11/first-comment/) with the effect being even worse in small communities. New comments pool at the bottom of the thread, effectively killing off discussion and making each thread a race to comment early.  This lowers the quality of conversation and rewards comments that are repetitive and spammy.
 
 ### Hacker News
@@ -35,3 +38,9 @@ Gravity = Decay gravity, 1.8 is default
 A plot of rank over 24 hours, of scores of 1, 5, 10, 100, 1000, with a scale factor of 10k.
 
 ![](rank_algorithm.png)
+
+#### Active User counts
+
+Lemmy also shows counts of *active users* for your site, and its communities. These are counted within the last `day`, `week`, `month`, and `half year`, and are cached on starting up lemmy, and every hour.
+
+An active user is someone who has posted or commented on our instance or community within the last given time frame. For site counts, only local users are counted. For community counts, federated users are included.
