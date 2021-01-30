@@ -10,7 +10,7 @@ Information about contributing to Lemmy, whether it is translating, testing, des
 
 ## Translating
 
-Check out [Lemmy's Weblate](https://weblate.yerbamate.ml/projects/lemmy/) for translations.
+Check out [Lemmy's Weblate](https://weblate.yerbamate.ml/projects/lemmy/) for translations. You can also help by [translating this documentation](https://github.com/LemmyNet/lemmy-docs#adding-a-new-language).
 
 
 ## Architecture
