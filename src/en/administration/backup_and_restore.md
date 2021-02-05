@@ -52,28 +52,22 @@ update post set url = replace (url, 'old_domain', 'new_domain');
 update post set body = replace (body, 'old_domain', 'new_domain');
 update post set thumbnail_url = replace (thumbnail_url, 'old_domain', 'new_domain');
 
-delete from post_aggregates_fast;
-insert into post_aggregates_fast select * from post_aggregates_view;
-
 -- Comments
 update comment set ap_id = replace (ap_id, 'old_domain', 'new_domain');
 update comment set content = replace (content, 'old_domain', 'new_domain');
 
-delete from comment_aggregates_fast;
-insert into comment_aggregates_fast select * from comment_aggregates_view;
-
 -- User
 update user_ set actor_id = replace (actor_id, 'old_domain', 'new_domain');
+update user_ set inbox_url = replace (inbox_url, 'old_domain', 'new_domain');
+update user_ set shared_inbox_url = replace (shared_inbox_url, 'old_domain', 'new_domain');
 update user_ set avatar = replace (avatar, 'old_domain', 'new_domain');
-
-delete from user_fast;
-insert into user_fast select * from user_view;
 
 -- Community
 update community set actor_id = replace (actor_id, 'old_domain', 'new_domain');
+update community set followers_url = replace (followers_url, 'old_domain', 'new_domain');
+update community set inbox_url = replace (inbox_url, 'old_domain', 'new_domain');
+update community set shared_inbox_url = replace (shared_inbox_url, 'old_domain', 'new_domain');
 
-delete from community_aggregates_fast;
-insert into community_aggregates_fast select * from community_aggregates_view;
 ```
 
 ## More resources
