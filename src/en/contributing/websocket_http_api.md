@@ -164,7 +164,7 @@ To receive websocket messages, you must join a room / context. The four availabl
 `websocat ws://127.0.0.1:8536/api/v2/ws -nt`
 
 A simple test command:
-`{"op": "ListCategories"}`
+`{"op": "ListCategories", "data": {}}`
 
 ### Testing with the WebSocket JavaScript API
 
@@ -175,7 +175,8 @@ var ws = new WebSocket("ws://" + host + "/api/v2/ws");
 ws.onopen = function () {
   console.log("Connection succeed!");
   ws.send(JSON.stringify({
-    op: "ListCategories"
+    op: "ListCategories",
+    data: {}
   }));
 };
 ```
