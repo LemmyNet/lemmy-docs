@@ -24,4 +24,3 @@
   - [Tests](contributing/tests.md)
   - [Federation Development](contributing/federation_development.md)
 - [Code of Conduct](code_of_conduct.md)
-- [Lemmy Council](lemmy_council.md)
