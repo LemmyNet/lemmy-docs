@@ -36,9 +36,6 @@ cargo build
 ### Get the front end source code
 ```
 git clone https://github.com/LemmyNet/lemmy-ui.git --recurse-submodules
-# get the translations
-git submodule init
-git submodule update --remote
 ```
 
 ### Setup postgresql
