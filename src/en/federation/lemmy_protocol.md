@@ -181,7 +181,10 @@ A page with title, and optional URL and text content. The URL often leads to an 
     "id": "https://voyager.lemmy.ml/post/29",
     "type": "Page",
     "attributedTo": "https://voyager.lemmy.ml/u/picard",
-    "to": "https://voyager.lemmy.ml/c/main",
+    "to": [
+      "https://voyager.lemmy.ml/c/main",
+      "https://www.w3.org/ns/activitystreams#Public"
+    ],
     "name": "Test thumbnail 2",
     "content": "blub blub",
     "source": {
@@ -225,7 +228,7 @@ A reply to a post, or reply to another comment. Contains only text (including re
     "id": "https://enterprise.lemmy.ml/comment/95",
     "type": "Note",
     "attributedTo": "https://enterprise.lemmy.ml/u/picard",
-    "to": "https://enterprise.lemmy.ml/c/main",
+    "to": "https://www.w3.org/ns/activitystreams#Public",
     "content": "mmmk",
     "source": {
         "content": "mmmk",
