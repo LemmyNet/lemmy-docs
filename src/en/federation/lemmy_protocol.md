@@ -182,7 +182,7 @@ A page with title, and optional URL and text content. The URL often leads to an 
     "type": "Page",
     "attributedTo": "https://voyager.lemmy.ml/u/picard",
     "to": "https://voyager.lemmy.ml/c/main",
-    "summary": "Test thumbnail 2",
+    "name": "Test thumbnail 2",
     "content": "blub blub",
     "source": {
         "content": "blub blub",
@@ -205,7 +205,7 @@ A page with title, and optional URL and text content. The URL often leads to an 
 |---|---|---|
 | `attributedTo` | yes | ID of the user which created this post |
 | `to` | yes | ID of the community where it was posted to |
-| `summary` | yes | Title of the post |
+| `name` | yes | Title of the post |
 | `content` | no | Body of the post |
 | `url` | no | An arbitrary link to be shared |
 | `image` | no | Thumbnail for `url`, only present if it is an image link |
