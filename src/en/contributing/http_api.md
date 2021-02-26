@@ -70,6 +70,7 @@ http://localhost:8536/api/v2/comment/like
 These features cannot be accessed from the WebSocket API:
 - [RSS/Atom feeds](#rss-atom-feeds)
 - [Images](#images)
+
 ### RSS/Atom feeds
 
 - All - `/feeds/all.xml?sort=Hot`
@@ -110,4 +111,5 @@ Uploaded content must be valid multipart/form-data with an image array located w
 
 
 # Note
+
 This documentation may lag behind the actual [API endpoints](https://github.com/LemmyNet/lemmy-js-client/blob/main/src/http.ts) and the API itself should be considered unstable (since it may change at any time).
