@@ -21,6 +21,8 @@
   - [Docker Development](contributing/docker_development.md)
   - [Local Development](contributing/local_development.md)
   - [Theming Guide](contributing/theming.md)
+  - [API reference](contributing/api_reference)
+  - [WebSocket API](https://join.lemmy.ml/api/index.html))
   - [HTTP API](contributing/http_api.md)
   - [Creating a Custom Frontend](contributing/custom_frontend.md)
   - [Tests](contributing/tests.md)

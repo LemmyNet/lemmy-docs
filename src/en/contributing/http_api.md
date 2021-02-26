@@ -20,7 +20,7 @@
 
 ## WebSocket vs HTTP API
 Lemmy's HTTP API is almost identical to its WebSocket API:
-- **WebSocket API** needs `let send = { op: userOperation[op], data: form}` as shown in [the WebSocketAPI specification](add_link)
+- **WebSocket API** needs `let send = { op: userOperation[op], data: form}` as shown in [the WebSocketAPI specification](https://join.lemmy.ml/api/index.html))
 - **HTTP API** needs the form (data) at the top level, an HTTP operation (GET, PUT or POST) and endpoint (at `http(s)://host/api/v2/endpoint`). For example:
 
 > `POST {username_or_email: X, password: X}`
