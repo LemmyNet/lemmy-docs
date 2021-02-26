@@ -21,7 +21,7 @@
   - [Docker Development](contributing/docker_development.md)
   - [Local Development](contributing/local_development.md)
   - [Theming Guide](contributing/theming.md)
-  - [Websocket/HTTP API](contributing/websocket_http_api.md)
+  - [HTTP API](contributing/http_api.md)
   - [Creating a Custom Frontend](contributing/custom_frontend.md)
   - [Tests](contributing/tests.md)
   - [Federation Development](contributing/federation_development.md)
