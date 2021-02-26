@@ -68,6 +68,7 @@ http://localhost:8536/api/v2/comment/like
 ## HTTP API exclusive features
 
 These features cannot be accessed from the WebSocket API:
+
 - [RSS/Atom feeds](#rss-atom-feeds)
 - [Images](#images)
 
