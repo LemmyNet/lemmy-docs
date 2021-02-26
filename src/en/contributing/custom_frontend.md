@@ -1,6 +1,6 @@
 # Creating a Custom Frontend
 
-The backend and frontend are completely decoupled, and run in independent Docker containers. They only communicate over the [Lemmy API](websocket_http_api.md), which makes it quite easy to write alternative frontends.
+The backend and frontend are completely decoupled, and run in independent Docker containers. They only communicate over the [Lemmy API](api_reference.md), which makes it quite easy to write alternative frontends.
 
 This creates a lot of potential for custom frontends, which could change much of the design and user experience of Lemmy. For example, it would be possible to create a frontend in the style of a traditional forum like [phpBB](https://www.phpbb.com/), or a question-and-answer site like [stackoverflow](https://stackoverflow.com/). All without having to think about database queries, authentification or ActivityPub, which you essentially get for free.
 
