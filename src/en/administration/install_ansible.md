@@ -2,7 +2,7 @@
 
 This is the same as the [Docker installation](install_docker.md), except that Ansible handles all of it automatically. It also does some extra things like setting up TLS and email for your Lemmy instance.
 
-First, you need to [install Ansible on your local computer](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html). You also need to install the [docker_compose plugin](https://docs.ansible.com/ansible/latest/collections/community/docker/docker_compose_module.html#ansible-collections-community-docker-docker-compose-module) for Ansible.
+First, you need to [install Ansible on your local computer](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html). You also need to install the [docker_compose plugin](https://docs.ansible.com/ansible/latest/collections/community/docker/docker_compose_module.html#id4) for Ansible.
 
 Then run the following commands on your local computer:
 
