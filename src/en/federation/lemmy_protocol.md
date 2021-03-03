@@ -56,10 +56,6 @@ Receives activities from user: `Follow`, `Undo/Follow`, `Create`, `Update`, `Lik
     "type": "Group",
     "preferredUsername": "main",
     "name": "The Main Community",
-    "category": { 
-        "identifier": "1",
-        "name": "Discussion"
-    },
     "sensitive": false,
     "attributedTo": [
         "https://enterprise.lemmy.ml/u/picard",
@@ -98,7 +94,6 @@ Receives activities from user: `Follow`, `Undo/Follow`, `Create`, `Update`, `Lik
 |---|---|---|
 | `preferredUsername` | yes | Name of the actor |
 | `name` | yes | Title of the community |
-| `category` | yes | Hardcoded list of categories, see https://lemmy.ml/api/v1/categories |
 | `sensitive` | yes | True indicates that all posts in the community are nsfw |
 | `attributedTo` | yes | First the community creator, then all the remaining moderators |
 | `content` | no | Text for the community sidebar, usually containing a description and rules |
