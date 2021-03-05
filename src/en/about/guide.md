@@ -16,7 +16,7 @@ Active | Trending sort based on the score, and the most recent comment time.
 Hot | Trending sort based on the score, and the post creation time.
 New | Newest items.
 Most Comments | The posts with the most comments.
-New Comments | The posts that have new comments, IE a forum-style sort.
+New Comments | The posts with recent comments, IE a forum-style sort.
 Top | The highest scoring items in the given time frame.
 
 For more detail, check the [Post and Comment Ranking details](ranking.md).
