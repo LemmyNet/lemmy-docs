@@ -21,6 +21,18 @@ Top | The highest scoring items in the given time frame.
 
 For more detail, check the [Post and Comment Ranking details](ranking.md).
 
+## Moderation / Administration
+
+All moderator and admin actions on users are done on comments or posts, by clicking the `More` 3-dot icon.
+
+This includes:
+
+- Adding / Removing mods or admins.
+- Removing / Restoring comments.
+- Banning / Unbanning users.
+
+All admin actions on communties are done on the community sidebar. This currently only includes Removing / Restoring communities.
+
 ## Markdown Guide
 
 Type | Or | … to Get 
