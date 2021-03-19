@@ -14,30 +14,62 @@ In the following tables, "mandatory" refers to whether or not Lemmy will accept 
 
 <!-- toc -->
 
+- [Context](#context)
 - [Actors](#actors)
   * [Community](#community)
+    + [Community Outbox](#community-outbox)
+    + [Community Followers](#community-followers)
+    + [Community Moderators](#community-moderators)
   * [User](#user)
+    + [User Outbox](#user-outbox)
 - [Objects](#objects)
   * [Post](#post)
   * [Comment](#comment)
   * [Private Message](#private-message)
 - [Activities](#activities)
-  * [Follow](#follow)
-  * [Accept Follow](#accept-follow)
-  * [Unfollow](#unfollow)
-  * [Create or Update Post](#create-or-update-post)
-  * [Create or Update Comment](#create-or-update-comment)
-  * [Like Post or Comment](#like-post-or-comment)
-  * [Dislike Post or Comment](#dislike-post-or-comment)
-  * [Delete Post or Comment](#delete-post-or-comment)
-  * [Remove Post or Comment](#remove-post-or-comment)
-  * [Undo](#undo)
-  * [Announce](#announce)
-  * [Create or Update Private message](#create-or-update-private-message)
-  * [Delete Private Message](#delete-private-message)
-  * [Undo Delete Private Message](#undo-delete-private-message)
+  * [User to Community](#user-to-community)
+    + [Follow](#follow)
+    + [Unfollow](#unfollow)
+    + [Create or Update Post](#create-or-update-post)
+    + [Create or Update Comment](#create-or-update-comment)
+    + [Like Post or Comment](#like-post-or-comment)
+    + [Dislike Post or Comment](#dislike-post-or-comment)
+    + [Delete Post or Comment](#delete-post-or-comment)
+    + [Remove Post or Comment](#remove-post-or-comment)
+    + [Undo](#undo)
+  * [Community to User](#community-to-user)
+    + [Accept Follow](#accept-follow)
+    + [Announce](#announce)
+    + [Remove or Delete Community](#remove-or-delete-community)
+    + [Restore Removed or Deleted Community](#restore-removed-or-deleted-community)
+  * [User to User](#user-to-user)
+    + [Create or Update Private message](#create-or-update-private-message)
+    + [Delete Private Message](#delete-private-message)
+    + [Undo Delete Private Message](#undo-delete-private-message)⏎
 
 <!-- tocstop -->
+
+## Context
+
+```json
+{
+  "@context": [
+    "https://www.w3.org/ns/activitystreams",
+    {
+      "moderators": "as:moderators",
+      "sc": "http://schema.org#",
+      "stickied": "as:stickied",
+      "sensitive": "as:sensitive",
+      "comments_enabled": {
+        "kind": "sc:Boolean",
+        "id": "pt:commentsEnabled"
+    }
+    }
+  ]
+}
+```
+
+The context is identical for all activities and objects.
 
 ## Actors
 
@@ -51,7 +83,7 @@ Receives activities from user: `Follow`, `Undo/Follow`, `Create`, `Update`, `Lik
 
 ```json
 {
-    "@context": "https://www.w3.org/ns/activitystreams",
+    "@context": ...,
     "id": "https://enterprise.lemmy.ml/c/main",
     "type": "Group",
     "preferredUsername": "main",
@@ -61,11 +93,8 @@ Receives activities from user: `Follow`, `Undo/Follow`, `Create`, `Update`, `Lik
         "name": "Discussion"
     },
     "sensitive": false,
-    "attributedTo": [
-        "https://enterprise.lemmy.ml/u/picard",
-        "https://enterprise.lemmy.ml/u/riker"
-    ],
     "content": "Welcome to the default community!",
+    "mediaType": "text/html",
     "source": {
         "content": "Welcome to the default community!",
         "mediaType": "text/markdown"
@@ -81,6 +110,7 @@ Receives activities from user: `Follow`, `Undo/Follow`, `Create`, `Update`, `Lik
     "inbox": "https://enterprise.lemmy.ml/c/main/inbox",
     "outbox": "https://enterprise.lemmy.ml/c/main/outbox",
     "followers": "https://enterprise.lemmy.ml/c/main/followers",
+    "moderators": "https://enterprise.lemmy.ml/c/main/moderators",
     "endpoints": {
         "sharedInbox": "https://enterprise.lemmy.ml/inbox"
     },
@@ -112,6 +142,50 @@ Receives activities from user: `Follow`, `Undo/Follow`, `Create`, `Update`, `Lik
 | `updated` | no | Datetime when the community was last changed |
 | `publicKey` | yes | The public key used to verify signatures from this actor |
    
+#### Community Outbox
+
+```json
+{
+    "@context": ...,
+    "items": [
+      ...
+    ],
+    "totalItems": 3,
+    "id": "https://enterprise.lemmy.ml/c/main/outbox",
+    "type": "OrderedCollection"
+}
+```
+
+The outbox only contains `Create/Post` activities for now.
+
+#### Community Followers
+
+```json
+{
+  "totalItems": 2,
+  "@context": ...,
+  "id": "https://enterprise.lemmy.ml/c/main/followers",
+  "type": "Collection"
+}
+```
+
+The followers collection is only used to expose the number of followers. Actor IDs are not included, to protect user privacy.
+
+#### Community Moderators
+
+```json
+{
+    "items": [
+        "https://enterprise.lemmy.ml/u/picard",
+        "https://enterprise.lemmy.ml/u/riker"
+    ],
+    "totalItems": 2,
+    "@context": ...,
+    "id": "https://enterprise.lemmy.ml/c/main/moderators",
+    "type": "OrderedCollection"
+}
+```
+
 ### User
 
 A person, interacts primarily with the community where it sends and receives posts/comments. Can also create and moderate communities, and send private messages to other users.
@@ -124,12 +198,13 @@ Sends and receives activities from/to other users: `Create/Note`, `Update/Note`,
 
 ```json
 {
-    "@context": "https://www.w3.org/ns/activitystreams",
+    "@context": ...,
     "id": "https://enterprise.lemmy.ml/u/picard",
     "type": "Person",
     "preferredUsername": "picard",
     "name": "Jean-Luc Picard",
     "content": "The user bio",
+    "mediaType": "text/html",
     "source": {
         "content": "The user bio",
         "mediaType": "text/markdown"
@@ -169,6 +244,20 @@ Sends and receives activities from/to other users: `Create/Note`, `Update/Note`,
 | `updated` | no | Datetime when the user profile was last changed |
 | `publicKey` | yes | The public key used to verify signatures from this actor |
 
+#### User Outbox
+
+```json
+{
+    "items": [],
+    "totalItems": 0,
+    "@context": ...,
+    "id": "http://lemmy-alpha:8541/u/lemmy_alpha/outbox",
+    "type": "OrderedCollection"
+}
+```
+
+The user inbox is not actually implemented yet, and is only a placeholder for ActivityPub implementations which require it.
+
 ## Objects
 
 ### Post
@@ -177,7 +266,7 @@ A page with title, and optional URL and text content. The URL often leads to an 
 
 ```json
 {
-    "@context": "https://www.w3.org/ns/activitystreams",
+    "@context": ...,
     "id": "https://voyager.lemmy.ml/post/29",
     "type": "Page",
     "attributedTo": "https://voyager.lemmy.ml/u/picard",
@@ -187,6 +276,7 @@ A page with title, and optional URL and text content. The URL often leads to an 
     ],
     "name": "Test thumbnail 2",
     "content": "blub blub",
+    "mediaType": "text/html",
     "source": {
         "content": "blub blub",
         "mediaType": "text/markdown"
@@ -224,12 +314,13 @@ A reply to a post, or reply to another comment. Contains only text (including re
 
 ```json
 {
-    "@context": "https://www.w3.org/ns/activitystreams",
+    "@context": ...,
     "id": "https://enterprise.lemmy.ml/comment/95",
     "type": "Note",
     "attributedTo": "https://enterprise.lemmy.ml/u/picard",
     "to": "https://www.w3.org/ns/activitystreams#Public",
     "content": "mmmk",
+    "mediaType": "text/html",
     "source": {
         "content": "mmmk",
         "mediaType": "text/markdown"
@@ -258,7 +349,7 @@ A direct message from one user to another. Can not include additional users. Thr
 
 ```json
 {
-    "@context": "https://www.w3.org/ns/activitystreams",
+    "@context": ...,
     "id": "https://enterprise.lemmy.ml/private_message/34",
     "type": "Note",
     "attributedTo": "https://enterprise.lemmy.ml/u/picard",
@@ -284,17 +375,15 @@ A direct message from one user to another. Can not include additional users. Thr
 
 ## Activities
 
-### Follow
+### User to Community
+
+#### Follow
 
 When the user clicks "Subscribe" in a community, a `Follow` is sent. The community automatically responds with an `Accept/Follow`.
 
-Sent by: User
-
-Sent to: Community
-
 ```json
 {
-    "@context": "https://www.w3.org/ns/activitystreams",
+    "@context": ...,
     "id": "https://enterprise.lemmy.ml/activities/follow/2e4784b7-4edf-4fa1-a352-674d5d5f8891",
     "type": "Follow",
     "actor": "https://enterprise.lemmy.ml/u/picard",
@@ -308,54 +397,19 @@ Sent to: Community
 | `actor` | yes | The user that is sending the follow request |
 | `object` | yes | The community to be followed |
 
-### Accept Follow
-
-Automatically sent by the community in response to a `Follow`. At the same time, the community adds this user to its followers list.
-
-Sent by: Community
-
-Sent to: User
-
-```json
-{
-    "@context": "https://www.w3.org/ns/activitystreams",
-    "id": "https://ds9.lemmy.ml/activities/accept/5314bf7c-dab8-4b01-baf2-9be11a6a812e",
-    "type": "Accept",
-    "actor": "https://ds9.lemmy.ml/c/main",
-    "to": "https://enterprise.lemmy.ml/u/picard",
-    "object": {
-        "@context": "https://www.w3.org/ns/activitystreams",
-        "id": "https://enterprise.lemmy.ml/activities/follow/2e4784b7-4edf-4fa1-a352-674d5d5f8891",
-        "type": "Follow",
-        "object": "https://ds9.lemmy.ml/c/main",
-        "actor": "https://enterprise.lemmy.ml/u/picard"
-    }
-}
-```
-
-| Field Name | Mandatory | Description |
-|---|---|---|
-| `actor` | yes | The same community as in the `Follow` activity |
-| `to` | no | ID of the user which sent the `Follow` |
-| `object` | yes | The previously sent `Follow` activity |
-
-### Unfollow
+#### Unfollow
 
 Clicking on the unsubscribe button in a community causes an `Undo/Follow` to be sent. The community removes the user from its follower list after receiving it.
 
-Sent by: User
-
-Sent to: Community
-
 ```json
 {
-    "@context": "https://www.w3.org/ns/activitystreams",
+    "@context": ...,
     "id": "http://lemmy-alpha:8541/activities/undo/2c624a77-a003-4ed7-91cb-d502eb01b8e8",
     "type": "Undo",
     "actor": "http://lemmy-alpha:8541/u/lemmy_alpha",
     "to": "http://lemmy-beta:8551/c/main",
     "object": {
-        "@context": "https://www.w3.org/ns/activitystreams",
+        "@context": ...,
         "id": "http://lemmy-alpha:8541/activities/follow/f0d732e7-b1e7-4857-a5e0-9dc83c3f7ee8",
         "type": "Follow",
         "actor": "http://lemmy-alpha:8541/u/lemmy_alpha",
@@ -363,17 +417,14 @@ Sent to: Community
     }
 }
 ```
-### Create or Update Post
+
+#### Create or Update Post
 
 When a user creates a new post, it is sent to the respective community. Editing a previously created post sends an almost identical activity, except the `type` being `Update`. We don't support mentions in posts yet.
 
-Sent by: User
-
-Sent to: Community
-
 ```json
 {
-    "@context": "https://www.w3.org/ns/activitystreams",
+    "@context": ...,
     "id": "https://enterprise.lemmy.ml/activities/create/6e11174f-501a-4531-ac03-818739bfd07d",
     "type": "Create",
     "actor": "https://enterprise.lemmy.ml/u/riker",
@@ -391,17 +442,13 @@ Sent to: Community
 | `cc` | yes | Community where the post is being made |
 | `object` | yes | The post being created |
 
-### Create or Update Comment
+#### Create or Update Comment
 
 A reply to a post, or to another comment. Can contain mentions of other users. Editing a previously created post sends an almost identical activity, except the `type` being `Update`.
 
-Sent by: User
-
-Sent to: Community
-
 ```json
 {
-    "@context": "https://www.w3.org/ns/activitystreams",
+    "@context": ...,
     "id": "https://enterprise.lemmy.ml/activities/create/6f52d685-489d-4989-a988-4faedaed1a70",
     "type": "Create",
     "actor": "https://enterprise.lemmy.ml/u/riker",
@@ -425,17 +472,13 @@ Sent to: Community
 | `cc` | yes | Community where the post is being made, the user being replied to (creator of the parent post/comment), as well as any mentioned users |
 | `object` | yes | The comment being created |
 
-### Like Post or Comment
+#### Like Post or Comment
 
 An upvote for a post or comment.
 
-Sent by: User
-
-Sent to: Community
-
 ```json
 {
-    "@context": "https://www.w3.org/ns/activitystreams",
+    "@context": ...,
     "id": "https://enterprise.lemmy.ml/activities/like/8f3f48dd-587d-4624-af3d-59605b7abad3",
     "type": "Like",
     "actor": "https://enterprise.lemmy.ml/u/riker",
@@ -452,17 +495,13 @@ Sent to: Community
 | `cc` | yes | ID of the community where the post/comment is |
 | `object` | yes | The post or comment being upvoted |
 
-### Dislike Post or Comment
+#### Dislike Post or Comment
 
 A downvote for a post or comment.
 
-Sent by: User
-
-Sent to: Community
-
 ```json
 {
-    "@context": "https://www.w3.org/ns/activitystreams",
+    "@context": ...,
     "id": "https://enterprise.lemmy.ml/activities/dislike/fd2b8e1d-719d-4269-bf6b-2cadeebba849",
     "type": "Dislike",
     "actor": "https://enterprise.lemmy.ml/u/riker",
@@ -479,17 +518,13 @@ Sent to: Community
 | `cc` | yes | ID of the community where the post/comment is |
 | `object` | yes | The post or comment being upvoted |
 
-### Delete Post or Comment
+#### Delete Post or Comment
 
 Deletes a previously created post or comment. This can only be done by the original creator of that post/comment.
 
-Sent by: User
-
-Sent to: Community
-
 ```json
 {
-    "@context": "https://www.w3.org/ns/activitystreams",
+    "@context": ...,
     "id": "https://enterprise.lemmy.ml/activities/delete/f1b5d57c-80f8-4e03-a615-688d552e946c",
     "type": "Delete",
     "actor": "https://enterprise.lemmy.ml/u/riker",
@@ -506,17 +541,13 @@ Sent to: Community
 | `cc` | yes | ID of the community where the post/comment is |
 | `object` | yes | ID of the post or comment being deleted |
 
-### Remove Post or Comment
+#### Remove Post or Comment
 
 Removes a post or comment. This can only be done by a community mod, or by an admin on the instance where the community is hosted.
 
-Sent by: User
-
-Sent to: Community
-
 ```json
 {
-    "@context": "https://www.w3.org/ns/activitystreams",
+    "@context": ...,
     "id": "https://ds9.lemmy.ml/activities/remove/aab93b8e-3688-4ea3-8212-d00d29519218",
     "type": "Remove",
     "actor": "https://ds9.lemmy.ml/u/sisko",
@@ -533,17 +564,13 @@ Sent to: Community
 | `cc` | yes | ID of the community where the post/comment is |
 | `object` | yes | ID of the post or comment being removed |
 
-### Undo
+#### Undo
 
 Reverts a previous activity, can only be done by the `actor` of `object`. In case of a `Like` or `Dislike`, the vote count is changed back. In case of a `Delete` or `Remove`, the post/comment is restored. The `object` is regenerated from scratch, as such the activity ID and other fields are different.
 
-Sent by: User
-
-Sent to: Community
-
 ```json
 {
-  "@context": "https://www.w3.org/ns/activitystreams",
+  "@context": ...,
   "id": "https://ds9.lemmy.ml/activities/undo/70ca5fb2-e280-4fd0-a593-334b7f8a5916",
   "type": "Undo",
   "actor": "https://ds9.lemmy.ml/u/sisko",
@@ -559,17 +586,42 @@ Sent to: Community
 |---|---|---|
 | `object` | yes | Any `Like`, `Dislike`, `Delete` or `Remove` activity as described above |
 
-### Announce
+### Community to User
 
-When the community receives a post or comment activity, it wraps that into an `Announce` and sends it to all followers.
+#### Accept Follow
 
-Sent by: Community
-
-Sent to: User
+Automatically sent by the community in response to a `Follow`. At the same time, the community adds this user to its followers list.
 
 ```json
 {
-  "@context": "https://www.w3.org/ns/activitystreams",
+    "@context": ...,
+    "id": "https://ds9.lemmy.ml/activities/accept/5314bf7c-dab8-4b01-baf2-9be11a6a812e",
+    "type": "Accept",
+    "actor": "https://ds9.lemmy.ml/c/main",
+    "to": "https://enterprise.lemmy.ml/u/picard",
+    "object": {
+        "@context": ...,
+        "id": "https://enterprise.lemmy.ml/activities/follow/2e4784b7-4edf-4fa1-a352-674d5d5f8891",
+        "type": "Follow",
+        "object": "https://ds9.lemmy.ml/c/main",
+        "actor": "https://enterprise.lemmy.ml/u/picard"
+    }
+}
+```
+
+| Field Name | Mandatory | Description |
+|---|---|---|
+| `actor` | yes | The same community as in the `Follow` activity |
+| `to` | no | ID of the user which sent the `Follow` |
+| `object` | yes | The previously sent `Follow` activity |
+
+#### Announce
+
+When the community receives a post or comment activity, it wraps that into an `Announce` and sends it to all followers.
+
+```json
+{
+  "@context": ...,
   "id": "https://ds9.lemmy.ml/activities/announce/b98382e8-6cb1-469e-aa1f-65c5d2c31cc4",
   "type": "Announce",
   "actor": "https://ds9.lemmy.ml/c/main",
@@ -583,13 +635,15 @@ Sent to: User
 
 | Field Name | Mandatory | Description |
 |---|---|---|
-| `object` | yes | Any `Create`, `Update`, `Like`, `Dislike`, `Delete` `Remove` or `Undo` activity as described above |
+| `object` | yes | Any of the `Create`, `Update`, `Like`, `Dislike`, `Delete` `Remove` or `Undo` activity described in the [User to Community](#user-to-community) section |
 
-### Remove or Delete Community
+#### Remove or Delete Community
+
+An instance admin can remove the community, or a mod can delete it. 
 
 ```json
 {
-  "@context": "https://www.w3.org/ns/activitystreams",
+  "@context": ...,
   "id": "http://ds9.lemmy.ml/activities/remove/e4ca7688-af9d-48b7-864f-765e7f9f3591",
   "type": "Remove",
   "actor": "http://ds9.lemmy.ml/c/some_community",
@@ -605,11 +659,13 @@ Sent to: User
 |---|---|---|
 | `type` | yes | Either `Remove` or `Delete` |
 
-### Restore Removed or Deleted Community 
+#### Restore Removed or Deleted Community
+
+Reverts the removal or deletion.
 
 ```json
 {
-  "@context": "https://www.w3.org/ns/activitystreams",
+  "@context": ...,
   "id": "http://ds9.lemmy.ml/activities/like/0703668c-8b09-4a85-aa7a-f93621936901",
   "type": "Undo",
   "actor": "http://ds9.lemmy.ml/c/some_community",
@@ -618,7 +674,7 @@ Sent to: User
     "http://ds9.lemmy.ml/c/testcom/followers"
   ],
   "object": {
-    "@context": "https://www.w3.org/ns/activitystreams",
+    "@context": ...,
     "id": "http://ds9.lemmy.ml/activities/remove/1062b5e0-07e8-44fc-868c-854209935bdd",
     "type": "Remove",
     "actor": "http://ds9.lemmy.ml/c/some_community",
@@ -635,17 +691,15 @@ Sent to: User
 |---|---|---|
 | `object.type` | yes | Either `Remove` or `Delete` |
 
-### Create or Update Private message 
+### User to User
+
+#### Create or Update Private message 
 
 Creates a new private message between two users.
 
-Sent by: User
-
-Sent to: User
-
 ```json
 {
-    "@context": "https://www.w3.org/ns/activitystreams",
+    "@context": ...,
     "id": "https://ds9.lemmy.ml/activities/create/202daf0a-1489-45df-8d2e-c8a3173fed36",
     "type": "Create",
     "actor": "https://ds9.lemmy.ml/u/sisko",
@@ -657,18 +711,15 @@ Sent to: User
 | Field Name | Mandatory | Description |
 |---|---|---|
 | `type` | yes | Either `Create` or `Update` |
+| `object` | yes | A [Private Message](#private-message) |
 
-### Delete Private Message
+#### Delete Private Message
 
 Deletes a previous private message.
 
-Sent by: User
-
-Sent to: User
-
 ```json
 {
-    "@context": "https://www.w3.org/ns/activitystreams",
+    "@context": ...,
     "id": "https://ds9.lemmy.ml/activities/delete/2de5a5f3-bf26-4949-a7f5-bf52edfca909",
     "type": "Delete",
     "actor": "https://ds9.lemmy.ml/u/sisko",
@@ -677,17 +728,13 @@ Sent to: User
 }
 ```
 
-### Undo Delete Private Message
+#### Undo Delete Private Message
 
 Restores a previously deleted private message. The `object` is regenerated from scratch, as such the activity ID and other fields are different.
 
-Sent by: User
-
-Sent to: User
-
 ```json
 {
-    "@context": "https://www.w3.org/ns/activitystreams",
+    "@context": ...,
     "id": "https://ds9.lemmy.ml/activities/undo/b24bc56d-5db1-41dd-be06-3f1db8757842",
     "type": "Undo",
     "actor": "https://ds9.lemmy.ml/u/sisko",
