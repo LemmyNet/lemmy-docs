@@ -53,19 +53,21 @@ In the following tables, "mandatory" refers to whether or not Lemmy will accept 
 
 ```json
 {
-  "@context": [
-    "https://www.w3.org/ns/activitystreams",
-    {
-      "moderators": "as:moderators",
-      "sc": "http://schema.org#",
-      "stickied": "as:stickied",
-      "sensitive": "as:sensitive",
-      "comments_enabled": {
-        "kind": "sc:Boolean",
-        "id": "pt:commentsEnabled"
-    }
-    }
-  ]
+    "@context": [
+        "https://www.w3.org/ns/activitystreams",
+        {
+            "moderators": "as:moderators",
+            "sc": "http://schema.org#",
+            "stickied": "as:stickied",
+            "sensitive": "as:sensitive",
+            "pt": "https://join.lemmy.ml#",
+            "comments_enabled": {
+                "type": "sc:Boolean",
+                "id": "pt:commentsEnabled"
+            }
+        },
+        "https://w3id.org/security/v1"
+    ]
 }
 ```
 
@@ -565,15 +567,15 @@ Reverts a previous activity, can only be done by the `actor` of `object`. In cas
 
 ```json
 {
-  "@context": ...,
-  "id": "https://ds9.lemmy.ml/activities/undo/70ca5fb2-e280-4fd0-a593-334b7f8a5916",
-  "type": "Undo",
-  "actor": "https://ds9.lemmy.ml/u/sisko",
-  "to": "https://www.w3.org/ns/activitystreams#Public",
-  "cc": [
-    "https://ds9.lemmy.ml/c/main/"
-  ],
-  "object": ...
+    "@context": ...,
+    "id": "https://ds9.lemmy.ml/activities/undo/70ca5fb2-e280-4fd0-a593-334b7f8a5916",
+    "type": "Undo",
+    "actor": "https://ds9.lemmy.ml/u/sisko",
+    "to": "https://www.w3.org/ns/activitystreams#Public",
+    "cc": [
+        "https://ds9.lemmy.ml/c/main/"
+    ],
+    "object": ...
 }
 ```
 
@@ -581,6 +583,43 @@ Reverts a previous activity, can only be done by the `actor` of `object`. In cas
 |---|---|---|
 | `object` | yes | Any `Like`, `Dislike`, `Delete` or `Remove` activity as described above |
 
+#### Add Mod
+
+Add a new mod (registered on `ds9.lemmy.ml`) to the community `!main@enterprise.lemmy.ml`. Has to be sent by an existing community mod.
+
+```json
+{
+    "@context": ...,
+    "id": "https://enterprise.lemmy.ml/activities/add/531471b1-3601-4053-b834-d26718da2a06",
+    "type": "Add",
+    "cc": [
+        "https://enterprise.lemmy.ml/c/main"
+    ],
+    "to": "https://www.w3.org/ns/activitystreams#Public",
+    "object": "https://ds9.lemmy.ml/u/sisko",
+    "actor": "https://enterprise.lemmy.ml/u/picard",
+    "target": "https://enterprise.lemmy.ml/c/main/moderators"
+}
+```
+
+#### Remove Mod
+
+Remove an existing mod from the community. Has to be sent by an existing community mod.
+
+```json
+{
+    "@context": ...,
+    "id": "https://enterprise.lemmy.ml/activities/remove/63b9a5b2-d3f8-4371-a7eb-711c7928b3c0",
+    "type": "Remove",
+    "object": "https://ds9.lemmy.ml/u/sisko",
+    "to": "https://www.w3.org/ns/activitystreams#Public",
+    "actor": "https://enterprise.lemmy.ml/u/picard",
+    "cc": [
+        "https://enterprise.lemmy.ml/c/main"
+    ],
+    "target": "https://enterprise.lemmy.ml/c/main/moderators"
+}
+```
 ### Community to User
 
 #### Accept Follow
