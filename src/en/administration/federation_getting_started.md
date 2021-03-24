@@ -14,3 +14,24 @@ One way you can take advantage of federation is by opening a different instance,
 - `https://lemmy.ml/comment/321` (Comment)
 
 You can see the list of linked instances by following the "Instances" link at the bottom of any Lemmy page.
+
+## Fetching communities
+
+If you search for a community first time, 20 posts are fetched initially. Only if a least one user on your instance subscribes to the remote community, will the community send updates to your instance. Updates include: 
+
+- New posts, comments
+- Votes
+- Post, comment edits and deletions
+- Mod actions
+
+You can copy the URL of the community from the address bar in your browser and insert it in your search field. Wait a few seconds, the post will appear below. At the moment there is no loading indicator for the search, so wait a few seconds if it shows "no results".
+
+## Fetching posts
+
+Paste the URL of a post into your Lemmy instance's search field. Wait a few seconds until the post appears. This will also fetch the community profile, and the profile of the post creator.
+
+## Fetching comments
+
+If you find an interesting comment under a posting on another instance, you can find below the comment in the 3-dot-menu the link-symbol. Copy this link. It looks like `https://lemmy.ml/post/56382/comment/40796`. Remove the `post/XXX` part and put it into your search-bar. For this example, search for `https://lemmy.ml/comment/40796`. This comment, all parent comments, users and community and the corresponding post are fetched from the remote instance, if they are not known locally.
+
+Sibling comments are not fetched! If you want more comments from older posts, you have to search for each of them as described above.
