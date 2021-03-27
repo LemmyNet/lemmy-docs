@@ -10,7 +10,7 @@ Para un agregador de enlaces, esto significa que un usuario registrado en un ser
 
 El objetivo general es crear una alternativa a reddit y otros agregadores de enlaces, fácilmente auto-hospedada, descentralizada, fuera de su control e intromisión corporativa.
 
-Cada servidor lemmy puede establecer su propia política de moderación; nombrando a los administradores del sitio y a los modeladores de la comunidad para mantener alejados a los trolls, y fomentar un entorno saludable y no tóxico en el que puedan sentirse cómodos contribuyendo.
+Cada servidor lemmy puede establecer su propia política de moderación; nombrando a los administradores del sitio y a los moderadores de la comunidad para mantener alejados a los trolls, y fomentar un entorno saludable y no tóxico en el que puedan sentirse cómodos contribuyendo.
 
 *Nota: La Federación aún está en desarrollo activo*
 
