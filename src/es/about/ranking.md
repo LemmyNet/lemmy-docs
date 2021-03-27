@@ -1,24 +1,24 @@
-# Trending / Hot / Best Sorting algorithm
+# Tendencia / Popular / Mejor algoritmo de clasificación
 
-## Goals
+## Metas
 
-- During the day, new posts and comments should be near the top, so they can be voted on.
-- After a day or so, the time factor should go away.
-- Use a log scale, since votes tend to snowball, and so the first 10 votes are just as important as the next hundred.
+- Durante el día, las nuevas publicaciones y comentarios deben estar cerca de la parte superior, para que puedan ser votados.
+- Después de un día más o menos, el factor tiempo debería desaparecer.
+- Utilizar una escala logarítmica, ya que los votos tienden a convertirse en una bola de nieve, por lo que los primeros 10 votos son tan importantes como los siguientes cien.
 
-## Implementations
+## Implementaciones
 
 ### Reddit
 
-Does not take the lifetime of the thread into account, [giving early comments an overwhelming advantage over later ones,](https://minimaxir.com/2016/11/first-comment/) with the effect being even worse in small communities. New comments pool at the bottom of the thread, effectively killing off discussion and making each thread a race to comment early.  This lowers the quality of conversation and rewards comments that are repetitive and spammy.
+No tiene en cuenta la duración del hilo, [lo que da a los primeros comentarios una ventaja abrumadora sobre los posteriores,](https://minimaxir.com/2016/11/first-comment/) siendo el efecto aún peor en las comunidades pequeñas. Los nuevos comentarios se acumulan en la parte inferior del hilo, acabando con la discusión y convirtiendo cada hilo en una carrera por comentar antes. Esto reduce la calidad de la conversación y premia los comentarios repetitivos y el spam.
 
 ### Hacker News
 
-While far superior to Reddit's implementation for its decay of scores over time, [Hacker News' ranking algorithm](https://medium.com/hacking-and-gonzo/how-hacker-news-ranking-algorithm-works-1d9b0cf2c08d) does not use a logarithmic scale for scores.
+Aunque es muy superior a la implementación de Reddit por su decaimiento de las puntuaciones en el tiempo, [el algoritmo de clasificación de Hacker News](https://medium.com/hacking-and-gonzo/how-hacker-news-ranking-algorithm-works-1d9b0cf2c08d) no utiliza una escala logarítmica para las puntuaciones.
 
 ### Lemmy
 
-Counterbalances the snowballing effect of votes over time with a logarithmic scale.  Negates the inherent advantage of early comments while still ensuring that votes still matter in the long-term, not nuking older popular comments.
+Contrarresta el efecto de bola de nieve de los votos a lo largo del tiempo con una escala logarítmica.  Anula la ventaja inherente de los primeros comentarios y garantiza que los votos sigan siendo importantes a largo plazo, sin perjudicar los comentarios populares más antiguos.
 
 ```
 Rank = ScaleFactor * log(Max(1, 3 + Score)) / (Time + 2)^Gravity
@@ -27,20 +27,20 @@ Score = Upvotes - Downvotes
 Time = time since submission (in hours)
 Gravity = Decay gravity, 1.8 is default
 ```
-- Lemmy uses the same `Rank` algorithm above, in two sorts: `Active`, and `Hot`.
-  - `Active` uses the post votes, and latest comment time (limited to two days).
-  - `Hot` uses the post votes, and the post published time.
-- Use Max(1, score) to make sure all comments are affected by time decay.
-- Add 3 to the score, so that everything that has less than 3 downvotes will seem new. Otherwise all new comments would stay at zero, near the bottom.
-- The sign and abs of the score are necessary for dealing with the log of negative scores.
-- A scale factor of 10k gets the rank in integer form.
+- Lemmy utiliza el mismo algoritmo `Rank` anterior, en dos tipos: `Active` y `Hot`.
+  - El algoritmo "activo" utiliza los votos de las publicaciones y el tiempo de los últimos comentarios (limitado a dos días).
+  - `Hot` utiliza los votos de las publicaciones, y la hora de publicación de los mismos.
+- Utiliza Max(1, score) para asegurarse de que todos los comentarios se ven afectados por el decaimiento del tiempo.
+- Añade 3 a la puntuación, para que todo lo que tenga menos de 3 downvotes parezca nuevo. De lo contrario, todos los comentarios nuevos se quedarían en cero, cerca del fondo.
+- El signo y los abs de la puntuación son necesarios para tratar el registro de las puntuaciones negativas.
+- Un factor de escala de 10k obtiene el rango en forma de número entero.
 
-A plot of rank over 24 hours, of scores of 1, 5, 10, 100, 1000, with a scale factor of 10k.
+Un gráfico del rango a lo largo de 24 horas, de puntuaciones de 1, 5, 10, 100, 1000, con un factor de escala de 10k.
 
 ![](rank_algorithm.png)
 
-#### Active User counts
+#### Conteo de usuarios activos
 
-Lemmy also shows counts of *active users* for your site, and its communities. These are counted within the last `day`, `week`, `month`, and `half year`, and are cached on starting up lemmy, and every hour.
+Lemmy también muestra el conteo de *usuarios activos* de tu sitio y sus comunidades. Estos se cuentan en el último día `day`, semana `week`, mes `month` y medio año `half year`, almacenándose en caché al iniciar Lemmy, cada hora.
 
-An active user is someone who has posted or commented on our instance or community within the last given time frame. For site counts, only local users are counted. For community counts, federated users are included.
+Un usuario activo es alguien que ha publicado o comentado en nuestra instancia o comunidad en el último periodo de tiempo. Para el conteo de sitios, sólo se cuentan los usuarios locales. Para los conteos de la comunidad, se incluyen los usuarios federados.

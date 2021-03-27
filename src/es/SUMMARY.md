@@ -1,10 +1,10 @@
 # Summary
 
 - [Acerca de](about/about.md)
-  - [Features](about/features.md)
-  - [Goals](about/goals.md)
-  - [Post and Comment Ranking](about/ranking.md)
-  - [Guide](about/guide.md)
+  - [Características](about/features.md)
+  - [Metas](about/goals.md)
+  - [Clasificación de las publicaciones y los comentarios](about/ranking.md)
+  - [Guía](about/guide.md)
 - [Administration](administration/administration.md)
   - [Install with Docker](administration/install_docker.md)
   - [Install with Ansible](administration/install_ansible.md)

@@ -1,35 +1,35 @@
-# Features
+# Características
 
-- Open source, [AGPL License](/LICENSE).
-- Self hostable, easy to deploy.
-  - Comes with [Docker](#docker) and [Ansible](#ansible).
-- Clean, mobile-friendly interface.
-  - Only a minimum of a username and password is required to sign up!
-  - User avatar support.
-  - Live-updating Comment threads.
-  - Full vote scores `(+/-)` like old reddit.
-  - Themes, including light, dark, and solarized.
-  - Emojis with autocomplete support. Start typing `:`
-  - User tagging using `@`, Community tagging using `!`.
-  - Integrated image uploading in both posts and comments.
-  - A post can consist of a title and any combination of self text, a URL, or nothing else.
-  - Notifications, on comment replies and when you're tagged.
-    - Notifications can be sent via email.
-  - i18n / internationalization support.
-  - RSS / Atom feeds for `All`, `Subscribed`, `Inbox`, `User`, and `Community`.
-- Cross-posting support.
-  - A *similar post search* when creating new posts. Great for question / answer communities.
-- Moderation abilities.
-  - Public Moderation Logs.
-  - Can sticky posts to the top of communities.
-  - Both site admins, and community moderators, who can appoint other moderators.
-  - Can lock, remove, and restore posts and comments.
-  - Can ban and unban users from communities and the site.
-  - Can transfer site and communities to others.
-- Can fully erase your data, replacing all posts and comments.
-- NSFW post / community support.
-- High performance.
-  - Server is written in rust.
-  - Front end is `~80kB` gzipped.
-  - Front end works without javascript (read-only).
-  - Supports arm64 / Raspberry Pi.
+- Código abierto, [Licencia AGPL](/LICENSE).
+- Auto-hospedado, fácil de desplegar (deploy).
+  - Viene con [Docker](#docker) y [Ansible](#ansible).
+- Interfaz limpia y fácil de usar para los móviles.
+  - Sólo se requiere como mínimo un nombre de usuario y una contraseñar para inscribirse!
+  - Soporte de avatar de usuario.
+  - Hilos de comentarios actualizados en directo.
+  - Puntuaciones completas de los votos `(+/-)` como en el antiguo reddit.
+  - Temas, incluidos los claros, los oscuros, y los solarizados.
+  - Emojis con soporte para autocompletar. Empieza tecleando `:`
+  - Etiquetado de Usuarios con `@`, etiquetado de Comunidades con `!`.
+  - Carga de imágenes integrada tanto en las publicaciones como en los comentarios.
+  - Una publicación puede consistir en un título y cualquier combinación de texto propio, una URL o nada más.
+  - Notificaciones, sobre las respuestas a los comentarios y cuando te etiquetan.
+    - Las notificaciones se pueden enviar por correo electrónico.
+  - Soporte de i18n / internacionalización.
+  - Fuentes RSS / Atom para `Todo`, `Suscrito`, `Bandeja de entrada`, `Usuario`, y `Comunidad`.
+- Soporte para la publicación cruzada (cross-posting).
+  - Una *búsqueda de publicaciones similares* al crear nuevas publicaciones. Ideal para comunidades de preguntas y respuestas.
+- Capacidades de moderación.
+  - Registros públicos de moderación.
+  - Puede pegar las publicaciones a la parte superior de las comunidades.
+  - Tanto los administradores del sitio, como los moderadores de la comunidad, pueden nombrar a otros moderadores.
+  - Puede bloquear, eliminar y restaurar publicaciones y comentarios.
+  - Puede banear y desbanear usuarios de las comunidades y del sitio.
+  - Puede transferir el sitio y las comunidades a otros.
+- Puede borrar completamente sus datos, reemplazando todas las publicaciones y comentarios.
+- Soporte para publicaciones y comunidades NSFW.
+- Alto rendimiento.
+  - El servidor está escrito en rust.
+  - El front end está comprimido (gzipped) en `~80kB`.
+  - El front end funciona sin javascript (sólo lectura).
+  - Soporta arm64 / Raspberry Pi.

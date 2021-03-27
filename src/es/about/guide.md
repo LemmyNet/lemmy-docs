@@ -1,57 +1,62 @@
-# Lemmy Guide
+# Guía de Lemmy
 
-Start typing...
+Empieza tecleando...
 
-- `@a_user_name` to get a list of usernames.
-- `!a_community` to get a list of communities.
-- `:emoji` to get a list of emojis.
+- `@nombre_usuario` para obtener una lista de nombres de usuario.
+- `!nombre_comunidad` para obtener una lista de comunidades.
+- `:emoji` para obtener una lista de emojis.
 
-## Sorting
+## Clasificación
 
-*Applies to both posts and comments*
+*Se aplica tanto a las publicaciones como a los comentarios.*
 
-Type | Description
+<!--- Flag
+wrong: la mayoria de los comentarios > Más comentados
+missing: New Comments > Nuevos Comentarios
+-->
+
+Tipo | Descripción
 --- | ---
-Active | Trending sort based on the score, and the most recent comment time.
-Hot | Trending sort based on the score, and the post creation time.
-New | Newest items.
-Most Comments | The posts with the most comments.
-New Comments | The posts with most recent comments, IE a forum-style sort.
-Top | The highest scoring items in the given time frame.
+Activo | Tendencias ordenadas en base a la puntuación, y la hora del comentario mas reciente.
+Popular | Tendencias ordenadas en base a la puntuación, y la hora de creación de la publicación.
+Nuevo | Las publicaciones más nuevas.
+Más comentados | Las publicaciones con más comentarios.
+Nuevos comentarios | Las publicaciones con los comentarios más recientes, es decir un ordenamiento tipo foro.
+Top | Las publicaciones con mayor puntuación en el periodo de dado.
 
-For more detail, check the [Post and Comment Ranking details](ranking.md).
+Para más detalles, revisa el [Apartado de la Clasificación de las publicaciones y  los comentarios](ranking.md).
 
-## Moderation / Administration
+## Moderación / Administración
 
-All moderator and admin actions on users are done on comments or posts, by clicking the `More` 3-dot icon.
+Todas las acciones de los moderadores y administradores sobre los usuarios se realizan en los comentarios o entradas, haciendo clic en el icono de 3 puntos "Más".
 
-This includes:
+Esto incluye:
 
-- Adding / Removing mods or admins.
-- Removing / Restoring comments.
-- Banning / Unbanning users.
+- Agregar / Eliminar mods y admins.
+- Eliminar / Restaurar comentarios.
+- Banear / Desbanear usuarios.
 
-All admin actions on communties are done on the community sidebar. This currently only includes Removing / Restoring communities.
+Todas las acciones de los administradores en las comunidades se realizan en la barra lateral de la comunidad. Esto actualmente sólo incluye la eliminación/restauración de comunidades.
 
-## Markdown Guide
+## Guía de Markdown
 
-Type | Or | … to Get 
+Tipo | O | … para obtener 
 --- | --- | ---
-\*Italic\* | \_Italic\_  | _Italic_ 
-\*\*Bold\*\* | \_\_Bold\_\_ | **Bold** 
-\# Heading 1 | Heading 1 <br> ========= | <h4>Heading 1</h4>
-\## Heading 2 | Heading 2 <br>--------- | <h5>Heading 2</h5>
-\[Link\](http://a.com) | \[Link\]\[1\]<br>⋮ <br>\[1\]: http://b.org | [Link](https://commonmark.org/) 
-!\[Image\](http://url/a.png) | !\[Image\]\[1\]<br>⋮ <br>\[1\]: http://url/b.jpg | ![Markdown](https://commonmark.org/help/images/favicon.png) 
-\> Blockquote | | <blockquote>Blockquote</blockquote>
-\* List <br>\* List <br>\* List | \- List <br>\- List <br>\- List <br> | *   List <br>*   List <br>*   List <br>
-1\. One <br>2\. Two <br>3\. Three | 1) One<br>2) Two<br>3) Three | 1.  One<br>2.  Two<br>3.  Three
-Horizontal Rule <br>\--- | Horizontal Rule<br>\*\*\* | Horizontal Rule  <br><hr>
-\`Inline code\` with backticks | |`Inline code` with backticks 
-\`\`\`<br>\# code block <br>print '3 backticks or'<br>print 'indent 4 spaces' <br>\`\`\` | ····\# code block<br>····print '3 backticks or'<br>····print 'indent 4 spaces' | \# code block <br>print '3 backticks or'<br>print 'indent 4 spaces'
-::: spoiler hidden or nsfw stuff<br>*a bunch of spoilers here*<br>::: | | <details><summary> hidden or nsfw stuff </summary><p><em>a bunch of spoilers here</em></p></details>
-Some ~subscript~ text | | Some <sub>subscript</sub> text
-Some ^superscript^ text | | Some <sup>superscript</sup> text
+\*Italica\* | \_Italica\_  | _Italica_ 
+\*\*Negrita\*\* | \_\_Negrita\_\_ | **Negrita** 
+\# Titulo 1 | Titulo 1 <br> ========= | <h4>Titulo 1</h4>
+\## Titulo 2 | Titulo 2 <br>--------- | <h5>Titulo 2</h5>
+\[enlace\](http://a.com) | \[enlace\]\[1\]<br>⋮ <br>\[1\]: http://b.org | [enlace](https://commonmark.org/) 
+!\[Imagen\](http://url/a.png) | !\[Imagen\]\[1\]<br>⋮ <br>\[1\]: http://url/b.jpg | ![Markdown](https://commonmark.org/help/images/favicon.png) 
+\> Cita en bloque | | <blockquote>Cita en bloque</blockquote>
+\* Lista <br>\* Lista <br>\* Lista | \- Lista <br>\- Lista <br>\- Lista <br> | *   Lista <br>*   Lista <br>*   Lista <br>
+1\. Uno <br>2\. Dos <br>3\. Tres | 1) Uno<br>2) Dos<br>3) Tres | 1.  Uno<br>2.  Dos<br>3.  Tres
+Línea Horizontal <br>\--- | Línea Horizontal<br>\*\*\* | Línea Horizontal  <br><hr>
+\`Código en línea\` con acento grave | |`Código en línea` con acento grave 
+\`\`\`<br>\# Bloque de código <br>print '3 acentos graves o'<br>print 'indentar 4 espacios' <br>\`\`\` | ····\# Bloque de código<br>····print '3 acentos graves o'<br>····print 'indentar 4 espacios' | \# Bloque de código <br>print '3 acentos graves o'<br>print 'indentar 4 espacios'
+::: spoiler o nsfw oculto <br>*mucho spoiler aquí*<br>::: | | <details><summary> spoiler o nsfw oculto </summary><p><em>mucho spoiler aquí</em></p></details>
+Texto de ~subíndice~ | | Texto de <sub>subíndice</sub>
+Texto de ^superíndice^ | | Texto de <sup>superíndice</sup>
 
-[CommonMark Tutorial](https://commonmark.org/help/tutorial/)
+[Tutorial de CommonMark](https://commonmark.org/help/tutorial/)
 
