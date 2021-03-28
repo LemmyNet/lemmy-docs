@@ -1,11 +1,11 @@
-# Administration info
+# Información Administrativa
 
-Information for Lemmy instance admins, and those who want to run a server.
+Información para administradores de las instancias de Lemmy, y para aquellos que quieran gestionar un servidor.
 
-## Install
+## Instalación
 
-Lemmy has two primary installation methods, [manually with Docker](install_docker.md), and [automated with Ansible](install_ansible.md). We recommend using Ansible, because it simplifies the installation and also makes updating easier.
+Lemmy tiene dos métodos principales de instalación, [manual con Docker](install_docker.md), y [automatizado con Ansible](install_ansible.md). Recomendamos usar Ansible, porque simplifica la instalación y también facilita la actualización.
 
-## Other installation methods
+## Otros métodos de instalación
 
-In some cases, it might be necessary to use [different installation methods](other_installation_methods.md). But we don't recommend this, and can't provide support for them.
+En algunos casos, puede ser necesario utilizar [otros métodos de instalación](other_installation_methods.md). Pero no lo recomendamos y no podemos dar soporte para ellos.

@@ -1,15 +1,15 @@
-# Other Installation Methods
+# Otros Métodos de Instalación
 
-Disclaimer: these installation methods are not recommended by the Lemmy developers. If you have any problems, you need to solve them yourself or ask the respective authors. If you notice any Lemmy bugs on an instance installed like this, please mention it in the bug report.
+Descargo de responsabilidad: estos métodos de instalación no son recomendados por los desarrolladores de Lemmy. Si tienes algún problema, debes resolverlo tú mismo o preguntar a los respectivos autores. Si observas algún fallo de Lemmy en una instancia instalada de esta manera, menciónalo en el informe de fallos.
 
-## Installing Lemmy without Docker
+## Instalación de Lemmy sin Docker
 
-Instructions for installing Lemmy natively, without relying on Docker.
+Instrucciones para instalar Lemmy de forma nativa, sin depender de Docker.
 
 [https://lemmy.ca/post/1066](https://lemmy.ca/post/1066)
 
-## Installing on Amazon Web Services (AWS)
+## Instalación en Amazon Web Services (AWS)
 
-This contains the necessary infrastructure definitions to deploy Lemmy to [AWS](https://aws.amazon.com/) using their [Cloud Development Kit](https://docs.aws.amazon.com/cdk/latest/guide/home.html).
+Contiene las definiciones de infraestructura necesarias para desplegar Lemmy en [AWS](https://aws.amazon.com/) utilizando su [Kit de Desarrollo en la Nube](https://docs.aws.amazon.com/cdk/latest/guide/home.html).
 
 [https://github.com/jetbridge/lemmy-cdk](https://github.com/jetbridge/lemmy-cdk)
