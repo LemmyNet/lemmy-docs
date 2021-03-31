@@ -1,24 +1,26 @@
-# Goals
+# Metas
 
-- Come up with a name / codename.
-- Must have communities.
-- Must have threaded comments.
-- Must be federated: liking and following communities across instances.
-- Be live-updating: have a right pane for new comments, and a main pane for the full threaded view.
-  - Use websockets for post / gets to your own instance.
+*Esta sección contiene ideas y recursos del equipo que desarrolla Lemmy*. **Parecido a un bloc de notas**
 
-# Questions
+- Piensa en un nombre / nombre clave.
+- Debe tener comunidades.
+- Debe tener comentarios hilados.
+- Debe ser federado: enlazar y seguir comunidades en todas las instancias.
+- Debe estar actualizado en vivo: tener un panel derecho para nuevos comentarios y un panel principal para la vista completa de los hilos.
+  - Usar websockets para publicar (post) / obtener (gets) hacia tu propia instancia.
 
-- How does voting work? Should we go back to the old way of showing up and downvote counts? Or just a score?
-- Decide on tech to be used
+# Preguntas
+
+- ¿Cómo funciona la votación? ¿Debemos volver a la antigua forma de mostrar y contar los votos negativos? ¿O sólo una puntuación?
+- Decidir la tecnología que se utilizará
   - Backend: Actix, Diesel.
-  - Frontend: inferno, typescript and bootstrap for now.
-- Should it allow bots?
-- Should the comments / votes be static, or feel like a chat, like [flowchat?](https://flow-chat.com).
-  - Two pane model - Right pane is live comments, left pane is live tree view.
-  - On mobile, allow you to switch between them. Default?
+  - Frontend: inferno, typescript y bootstrap por ahora.
+- ¿Deberia permitir bots?
+- ¿Deberían los comentarios/votos ser estáticos, o sentirse como un chat, como [flowchat?](https://flow-chat.com).
+  - Modelo de dos paneles - El panel derecho para comentarios en vivo, el panel izquierdo para la vista en árbol en vivo
+  - En el móvil, permite cambiar entre ellos. ¿Por defecto? 
 
-# Resources / Potential Libraries
+# Recursos / Librerías potenciales
 
 - [Diesel to Postgres data types](https://kotiri.com/2018/01/31/postgresql-diesel-rust-types.html)
 - [helpful diesel examples](http://siciarz.net/24-days-rust-diesel/)

@@ -6,6 +6,6 @@ src = "src"
 name = "English"
 title = "Lemmy Documentation"
 
-#[language.es]
-#name = "Español"
-#title = "Documentación Lemmy"
+[language.es]
+name = "Español"
+title = "Documentación Lemmy"
