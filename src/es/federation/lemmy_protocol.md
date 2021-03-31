@@ -1,55 +1,55 @@
-# Lemmy Federation Protocol
+# Protocolo de la Federación Lemmy 
 
-The Lemmy Protocol (or Lemmy Federation Protocol) is a strict subset of the [ActivityPub Protocol](https://www.w3.org/TR/activitypub/). Any deviation from the ActivityPub protocol is a bug in Lemmy or in this documentation (or both).
+El protocolo de Lemmy (o Protocolo de la Federación Lemmy) es un subconjunto estricto del [Protocolo ActivityPub](https://www.w3.org/TR/activitypub/). Cualquier desviación del protocolo ActivityPub es un error (bug) en Lemmy o en esta documentación (o ambos).
 
-This document is targeted at developers who are familiar with the ActivityPub and ActivityStreams protocols. It gives a detailed outline of the actors, objects and activities used by Lemmy.
+Este documento está dirigido a desarrolladores que están familiarizados con los protocolos ActivityPub y ActivityStreams. Ofrece un esquema detallado de los actores, objetos y actividades utilizados por Lemmy.
 
-Before reading this, have a look at our [Federation Overview](contributing_federation_overview.md) to get an idea how Lemmy federation works on a high level.
+Antes de leerlo, echa un vistazo a nuestra [Visión General de la Federación](overview.md) para hacerte una idea de cómo funciona la federación de Lemmy a alto nivel.
 
-Lemmy does not yet follow the ActivityPub spec in all regards. For example, we don't set a valid context indicating our context fields. We also ignore fields like `inbox`, `outbox` or `endpoints` for remote actors, and assume that everything is Lemmy. For an overview of deviations, read [#698](https://github.com/LemmyNet/lemmy/issues/698). They will be fixed in the near future.
+Lemmy todavía no sigue la especificación ActivityPub en todos los aspectos. Por ejemplo, no establecemos un contexto válido indicando nuestros campos de contexto. También ignoramos campos como la bandeja de entrada `inbox`, la bandeja de salida `outbox` o los puntos finales `endpoints` de los actores remotos, y asumimos que todo es Lemmy. Para una visión general de las desviaciones, lea el tema [#698](https://github.com/LemmyNet/lemmy/issues/698). Serán corregidas en un futuro próximo.
 
-Lemmy is also really inflexible when it comes to incoming activities and objects. They need to be exactly identical to the examples below. Things like having an array instead of a single value, or an object ID instead of the full object will result in an error.
+Lemmy también es realmente inflexible cuando se trata de actividades y objetos entrantes. Tienen que ser exactamente idénticos a los ejemplos de abajo. Cosas como tener un array en lugar de un solo valor, o un ID de objeto en lugar del objeto completo resultará en un error.
 
-In the following tables, "mandatory" refers to whether or not Lemmy will accept an incoming activity without this field. Lemmy itself will always include all non-empty fields.
+En las siguientes tablas, "obligatorio" se refiere a si Lemmy aceptará o no una actividad entrante sin este campo. El propio Lemmy siempre incluirá todos los campos no vacíos.
 
 <!-- toc -->
 
-- [Context](#context)
-- [Actors](#actors)
-  * [Community](#community)
-    + [Community Outbox](#community-outbox)
-    + [Community Followers](#community-followers)
-    + [Community Moderators](#community-moderators)
-  * [User](#user)
-    + [User Outbox](#user-outbox)
-- [Objects](#objects)
-  * [Post](#post)
-  * [Comment](#comment)
-  * [Private Message](#private-message)
-- [Activities](#activities)
-  * [User to Community](#user-to-community)
-    + [Follow](#follow)
-    + [Unfollow](#unfollow)
-    + [Create or Update Post](#create-or-update-post)
-    + [Create or Update Comment](#create-or-update-comment)
-    + [Like Post or Comment](#like-post-or-comment)
-    + [Dislike Post or Comment](#dislike-post-or-comment)
-    + [Delete Post or Comment](#delete-post-or-comment)
-    + [Remove Post or Comment](#remove-post-or-comment)
-    + [Undo](#undo)
-  * [Community to User](#community-to-user)
-    + [Accept Follow](#accept-follow)
-    + [Announce](#announce)
-    + [Remove or Delete Community](#remove-or-delete-community)
-    + [Restore Removed or Deleted Community](#restore-removed-or-deleted-community)
-  * [User to User](#user-to-user)
-    + [Create or Update Private message](#create-or-update-private-message)
-    + [Delete Private Message](#delete-private-message)
-    + [Undo Delete Private Message](#undo-delete-private-message)⏎
+- [Contexto](#context)
+- [Actores](#actors)
+  * [Comunidad](#community)
+    + [Bandeja de salida de la Comunidad](#community-outbox)
+    + [Seguidores de la Comunidad](#community-followers)
+    + [Moderadores de la Comunidad](#community-moderators)
+  * [Usuario](#user)
+    + [Bandeja de salida del Usuario](#user-outbox)
+- [Objectos](#objects)
+  * [Publicación](#post)
+  * [Comentario](#comment)
+  * [Mensaje privado](#private-message)
+- [Actividades](#activities)
+  * [Usuario a Comunidad](#user-to-community)
+    + [Seguir](#follow)
+    + [Dejar de seguir](#unfollow)
+    + [Crear o Actualizar Publicación](#create-or-update-post)
+    + [Crear o Actualizar Comentario](#create-or-update-comment)
+    + [Me gusta Publicación o Comentario](#like-post-or-comment)
+    + [No me gusta Publicación o Comentario](#dislike-post-or-comment)
+    + [Eliminar Publicación o Comentario](#delete-post-or-comment)
+    + [Remover Publicación o Comentario](#remove-post-or-comment)
+    + [Deshacer](#undo)
+  * [Comunidad a Usuario](#community-to-user)
+    + [Aceptar Seguir](#accept-follow)
+    + [Anunciar](#announce)
+    + [Remover o Eliminar Comunidad](#remove-or-delete-community)
+    + [Restaurar Comunidad Removida o Eliminada](#restore-removed-or-deleted-community)
+  * [Usuario a Usuario](#user-to-user)
+    + [Crear o Actualizar Mensaje Privado](#create-or-update-private-message)
+    + [Eliminar Mensaje Privado](#delete-private-message)
+    + [Deshacer la Eliminación del Mensaje Privado](#undo-delete-private-message)⏎
 
 <!-- tocstop -->
 
-## Context
+## Contexto
 
 ```json
 {
@@ -71,17 +71,17 @@ In the following tables, "mandatory" refers to whether or not Lemmy will accept 
 }
 ```
 
-The context is identical for all activities and objects.
+El contexto es identico para todas las actividades y objetos.
 
-## Actors
+## Actores
 
-### Community
+### Comunidad
 
-An automated actor. Users can send posts or comments to it, which the community forwards to its followers in the form of `Announce`.
+Un actor automatizado. Los usuarios pueden enviarle mensajes o comentarios, que la comunidad reenvía a sus seguidores en forma de Anuncio `Announce`.
 
-Sends activities to user: `Accept/Follow`, `Announce`
+Envía actividades al usuario: Aceptar/Seguir `Accept/Follow`, Anunciar `Announce`.
 
-Receives activities from user: `Follow`, `Undo/Follow`, `Create`, `Update`, `Like`, `Dislike`, `Remove` (only admin/mod), `Delete` (only creator), `Undo` (only for own actions)
+Recibe actividades del usuario: Seguir `Follow`, Deshacer/Seguir `Undo/Follow`, Crear `Create`, Actualizar `Update`, Me gusta `Like`, No me gusta `Dislike`, Remover `Remove` (sólo admin/mod), Eliminar `Delete` (sólo creador), Deshacer `Undo` (sólo para acciones propias).
 
 ```json
 {
@@ -122,24 +122,24 @@ Receives activities from user: `Follow`, `Undo/Follow`, `Create`, `Update`, `Lik
 }
 ```
 
-| Field Name | Mandatory | Description |
+| Nombre del Campo | Obligatorio | Descripción |
 |---|---|---|
-| `preferredUsername` | yes | Name of the actor |
-| `name` | yes | Title of the community |
-| `sensitive` | yes | True indicates that all posts in the community are nsfw |
-| `attributedTo` | yes | First the community creator, then all the remaining moderators |
-| `content` | no | Text for the community sidebar, usually containing a description and rules |
-| `icon` | no | Icon, shown next to the community name |
-| `image` | no | Banner image, shown on top of the community page |
-| `inbox` | no | ActivityPub inbox URL |
-| `outbox` | no | ActivityPub outbox URL, only contains up to 20 latest posts, no comments, votes or other activities |
-| `followers` | no | Follower collection URL, only contains the number of followers, no references to individual followers |
-| `endpoints` | no | Contains URL of shared inbox |
-| `published` | no | Datetime when the community was first created |
-| `updated` | no | Datetime when the community was last changed |
-| `publicKey` | yes | The public key used to verify signatures from this actor |
+| `preferredUsername` | si | Nombre del actor |
+| `name` | si | Titulo de la comunidad |
+| `sensitive` | si | True indica que todas las publicaciones en la comunidad son nsfw |
+| `attributedTo` | si | Primero el creador de la comunidad, luego el resto de los moderadores |
+| `content` | no | Texto para la barra lateral de lac comunidad, que suele contener una descripción y normas |
+| `icon` | no | Icono que aparece junto al nombre de la comunidad |
+| `image` | no | Imagen de banner, mostrada en la parte superior de la página de la comunidad |
+| `inbox` | no | URL de la bandeja de entrada de ActivityPub |
+| `outbox` | no | URL de la bandeja de salida de ActivityPub, sólo contiene las últimas 20 publicaciones sin comentarios, votos u otras actividades |
+| `followers` | no | URL de la colección de seguidores, sólo contiene el número de seguidores, sin referencias a seguidores individuales |
+| `endpoints` | no | Contiene la URL de la bandeja de entrada compartida |
+| `published` | no | Fecha de creación de la comunidad |
+| `updated` | no | Fecha de la última modificación de la comunidad |
+| `publicKey` | si | La clave pública utilizada para verificar las firmas de este actor |
    
-#### Community Outbox
+#### Bandeja de Salida de la Comunidad
 
 ```json
 {
@@ -153,9 +153,9 @@ Receives activities from user: `Follow`, `Undo/Follow`, `Create`, `Update`, `Lik
 }
 ```
 
-The outbox only contains `Create/Post` activities for now.
+La bandeja de salida sólo contiene las actividades Crear/Publicación `Create/Post` por ahora.
 
-#### Community Followers
+#### Seguidores de la Comunidad
 
 ```json
 {
@@ -166,9 +166,9 @@ The outbox only contains `Create/Post` activities for now.
 }
 ```
 
-The followers collection is only used to expose the number of followers. Actor IDs are not included, to protect user privacy.
+La colección de seguidores sólo se utiliza para exponer el número de seguidores. Los ID de los actores no se incluyen, para proteger la privacidad de los usuarios.
 
-#### Community Moderators
+#### Moderadores de la Comunidad
 
 ```json
 {
@@ -183,15 +183,15 @@ The followers collection is only used to expose the number of followers. Actor I
 }
 ```
 
-### User
+### Usuario
 
-A person, interacts primarily with the community where it sends and receives posts/comments. Can also create and moderate communities, and send private messages to other users.
+Una persona, interactúa principalmente con la comunidad en la que envía y recibe publicaciones/comentarios. También puede crear y moderar comunidades, y enviar mensajes privados a otros usuarios.
 
-Sends activities to Community: `Follow`, `Undo/Follow`, `Create`, `Update`, `Like`, `Dislike`, `Remove` (only admin/mod), `Delete` (only creator), `Undo` (only for own actions)
+Envía actividades a la Comunidad: Seguir `Follow`, Deshacer/Seguir `Undo/Follow`, Crear `Create`, Actualizar `Update`, Me gusta `Like`, No me gusta `Dislike`, Remover `Remove` (sólo admin/mod), Eliminar `Delete` (sólo creador), Deshacer `Undo` (sólo para acciones propias)
 
-Receives activities from Community: `Accept/Follow`, `Announce`
+Recibe actividades de la Comunidad: Aceptar/Seguir `Accept/Follow`, Anunciar `Announce`.
 
-Sends and receives activities from/to other users: `Create/Note`, `Update/Note`, `Delete/Note`, `Undo/Delete/Note` (all those related to private messages)
+Envía y recibe actividades de/para otros usuarios: Crear/Nota `Create/Note`, Actualizar/Nota `Update/Note`, Eliminar/Nota `Delete/Note`, Deshacer/Eliminar/Nota `Undo/Delete/Note` (todas las relacionadas con mensajes privados).
 
 ```json
 {
@@ -228,20 +228,20 @@ Sends and receives activities from/to other users: `Create/Note`, `Update/Note`,
 }
 ```
 
-| Field Name | Mandatory | Description |
+| Nombre del Campo | Obligatorio | Descripción |
 |---|---|---|
-| `preferredUsername` | yes | Name of the actor |
-| `name` | no | The user's displayname |
-| `content` | no | User bio |
-| `icon` | no | The user's avatar, shown next to the username |
-| `image` | no | The user's banner, shown on top of the profile |
-| `inbox` | no | ActivityPub inbox URL |
-| `endpoints` | no | Contains URL of shared inbox |
-| `published` | no | Datetime when the user signed up |
-| `updated` | no | Datetime when the user profile was last changed |
-| `publicKey` | yes | The public key used to verify signatures from this actor |
+| `preferredUsername` | si | Nombre del actor |
+| `name` | no | El nombre para mostrar del usuario |
+| `content` | no | La biografía del usuario |
+| `icon` | no | El avatar del usuario, que aparece junto al nombre del usuario |
+| `image` | no | Banner del usuario, mostrada en la parte superior del perfil |
+| `inbox` | no | URL de la bandeja de entrada de ActivityPub |
+| `endpoints` | no | Contiene la URL de la bandeja de entrada compartida |
+| `published` | no | Fecha de registro del usuario |
+| `updated` | no | Fecha de la última actualización del perfil del usuario |
+| `publicKey` | si | La clave pública utilizada para verificar las firmas de este actor |
 
-#### User Outbox
+#### Bandeja de salida del Usuario
 
 ```json
 {
@@ -253,13 +253,13 @@ Sends and receives activities from/to other users: `Create/Note`, `Update/Note`,
 }
 ```
 
-The user inbox is not actually implemented yet, and is only a placeholder for ActivityPub implementations which require it.
+La bandeja de salida del usuario no está implementada todavía, y es sólo un marcador de posición para las implementaciones de ActivityPub que lo requieren.
 
-## Objects
+## Objetos
 
-### Post
+### Publicación
 
-A page with title, and optional URL and text content. The URL often leads to an image, in which case a thumbnail is included. Each post belongs to exactly one community.
+Una página con título, y contenido opcional de URL y texto. La URL suele llevar a una imagen, en cuyo caso se incluye una miniatura. Cada entrada pertenece exactamente a una comunidad.
 
 ```json
 {
@@ -291,23 +291,23 @@ A page with title, and optional URL and text content. The URL often leads to an 
 }
 ```
 
-| Field Name | Mandatory | Description |
+| Nombre del Campo | Obligatorio | Description |
 |---|---|---|
-| `attributedTo` | yes | ID of the user which created this post |
-| `to` | yes | ID of the community where it was posted to |
-| `name` | yes | Title of the post |
-| `content` | no | Body of the post |
-| `url` | no | An arbitrary link to be shared |
-| `image` | no | Thumbnail for `url`, only present if it is an image link |
-| `commentsEnabled` | yes | False indicates that the post is locked, and no comments can be added |
-| `sensitive` | yes | True marks the post as NSFW, blurs the thumbnail and hides it from users with NSFW settign disabled |
-| `stickied` | yes | True means that it is shown on top of the community |
-| `published` | no | Datetime when the post was created |
-| `updated` | no | Datetime when the post was edited (not present if it was never edited) |
+| `attributedTo` | si | ID del usuario que creó esta publicación |
+| `to` | si | ID de la comunidad en la que se publicó |
+| `name` | si | Título de la publicación |
+| `content` | no | Cuerpo de la publicación |
+| `url` | no | Un enlace arbitrario para compartir |
+| `image` | no | Miniatura para la `url`, sólo aparece si es un enlace de imagen |
+| `commentsEnabled` | si | False indica que la publicación está bloqueada, y no se pueden añadir comentarios |
+| `sensitive` | si | True marca la publicación como NSFW,difumina la miniatura y la oculta a los usuarios con la configuración NSFW desactivada |
+| `stickied` | si | True significa que se muestra en la parte superior de la comunidad |
+| `published` | no | Fecha de creación de la publicación |
+| `updated` | no | Fecha en la que se editó la publicación (no está presente si nunca se editó) |
 
-### Comment
+### Comentario
 
-A reply to a post, or reply to another comment. Contains only text (including references to other users or communities). Lemmy displays comments in a tree structure.
+Una respuesta a una publicación, o una respuesta a otro comentario. Contiene sólo texto (incluyendo referencias a otros usuarios o comunidades). Lemmy muestra los comentarios en una estructura de árbol.
 
 ```json
 {
@@ -331,18 +331,18 @@ A reply to a post, or reply to another comment. Contains only text (including re
 }
 ```
 
-| Field Name | Mandatory | Description |
+| Nombre del Campo | Obligatorio | Descripción |
 |---|---|---|
-| `attributedTo` | yes | ID of the user who created the comment |
-| `to` | yes | Community where the comment was made |
-| `content` | yes | The comment text |
-| `inReplyTo` | yes | IDs of the post where this comment was made, and the parent comment. If this is a top-level comment, `inReplyTo` only contains the post |
-| `published` | no | Datetime when the comment was created |
-| `updated` | no | Datetime when the comment was edited (not present if it was never edited) |
+| `attributedTo` | si | ID del usuario que creó el comentario |
+| `to` | si | Comunidad donde se hizo el comentario |
+| `content` | si | El texto del comentario |
+| `inReplyTo` | si | ID de la publicación donde se hizo el comentario, y el comentario padre. Si este es un comentario de nivel superior, `inReplyTo` sólo contiene la publicación |
+| `published` | no | Fecha de creación del comentario |
+| `updated` | no | Fecha en la que se editó la publicación (no está presente si nunca se editó) |
 
-### Private Message
+### Mensaje Privado
 
-A direct message from one user to another. Can not include additional users. Threading is not implemented yet, so the `inReplyTo` field is missing.
+Un mensaje directo de un usuario a otro. No puede incluir usuarios adicionales. Todavía no se ha implementado el hilo, por lo que falta el campo `inReplyTo`.
 
 ```json
 {
@@ -361,22 +361,23 @@ A direct message from one user to another. Can not include additional users. Thr
     "updated": "2020-10-08T20:13:52.547156+00:00"
 }
 ```
+<!-- Fix table in english version --->
 
-| Field Name | Mandatory | Description |
+| Nombre del Campo | Obligatorio | Descripción |
 |---|---|---|
-| `attributedTo` | ID of the user who created this private message |
-| `to` | ID of the recipient |
-| `content` | yes | The text of the private message |
-| `published` | no | Datetime when the message was created |
-| `updated` | no | Datetime when the message was edited (not present if it was never edited) |
+| `attributedTo` | | ID del usuario que creo este mensaje |
+| `to` | | ID del destinatario |
+| `content` | si | El texto del mensaje privado |
+| `published` | no | Fecha de creación del mensaje |
+| `updated` | no |  Fecha en la que se editó la publicación (no está presente si nunca se editó) |
 
-## Activities
+## Actividades
 
-### User to Community
+### Usuario a Comunidad
 
-#### Follow
+#### Seguir
 
-When the user clicks "Subscribe" in a community, a `Follow` is sent. The community automatically responds with an `Accept/Follow`.
+Cuando el usuario hace clic en "Suscribirse" en una comunidad, se envía un `Follow`. La comunidad responde automáticamente con un `Accept/Follow`.
 
 ```json
 {
@@ -389,14 +390,14 @@ When the user clicks "Subscribe" in a community, a `Follow` is sent. The communi
 }
 ```
 
-| Field Name | Mandatory | Description |
+| Nombre del Campo | Obligatorio | Descripción |
 |---|---|---|
-| `actor` | yes | The user that is sending the follow request |
-| `object` | yes | The community to be followed |
+| `actor` | si | El usuario que envía la solicitud de seguimiento `Follow` |
+| `object` | si | La comunidad a seguir |
 
-#### Unfollow
+#### Dejar de Seguir
 
-Clicking on the unsubscribe button in a community causes an `Undo/Follow` to be sent. The community removes the user from its follower list after receiving it.
+Al pulsar el botón de "dar de baja"  en una comunidad se envía un `Undo/Follow`. La comunidad retira al usuario de su lista de seguidores tras recibirlo.
 
 ```json
 {
@@ -415,9 +416,9 @@ Clicking on the unsubscribe button in a community causes an `Undo/Follow` to be 
 }
 ```
 
-#### Create or Update Post
+#### Crear o Actualizar Publicación
 
-When a user creates a new post, it is sent to the respective community. Editing a previously created post sends an almost identical activity, except the `type` being `Update`. We don't support mentions in posts yet.
+Cuando un usuario crea una nueva publicación, ésta se envía a la comunidad correspondiente. La edición de una publicación previamente creada envía una actividad casi idéntica, excepto que el tipo `type` es Actualizar `Update`. Todavía no admitimos las menciones en las publicaciones.
 
 ```json
 {
@@ -433,15 +434,15 @@ When a user creates a new post, it is sent to the respective community. Editing 
 }
 ```
 
-| Field Name | Mandatory | Description |
+| Nombre del Campo | Obligatorio | Descripción |
 |---|---|---|
-| `type` | yes | either `Create` or `Update` |
-| `cc` | yes | Community where the post is being made |
-| `object` | yes | The post being created |
+| `type` | si | Crear `Create` o Actualizar `Update` |
+| `cc` | si | Comunidad donde se hizo la publicación |
+| `object` | si | La publicación que se crea |
 
-#### Create or Update Comment
+#### Crear o Actulizar Comentario
 
-A reply to a post, or to another comment. Can contain mentions of other users. Editing a previously created post sends an almost identical activity, except the `type` being `Update`.
+Una respuesta a una publicación, o a otro comentario. Puede contener menciones a otros usuarios. La edición de una publicación previamente creada envía una actividad casi idéntica, excepto que el tipo `type` es Actualizar `Update`.
 
 ```json
 {
@@ -463,15 +464,15 @@ A reply to a post, or to another comment. Can contain mentions of other users. E
 }
 ```
 
-| Field Name | Mandatory | Description |
+| Nombre del Campo | Obligatorio | Descripción |
 |---|---|---|
-| `tag` | no | List of users which are mentioned in the comment (like `@user@example.com`) |
-| `cc` | yes | Community where the post is being made, the user being replied to (creator of the parent post/comment), as well as any mentioned users |
-| `object` | yes | The comment being created |
+| `tag` | no | Lista de los usuarios que se mencionan en el comentario (como `@usuario@ejemplo.com`) |
+| `cc` | si | Comunidad en la que se hace la publicación, el usuario al que se responde (creador de la publicación/comentario principal), así como los usuarios mencionados |
+| `object` | si | El comentario que se crea |
 
-#### Like Post or Comment
+#### Me gusta Publicación o Comentario
 
-An upvote for a post or comment.
+Un voto positivo para una publicación o un comentario
 
 ```json
 {
@@ -487,14 +488,14 @@ An upvote for a post or comment.
 }
 ```
 
-| Field Name | Mandatory | Description |
+| Nombre del Campo | Obligatorio | Descripción|
 |---|---|---|
-| `cc` | yes | ID of the community where the post/comment is |
-| `object` | yes | The post or comment being upvoted |
+| `cc` | si | ID de la comunidad en la que se encuentra la publicación/comentario |
+| `object` | si | La publicación o comentario que se ha votado |
 
-#### Dislike Post or Comment
+#### No me gusta Publicación o Comentario
 
-A downvote for a post or comment.
+Un voto negativo para una publicación o un comentario
 
 ```json
 {
@@ -510,14 +511,14 @@ A downvote for a post or comment.
 }
 ```
 
-| Field Name | Mandatory | Description |
+| Nombre del Campo | Obligatorio | Descripción|
 |---|---|---|
-| `cc` | yes | ID of the community where the post/comment is |
-| `object` | yes | The post or comment being upvoted |
+| `cc` | si | ID de la comunidad en la que se encuentra la publicación/comentario |
+| `object` | si | La publicación o comentario que se ha votado |
 
-#### Delete Post or Comment
+#### Eliminar Publicación o Comentario
 
-Deletes a previously created post or comment. This can only be done by the original creator of that post/comment.
+Elimina una publicación o comentario creado anteriormente. Esto sólo lo puede hacer el creador original de esa publicación/comentario.
 
 ```json
 {
@@ -533,14 +534,14 @@ Deletes a previously created post or comment. This can only be done by the origi
 }
 ```
 
-| Field Name | Mandatory | Description |
+| Nombre del Campo | Obligatorio | Descripción|
 |---|---|---|
-| `cc` | yes | ID of the community where the post/comment is |
-| `object` | yes | ID of the post or comment being deleted |
+| `cc` | si | ID de la comunidad en la que se encuentra la publicación/comentario |
+| `object` | si | La publicación o comentario que se está eliminando |
 
-#### Remove Post or Comment
+#### Remover Publicación o Comentario 
 
-Removes a post or comment. This can only be done by a community mod, or by an admin on the instance where the community is hosted.
+Remover una publicación o un comentario. Esto sólo puede hacerlo un mod de la comunidad, o un administrador en la instancia donde se aloja la comunidad.
 
 ```json
 {
@@ -556,14 +557,14 @@ Removes a post or comment. This can only be done by a community mod, or by an ad
 }
 ```
 
-| Field Name | Mandatory | Description |
+| Nombre del Campo | Obligatorio | Descripción|
 |---|---|---|
-| `cc` | yes | ID of the community where the post/comment is |
-| `object` | yes | ID of the post or comment being removed |
+| `cc` | si | ID de la comunidad en la que se encuentra la publicación/comentario |
+| `object` | si | La publicación o comentario que se está removiendo |
 
-#### Undo
+#### Deshacer
 
-Reverts a previous activity, can only be done by the `actor` of `object`. In case of a `Like` or `Dislike`, the vote count is changed back. In case of a `Delete` or `Remove`, the post/comment is restored. The `object` is regenerated from scratch, as such the activity ID and other fields are different.
+Revierte una actividad anterior, sólo puede hacerlo el actor `actor` del objeto `object`. En caso de un `Like` o `Dislike`, se vuelve a cambiar el conteo de votos. En el caso de un `Delete`o `Remove`, se restablece la publicación/comentario. El objeto se regenera desde cero, por lo que el ID de la actividad y otros campos son diferentes.
 
 ```json
 {
@@ -579,13 +580,13 @@ Reverts a previous activity, can only be done by the `actor` of `object`. In cas
 }
 ```
 
-| Field Name | Mandatory | Description |
+| Nombre del Campo | Obligatorio | Descripción |
 |---|---|---|
-| `object` | yes | Any `Like`, `Dislike`, `Delete` or `Remove` activity as described above |
+| `object` | si | Cualquier actividad `Like`, `Dislike`, `Delete` o `Remove` tal como se ha descrito anteriormente |
 
-#### Add Mod
+#### Agregar Moderador
 
-Add a new mod (registered on `ds9.lemmy.ml`) to the community `!main@enterprise.lemmy.ml`. Has to be sent by an existing community mod.
+Añade un nuevo mod (registrado en `ds9.lemmy.ml`) a la comunidad `!main@enterprise.lemmy.ml`. Tiene que ser enviado por un mod de la comunidad existente.
 
 ```json
 {
@@ -602,9 +603,9 @@ Add a new mod (registered on `ds9.lemmy.ml`) to the community `!main@enterprise.
 }
 ```
 
-#### Remove Mod
+#### Remover Moderador
 
-Remove an existing mod from the community. Has to be sent by an existing community mod.
+Remueve un mod existente de la comunidad. Tiene que ser enviado por un mod de la comunidad existente.
 
 ```json
 {
@@ -620,11 +621,12 @@ Remove an existing mod from the community. Has to be sent by an existing communi
     "target": "https://enterprise.lemmy.ml/c/main/moderators"
 }
 ```
-### Community to User
 
-#### Accept Follow
+### Comunidad a Usuario
 
-Automatically sent by the community in response to a `Follow`. At the same time, the community adds this user to its followers list.
+#### Aceptar Seguir
+
+Enviado automáticamente por la comunidad en respuesta a un `Follow`. Al mismo tiempo, la comunidad añade a este usuario a su lista de seguidores.
 
 ```json
 {
@@ -643,15 +645,15 @@ Automatically sent by the community in response to a `Follow`. At the same time,
 }
 ```
 
-| Field Name | Mandatory | Description |
+| Nombre del Campo | Obligatorio | Descripción |
 |---|---|---|
-| `actor` | yes | The same community as in the `Follow` activity |
-| `to` | no | ID of the user which sent the `Follow` |
-| `object` | yes | The previously sent `Follow` activity |
+| `actor` | si | La misma comunidad que en la actividad `Follow` |
+| `to` | no | ID del usuario que envió el `Follow` |
+| `object` | si | La actividad de `Follow` enviada anteriormente |
 
-#### Announce
+#### Anuncio
 
-When the community receives a post or comment activity, it wraps that into an `Announce` and sends it to all followers.
+Cuando la comunidad recibe una actividad publicación o comentario, lo envuelve en un anuncio `Announce` y lo envía a todos los seguidores.
 
 ```json
 {
@@ -667,13 +669,13 @@ When the community receives a post or comment activity, it wraps that into an `A
 }
 ```
 
-| Field Name | Mandatory | Description |
+| Nombre del Campo | Obligatorio | Descripción |
 |---|---|---|
-| `object` | yes | Any of the `Create`, `Update`, `Like`, `Dislike`, `Delete` `Remove` or `Undo` activity described in the [User to Community](#user-to-community) section |
+| `object` | si | Cualquier actividad `Create`, `Update`, `Like`, `Dislike`, `Delete`, `Remove` o `Undo` tal como se ha descrito en la sección [Usuario a Comunidad](#user-to-community) |
 
-#### Remove or Delete Community
+#### Remover o Eliminar Comunidad
 
-An instance admin can remove the community, or a mod can delete it. 
+Un administrador de instancia puede remover la comunidad, o un mod puede eliminarla. 
 
 ```json
 {
@@ -689,13 +691,13 @@ An instance admin can remove the community, or a mod can delete it.
 }
 ```
 
-| Field Name | Mandatory | Description |
+| Nombre del Campo| Obligatorio | Descripción |
 |---|---|---|
-| `type` | yes | Either `Remove` or `Delete` |
+| `type` | si | Remover `Remove` o Eliminar `Delete` |
 
-#### Restore Removed or Deleted Community
+#### Restaurar Comunidad Removida o Eliminada
 
-Reverts the removal or deletion.
+Revierte la remoción o eliminación
 
 ```json
 {
@@ -721,15 +723,15 @@ Reverts the removal or deletion.
 }
 
 ```
-| Field Name | Mandatory | Description |
+| Nombre del Campo | Obligatorio | Descripción|
 |---|---|---|
-| `object.type` | yes | Either `Remove` or `Delete` |
+| `object.type` | si | Remover `Remove` o Eliminar `Delete` |
 
-### User to User
+### Usuario a Usuario
 
-#### Create or Update Private message 
+#### Crear o Actualizar Mensaje Privado
 
-Creates a new private message between two users.
+Crea un nuevo mensaje privado entre dos usuarios.
 
 ```json
 {
@@ -742,14 +744,14 @@ Creates a new private message between two users.
 }
 ```
 
-| Field Name | Mandatory | Description |
+| Nombre del Campo | Obligatorio| Descripción |
 |---|---|---|
-| `type` | yes | Either `Create` or `Update` |
-| `object` | yes | A [Private Message](#private-message) |
+| `type` | si | Crear `Create` o Actualizar `Update` |
+| `object` | si | Un [Mensaje Privado](#private-message) |
 
-#### Delete Private Message
+#### Eliminar Mensaje Privado
 
-Deletes a previous private message.
+Elimina un mensaje privado previo
 
 ```json
 {
@@ -762,9 +764,9 @@ Deletes a previous private message.
 }
 ```
 
-#### Undo Delete Private Message
+#### Deshacer la Eliminación del Mensaje Privado
 
-Restores a previously deleted private message. The `object` is regenerated from scratch, as such the activity ID and other fields are different.
+Restaura un mensaje privado previamente eliminado. El objeto `object` se regenera desde cero, por lo que el ID de actividad y otros campos son diferentes.
 
 ```json
 {

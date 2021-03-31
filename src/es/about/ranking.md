@@ -41,6 +41,6 @@ Un gráfico del rango a lo largo de 24 horas, de puntuaciones de 1, 5, 10, 100, 
 
 #### Conteo de usuarios activos
 
-Lemmy también muestra el conteo de *usuarios activos* de tu sitio y sus comunidades. Estos se cuentan en el último día `day`, semana `week`, mes `month` y medio año `half year`, almacenándose en caché al iniciar Lemmy, cada hora.
+Lemmy también muestra el conteo de *usuarios activos* de tu sitio y sus comunidades. Estos se cuentan en el último día `day`, semana `week`, mes `month` y medio año `half year`, almacenándose en caché al iniciar Lemmy, y cada hora.
 
 Un usuario activo es alguien que ha publicado o comentado en nuestra instancia o comunidad en el último periodo de tiempo. Para el conteo de sitios, sólo se cuentan los usuarios locales. Para los conteos de la comunidad, se incluyen los usuarios federados.

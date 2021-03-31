@@ -1,17 +1,17 @@
-# Configuration
+# Configuración
 
-The configuration is based on the file [defaults.hjson](https://yerbamate.ml/LemmyNet/lemmy/src/branch/main/config/defaults.hjson). This file also contains documentation for all the available options. To override the defaults, you can copy the options you want to change into your local `config.hjson` file.
+La configuración está basada en el archivo [defaults.hjson](https://yerbamate.ml/LemmyNet/lemmy/src/branch/main/config/defaults.hjson). Este archivo también contiene la documentación de todas las opciones disponibles. Para anular los valores predeterminados, puedes copiar las opciones que deseas cambiar dentro de tu archivo local `config.hjson`.
 
-The `defaults.hjson` and `config.hjson` files are located at `config/defaults.hjson` and`config/config.hjson`, respectively. To change these default locations, you can set these two environment variables:
+Los archivos `defaults.hjson` y `config.hjson` se encuentran en `config/defaults.hjson` y `config/config.hjson`, respectivamente. Para cambiar estas localizaciones predeterminadas, puedes establecer las siguientes variables de entorno: 
 
 - LEMMY_CONFIG_LOCATION # config.hjson
 - LEMMY_CONFIG_DEFAULTS_LOCATION # defaults.hjson
 
-Additionally, you can override any config files with environment variables. These have the same name as the config options, and are prefixed with `LEMMY_`. For example, you can override the `database.password` with `LEMMY_DATABASE__POOL_SIZE=10`.
+Adicionalmente, puedes sobrescribir cualquier archivo de configuración con las variables de entorno. Éstas tienen el mismo nombre que las opciones de configuración, llevando el prefijo `LEMMY_`. Por ejemplo, puedes sobrescribir el `database.password` con `LEMMY_DATABASE__POOL_SIZE=10`.
 
-An additional option `LEMMY_DATABASE_URL` is available, which can be used with a PostgreSQL connection string like `postgres://lemmy:password@lemmy_db:5432/lemmy`, passing all connection details at once.
+Una opción adicional `LEMMY_DATABASE_URL` está disponible, la cual puede ser usada con una cadena de conexión PostgreSQL como `postgres://lemmy:password@lemmy_db:5432/lemmy`, pasando todos los detalles de la conexión a la vez.
 
-If the Docker container is not used, manually create the database specified above by running the following commands:
+Si no se utiliza el contenedor Docker, cree manualmente la base de datos especificada anteriormente ejecutando los siguientes comandos:
 
 ```bash
 cd server

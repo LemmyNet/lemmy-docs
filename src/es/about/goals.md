@@ -1,5 +1,7 @@
 # Metas
 
+*Esta sección contiene ideas y recursos del equipo que desarrolla Lemmy*. **Parecido a un bloc de notas**
+
 - Piensa en un nombre / nombre clave.
 - Debe tener comunidades.
 - Debe tener comentarios hilados.

@@ -1,5 +1,12 @@
 # Guía de Lemmy
 
+**¿Eres nuevo aquí?** Esta sección es la indicada para que los nuevos (y no tan nuevos 😙) usuarios puedan sacar provecho de todo lo que Lemmy ofrece.
+
+## Vídeo Explicativo (en inglés)
+
+<iframe id='ivplayer' width='640' height='360' src='https://invidious.xyz/embed/5axSUJj0bBY' style='border:none;'></iframe>
+
+## Comandos Útiles
 Empieza tecleando...
 
 - `@nombre_usuario` para obtener una lista de nombres de usuario.
@@ -9,11 +16,6 @@ Empieza tecleando...
 ## Clasificación
 
 *Se aplica tanto a las publicaciones como a los comentarios.*
-
-<!--- Flag
-wrong: la mayoria de los comentarios > Más comentados
-missing: New Comments > Nuevos Comentarios
--->
 
 Tipo | Descripción
 --- | ---
@@ -39,6 +41,8 @@ Esto incluye:
 Todas las acciones de los administradores en las comunidades se realizan en la barra lateral de la comunidad. Esto actualmente sólo incluye la eliminación/restauración de comunidades.
 
 ## Guía de Markdown
+
+Enriquece todas tus publicaciones / comentarios aplicando el formato Markdown para que el texto no se vea tan aburrido.
 
 Tipo | O | … para obtener 
 --- | --- | ---

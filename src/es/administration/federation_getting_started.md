@@ -1,37 +1,37 @@
-# Federation
+# Federación
 
-Lemmy uses the ActivityPub protocol (a W3C standard) to enable federation between different servers (often called instances). This is very similar to the way email works. For example, if you use gmail.com, then you can not only send mails to other gmail.com users, but also to yahoo.com, yandex.ru and so on. Email uses the SMTP protocol to achieve this, so you can think of ActivityPub as "SMTP for social media". The amount of different actions possible on social media (post, comment, like, share, etc) means that ActivityPub is much more complicated than SMTP.
+Lemmy utiliza el protocolo ActivityPub (un estándar del W3C) para permitir la federación entre diferentes servidores (a menudo llamados instancias). Esto es muy parecido al funcionamiento del correo electrónico. Por ejemplo, si utilizas gmail.com, no sólo puedes enviar correos a otros usuarios de gmail.com, sino también a yahoo.com, yandex.ru, etc. El correo electrónico utiliza el protocolo SMTP para lograr esto, así que puedes pensar en ActivityPub como "SMTP para las redes sociales". La cantidad de acciones posibles en las redes sociales (publicar, comentar, gustar, compartir, etc.) hace que ActivityPub sea mucho más complicado que SMTP.
 
-As with email, ActivityPub federation happens only between servers. So if you are registered on `enterprise.lemmy.ml`, you only connect to the API of `enterprise.lemmy.ml`, while the server takes care of sending and receiving data from other instances (eg `voyager.lemmy.ml`). The great advantage of this approach is that the average user doesn't have to do anything to use federation. In fact if you are using Lemmy, you are likely already using it. One way to confirm is by going to a community or user profile. If you are on `enterprise.lemmy.ml` and you see a user like `@nutomic@voyager.lemmy.ml`, or a community like `!main@ds9.lemmy.ml`, then those are federated, meaning they use a different instance from yours.
+Al igual que con el correo electrónico, la federación de ActivityPub sólo se produce entre servidores. Así, si estás registrado en `enterprise.lemmy.ml`, sólo te conectas a la API de `enterprise.lemmy.ml`, mientras que el servidor se encarga de enviar y recibir datos de otras instancias (por ejemplo, `voyager.lemmy.ml`). La gran ventaja de este enfoque es que el usuario medio no tiene que hacer nada para utilizar la federación. De hecho, si está utilizando Lemmy, es probable que ya lo estés haciendo. Una forma de confirmarlo es ir a una comunidad o perfil de usuario. Si estás en `enterprise.lemmy.ml` y ves un usuario como `@nutomic@voyager.lemmy.ml`, o una comunidad como `!main@ds9.lemmy.ml`, entonces están federados, lo que significa que utilizan una instancia diferente a la tuya.
 
-One way you can take advantage of federation is by opening a different instance, like `ds9.lemmy.ml`, and browsing it. If you see an interesting community, post or user that you want to interact with, just copy its URL and paste it into the search of your own instance. Your instance will connect to the other one (assuming the allowlist/blocklist allows it), and directly display the remote content to you, so that you can follow a community or comment on a post. Here are some examples of working searches:
+Una forma de aprovechar la federación es abrir una instancia diferente, como `ds9.lemmy.ml`, y navegar por ella. Si ves una comunidad, una publicación o un usuario interesante con el que quieres interactuar, sólo tienes que copiar su URL y pegarla en el campo de búsqueda de tu propia instancia (parte superior de página). Tu instancia se conectará a la otra (suponiendo que la lista de permitidos/bloqueados lo permita), y te mostrará directamente el contenido remoto, para que puedas seguir una comunidad o comentar un publicación. Estos son algunos ejemplos de búsquedas que funcionan:
 
-- `!main@lemmy.ml` (Community)
-- `@nutomic@lemmy.ml` (User)
-- `https://lemmy.ml/c/programming` (Community)
-- `https://lemmy.ml/u/nutomic` (User)
-- `https://lemmy.ml/post/123` (Post)
-- `https://lemmy.ml/comment/321` (Comment)
+- `!main@lemmy.ml` (Comunidad)
+- `@nutomic@lemmy.ml` (Usuario)
+- `https://lemmy.ml/c/programming` (Comunidad)
+- `https://lemmy.ml/u/nutomic` (Usuario)
+- `https://lemmy.ml/post/123` (Publicación)
+- `https://lemmy.ml/comment/321` (Comentario)
 
-You can see the list of linked instances by following the "Instances" link at the bottom of any Lemmy page.
+Puedes ver la lista de instancias vinculadas siguiendo el enlace "Instancias" en la parte inferior de cualquier página de Lemmy.
 
-## Fetching communities
+## Búsqueda de comunidades
 
-If you search for a community first time, 20 posts are fetched initially. Only if a least one user on your instance subscribes to the remote community, will the community send updates to your instance. Updates include: 
+Si buscas una comunidad por primera vez, inicialmente se obtienen 20 publicaciones. Sólo si al menos un usuario de tu instancia se suscribe a la comunidad remota, ésta enviará actualizaciones a tu instancia. Las actualizaciones incluyen:
 
-- New posts, comments
-- Votes
-- Post, comment edits and deletions
-- Mod actions
+- Nuevas publicaciones / comentarios
+- Votos
+- Publicación, ediciones y supresiones de comentarios
+- Acciones de los modeladores
 
-You can copy the URL of the community from the address bar in your browser and insert it in your search field. Wait a few seconds, the post will appear below. At the moment there is no loading indicator for the search, so wait a few seconds if it shows "no results".
+Puedes copiar la URL de la comunidad desde la barra de direcciones de tu navegador e insertarla en el campo de búsqueda. Espera unos segundos y la publicación aparecerá a continuación. Por el momento no hay un indicador de carga para la búsqueda, así que espera unos segundos si muestra "sin resultados".
 
-## Fetching posts
+## Búsqueda de publicaciones
 
-Paste the URL of a post into your Lemmy instance's search field. Wait a few seconds until the post appears. This will also fetch the community profile, and the profile of the post creator.
+Pega la URL de una publicación en el campo de búsqueda de tu instancia de Lemmy. Espera unos segundos hasta que aparezca la publicación. Esto también recuperará el perfil de la comunidad y el perfil del creador de la publicación.
 
-## Fetching comments
+## Búsqueda de comentarios
 
-If you find an interesting comment under a posting on another instance, you can find below the comment in the 3-dot-menu the link-symbol. Copy this link. It looks like `https://lemmy.ml/post/56382/comment/40796`. Remove the `post/XXX` part and put it into your search-bar. For this example, search for `https://lemmy.ml/comment/40796`. This comment, all parent comments, users and community and the corresponding post are fetched from the remote instance, if they are not known locally.
-
-Sibling comments are not fetched! If you want more comments from older posts, you have to search for each of them as described above.
+Si encuentras un comentario interesante bajo una publicación en otra instancia, puedes encontrar debajo del comentario en el menú de 3 puntos el símbolo del enlace. Copia este enlace. Se parece a `https://lemmy.ml/post/56382/comment/40796`. Elimina la parte `post/XXX` y ponlo en tu barra de búsqueda. Para este ejemplo, busqua `https://lemmy.ml/comment/40796`. Este comentario, todos los comentarios padre, usuarios, la comunidad y la publicación correspondiente se obtienen de la instancia remota, si no se conocen localmente.
+ 
+Los comentarios hermanos no se obtienen. Si quieres más comentarios de publicaciones anteriores, tienes que buscar cada uno de ellos como se ha descrito anteriormente.

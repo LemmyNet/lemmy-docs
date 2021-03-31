@@ -1,127 +1,123 @@
-# Federation Overview
+# Visión General de la Federación
 
+Este documento es para cualquiera que quiera saber como funciona la federación en Lemmy, sin ser demasiado técnico. Se pretende proporcionar una visión general de alto nivel de la federación ActivityPub en Lemmy. Si estás implementando ActivityPub por ti mismo y quieres ser compatible con Lemmy, lee nuestro
+[esquema de la API de ActivityPub](contributing_apub_api_outline.md).
 
-This document is for anyone who wants to know how Lemmy federation works, without being overly technical. It is meant provide a high-level overview of ActivityPub federation in Lemmy. If you are implementing ActivityPub yourself and want to be compatible with Lemmy, read our [ActivityPub API outline](contributing_apub_api_outline.md).
+## Convenciones de la documentación
 
-## Documentation conventions
+Para mantener las cosas simples, a veces verás cosas formateadas como Crear/Nota `Create/Note` o Eliminar/Evento `Delete/Event` o Deshacer/Seguir `Undo/Follow`. La cosa antes de la barra es la Actividad, y la cosa después de la barra es el Objeto dentro de la Actividad, una propiedad del objeto `objet`. Así que estos deben ser leídos como sigue:
 
-To keep things simple, sometimes you will see things formatted like `Create/Note` or `Delete/Event` or `Undo/Follow`. The thing before the slash is the Activity, and the thing after the slash is the Object inside the Activity, in an `object` property. So these are to be read as follows:
+* `Create/Note`: una actividad `Create` que contiene una `Note` en el campo del `object`
+* `Delete/Event`: una actividad `Delete` que contiene un `Event` en el campo del `object`
+* `Undo/Follow`: una actividad `Undo` que contiene un `Follow` en el campo del `object`
 
-* `Create/Note`: a `Create` activity containing a `Note` in the `object` field 
-* `Delete/Event`: a `Delete` activity containing an `Event` in the `object` field
-* `Undo/Follow`: an `Undo` activity containing a `Follow` in the `object` field
+En Lemmy utilizamos algunos términos específicos para referirnos a los elementos de ActivityPub. Son esencialmente nuestras implementaciones específicas de conceptos conocidos de ActivityPub:
 
-In Lemmy we use some specific terms to refer to ActivityPub items. They are essentially our specific implementations of well-known ActivityPub concepts:
+- Comunidad (community): Grupo `Group`
+- Usuario (user): Persona `Person`
+- Publicación (post): Página `Page`
+- Comentario (comment): Nota `Note`
 
-- Community: `Group`
-- User: `Person`
-- Post: `Page`
-- Comment: `Note`
+Este documento tiene tres secciones principales:
 
-This document has three main sections:
+* __Filosofía de la federación:__ expone el modelo general de cómo se debe federar.
+* __Actividades del usuario:__ describen las acciones que un usuario puede realizar para interactuar.
+* __Actividades de la comunidad:__ describen lo que hace la comunidad en respuesta a determinadas acciones de los usuarios.
 
-* __Federation philosophy__ lays out the general model of how this is intended to federate
-* __User Activities__ describes which actions that a User can take to interact
-* __Community Activities__ describes what the Community does in response to certain User actions
+## Filosofía de la federación
 
-## Federation philosophy
+El actor principal de Lemmy es la Comunidad. Cada comunidad reside en una única instancia, y consiste en una lista de Publicaciones y una lista de seguidores. La interacción principal es la de un usuario que envía una actividad relacionada con una Publicación o un Comentario a la bandeja de entrada de la Comunidad, que la anuncia a todos sus seguidores.
 
-The primary Actor in Lemmy is the Community. Each community resides on a single instance, and consists of a list of Posts and a list of followers. The primary interaction is that of a User sending a Post or Comment related activity to the Community inbox, which then announces it to all its followers. 
+Cada Comunidad tiene un Usuario creador específico, que es responsable de establecer las reglas, nombrar moderadores y eliminar el contenido que viola las reglas.
 
-Each Community has a specific creator User, who is responsible for setting rules, appointing moderators, and removing content that violates the rules.
+Además de la moderación a nivel de comunidad, cada instancia tiene un conjunto de Usuarios administradores, que tienen el poder de realizar eliminaciones y baneos en todo el sitio.
 
-Besides moderation on the community level, each instance has a set of administrator Users, who have the power to do site-wide removals and bans.
+Los Usuarios siguen a las comunidades que les interesan para recibir Publicaciones y Comentarios. También votan las Publicaciones y los Comentarios, además de crear otros nuevos. Los Comentarios se organizan en una estructura de árbol y suelen ordenarse por número de votos. Los mensajes directos entre Usuarios también son compatibles.
 
-Users follow Communities that they are interested in, in order to receive Posts and Comments. They also vote on Posts and Comments, as well as creating new ones. Comments are organised in a tree structure and commonly sorted by number of votes. Direct messages between Users are also supported.
+Los Usuarios no pueden seguirse unos a otros, y las Comunidades tampoco pueden seguir nada.
 
-Users can not follow each other, and neither can Communities follow anything.
+Nuestra implementación de la federación ya está completa, pero hasta ahora no nos hemos centrado en absoluto en el cumplimiento de la especificación ActivityPub. Como tal, Lemmy probablemente no es compatible con las implementaciones que esperan enviar y recibir actividades válidas. Esto es algo que planeamos arreglar en un futuro próximo. Consulta el tema [#698](https://github.com/LemmyNet/lemmy/issues/698) para ver un resumen de nuestras desviaciones.
 
-Our federation implementation is already feature complete, but so far we haven't focused at all on complying with the ActivityPub spec. As such, Lemmy is likely not compatible with implementations which expect to send and receive valid activities. This is something we plan to fix in the near future. Check out [#698](https://github.com/LemmyNet/lemmy/issues/698) for an overview of our deviations.
+## Actividades del usuario
 
-## User Activities
+### Seguir a una Comunidad
 
-### Follow a Community
+Cada página de la Comunidad tiene un botón "Seguir". Al hacer clic en él, el usuario envía una actividad de Seguir `Follow` a la bandeja de entrada de la Comunidad. La Comunidad responderá automáticamente con una actividad de Aceptar/Seguir `Accept/Follow` a la bandeja de entrada del usuario. También añadirá al usuario a su lista de seguidores y le enviará cualquier actividad sobre las publicaciones/comentarios de la comunidad.
 
-Each Community page has a "Follow" button. Clicking this triggers a `Follow` activity to be sent from the user to the Community inbox. The Community will automatically respond with an `Accept/Follow` activity to the user inbox. It will also add the user to its list of followers, and deliver any activities about Posts/Comments in the Community to the user.
+### Dejar de seguir una Comunidad
 
-### Unfollow a Community
+Después de seguir una Comunidad, el botón "Seguir" se sustituye por "Dejar de seguir". Al hacer clic en él, se envía una actividad de Deshacer/Seguir `Undo/Follow` a la bandeja de entrada de la Comunidad. La Comunidad elimina al usuario de su lista de seguidores y ya no le envía ninguna actividad.
 
-After following a Community, the "Follow" button is replaced by "Unfollow". Clicking this sends an `Undo/Follow` activity to the Community inbox. The Community removes the User from its followers list and doesn't send any activities to it anymore.
+### Crear una Publicación
 
-### Create a Post
+Cuando un usuario crea una nueva publicación en una Comunidad determinada, se envía como Crear/Página `Create/Page` a la bandeja de entrada de la Comunidad.
 
-When a user creates a new Post in a given Community, it is sent as `Create/Page` to the  Community
-inbox. 
+### Crear un Comentario
 
-### Create a Comment
+Cuando se crea un nuevo Comentario para una Publicación, tanto el ID de la Publicación como el ID del Comentario principal (si existe) se escriben en el campo `in_reply_to`. Esto permite asignarlo a la Publicación correcta y construir el árbol de Comentarios. A continuación, se envía a la bandeja de entrada de la Comunidad como Crear/Note `Create/Note`.
 
-When a new Comment is created for a Post, both the Post ID and the parent Comment ID (if it exists)
-are written to the `in_reply_to` field. This allows assigning it to the correct Post, and building
-the Comment tree. It is then sent to the Community inbox as `Create/Note`
+La instancia de origen también escanea el Comentario en busca de cualquier mención de Usuario, y envía el Crear/Nota`Create/Note` a esos Usuarios también.
 
-The origin instance also scans the Comment for any User mentions, and sends the `Create/Note` to
-those Users as well.
+### Editar una Publicación
 
-### Edit a Post
+Cambia el contenido de una Publicación existente. Sólo puede hacerlo el usuario que lo crea.
 
-Changes the content of an existing Post. Can only be done by the creating User.
+### Editar un Comentario
 
-### Edit a Comment
+Cambia el contenido de un Comentario existente. Sólo puede hacerlo el usuario que lo crea.
 
-Changes the content of an existing Comment. Can only be done by the creating User.
+### Me Gusta y No Me Gusta
 
-### Likes and Dislikes
+Los usuarios pueden poner Me gustar o No me gusta de cualquier Publicación o Comentario. Estos se envían como Me gusta / Página `like/Page`, No me gusta / Nota `Dislike/Note`, etc. a la bandeja de entrada de la Comunidad.
 
-Users can like or dislike any Post or Comment. These are sent as `Like/Page`, `Dislike/Note` etc to the Community inbox.
+### Eliminaciones
 
-### Deletions
+El creador de una Publicación, Comentario o Comunidad puede eliminarla. Entonces se envía a los seguidores de la Comunidad. El elemento queda entonces oculto para todos los usuarios.
 
-The creator of a Post, Comment or Community can delete it. It is then sent to the Community followers. The item is then hidden from all users.
+### Remociones
 
-### Removals
+Los mods pueden remover Publicaciones y Comentarios de sus Comunidades. Los administradores pueden remover cualquier Publicación o Comentario en todo el sitio. Las Comunidades también pueden ser removidas por los administradores. El elemento se oculta para todos los usuarios.
 
-Mods can remove Posts and Comments from their Communities. Admins can remove any Posts or Comments on the entire site. Communities can also be removed by admins. The item is then hidden from all users.
+Las remociones se envían a todos los seguidores de la Comunidad, por lo que también tienen efecto allí. La excepción es si un administrador elimina un elemento de una Comunidad que está alojada en una instancia diferente. En este caso, la eliminación sólo tiene efecto a nivel local.
 
-Removals are sent to all followers of the Community, so that they also take effect there. The exception is if an admin removes an item from a Community which is hosted on a different instance. In this case, the removal only takes effect locally.
+### Revertir una acción anterior 
 
-### Revert a previous Action
+**No eliminamos nada de nuestra base de datos, sólo lo ocultamos a los usuarios**. Las Comunidades/Publicaciones/Comentarios removidos o eliminados tienen un botón de "restauración". Este botón genera una actividad de Deshacer `Undo` que establece la actividad original de eliminar/remover como objeto, como Deshacer/Remover/Publicación `Undo/Remove/Post` o Deshacer/Eliminar/Comunidad `Undo/Delete/Community`.
 
-We don't delete anything from our database, just hide it from users. Deleted or removed Communities/Posts/Comments have a "restore" button. This button generates an `Undo` activity which sets the original delete/remove activity as object, such as `Undo/Remove/Post` or `Undo/Delete/Community`.
+Al hacer clic en el botón de "Voto positivo" (upvote) de una publicación/comentario ya votado (o en el botón de "Voto negativo" (downvote) de una publicación/comentario ya votado) también se genera un Deshacer `Undo`. En este caso Deshacer/Me gusta/Publicación `Undo/Like/Post` o Deshacer/No me gusta/Comentario `Undo/Dislike/Comment`.
 
-Clicking on the upvote button of an already upvoted post/comment (or the downvote button of an already downvoted post/comment) also generates an `Undo`. In this case and `Undo/Like/Post` or `Undo/Dislike/Comment`.
+### Crear un mensaje privado
 
-### Create private message
+Los perfiles de los usuarios tienen un botón "Enviar mensaje", que abre un diálogo que permite enviar un mensaje privado a este usuario. Se envía como un Crear/Nota `Create/Note` a la bandeja de entrada del usuario. Los mensajes privados sólo pueden dirigirse a un único usuario.
 
-User profiles have a "Send Message" button, which opens a dialog permitting to send a private message to this user. It is sent as a `Create/Note` to the user inbox. Private messages can only be directed at a single User.
+### Editar mensaje privado
 
-### Edit private message
+Actualizar/Nota `Update/Note` cambia el texto de un mensaje enviado previamente.
 
-`Update/Note` changes the text of a previously sent message
+### Eliminar mensaje privado
 
-### Delete private message
+Eliminar/Nota `Delete/Note` borra un mensaje privado.
 
-`Delete/Note` deletes a private message.
+### Restaurar mensaje privado
 
-### Restore private message
+Deshacer/Eliminar/Nota `Undo/Delete/Note` Revierte la eliminación de un mensaje privado.
 
-`Undo/Delete/Note` reverts the deletion of a private message.
+## Actividades de la Comunidad
 
-## Community Activities
+La Comunidad es esencialmente un bot, que sólo hará algo en reacción a las acciones de los Usuarios. El usuario que creó la Comunidad por primera vez se convierte en el primer moderador, y puede añadir moderadores adicionales. En general, cada vez que la Comunidad recibe una actividad válida en su bandeja de entrada, esa actividad se reenvía a todos sus seguidores.
 
-The Community is essentially a bot, which will only do anything in reaction to actions from Users. The User who first created the Community becomes the first moderator, and can add additional moderators. In general, whenever the Community receives a valid activity in its inbox, that activity is forwarded to all its followers.
+### Aceptar seguir
 
-### Accept follow
+Si la Comunidad recibe una actividad de Seguir `Follow`, responde automáticamente con Aceptar/Seguir `Accept/Follow`. También añade al Usuario a su lista de seguidores.
 
-If the Community receives a `Follow` activity, it automatically responds with `Accept/Follow`. It also adds the User to its list of followers. 
+### Dejar de seguir
 
-### Unfollow
-
-Upon receiving an `Undo/Follow`, the Community removes the User from its followers list.
+Al recibir un Deshacer/Seguir `Undo/Follow`, la Comunidad elimina al Usuario de su lista de seguidores.
  
-### Announce
+### Anunciar
 
-If the Community receives any Post or Comment related activity (Create, Update, Like, Dislike, Remove, Delete, Undo), it will Announce this to its followers. For this, an Announce is created with the Community as actor, and the received activity as object. Following instances thus stay updated about any actions in Communities they follow.
+Si la Comunidad recibe cualquier actividad relacionada con una publicación o comentario (Crear, Actualizar, Me gusta, No me gusta, Eliminar, Borrar, Deshacer), lo anunciará a sus seguidores. Para ello, se crea un Anuncio con la Comunidad como actor, y la actividad recibida como objeto. De este modo, las instancias seguidoras se mantienen actualizadas sobre cualquier acción en las Comunidades que siguen.
 
-### Delete Community
+### Eliminar Comunidad
 
-If the creator or an admin deletes the Community, it sends a `Delete/Group` to all its followers.
+Si el creador o un administrador elimina la Comunidad, envía un Anuncio de Eliminar/Grupo `Delete/Group` a todos sus seguidores.

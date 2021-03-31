@@ -17,7 +17,7 @@ nano inventory # ingresa tu servidor, dominio, correo electrónico de contacto
 ansible-playbook lemmy.yml --become
 ```
 
-Para actualizar a una nueva versión, simplemente ejecute lo siguiente en tu repo local de Lemmy:
+Para actualizar a una nueva versión, simplemente ejecuta lo siguiente en tu repo local de Lemmy:
 ```bash
 git pull origin main
 cd ansible

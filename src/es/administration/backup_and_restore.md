@@ -1,17 +1,17 @@
-# Backup and Restore Guide
+# Guía de Copia de Seguridad Y Restauración
 
-## Docker and Ansible
+## Docker y Ansible
 
-When using docker or ansible, there should be a `volumes` folder, which contains both the database, and all the pictures. Copy this folder to the new instance to restore your data.
+Cuando se utiliza docker o ansible, debe haber una carpeta llamada `volumes`, la cual contiene tanto la Base de Datos como todas las Imágenes. Copia esta carpeta a la nueva instancia para restaurar tus datos.
 
-### Incremental Database backup
+### Copia de seguridad incremental de la BD
 
-To incrementally backup the DB to an `.sql` file, you can run: 
+Para hacer una copia de seguridad incremental de una base de datos en archivo `.sql` puedes ejecutar: 
 
 ```bash
 docker-compose exec postgres pg_dumpall -c -U lemmy >  lemmy_dump_`date +%Y-%m-%d"_"%H_%M_%S`.sql
 ```
-### A Sample backup script
+### Un ejemplo de script de copia de seguridad
 
 ```bash
 #!/bin/sh
@@ -22,9 +22,9 @@ ssh MY_USER@MY_IP "docker-compose exec postgres pg_dumpall -c -U lemmy" >  ~/BAC
 rsync -avP -zz --rsync-path="sudo rsync" MY_USER@MY_IP:/LEMMY_LOCATION/volumes ~/BACKUP_LOCATION/FOLDERNAME
 ```
 
-### Restoring the DB
+### Restauración de la BD
 
-If you need to restore from a `pg_dumpall` file, you need to first clear out your existing database
+Si necesitas restaurar la base de datos a partir de un archivo `pg_dumpall`, primero necesitas borrar la base de datos existente
 
 ```bash
 # Drop the existing DB
@@ -37,11 +37,12 @@ cat db_dump.sql  |  docker exec -i FOLDERNAME_postgres_1 psql -U lemmy # restore
 docker exec -i FOLDERNAME_postgres_1 psql -U lemmy -c "alter user lemmy with password 'bleh'"
 ```
 
-### Changing your domain name
+### Cambiar el nombre de dominio
 
-If you haven't federated yet, you can change your domain name in the DB. **Warning: do not do this after you've federated, or it will break federation.**
+Si aún no te has federado, puedes cambiar tu nombre de dominio en la base de datos.
+**Advertencia: no haga esto después de haber federado o romperás la federación.**
 
-Get into `psql` for your docker: 
+Entra al `psql` de tu docker: 
 
 `docker-compose exec postgres psql -U lemmy`
 
@@ -70,7 +71,7 @@ update community set shared_inbox_url = replace (shared_inbox_url, 'old_domain',
 
 ```
 
-## More resources
+## Más recursos
 
 - https://stackoverflow.com/questions/24718706/backup-restore-a-dockerized-postgresql-database
 

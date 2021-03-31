@@ -3,30 +3,32 @@
 - Código abierto, [Licencia AGPL](/LICENSE).
 - Auto-hospedado, fácil de desplegar (deploy).
   - Viene con [Docker](#docker) y [Ansible](#ansible).
-- Interfaz limpia y fácil de usar para los móviles.
+- Interfaz limpia y fácil de usar. Apta para dispositivos móviles.
   - Sólo se requiere como mínimo un nombre de usuario y una contraseñar para inscribirse!
   - Soporte de avatar de usuario.
   - Hilos de comentarios actualizados en directo.
   - Puntuaciones completas de los votos `(+/-)` como en el antiguo reddit.
   - Temas, incluidos los claros, los oscuros, y los solarizados.
-  - Emojis con soporte para autocompletar. Empieza tecleando `:`
+  - Emojis con soporte de autocompletado. Empieza tecleando `:`
+    - *Ejemplo* `miau :cat:` => `miau 🐈`
   - Etiquetado de Usuarios con `@`, etiquetado de Comunidades con `!`.
+    - *Ejemplo* `@miguel@lemmy.ml me invitó a la comunidad !gaming@lemmy.ml`
   - Carga de imágenes integrada tanto en las publicaciones como en los comentarios.
   - Una publicación puede consistir en un título y cualquier combinación de texto propio, una URL o nada más.
   - Notificaciones, sobre las respuestas a los comentarios y cuando te etiquetan.
     - Las notificaciones se pueden enviar por correo electrónico.
   - Soporte de i18n / internacionalización.
-  - Fuentes RSS / Atom para `Todo`, `Suscrito`, `Bandeja de entrada`, `Usuario`, y `Comunidad`.
+  - Fuentes RSS / Atom para Todo `All`, Suscrito `Subscribed`, Bandeja de entrada `inbox`, Usuario `User`, y Comunidad `Community`.
 - Soporte para la publicación cruzada (cross-posting).
-  - Una *búsqueda de publicaciones similares* al crear nuevas publicaciones. Ideal para comunidades de preguntas y respuestas.
+  - **búsqueda de publicaciones similares** al crear una nueva. Ideal para comunidades de preguntas y respuestas.
 - Capacidades de moderación.
   - Registros públicos de moderación.
-  - Puede pegar las publicaciones a la parte superior de las comunidades.
+  - Puedes pegar las publicaciones a la parte superior de las comunidades.
   - Tanto los administradores del sitio, como los moderadores de la comunidad, pueden nombrar a otros moderadores.
-  - Puede bloquear, eliminar y restaurar publicaciones y comentarios.
-  - Puede banear y desbanear usuarios de las comunidades y del sitio.
-  - Puede transferir el sitio y las comunidades a otros.
-- Puede borrar completamente sus datos, reemplazando todas las publicaciones y comentarios.
+  - Puedes bloquear, eliminar y restaurar publicaciones y comentarios.
+  - Puedes banear y desbanear usuarios de las comunidades y del sitio.
+  - Puedes transferir el sitio y las comunidades a otros.
+- Puedes borrar completamente tus datos, reemplazando todas las publicaciones y comentarios.
 - Soporte para publicaciones y comunidades NSFW.
 - Alto rendimiento.
   - El servidor está escrito en rust.
