@@ -1,12 +1,12 @@
-# Lemmy Documentation
+# Документация Lemmy
 
-Documentation for the Lemmy project
+Документация по проекту Lemmy
 
-## Building
+## Сборка
 
-You need to have [Cargo](https://doc.rust-lang.org/cargo/) installed.
+У вас должен быть установлен [Cargo](https://doc.rust-lang.org/cargo/).
 
-Our documentation tool [mdbook](https://github.com/rust-lang/mdBook) doesn't support localisation yet, so we are using code that is still work on progress to create our documentation with localisation. Note that this code still has some rough edges. See [github.com/rust-lang/mdBook/pull/1306](https://github.com/rust-lang/mdBook/pull/1306) for more details.
+Наш инструментарий для документации  [mdbook](https://github.com/rust-lang/mdBook) пока не поддерживает международную локализацию, поэтому мы используем код, работа над которым продолжается для создания документации с локализацией. Обратите внимание, что у этого кода все еще есть шероховатости. Смотрите [github.com/rust-lang/mdBook/pull/1306](https://github.com/rust-lang/mdBook/pull/1306) для уточнения деталей.
 
 ```bash
 cargo install mdbook --git https://github.com/Ruin0x11/mdBook.git \
@@ -17,20 +17,20 @@ mdbook build
 mdbook serve
 ```
 
-## Adding a new Language
+## Добавление нового Языка
 
-- Edit `book.toml` to add the metadata for your language
-- Copy `src/en/SUMMARY.md` to `src/xx/SUMMARY.md` (where xx is your language's identifier)
-- In `src/xx/`, write your translation into files and folders with the same name as in `src/en/`
-- Use the instructions above to ensure that it builds without errors
+- Отредактируйте `book.toml` для добавления метаданных нового языка
+- Скопируйте `src/en/SUMMARY.md` в `src/xx/SUMMARY.md` (где значение xx это языковой индетификатор)
+- В `src/xx/`, внесите ваш перевод в файлы и папки такие же как и `src/en/`
+- Используйте инструкции выше для того чтобы исключить ошибки при сборке
 
-## Guidelines for adding a new Translation
+## Рекомендации по добавлению нового Перевода
 
-- After following the instructions above for adding a new language, open a pull request in the repository.
-- We don't expect that you translate the entire documentation as fast as possible, its more important that you consistently work to improve the translation (even if its only a few hours a week or less).
-- The goal is not to make a sentence-for-sentence translation of the English docs, but writing something that addresses the needs of users in your language. For example, if docker-compose docs are lacking in a language, that should be explained more extensively in lemmy docs for that language
-- This is technical documentation, so try to avoid mentioning things that are unrelated to Lemmy itself, and avoid mentioning specific Lemmy instances.
-- Avoid adding files which don't exist in English or other languages, as that would lead to problems when switching between languages.
-- We will merge a new language after it has been worked on regularly for at least a month, and at least some pages are finished.
-- After merging, we will add a label for the language, to help organising issues and pull requests by language.
-- The translator will also get maintainer rights in this repository, to allow managing contributions for their language.
+- После выполнения приведённых выше инструкций по добавлению нового языка откройте запрос на перенос в репозитории.
+- Мы не ожидаем, что вы переведёте всю документацию как можно быстрее, важнее, чтобы вы постоянно работали над улучшением перевода (даже если это всего несколько часов в неделю или меньше). 
+- Цель состоит не в том, чтобы переводить документы на ваш язык, предложение за предложением, а в написании чего-то, что удовлетворит потребности пользователей на вашем языке. Например, если на языке отсутствуют документы для создания докеров, это следует более подробно объяснить в документации Lemmy для этого языка.
+- Это техническая документация, поэтому старайтесь не упоминать вещи, не связанные с самим Lemmy, и не упоминайте конкретные экземпляры Lemmy. 
+- Избегайте добавления файлов, которых нет на английском или других языках, так как это может привести к проблемам при переключении между языками. 
+- Мы объединим новый язык после того, как он будет регулярно работать как минимум в течение месяца и как минимум некоторые страницы будут завершены. 
+- После слияния мы добавим метку для языка чтобы упорядочить запросы о проблемах и добавления по языку в будущем. 
+- Переводчик также получит права сопровождающего в этом репозитории, что позволит ему управлять изменениями для своего языка. 
