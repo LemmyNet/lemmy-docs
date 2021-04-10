@@ -1,28 +1,28 @@
-# Federation Administration
+# Administration de la fédération
 
-Note: ActivityPub federation is still under development. We recommend that you only enable it on test instances for now.
+Note : La fédération ActivityPub est encore en cours de développement. Nous vous recommandons de ne l'activer que sur les instances de test pour le moment.
 
-To enable federation, change the setting `federation.enabled` to `true` in `lemmy.hjson`, and restart Lemmy.
+Pour activer la fédération, changez le paramètre `federation.enabled` en `true` dans `lemmy.hjson`, et redémarrez Lemmy.
 
-Federation does not start automatically, but needs to be triggered manually through the search. To do this you have to enter a reference to a remote object, such as:
+La fédération ne démarre pas automatiquement, mais doit être déclenchée manuellement par la recherche. Pour ce faire, vous devez entrer une référence à un objet distant, tel que :
 
-- `!main@lemmy.ml` (Community)
-- `@nutomic@lemmy.ml` (User)
-- `https://lemmy.ml/c/programming` (Community)
-- `https://lemmy.ml/u/nutomic` (User)
-- `https://lemmy.ml/post/123` (Post)
-- `https://lemmy.ml/comment/321` (Comment)
+- `!main@lemmy.ml` (Communauté)
+- `@nutomic@lemmy.ml` (Utilisateur)
+- `https://lemmy.ml/c/programming` (Communauté)
+- `https://lemmy.ml/u/nutomic` (Utilisateur)
+- `https://lemmy.ml/post/123` (Publication)
+- `https://lemmy.ml/comment/321` (Commentaire)
 
-For an overview of how federation in Lemmy works on a technical level, check out our [Federation Overview](contributing_federation_overview.md).
+Pour un aperçu du fonctionnement technique de la fédération dans Lemmy, consultez notre [Aperçu de la fédération](contributing_federation_overview.md).
 
-## Instance allowlist and blocklist
+## Instance allowlist et blocklist
 
-The federation section of Lemmy's config has two variables `allowed_instances` and `blocked_instances`. These control which other instances Lemmy will federate with. Both settings take a comma separated list of domains, eg `lemmy.ml,example.com`. You can either change those settings via `/admin`, or directly on the server filesystem. 
+La section fédération de la configuration de Lemmy a deux variables `allowed_instances` et `blocked_instances`. Celles-ci contrôlent avec quelles autres instances Lemmy va se fédérer. Les deux paramètres prennent une liste de domaines séparés par des virgules, par exemple `lemmy.ml,exemple.com`. Vous pouvez modifier ces paramètres soit via `/admin`, soit directement sur le système de fichiers du serveur. 
 
-It is important to note that these settings only affect sending and receiving of data between instances. If allow federation with a certain instance, and then remove it from the allowlist, this will not affect previously federated data. These communities, users, posts and comments will still be shown. They will just not be updated anymore. And even if an instance is blocked, it can still fetch and display public data from your instance.
+Il est important de noter que ces paramètres n'affectent que l'envoi et la réception de données entre les instances. Si vous autorisez la fédération avec une certaine instance, puis la supprimez de la liste d'autorisation, cela n'affectera pas les données fédérées précédemment. Ces communautés, utilisateurs, messages et commentaires seront toujours affichés. Ils ne seront simplement plus mis à jour. Et même si une instance est bloquée, elle peut toujours récupérer et afficher les données publiques de votre instance.
 
-By default, both `allowed_instances` and `blocked_instances` values are empty, which means that Lemmy will federate with every compatible instance. We do not recommend this, because the moderation tools are not yet ready to deal with malicious instances.
+Par défaut, les valeurs `allowed_instances` et `blocked_instances` sont vides, ce qui signifie que Lemmy se fédérera avec toute instance compatible. Nous ne recommandons pas cela, car les outils de modération ne sont pas encore prêts à traiter les instances malveillantes.
 
-What we do recommend is putting a list of trusted instances into `allowed_instances`, and only federating with those. Note that both sides need to add each other to their `allowed_instances` to allow two-way federation.
+Ce que nous recommandons est de mettre une liste d'instances de confiance dans `allowed_instances`, et de ne se fédérer qu'avec celles-ci. Notez que les deux parties doivent s'ajouter mutuellement à leurs `allowed_instances` pour permettre une fédération bidirectionnelle.
 
-Alternatively you can also use blocklist based federation. In this case, add the domains of instances you do *not* want to federate with. You can only set one of `allowed_instances` and `blocked_instances`, as setting both doesn't make sense.
+Alternativement, vous pouvez aussi utiliser une fédération basée sur une liste de blocage. Dans ce cas, ajoutez les domaines des instances avec lesquelles vous ne voulez *pas* vous fédérer. Vous ne pouvez définir que l'un des deux, `allowed_instances` et `blocked_instances`, car définir les deux n'a pas de sens.
