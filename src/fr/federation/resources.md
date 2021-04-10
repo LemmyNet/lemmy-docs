@@ -1,11 +1,11 @@
-# ActivityPub Resources
+# Ressources de l'ActivityPub
 
-## Official Documents
+## Documents officiels
 
-- [ActivityPub standard](https://www.w3.org/TR/activitypub/)
-- [Activitypub vocabulary](https://www.w3.org/TR/activitystreams-vocabulary/)
+- [Norme ActivityPub](https://www.w3.org/TR/activitypub/)
+- [Vocabulaire de l'ActivityPub](https://www.w3.org/TR/activitystreams-vocabulary/)
 
-## Explanations
+## Explications
 
 - [ActivityPub - one protocol to rule them all?](https://schub.io/blog/2018/02/01/activitypub-one-protocol-to-rule-them-all.html)
 - [A highly opinionated guide to learning about ActivityPub](https://tinysubversions.com/notes/reading-activitypub/)
@@ -15,7 +15,7 @@
 - [Data storage questions](https://socialhub.activitypub.rocks/t/data-storage-questions/579)
 - [Activitypub as it has been understood](https://flak.tedunangst.com/post/ActivityPub-as-it-has-been-understood)
 
-## Examples and Libraries
+## Exemples et bibliothèques
 
 - [ActivityPub example server](https://github.com/tOkeshu/activitypub-example)
 - [ActivityStreams crate](https://docs.rs/activitystreams/)
