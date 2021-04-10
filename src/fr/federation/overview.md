@@ -24,22 +24,6 @@ Ce document comporte trois sections principales :
 * __Les activités des utilisateurs__ décrivent les actions qu'un utilisateur peut entreprendre pour interagir.
 * __Activités de la communauté__ décrit ce que la communauté fait en réponse à certaines actions de l'utilisateur.
 
-## Federation philosophy
-
-The primary Actor in Lemmy is the Community. Each community resides on a single instance, and consists of a list of Posts and a list of followers. The primary interaction is that of a User sending a Post or Comment related activity to the Community inbox, which then announces it to all its followers. 
-
-Each Community has a specific creator User, who is responsible for setting rules, appointing moderators, and removing content that violates the rules.
-
-Besides moderation on the community level, each instance has a set of administrator Users, who have the power to do site-wide removals and bans.
-
-Users follow Communities that they are interested in, in order to receive Posts and Comments. They also vote on Posts and Comments, as well as creating new ones. Comments are organised in a tree structure and commonly sorted by number of votes. Direct messages between Users are also supported.
-
-Users can not follow each other, and neither can Communities follow anything.
-
-Our federation implementation is already feature complete, but so far we haven't focused at all on complying with the ActivityPub spec. As such, Lemmy is likely not compatible with implementations which expect to send and receive valid activities. This is something we plan to fix in the near future. Check out [#698](https://github.com/LemmyNet/lemmy/issues/698) for an overview of our deviations.
-
-## Activités de l'utilisateur
-
 ## Philosophie de la Fédération
 
 L'acteur principal de Lemmy est la communauté. Chaque communauté réside sur une seule instance, et se compose d'une liste de messages et d'une liste de followers. L'interaction principale est celle d'un utilisateur qui envoie une activité liée à un message ou à un commentaire à la boîte de réception de la communauté, qui l'annonce ensuite à tous ses suiveurs. 
