@@ -22,7 +22,7 @@ Ce document comporte trois sections principales :
 
 * __Philosophie de la fédération__ expose le modèle général de la manière dont le projet est censé se fédérer.
 * __Les activités des utilisateurs__ décrivent les actions qu'un utilisateur peut entreprendre pour interagir.
-* __Activités de la communauté __ décrit ce que la communauté fait en réponse à certaines actions de l'utilisateur.
+* __Activités de la communauté__ décrit ce que la communauté fait en réponse à certaines actions de l'utilisateur.
 
 ## Federation philosophy
 
