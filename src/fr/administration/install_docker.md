@@ -1,53 +1,53 @@
-# Docker Installation
+# Installation de Docker
 
-Make sure you have both docker and docker-compose(>=`1.24.0`) installed. On Ubuntu, just run `apt install docker-compose docker.io`. Next, 
+Assurez-vous que vous avez à la fois docker et docker-compose(>=`1.24.0`) installés. Sur Ubuntu, exécutez simplement `apt install docker-compose docker.io`. Suivant, 
 
 ```bash
-# create a folder for the lemmy files. the location doesnt matter, you can put this anywhere you want
+# créez un dossier pour les fichiers lemmy. l'emplacement n'a pas d'importance, vous pouvez le mettre où vous voulez
 mkdir /lemmy
 cd /lemmy
 
-# download default config files
+# télécharger les fichiers de configuration par défaut
 wget https://raw.githubusercontent.com/LemmyNet/lemmy/main/docker/prod/docker-compose.yml
 wget https://raw.githubusercontent.com/LemmyNet/lemmy/main/docker/lemmy.hjson
 wget https://raw.githubusercontent.com/LemmyNet/lemmy/main/docker/iframely.config.local.js
 
-# Set correct permissions for pictrs folder
+# Définir les permissions correctes pour le dossier pictrs
 mkdir -p volumes/pictrs
 sudo chown -R 991:991 volumes/pictrs
 ```
 
-Open up your `docker-compose.yml`, and make sure `LEMMY_EXTERNAL_HOST` for `lemmy-ui` is set to your correct host.
+Ouvrez votre `docker-compose.yml`, et assurez-vous que `LEMMY_EXTERNAL_HOST` pour `lemmy-ui` est réglé sur votre hôte correct.
 
 ```
 - LEMMY_INTERNAL_HOST=lemmy:8536
-- LEMMY_EXTERNAL_HOST=your-domain.com
+- LEMMY_EXTERNAL_HOST=votre-domaine.com
 - LEMMY_HTTPS=false
 ```
 
-If you'd like a different database password, you should also change it in the `docker-compose.yml` **before** your first run.
+Si vous souhaitez un mot de passe différent pour la base de données, vous devez également le changer dans le fichier `docker-compose.yml` **avant** votre première exécution.
 
-After this, have a look at the [config file](configuration.md) named `lemmy.hjson`, and adjust it, in particular the hostname, and possibly the db password. Then run:
+Après cela, jetez un oeil au [fichier de configuration](configuration.md) nommé `lemmy.hjson`, et ajustez-le, en particulier le nom d'hôte, et éventuellement le mot de passe de la base de données. Puis lancez :
 
 `docker-compose up -d`
 
-You can access the lemmy-ui at `http://localhost:1235`
+Vous pouvez accéder au lemmy-ui à l'adresse `http://localhost:1235`.
 
-To make Lemmy available outside the server, you need to setup a reverse proxy, like Nginx. [A sample nginx config](https://raw.githubusercontent.com/LemmyNet/lemmy/main/ansible/templates/nginx.conf), could be setup with:
+Pour rendre Lemmy disponible en dehors du serveur, vous devez configurer un proxy inverse, comme Nginx. Un exemple de configuration de Nginx (https://raw.githubusercontent.com/LemmyNet/lemmy/main/ansible/templates/nginx.conf), peut être configuré avec :
 
 ```bash
 wget https://raw.githubusercontent.com/LemmyNet/lemmy/main/ansible/templates/nginx.conf
-# Replace the {{ vars }}
-# The default lemmy_port is 8536
-# The default lemmy_ui_port is 1235
+# Remplacer les {{ variables}}
+# Le lemmy_port par défaut est 8536
+# Le lemmy_ui_port par défaut est 1235
 sudo mv nginx.conf /etc/nginx/sites-enabled/lemmy.conf
 ```
 
-You will also need to setup TLS, for example with [Let's Encrypt](https://letsencrypt.org/). After this you need to restart Nginx to reload the config.
+Vous devrez également configurer TLS, par exemple avec [Let's Encrypt](https://letsencrypt.org/). Après cela, vous devez redémarrer Nginx pour recharger la configuration.
 
-## Updating
+## Mise à jour
 
-To update to the newest version, you can manually change the version in `docker-compose.yml`. Alternatively, fetch the latest version from our git repo:
+Pour mettre à jour la dernière version, vous pouvez changer manuellement la version dans `docker-compose.yml`. Alternativement, récupérez la dernière version depuis notre dépôt git :
 
 ```bash
 wget https://raw.githubusercontent.com/LemmyNet/lemmy/main/docker/prod/docker-compose.yml
