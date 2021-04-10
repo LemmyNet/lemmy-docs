@@ -5,7 +5,7 @@ Ce document est destiné à tous ceux qui veulent savoir comment fonctionne la f
 
 ## Conventions de documentation
 
-Pour garder les choses simples, vous verrez parfois des choses formatées comme `Create/Note` ou `Delete/Event` ou `Undo/Follow`. La chose avant le slash est l'activité, et la chose après le slash est l'objet à l'intérieur de l'activité, dans une propriété `object`. Il faut donc les lire comme suit :
+Pour garder les choses simples, vous verrez parfois des choses formatées comme `Create/Note`, `Delete/Event` ou `Undo/Follow`. La chose avant le slash est l'activité, et la chose après le slash est l'objet à l'intérieur de l'activité, dans une propriété `object`. Il faut donc les lire comme suit :
 
 * `Create/Note` : une activité `Create` contenant une `Note` dans le champ `object`. 
 * `Delete/Event` : une activité `Delete` contenant un `Event` dans le champ `object`.
