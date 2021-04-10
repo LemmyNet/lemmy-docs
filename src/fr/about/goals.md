@@ -1,24 +1,26 @@
-# Goals
+# Objectifs
 
-- Come up with a name / codename.
-- Must have communities.
-- Must have threaded comments.
-- Must be federated: liking and following communities across instances.
-- Be live-updating: have a right pane for new comments, and a main pane for the full threaded view.
-  - Use websockets for post / gets to your own instance.
+*Cette section contient des idées et des ressources de l'équipe qui développe Lemmy*. Similaire à un bloc-notes
+
+- Trouver un nom / nom de code.
+- Doit avoir des communautés.
+- Doit avoir des commentaires en fil de discussion.
+- Doit être fédéré : aimer et suivre les communautés à travers les instances.
+- Doit être actualisé en temps réel : avoir un panneau de droite pour les nouveaux commentaires, et un panneau principal pour la vue complète du fil de discussion.
+  - Utiliser des websockets pour envoyer et recevoir des messages dans votre propre instance.
 
 # Questions
 
-- How does voting work? Should we go back to the old way of showing up and downvote counts? Or just a score?
-- Decide on tech to be used
-  - Backend: Actix, Diesel.
-  - Frontend: inferno, typescript and bootstrap for now.
-- Should it allow bots?
-- Should the comments / votes be static, or feel like a chat, like [flowchat?](https://flow-chat.com).
-  - Two pane model - Right pane is live comments, left pane is live tree view.
-  - On mobile, allow you to switch between them. Default?
+- Comment fonctionne le vote ? Devrions-nous revenir à l'ancienne méthode qui consistait à compter les votes positifs et négatifs ? Ou juste un score ?
+- Décider de la technologie à utiliser
+  - Backend : Actix, Diesel.
+  - Front-end : inferno, typescript et bootstrap pour le moment.
+- Doit-on autoriser les robots ?
+- Les commentaires / votes doivent-ils être statiques, ou ressembler à un chat, comme [flowchat ?] (https://flow-chat.com).
+  - Modèle à deux volets - le volet de droite contient les commentaires en direct, le volet de gauche est l'arborescence en direct.
+  - Sur mobile, permettre de passer de l'un à l'autre. Par défaut ?
 
-# Resources / Potential Libraries
+# Ressources / Bibliothèques potentielles
 
 - [Diesel to Postgres data types](https://kotiri.com/2018/01/31/postgresql-diesel-rust-types.html)
 - [helpful diesel examples](http://siciarz.net/24-days-rust-diesel/)
