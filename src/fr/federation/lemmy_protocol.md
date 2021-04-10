@@ -1,51 +1,51 @@
-# Lemmy Federation Protocol
+# Protocole de la Fédération Lemmy
 
-The Lemmy Protocol (or Lemmy Federation Protocol) is a strict subset of the [ActivityPub Protocol](https://www.w3.org/TR/activitypub/). Any deviation from the ActivityPub protocol is a bug in Lemmy or in this documentation (or both).
+Le protocole Lemmy (ou protocole de la fédération Lemmy) est un sous-ensemble strict du [protocole ActivityPub](https://www.w3.org/TR/activitypub/). Toute déviation du protocole ActivityPub est un bug dans Lemmy ou dans cette documentation (ou les deux).
 
-This document is targeted at developers who are familiar with the ActivityPub and ActivityStreams protocols. It gives a detailed outline of the actors, objects and activities used by Lemmy.
+Ce document s'adresse aux développeurs qui sont familiers avec les protocoles ActivityPub et ActivityStreams. Il donne un aperçu détaillé des acteurs, objets et activités utilisés par Lemmy.
 
-Before reading this, have a look at our [Federation Overview](contributing_federation_overview.md) to get an idea how Lemmy federation works on a high level.
+Avant de lire ce document, jetez un coup d'œil à notre [Aperçu de la fédération](contributing_federation_overview.md) pour avoir une idée du fonctionnement de la fédération Lemmy à un haut niveau.
 
-Lemmy does not yet follow the ActivityPub spec in all regards. For example, we don't set a valid context indicating our context fields. We also ignore fields like `inbox`, `outbox` or `endpoints` for remote actors, and assume that everything is Lemmy. For an overview of deviations, read [#698](https://github.com/LemmyNet/lemmy/issues/698). They will be fixed in the near future.
+Lemmy ne suit pas encore la spécification ActivityPub à tous égards. Par exemple, nous ne définissons pas un contexte valide en indiquant nos champs de contexte. Nous ignorons également les champs comme `inbox`, `outbox` ou `endpoints` pour les acteurs distants, et supposons que tout est Lemmy. Pour un aperçu des déviations, lisez [#698](https://github.com/LemmyNet/lemmy/issues/698). Elles seront corrigées dans un futur proche.
 
-Lemmy is also really inflexible when it comes to incoming activities and objects. They need to be exactly identical to the examples below. Things like having an array instead of a single value, or an object ID instead of the full object will result in an error.
+Lemmy est également très peu flexible en ce qui concerne les activités et les objets entrants. Ils doivent être exactement identiques aux exemples ci-dessous. Des choses comme avoir un tableau au lieu d'une valeur unique, ou un ID d'objet au lieu de l'objet complet entraîneront une erreur.
 
-In the following tables, "mandatory" refers to whether or not Lemmy will accept an incoming activity without this field. Lemmy itself will always include all non-empty fields.
+Dans les tableaux suivants, le terme "obligatoire" indique si Lemmy accepte ou non une activité entrante sans ce champ. Lemmy lui-même inclura toujours tous les champs non vides.
 
 <!-- toc -->
 
-- [Context](#context)
-- [Actors](#actors)
-  * [Community](#community)
-    + [Community Outbox](#community-outbox)
-    + [Community Followers](#community-followers)
-    + [Community Moderators](#community-moderators)
-  * [User](#user)
-    + [User Outbox](#user-outbox)
-- [Objects](#objects)
-  * [Post](#post)
-  * [Comment](#comment)
-  * [Private Message](#private-message)
-- [Activities](#activities)
-  * [User to Community](#user-to-community)
-    + [Follow](#follow)
-    + [Unfollow](#unfollow)
-    + [Create or Update Post](#create-or-update-post)
-    + [Create or Update Comment](#create-or-update-comment)
-    + [Like Post or Comment](#like-post-or-comment)
-    + [Dislike Post or Comment](#dislike-post-or-comment)
-    + [Delete Post or Comment](#delete-post-or-comment)
-    + [Remove Post or Comment](#remove-post-or-comment)
-    + [Undo](#undo)
-  * [Community to User](#community-to-user)
-    + [Accept Follow](#accept-follow)
-    + [Announce](#announce)
-    + [Remove or Delete Community](#remove-or-delete-community)
-    + [Restore Removed or Deleted Community](#restore-removed-or-deleted-community)
-  * [User to User](#user-to-user)
-    + [Create or Update Private message](#create-or-update-private-message)
-    + [Delete Private Message](#delete-private-message)
-    + [Undo Delete Private Message](#undo-delete-private-message)⏎
+- [Contexte](#contexte)
+- [Acteurs](#acteurs)
+  * [Communauté](#communaute)
+    + [Boîte de sortie communautaire](#boite-de-sortie-communautaire)
+    + [Suiveurs de la communauté](#suiveurs-de-la-communaute)
+    + [Modérateurs de la communauté](#moderateurs-de-la-communaute)
+  * [Utilisateur](#utilisateur)
+    + [Boîte de sortie de l'utilisateur](#boite-de-sortie-de-lutilisateur)
+- [Objets](#objets)
+  * [Publication](#publication)
+  * [Commentaire](#commentaire)
+  * [Message privé](#message-prive)
+- [Activités](#activites)
+  * [De l'utilisateur à la communauté](#de-lutilisateur-a-la-communaute)
+    + [Suivre](#suivre)
+    + [Ne pas suivre](#ne-pas-suivre)
+    + [Créer ou mettre à jour un poste](#creer-ou-mettre-a-jour-un-poste)
+    + [Créer ou mettre à jour un commentaire](#creer-ou-mettre-a-jour-un-commentaire)
+    + [Aimer le message ou le commentaire](#aimer-le-message-ou-le-commentaire)
+    + [Ne pas aimer le message ou le commentaire](#ne-pas-aimer-le-message-ou-le-commentaire)
+    + [Supprimer un message ou un commentaire](#supprimer-un-message-ou-un-commenataire)
+    + [Retirer un message ou le commentaire](#retirer-un-message-ou-le-commentaire)
+    + [Défaire](#defaire)
+  * [De la communauté à l'utilisateur](#de-la-communaute-a-lutilisateur)
+    + [Accepter Suivre](#accepter-suivre)
+    + [Annoncer](#annoncer)
+    + [Retirer ou supprimer la communauté](#retirer-ou-supprimer-la-communaute)
+    + [Restaurer une communauté retiré ou effacée](#restaurer-une-communaute-retirer-ou-efface)
+  * [D'utilisateur à utilisateur](#dutilisateur-a-utilisateur)
+    + [Créer ou mettre à jour un message privé](#creer-ou-mettre-a-jour-un-message-prive)
+    + [Supprimer un message privé](#supprimer-un-message-prive)
+    + [Défaire Supprimer un message privé](#defaire-supprimer-une-message-prive)⏎
 
 <!-- tocstop -->
 
