@@ -1,28 +1,28 @@
-# Federation Overview
+# Aperçu de la fédération
 
 
-This document is for anyone who wants to know how Lemmy federation works, without being overly technical. It is meant provide a high-level overview of ActivityPub federation in Lemmy. If you are implementing ActivityPub yourself and want to be compatible with Lemmy, read our [ActivityPub API outline](contributing_apub_api_outline.md).
+Ce document est destiné à tous ceux qui veulent savoir comment fonctionne la fédération Lemmy, sans être trop technique. Il est destiné à fournir un aperçu de haut niveau de la fédération ActivityPub dans Lemmy. Si vous implémentez ActivityPub vous-même et souhaitez être compatible avec Lemmy, lisez notre [ActivityPub API outline](contributing_apub_api_outline.md).
 
-## Documentation conventions
+## Conventions de documentation
 
-To keep things simple, sometimes you will see things formatted like `Create/Note` or `Delete/Event` or `Undo/Follow`. The thing before the slash is the Activity, and the thing after the slash is the Object inside the Activity, in an `object` property. So these are to be read as follows:
+Pour garder les choses simples, vous verrez parfois des choses formatées comme `Create/Note` ou `Delete/Event` ou `Undo/Follow`. La chose avant le slash est l'activité, et la chose après le slash est l'objet à l'intérieur de l'activité, dans une propriété `object`. Il faut donc les lire comme suit :
 
-* `Create/Note`: a `Create` activity containing a `Note` in the `object` field 
-* `Delete/Event`: a `Delete` activity containing an `Event` in the `object` field
-* `Undo/Follow`: an `Undo` activity containing a `Follow` in the `object` field
+* `Create/Note` : une activité `Create` contenant une `Note` dans le champ `object`. 
+* `Delete/Event` : une activité `Delete` contenant un `Event` dans le champ `object`.
+* `Undo/Follow` : une activité `Undo` contenant un `Follow` dans le champ `object`.
 
-In Lemmy we use some specific terms to refer to ActivityPub items. They are essentially our specific implementations of well-known ActivityPub concepts:
+Dans Lemmy, nous utilisons certains termes spécifiques pour désigner les éléments ActivityPub. Il s'agit essentiellement de nos implémentations spécifiques de concepts ActivityPub bien connus :
 
-- Community: `Group`
-- User: `Person`
-- Post: `Page`
-- Comment: `Note`
+- Communauté (community) : `Group`
+- Utilisateur (user) : `Person`
+- Poste (post) : `Page`
+- Commentaire (comment) : `Note`
 
-This document has three main sections:
+Ce document comporte trois sections principales :
 
-* __Federation philosophy__ lays out the general model of how this is intended to federate
-* __User Activities__ describes which actions that a User can take to interact
-* __Community Activities__ describes what the Community does in response to certain User actions
+* __Philosophie de la fédération__ expose le modèle général de la manière dont le projet est censé se fédérer.
+* __Les activités des utilisateurs__ décrivent les actions qu'un utilisateur peut entreprendre pour interagir.
+* __Activités de la communauté __ décrit ce que la communauté fait en réponse à certaines actions de l'utilisateur.
 
 ## Federation philosophy
 
@@ -38,51 +38,66 @@ Users can not follow each other, and neither can Communities follow anything.
 
 Our federation implementation is already feature complete, but so far we haven't focused at all on complying with the ActivityPub spec. As such, Lemmy is likely not compatible with implementations which expect to send and receive valid activities. This is something we plan to fix in the near future. Check out [#698](https://github.com/LemmyNet/lemmy/issues/698) for an overview of our deviations.
 
-## User Activities
+## Activités de l'utilisateur
 
-### Follow a Community
+## Philosophie de la Fédération
 
-Each Community page has a "Follow" button. Clicking this triggers a `Follow` activity to be sent from the user to the Community inbox. The Community will automatically respond with an `Accept/Follow` activity to the user inbox. It will also add the user to its list of followers, and deliver any activities about Posts/Comments in the Community to the user.
+L'acteur principal de Lemmy est la communauté. Chaque communauté réside sur une seule instance, et se compose d'une liste de messages et d'une liste de followers. L'interaction principale est celle d'un utilisateur qui envoie une activité liée à un message ou à un commentaire à la boîte de réception de la communauté, qui l'annonce ensuite à tous ses suiveurs. 
 
-### Unfollow a Community
+Chaque communauté a un utilisateur créateur spécifique, qui est responsable de la définition des règles, de la nomination des modérateurs et de la suppression du contenu qui viole les règles.
 
-After following a Community, the "Follow" button is replaced by "Unfollow". Clicking this sends an `Undo/Follow` activity to the Community inbox. The Community removes the User from its followers list and doesn't send any activities to it anymore.
+Outre la modération au niveau de la communauté, chaque instance dispose d'un ensemble d'utilisateurs administrateurs, qui ont le pouvoir de supprimer et d'interdire des contenus sur l'ensemble du site.
 
-### Create a Post
+Les utilisateurs suivent les communautés qui les intéressent, afin de recevoir des messages et des commentaires. Ils votent également sur les messages et les commentaires, et en créent de nouveaux. Les commentaires sont organisés en une structure arborescente et généralement triés par nombre de votes. Les messages directs entre utilisateurs sont également pris en charge.
 
-When a user creates a new Post in a given Community, it is sent as `Create/Page` to the  Community
-inbox. 
+Les utilisateurs ne peuvent pas se suivre les uns les autres, et les communautés ne peuvent pas non plus suivre quoi que ce soit.
 
-### Create a Comment
+Notre mise en œuvre de la fédération est déjà complète, mais jusqu'à présent nous ne nous sommes pas du tout concentrés sur la conformité à la spécification ActivityPub. En tant que tel, Lemmy n'est probablement pas compatible avec les implémentations qui s'attendent à envoyer et recevoir des activités valides. C'est un point que nous prévoyons de corriger dans un avenir proche. Consultez [#698](https://github.com/LemmyNet/lemmy/issues/698) pour un aperçu de nos déviations.
 
-When a new Comment is created for a Post, both the Post ID and the parent Comment ID (if it exists)
-are written to the `in_reply_to` field. This allows assigning it to the correct Post, and building
-the Comment tree. It is then sent to the Community inbox as `Create/Note`
+## Activités des utilisateurs
 
-The origin instance also scans the Comment for any User mentions, and sends the `Create/Note` to
-those Users as well.
+### Suivre une communauté
 
-### Edit a Post
+Chaque page de communauté a un bouton "Suivre". Cliquer sur ce bouton déclenche l'envoi d'une activité "Suivre" `Follow` de l'utilisateur vers la boîte de réception de la communauté. La communauté répondra automatiquement par une activité "Accepter/Suivre" `Accept/Follow` dans la boîte de réception de l'utilisateur. Elle ajoutera également l'utilisateur à sa liste de suiveurs et lui transmettra toutes les activités relatives aux messages et commentaires de la communauté.
 
-Changes the content of an existing Post. Can only be done by the creating User.
+### Annuler le suivi d'une communauté
 
-### Edit a Comment
+Après avoir suivi une communauté, le bouton "Follow" est remplacé par "Unfollow". En cliquant sur ce bouton, vous envoyez une activité Annuler/Suivre `Undo/Follow` dans la boîte de réception de la communauté. La communauté supprime l'utilisateur de sa liste de followers et ne lui envoie plus d'activités.
 
-Changes the content of an existing Comment. Can only be done by the creating User.
+### Créer un message
 
-### Likes and Dislikes
+Quand un utilisateur crée un nouveau message dans une communauté donnée, il est envoyé comme Créer/Page `Create/Page` à la boîte de réception de la communauté.
 
-Users can like or dislike any Post or Comment. These are sent as `Like/Page`, `Dislike/Note` etc to the Community inbox.
+### Créer un commentaire
 
-### Deletions
+Quand un nouveau commentaire est créé pour un message, l'ID du message et l'ID du commentaire parent (s'il existe)
+sont écrits dans le champ `in_reply_to`. Cela permet de l'assigner au bon article, et de construire
+l'arbre des commentaires. Il est ensuite envoyé dans la boîte de réception de la Communauté sous le nom de Créer/Noter `Create/Note`.
 
-The creator of a Post, Comment or Community can delete it. It is then sent to the Community followers. The item is then hidden from all users.
+L'instance d'origine recherche également dans le commentaire toute mention d'utilisateur et envoie le `Create/Note` à ces utilisateurs.
+à ces utilisateurs.
 
-### Removals
+### Modifier un message
 
-Mods can remove Posts and Comments from their Communities. Admins can remove any Posts or Comments on the entire site. Communities can also be removed by admins. The item is then hidden from all users.
+Modifie le contenu d'un message existant. Ne peut être fait que par l'utilisateur qui l'a créé.
 
-Removals are sent to all followers of the Community, so that they also take effect there. The exception is if an admin removes an item from a Community which is hosted on a different instance. In this case, the removal only takes effect locally.
+### Modifier un commentaire
+
+Modifie le contenu d'un commentaire existant. Ne peut être fait que par l'utilisateur qui l'a créé.
+
+### J'aime et je n'aime pas
+
+Les utilisateurs peuvent aimer ou ne pas aimer un message ou un commentaire. Ces commentaires sont envoyés sous forme de "J'aime/Page" `like/Page`, "Je n'aime pas/Note" `Dislike/Note`, etc. dans la boîte de réception de la communauté.
+
+### Suppression
+
+Le créateur d'un message, d'un commentaire ou d'une communauté peut le supprimer. La suppression est alors envoyée aux suiveurs de la communauté. L'élément est alors caché de tous les utilisateurs.
+
+### Suppression
+
+Les mods peuvent supprimer les messages et les commentaires de leurs communautés. Les administrateurs peuvent supprimer tout message ou commentaire sur l'ensemble du site. Les communautés peuvent également être supprimées par les administrateurs. L'élément est alors caché à tous les utilisateurs.
+
+Les suppressions sont envoyées à tous les adeptes de la communauté, de sorte qu'elles y prennent également effet. L'exception est le cas où un administrateur supprime un élément d'une communauté qui est hébergée sur une instance différente. Dans ce cas, la suppression ne prend effet que localement.
 
 ### Revert a previous Action
 
