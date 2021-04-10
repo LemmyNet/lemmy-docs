@@ -50,8 +50,8 @@ Règle horizontale <br>\--- | Règle horizontale<br>\*\*\* | Règle horizontale 
 \`Code Inline\` avec des backticks | |`Code Inline` avec des backticks 
 \`\`\`<br>\# bloc de code <br>print '3 backticks ou'<br>print 'retrait de 4 espaces' <br>\`\`\` | ····\# bloc de code<br>····print '3 backticks ou'<br>····print 'retrait de 4 espaces' | \# bloc de code <br>print '3 backticks ou'<br>print 'retrait de 4 espaces'
 ::: spoiler caché ou trucs nsfw<br>*un tas de spoilers ici*<br>::: | | <details><summary> spoiler caché ou trucs nsfw </summary><p><em>un tas de spoilers ici</em></p></details>
-Certains ~subscript~ texte | | Certains <sub>subscript</sub> texte
-Quelques ^superscript^ texte | | Quelques <sup>superscript</sup> texte
+Certains texte \~indice\~ | | Certains texte <sub>indice</sub>
+Quelques texte ^indice^ | | Quelques texte <sup>indice</sup>
 
 [Tutoriel CommonMark](https://commonmark.org/help/tutorial/)
 
