@@ -10,11 +10,11 @@
 
 ### Reddit
 
-Ne tient pas compte de la durée de vie du fil de discussion, [ce qui donne aux premiers commentaires un avantage écrasant sur les derniers] (https://minimaxir.com/2016/11/first-comment/), l'effet étant encore pire dans les petites communautés. Les nouveaux commentaires sont regroupés au bas du fil de discussion, ce qui a pour effet de tuer la discussion et de faire de chaque fil de discussion une course au commentaire précoce.  Cela diminue la qualité de la conversation et récompense les commentaires répétitifs et les spams.
+Ne tient pas compte de la durée de vie du fil de discussion, [ce qui donne aux premiers commentaires un avantage écrasant sur les derniers](https://minimaxir.com/2016/11/first-comment/), l'effet étant encore pire dans les petites communautés. Les nouveaux commentaires sont regroupés au bas du fil de discussion, ce qui a pour effet de tuer la discussion et de faire de chaque fil de discussion une course au commentaire précoce.  Cela diminue la qualité de la conversation et récompense les commentaires répétitifs et les spams.
 
 ### Hacker News
 
-Bien qu'il soit de loin supérieur à l'implémentation de Reddit en ce qui concerne la décroissance des scores dans le temps, l'algorithme de classement de [Hacker News] (https://medium.com/hacking-and-gonzo/how-hacker-news-ranking-algorithm-works-1d9b0cf2c08d) n'utilise pas d'échelle logarithmique pour les scores.
+Bien qu'il soit de loin supérieur à l'implémentation de Reddit en ce qui concerne la décroissance des scores dans le temps, l'algorithme de classement de [Hacker News](https://medium.com/hacking-and-gonzo/how-hacker-news-ranking-algorithm-works-1d9b0cf2c08d) n'utilise pas d'échelle logarithmique pour les scores.
 
 ### Lemmy
 
