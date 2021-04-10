@@ -1,23 +1,23 @@
-# Ansible Installation
+# Installation Ansible
 
-This is the same as the [Docker installation](install_docker.md), except that Ansible handles all of it automatically. It also does some extra things like setting up TLS and email for your Lemmy instance.
+Ceci est la même chose que l'[installation Docker](install_docker.md), sauf qu'Ansible s'occupe de tout automatiquement. Il fait aussi des choses supplémentaires comme la configuration de TLS et de l'email pour votre instance Lemmy.
 
-First, you need to [install Ansible on your local computer](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html). You also need to install the [Docker SDK for Python](https://pypi.org/project/docker/) using `pip install docker` ([more info in Ansible documentation](https://docs.ansible.com/ansible/latest/collections/community/docker/docker_compose_module.html#id4)).
+Tout d'abord, vous devez [installer Ansible sur votre ordinateur local](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html). Vous devez également installer le [Docker SDK pour Python](https://pypi.org/project/docker/) en utilisant `pip install docker` ([plus d'informations dans la documentation Ansible](https://docs.ansible.com/ansible/latest/collections/community/docker/docker_compose_module.html#id4)).
 
-Then run the following commands on your local computer:
+Exécutez ensuite les commandes suivantes sur votre ordinateur local :
 
 ```bash
 git clone https://github.com/LemmyNet/lemmy.git
 cd lemmy/ansible/
 cp inventory.example inventory
 nano inventory # enter your server, domain, contact email
-# If the command below fails, you may need to comment out this line
-# In the ansible.cfg file:
+# Si la commande ci-dessous échoue, vous devrez peut-être décommenter cette ligne
+# Dans le fichier ansible.cfg :
 # interpreter_python=/usr/bin/python3
 ansible-playbook lemmy.yml --become
 ```
 
-To update to a new version, just run the following in your local Lemmy repo:
+Pour mettre à jour une nouvelle version, il suffit d'exécuter la commande suivante dans votre dépôt Lemmy local :
 ```bash
 git pull origin main
 cd ansible
