@@ -10,7 +10,7 @@ Exécutez ensuite les commandes suivantes sur votre ordinateur local :
 git clone https://github.com/LemmyNet/lemmy.git
 cd lemmy/ansible/
 cp inventory.example inventory
-nano inventory # enter your server, domain, contact email
+nano inventory # entrez votre serveur, domaine, email de contact
 # Si la commande ci-dessous échoue, vous devrez peut-être décommenter cette ligne
 # Dans le fichier ansible.cfg :
 # interpreter_python=/usr/bin/python3
