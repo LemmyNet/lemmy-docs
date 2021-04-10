@@ -15,7 +15,7 @@ La fédération ne démarre pas automatiquement, mais doit être déclenchée ma
 
 Pour un aperçu du fonctionnement technique de la fédération dans Lemmy, consultez notre [Aperçu de la fédération](contributing_federation_overview.md).
 
-## Instance allowlist et blocklist
+## Allowlist et blocklist de l'instance
 
 La section fédération de la configuration de Lemmy a deux variables `allowed_instances` et `blocked_instances`. Celles-ci contrôlent avec quelles autres instances Lemmy va se fédérer. Les deux paramètres prennent une liste de domaines séparés par des virgules, par exemple `lemmy.ml,exemple.com`. Vous pouvez modifier ces paramètres soit via `/admin`, soit directement sur le système de fichiers du serveur. 
 
