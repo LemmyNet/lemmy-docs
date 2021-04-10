@@ -93,50 +93,48 @@ Les utilisateurs peuvent aimer ou ne pas aimer un message ou un commentaire. Ces
 
 Le créateur d'un message, d'un commentaire ou d'une communauté peut le supprimer. La suppression est alors envoyée aux suiveurs de la communauté. L'élément est alors caché de tous les utilisateurs.
 
-### Suppression
-
 Les mods peuvent supprimer les messages et les commentaires de leurs communautés. Les administrateurs peuvent supprimer tout message ou commentaire sur l'ensemble du site. Les communautés peuvent également être supprimées par les administrateurs. L'élément est alors caché à tous les utilisateurs.
 
 Les suppressions sont envoyées à tous les adeptes de la communauté, de sorte qu'elles y prennent également effet. L'exception est le cas où un administrateur supprime un élément d'une communauté qui est hébergée sur une instance différente. Dans ce cas, la suppression ne prend effet que localement.
 
-### Revert a previous Action
+### Revenir sur une action précédente
 
-We don't delete anything from our database, just hide it from users. Deleted or removed Communities/Posts/Comments have a "restore" button. This button generates an `Undo` activity which sets the original delete/remove activity as object, such as `Undo/Remove/Post` or `Undo/Delete/Community`.
+Nous ne supprimons rien de notre base de données, nous le cachons simplement aux utilisateurs. Les Communautés/Paroles/Commentaires supprimés ou retirés ont un bouton "restaurer". Ce bouton génère une activité `Undo` qui définit l'activité originale de suppression/suppression comme objet, comme `Undo/Remove/Post` ou `Undo/Delete/Community`.
 
-Clicking on the upvote button of an already upvoted post/comment (or the downvote button of an already downvoted post/comment) also generates an `Undo`. In this case and `Undo/Like/Post` or `Undo/Dislike/Comment`.
+Cliquer sur le bouton "+" d'un message ou d'un commentaire déjà noté (ou sur le bouton "-" d'un message ou d'un commentaire déjà noté) génère également un `Undo`. Dans ce cas, il s'agit d'un `Undo/Like/Post` ou d'un `Undo/Dislike/Comment`.
 
-### Create private message
+### Créer un message privé
 
-User profiles have a "Send Message" button, which opens a dialog permitting to send a private message to this user. It is sent as a `Create/Note` to the user inbox. Private messages can only be directed at a single User.
+Les profils d'utilisateurs ont un bouton "Envoyer un message", qui ouvre une boîte de dialogue permettant d'envoyer un message privé à cet utilisateur. Le message est envoyé sous la forme d'une `Create/Note` dans la boîte de réception de l'utilisateur. Les messages privés ne peuvent être adressés qu'à un seul utilisateur.
 
-### Edit private message
+v## Modifier un message privé
 
-`Update/Note` changes the text of a previously sent message
+`Update/Note` modifie le texte d'un message précédemment envoyé.
 
-### Delete private message
+### Supprimer un message privé
 
-`Delete/Note` deletes a private message.
+`Delete/Note` supprime un message privé.
 
-### Restore private message
+### Restaurer un message privé
 
-`Undo/Delete/Note` reverts the deletion of a private message.
+`Undo/Delete/Note` rétablit la suppression d'un message privé.
 
-## Community Activities
+## Activités de la Communauté
 
-The Community is essentially a bot, which will only do anything in reaction to actions from Users. The User who first created the Community becomes the first moderator, and can add additional moderators. In general, whenever the Community receives a valid activity in its inbox, that activity is forwarded to all its followers.
+La communauté est essentiellement un robot, qui n'agit qu'en réaction aux actions des utilisateurs. L'utilisateur qui a créé la communauté devient le premier modérateur, et peut ajouter d'autres modérateurs. En général, lorsque la communauté reçoit une activité valide dans sa boîte de réception, cette activité est transmise à tous ses suiveurs.
 
-### Accept follow
+### Accepter le suivi
 
-If the Community receives a `Follow` activity, it automatically responds with `Accept/Follow`. It also adds the User to its list of followers. 
+Si la communauté reçoit une activité "Follow", elle répond automatiquement par "Accept/Follow". Elle ajoute également l'utilisateur à sa liste de suiveurs. 
 
 ### Unfollow
 
-Upon receiving an `Undo/Follow`, the Community removes the User from its followers list.
+À la réception d'un `Undo/Follow`, la communauté supprime l'utilisateur de sa liste de followers.
  
-### Announce
+#### Annoncer
 
-If the Community receives any Post or Comment related activity (Create, Update, Like, Dislike, Remove, Delete, Undo), it will Announce this to its followers. For this, an Announce is created with the Community as actor, and the received activity as object. Following instances thus stay updated about any actions in Communities they follow.
+Si la communauté reçoit une activité liée à un message ou à un commentaire (créer, mettre à jour, aimer, détester, retirer, supprimer, annuler), elle l'annoncera à ses membres. Pour cela, une Annonce est créée avec la Communauté comme acteur, et l'activité reçue comme objet. Les instances qui suivent restent ainsi informées de toutes les actions des communautés qu'elles suivent.
 
-### Delete Community
+### Supprimer une communauté
 
-If the creator or an admin deletes the Community, it sends a `Delete/Group` to all its followers.
+Si le créateur ou un administrateur supprime la communauté, il envoie un `Delete/Group` à tous ses suiveurs.
