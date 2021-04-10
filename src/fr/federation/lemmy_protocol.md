@@ -49,7 +49,7 @@ Dans les tableaux suivants, le terme "obligatoire" indique si Lemmy accepte ou n
 
 <!-- tocstop -->
 
-## Context
+## Contexte
 
 ```json
 {
@@ -71,17 +71,17 @@ Dans les tableaux suivants, le terme "obligatoire" indique si Lemmy accepte ou n
 }
 ```
 
-The context is identical for all activities and objects.
+Le contexte est identique pour toutes les activités et tous les objets.
 
-## Actors
+## Acteurs
 
-### Community
+### Communauté
 
-An automated actor. Users can send posts or comments to it, which the community forwards to its followers in the form of `Announce`.
+Un acteur automatisé. Les utilisateurs peuvent lui envoyer des messages ou des commentaires, que la communauté transmet à ses adeptes sous la forme d'un `Announce`.
 
-Sends activities to user: `Accept/Follow`, `Announce`
+Envoie des activités à l'utilisateur : `Accept/Follow`, `Announce`.
 
-Receives activities from user: `Follow`, `Undo/Follow`, `Create`, `Update`, `Like`, `Dislike`, `Remove` (only admin/mod), `Delete` (only creator), `Undo` (only for own actions)
+Reçoit des activités de l'utilisateur : `Follow`, `Undo/Follow`, `Create`, `Update`, `Like`, `Dislike`, `Remove` (seulement admin/mod), `Delete` (seul créateur), `Undo` (uniquement pour ses propres actions).
 
 ```json
 {
@@ -122,24 +122,24 @@ Receives activities from user: `Follow`, `Undo/Follow`, `Create`, `Update`, `Lik
 }
 ```
 
-| Field Name | Mandatory | Description |
+| Nom du champ | Obligatoire | Description |
 |---|---|---|
-| `preferredUsername` | yes | Name of the actor |
-| `name` | yes | Title of the community |
-| `sensitive` | yes | True indicates that all posts in the community are nsfw |
-| `attributedTo` | yes | First the community creator, then all the remaining moderators |
-| `content` | no | Text for the community sidebar, usually containing a description and rules |
-| `icon` | no | Icon, shown next to the community name |
-| `image` | no | Banner image, shown on top of the community page |
-| `inbox` | no | ActivityPub inbox URL |
-| `outbox` | no | ActivityPub outbox URL, only contains up to 20 latest posts, no comments, votes or other activities |
-| `followers` | no | Follower collection URL, only contains the number of followers, no references to individual followers |
-| `endpoints` | no | Contains URL of shared inbox |
-| `published` | no | Datetime when the community was first created |
-| `updated` | no | Datetime when the community was last changed |
-| `publicKey` | yes | The public key used to verify signatures from this actor |
+| `preferredUsername` | oui | Nom de l'acteur |
+| `name` | oui | Titre de la communauté |
+| `sensitive` | oui | True indique que tous les messages dans la communauté sont nsfw |
+| `attributedTo` | oui | D'abord le créateur de la communauté, puis tous les autres modérateurs. |
+| `content` | non | Texte pour la barre latérale de la communauté, contenant généralement une description et des règles. |
+| `icon` | non | Icône, affichée à côté du nom de la communauté |
+| `image` | non | Image de bannière, affichée en haut de la page de la communauté |
+| `inbox` | non | URL de la boîte de réception ActivityPub |
+| `outbox` | non | ActivityPub URL de la boîte de sortie, contient uniquement les 20 derniers messages, sans commentaires, votes ou autres activités. |
+| `followers` | non | URL de la collection de suiveurs, contenant uniquement le nombre de suiveurs, sans référence à des suiveurs individuels. |
+| `endpoints` | non | Contient l'URL de la boîte de réception partagée |
+| `published` | non | Date à laquelle la communauté a été créée pour la première fois |
+| `updated` | non | Date à laquelle la communauté a été modifiée pour la dernière fois |
+| `publicKey` | oui | La clé publique utilisée pour vérifier les signatures de cet acteur. |
    
-#### Community Outbox
+#### Boîte de sortie communautaire
 
 ```json
 {
@@ -153,9 +153,9 @@ Receives activities from user: `Follow`, `Undo/Follow`, `Create`, `Update`, `Lik
 }
 ```
 
-The outbox only contains `Create/Post` activities for now.
+La boîte d'envoi ne contient pour l'instant que les activités Créer/Poster `Create/Post`.
 
-#### Community Followers
+#### Suiveurs de la communauté
 
 ```json
 {
@@ -166,9 +166,9 @@ The outbox only contains `Create/Post` activities for now.
 }
 ```
 
-The followers collection is only used to expose the number of followers. Actor IDs are not included, to protect user privacy.
+La collection de followers est uniquement utilisée pour exposer le nombre de followers. Les identifiants des acteurs ne sont pas inclus, afin de protéger la vie privée des utilisateurs.
 
-#### Community Moderators
+#### Modérateurs de la communauté
 
 ```json
 {
@@ -183,15 +183,15 @@ The followers collection is only used to expose the number of followers. Actor I
 }
 ```
 
-### User
+### Utilisateur
 
-A person, interacts primarily with the community where it sends and receives posts/comments. Can also create and moderate communities, and send private messages to other users.
+Une personne, interagit principalement avec la communauté où elle envoie et reçoit des messages/commentaires. Peut également créer et modérer des communautés, et envoyer des messages privés à d'autres utilisateurs.
 
-Sends activities to Community: `Follow`, `Undo/Follow`, `Create`, `Update`, `Like`, `Dislike`, `Remove` (only admin/mod), `Delete` (only creator), `Undo` (only for own actions)
+Envoie des activités à la communauté : Suivre `Follow`, Annuler/Suivre `Undo/Follow`, Créer `Create`, Mettre à jour `Update`, Aimer `Like`, Ne pas aimer `Dislike`, Retirer `Remove` (seulement admin/mod), Supprimer `Delete` (seulement créateur), Défaire `Undo` (seulement pour ses propres actions).
 
-Receives activities from Community: `Accept/Follow`, `Announce`
+Reçoit des activités de la communauté : Accepter/Suivre `Accept/Follow`, Annoncer `Announce`.
 
-Sends and receives activities from/to other users: `Create/Note`, `Update/Note`, `Delete/Note`, `Undo/Delete/Note` (all those related to private messages)
+Envoie et reçoit des activités de/vers d'autres utilisateurs : Créer/Note `Create/Note`, Mettre à jour/Note `Update/Note`, Supprimer/Note `Delete/Note`, Défaire/Supprimer/Note `Undo/Delete/Note` (toutes celles relatives aux messages privés)
 
 ```json
 {
@@ -228,20 +228,20 @@ Sends and receives activities from/to other users: `Create/Note`, `Update/Note`,
 }
 ```
 
-| Field Name | Mandatory | Description |
+| Nom du champ | Obligatoire | Description |
 |---|---|---|
-| `preferredUsername` | yes | Name of the actor |
-| `name` | no | The user's displayname |
-| `content` | no | User bio |
-| `icon` | no | The user's avatar, shown next to the username |
-| `image` | no | The user's banner, shown on top of the profile |
-| `inbox` | no | ActivityPub inbox URL |
-| `endpoints` | no | Contains URL of shared inbox |
-| `published` | no | Datetime when the user signed up |
-| `updated` | no | Datetime when the user profile was last changed |
-| `publicKey` | yes | The public key used to verify signatures from this actor |
+| `preferredUsername` | oui | Nom de l'acteur |
+| `name` | non | Nom d'affichage de l'utilisateur |
+| `content` | non | Biographie de l'utilisateur |
+| `icon` | non | L'avatar de l'utilisateur, affiché à côté de son nom d'utilisateur |
+| `image` | non | La bannière de l'utilisateur, affichée en haut du profil |
+| `inbox` | non | URL de la boîte de réception d'ActivityPub |
+| `endpoints` | non | Contient l'URL de la boîte de réception partagée |
+| `published` | non | La date de l'inscription de l'utilisateur. 
+| `updated` | non | Date à laquelle le profil de l'utilisateur a été modifié en dernier lieu |
+| `publicKey` | oui | La clé publique utilisée pour vérifier les signatures de cet acteur |
 
-#### User Outbox
+#### Boîte de sortie de l'utilisateur
 
 ```json
 {
@@ -253,13 +253,13 @@ Sends and receives activities from/to other users: `Create/Note`, `Update/Note`,
 }
 ```
 
-The user inbox is not actually implemented yet, and is only a placeholder for ActivityPub implementations which require it.
+La boîte de réception de l'utilisateur n'a pas encore été implémentée et n'est qu'un substitut pour les implémentations de ActivityPub qui en ont besoin.
 
-## Objects
+## Objets
 
-### Post
+### Publication
 
-A page with title, and optional URL and text content. The URL often leads to an image, in which case a thumbnail is included. Each post belongs to exactly one community.
+Une page avec un titre, une URL facultative et un contenu textuel. L'URL mène souvent à une image, auquel cas une vignette est incluse. Chaque message appartient à une seule communauté.
 
 ```json
 {
@@ -291,23 +291,23 @@ A page with title, and optional URL and text content. The URL often leads to an 
 }
 ```
 
-| Field Name | Mandatory | Description |
+| Nom du champ | Obligatoire | Description |
 |---|---|---|
-| `attributedTo` | yes | ID of the user which created this post |
-| `to` | yes | ID of the community where it was posted to |
-| `name` | yes | Title of the post |
-| `content` | no | Body of the post |
-| `url` | no | An arbitrary link to be shared |
-| `image` | no | Thumbnail for `url`, only present if it is an image link |
-| `commentsEnabled` | yes | False indicates that the post is locked, and no comments can be added |
-| `sensitive` | yes | True marks the post as NSFW, blurs the thumbnail and hides it from users with NSFW settign disabled |
-| `stickied` | yes | True means that it is shown on top of the community |
-| `published` | no | Datetime when the post was created |
-| `updated` | no | Datetime when the post was edited (not present if it was never edited) |
+| `attributedTo` | oui | ID de l'utilisateur qui a créé ce message |
+| `to` | oui | ID de la communauté où il a été posté |
+| `name` | oui | Titre du message |
+| `content` | non | Corps du message |
+| `url` | non | Un lien arbitraire à partager |
+| `image` | non | Miniature pour `url`, seulement présent si c'est un lien d'image |
+| `commentsEnabled` | oui | False indique que le message est verrouillé, et qu'aucun commentaire ne peut être ajouté |
+| `sensitive` | oui | True marque le message comme NSFW, brouille la vignette et la cache aux utilisateurs dont le paramètre NSFW est désactivé |
+| `stickied` | oui | Le message est affiché en haut de la page de la communauté. |
+| `published` | non | La date et l'heure de création de l'article. |
+| `updated` | non | La date à laquelle le message a été édité (non présent s'il n'a jamais été édité). |
 
-### Comment
+### Commentaire
 
-A reply to a post, or reply to another comment. Contains only text (including references to other users or communities). Lemmy displays comments in a tree structure.
+Une réponse à un message, ou une réponse à un autre commentaire. Ne contient que du texte (y compris des références à d'autres utilisateurs ou communautés). Lemmy affiche les commentaires sous forme d'arborescence.
 
 ```json
 {
