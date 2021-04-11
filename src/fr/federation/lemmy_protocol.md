@@ -331,18 +331,18 @@ Une réponse à un message, ou une réponse à un autre commentaire. Ne contient
 }
 ```
 
-| Field Name | Mandatory | Description |
+| Nom du champ | Obligatoire | Description |
 |---|---|---|
-| `attributedTo` | yes | ID of the user who created the comment |
-| `to` | yes | Community where the comment was made |
-| `content` | yes | The comment text |
-| `inReplyTo` | yes | IDs of the post where this comment was made, and the parent comment. If this is a top-level comment, `inReplyTo` only contains the post |
-| `published` | no | Datetime when the comment was created |
-| `updated` | no | Datetime when the comment was edited (not present if it was never edited) |
+| `attributedTo` | oui | ID de l'utilisateur qui a créé le commentaire |
+| `to` | oui | Communauté où le commentaire a été fait |
+| `content` | oui | Le texte du commentaire |
+| `inReplyTo` | oui | IDs du message où ce commentaire a été fait, et du commentaire parent. S'il s'agit d'un commentaire de haut niveau, `inReplyTo` ne contient que l'article. |
+| `published` | non | La date de création du commentaire. |
+| `updated` | non | Date à laquelle le commentaire a été modifié (non présent s'il n'a jamais été modifié) |
 
-### Private Message
+### Message privé
 
-A direct message from one user to another. Can not include additional users. Threading is not implemented yet, so the `inReplyTo` field is missing.
+Un message direct d'un utilisateur à un autre. Il ne peut pas inclure d'autres utilisateurs. Le threading n'est pas encore implémenté, donc le champ `inReplyTo` est manquant.
 
 ```json
 {
@@ -362,21 +362,21 @@ A direct message from one user to another. Can not include additional users. Thr
 }
 ```
 
-| Field Name | Mandatory | Description |
+| Nom du champ | Obligatoire | Description |
 |---|---|---|
-| `attributedTo` | ID of the user who created this private message |
-| `to` | ID of the recipient |
-| `content` | yes | The text of the private message |
-| `published` | no | Datetime when the message was created |
-| `updated` | no | Datetime when the message was edited (not present if it was never edited) |
+| `attributedTo` | ID de l'utilisateur qui a créé ce message privé |
+| `to` | ID du destinataire |
+| `content` | oui | Le texte du message privé |
+| `published` | non | Date à laquelle le message a été créé |
+| `updated` | non | Date à laquelle le message a été modifié (non présent s'il n'a jamais été modifié) |
 
-## Activities
+## Activités
 
-### User to Community
+### Utilisateur à la communauté
 
-#### Follow
+#### Suivre
 
-When the user clicks "Subscribe" in a community, a `Follow` is sent. The community automatically responds with an `Accept/Follow`.
+Lorsque l'utilisateur clique sur "Subscribe" dans une communauté, un `Follow` est envoyé. La communauté répond automatiquement par un `Accept/Follow`.
 
 ```json
 {
@@ -389,14 +389,14 @@ When the user clicks "Subscribe" in a community, a `Follow` is sent. The communi
 }
 ```
 
-| Field Name | Mandatory | Description |
+| Nom du champ | Obligatoire | Description |
 |---|---|---|
-| `actor` | yes | The user that is sending the follow request |
-| `object` | yes | The community to be followed |
+| `actor` | oui | L'utilisateur qui envoie la demande de suivi.
+| `object` | oui | La communauté à suivre |
 
 #### Unfollow
 
-Clicking on the unsubscribe button in a community causes an `Undo/Follow` to be sent. The community removes the user from its follower list after receiving it.
+Cliquer sur le bouton de désabonnement d'une communauté provoque l'envoi d'un `Undo/Follow`. La communauté supprime l'utilisateur de sa liste de followers après l'avoir reçu.
 
 ```json
 {
@@ -415,9 +415,9 @@ Clicking on the unsubscribe button in a community causes an `Undo/Follow` to be 
 }
 ```
 
-#### Create or Update Post
+#### Créer ou mettre à jour un message
 
-When a user creates a new post, it is sent to the respective community. Editing a previously created post sends an almost identical activity, except the `type` being `Update`. We don't support mentions in posts yet.
+Lorsqu'un utilisateur crée un nouveau message, celui-ci est envoyé à la communauté concernée. La modification d'un message précédemment créé envoie une activité presque identique, sauf que le type `type` est Mise à jour `Update`. Nous ne supportons pas encore les mentions dans les messages.
 
 ```json
 {
@@ -433,15 +433,15 @@ When a user creates a new post, it is sent to the respective community. Editing 
 }
 ```
 
-| Field Name | Mandatory | Description |
+| Nom du champ | Obligatoire | Description |
 |---|---|---|
-| `type` | yes | either `Create` or `Update` |
-| `cc` | yes | Community where the post is being made |
-| `object` | yes | The post being created |
+| `type` | oui | soit `Create`, soit `Update` |...
+| `cc` | oui | Communauté où le message est créé |
+| `object` | oui | Le message en cours de création |
 
-#### Create or Update Comment
+#### Créer ou mettre à jour un commentaire
 
-A reply to a post, or to another comment. Can contain mentions of other users. Editing a previously created post sends an almost identical activity, except the `type` being `Update`.
+Une réponse à un article ou à un autre commentaire. Peut contenir des mentions d'autres utilisateurs. La modification d'un message précédemment créé envoie une activité presque identique, sauf que le type `type` est Mise à jour `Update`.
 
 ```json
 {
@@ -463,15 +463,15 @@ A reply to a post, or to another comment. Can contain mentions of other users. E
 }
 ```
 
-| Field Name | Mandatory | Description |
+| Nom du champ | Obligatoire | Description |
 |---|---|---|
-| `tag` | no | List of users which are mentioned in the comment (like `@user@example.com`) |
-| `cc` | yes | Community where the post is being made, the user being replied to (creator of the parent post/comment), as well as any mentioned users |
-| `object` | yes | The comment being created |
+| `tag` | non | Liste des utilisateurs mentionnés dans le commentaire (comme `@utilisateur@exemple.com`) |
+| `cc`| oui | La liste des utilisateurs mentionnés dans le commentaire (par exemple, `@`).
+| `object` | oui | Le commentaire en cours de création |
 
-#### Like Post or Comment
+#### J'aime un message ou un commentaire
 
-An upvote for a post or comment.
+Un vote positif pour un message ou un commentaire.
 
 ```json
 {
@@ -487,14 +487,14 @@ An upvote for a post or comment.
 }
 ```
 
-| Field Name | Mandatory | Description |
+| Nom du champ | Obligatoire | Description |
 |---|---|---|
-| `cc` | yes | ID of the community where the post/comment is |
-| `object` | yes | The post or comment being upvoted |
+| `cc` | oui | L'ID de la communauté où se trouve le message/commentaire. |
+| `object` | oui | Le message ou le commentaire en cours de validation |
 
-#### Dislike Post or Comment
+#### N'aime pas le message ou le commentaire
 
-A downvote for a post or comment.
+Un vote négatif pour un message ou un commentaire.
 
 ```json
 {
@@ -510,14 +510,14 @@ A downvote for a post or comment.
 }
 ```
 
-| Field Name | Mandatory | Description |
+| Nom du champ | Obligatoire | Description |
 |---|---|---|
-| `cc` | yes | ID of the community where the post/comment is |
-| `object` | yes | The post or comment being upvoted |
+| `cc` | oui | L'ID de la communauté où se trouve le message/commentaire. |
+| `object` | oui | Le message ou le commentaire en cours de validation |
 
-#### Delete Post or Comment
+#### Supprimer un message ou un commentaire
 
-Deletes a previously created post or comment. This can only be done by the original creator of that post/comment.
+Supprime un message ou un commentaire précédemment créé. Ceci ne peut être fait que par le créateur original de ce message ou commentaire.
 
 ```json
 {
@@ -533,14 +533,14 @@ Deletes a previously created post or comment. This can only be done by the origi
 }
 ```
 
-| Field Name | Mandatory | Description |
+| Nom du champ | Obligatoire | Description |
 |---|---|---|
-| `cc` | yes | ID of the community where the post/comment is |
-| `object` | yes | ID of the post or comment being deleted |
+| `cc` | oui | L'ID de la communauté où se trouve le message/commentaire. |
+| `object` | oui | ID du message ou du commentaire à supprimer |
 
-#### Remove Post or Comment
+#### Supprimer un message ou un commentaire
 
-Removes a post or comment. This can only be done by a community mod, or by an admin on the instance where the community is hosted.
+Supprime un message ou un commentaire. Cela ne peut être fait que par un mod de la communauté, ou par un administrateur sur l'instance où la communauté est hébergée.
 
 ```json
 {
@@ -556,14 +556,14 @@ Removes a post or comment. This can only be done by a community mod, or by an ad
 }
 ```
 
-| Field Name | Mandatory | Description |
+| Nom du champ | Obligatoire | Description |
 |---|---|---|
-| `cc` | yes | ID of the community where the post/comment is |
-| `object` | yes | ID of the post or comment being removed |
+| `cc` | oui | L'ID de la communauté où se trouve le message/commentaire. |
+| `object` | oui | ID du message ou du commentaire à supprimer |
 
-#### Undo
+#### Défaire
 
-Reverts a previous activity, can only be done by the `actor` of `object`. In case of a `Like` or `Dislike`, the vote count is changed back. In case of a `Delete` or `Remove`, the post/comment is restored. The `object` is regenerated from scratch, as such the activity ID and other fields are different.
+Défait une activité précédente, ne peut être fait que par l'acteur `actor` de l'objet`object`. Dans le cas d'un "J'aime" `Like` ou "Je n'aime pas" `Dislike`, le nombre de votes est modifié. Dans le cas d'un Supprimer `Delete` ou Retirer `Remove`, le message/commentaire est restauré. L'objet est régénéré à partir de zéro, l'ID de l'activité et les autres champs sont donc différents.
 
 ```json
 {
@@ -579,13 +579,13 @@ Reverts a previous activity, can only be done by the `actor` of `object`. In cas
 }
 ```
 
-| Field Name | Mandatory | Description |
+| Nom du champ | Obligatoire | Description |
 |---|---|---|
-| `object` | yes | Any `Like`, `Dislike`, `Delete` or `Remove` activity as described above |
+| `object` | oui | Toute activité `Like`, `Dislike`, `Delete` ou `Remove` comme décrit ci-dessus |
 
-#### Add Mod
+#### Ajouter un mod
 
-Add a new mod (registered on `ds9.lemmy.ml`) to the community `!main@enterprise.lemmy.ml`. Has to be sent by an existing community mod.
+Ajoute un nouveau mod (enregistré sur `ds9.lemmy.ml`) à la communauté `!main@enterprise.lemmy.ml`. Doit être envoyé par un mod existant de la communauté.
 
 ```json
 {
@@ -602,9 +602,9 @@ Add a new mod (registered on `ds9.lemmy.ml`) to the community `!main@enterprise.
 }
 ```
 
-#### Remove Mod
+#### Supprimer un mod
 
-Remove an existing mod from the community. Has to be sent by an existing community mod.
+Supprime un mod existant de la communauté. Doit être envoyé par un mod existant de la communauté.
 
 ```json
 {
@@ -620,11 +620,11 @@ Remove an existing mod from the community. Has to be sent by an existing communi
     "target": "https://enterprise.lemmy.ml/c/main/moderators"
 }
 ```
-### Community to User
+### Communauté à l'utilisateur
 
-#### Accept Follow
+#### Accepter un suivi
 
-Automatically sent by the community in response to a `Follow`. At the same time, the community adds this user to its followers list.
+Envoyé automatiquement par la communauté en réponse à un `Follow`. En même temps, la communauté ajoute cet utilisateur à sa liste de followers.
 
 ```json
 {
@@ -643,15 +643,15 @@ Automatically sent by the community in response to a `Follow`. At the same time,
 }
 ```
 
-| Field Name | Mandatory | Description |
+| Nom du champ | Obligatoire | Description |
 |---|---|---|
-| `actor` | yes | The same community as in the `Follow` activity |
-| `to` | no | ID of the user which sent the `Follow` |
-| `object` | yes | The previously sent `Follow` activity |
+| `actor` | oui | La même communauté que celle de l'activité `Follow` |
+| `to` | non | L'ID de l'utilisateur qui a envoyé le `Follow` |
+| `object` | oui | L'activité `Follow` précédemment envoyée |
 
-#### Announce
+#### Annoncer
 
-When the community receives a post or comment activity, it wraps that into an `Announce` and sends it to all followers.
+Lorsque la communauté reçoit une activité de post ou de commentaire, elle l'intègre dans une `Announce` et l'envoie à tous les followers.
 
 ```json
 {
@@ -667,13 +667,13 @@ When the community receives a post or comment activity, it wraps that into an `A
 }
 ```
 
-| Field Name | Mandatory | Description |
+| Nom du champ | Obligatoire | Description |
 |---|---|---|
-| `object` | yes | Any of the `Create`, `Update`, `Like`, `Dislike`, `Delete` `Remove` or `Undo` activity described in the [User to Community](#user-to-community) section |
+| `object` | oui | Toute activité de type `Create`, `Update`, `Like`, `Dislike`, `Delete` `Remove` ou `Undo` décrite dans la section [User to Community](#user-to-community) |
 
-#### Remove or Delete Community
+#### Retirer ou supprimer une communauté
 
-An instance admin can remove the community, or a mod can delete it. 
+Un administrateur d'instance peut supprimer la communauté, ou un mod peut la supprimer. 
 
 ```json
 {
@@ -689,13 +689,13 @@ An instance admin can remove the community, or a mod can delete it.
 }
 ```
 
-| Field Name | Mandatory | Description |
+| Nom du champ | Obligatoire | Description |
 |---|---|---|
-| `type` | yes | Either `Remove` or `Delete` |
+| `type` | oui | Soit `Remove` soit `Delete` |
 
-#### Restore Removed or Deleted Community
+#### Rétablir la communauté supprimée ou retirée
 
-Reverts the removal or deletion.
+Rétablit le retrait ou la suppression.
 
 ```json
 {
@@ -721,15 +721,15 @@ Reverts the removal or deletion.
 }
 
 ```
-| Field Name | Mandatory | Description |
+| Nom du champ | Obligatoire | Description |
 |---|---|---|
-| `object.type` | yes | Either `Remove` or `Delete` |
+| `object.type` | oui | Soit `Remove` ou `Delete` |
 
-### User to User
+### Utilisateur à Utilisateur
 
-#### Create or Update Private message 
+#### Créer ou mettre à jour un message privé 
 
-Creates a new private message between two users.
+Crée un nouveau message privé entre deux utilisateurs.
 
 ```json
 {
@@ -742,14 +742,14 @@ Creates a new private message between two users.
 }
 ```
 
-| Field Name | Mandatory | Description |
+| Nom du champ | Obligatoire | Description |
 |---|---|---|
-| `type` | yes | Either `Create` or `Update` |
-| `object` | yes | A [Private Message](#private-message) |
+| `type` | oui | Soit `Create`, soit `Update` |...
+| `object` | oui | A [Private Message](#private-message) |
 
-#### Delete Private Message
+#### Supprimer un message privé
 
-Deletes a previous private message.
+Supprime un message privé précédent.
 
 ```json
 {
@@ -762,9 +762,9 @@ Deletes a previous private message.
 }
 ```
 
-#### Undo Delete Private Message
+#### Annuler la suppression d'un message privé
 
-Restores a previously deleted private message. The `object` is regenerated from scratch, as such the activity ID and other fields are different.
+Restaure un message privé précédemment supprimé. L'objet est régénéré à partir de zéro, l'ID d'activité et les autres champs sont donc différents.
 
 ```json
 {
