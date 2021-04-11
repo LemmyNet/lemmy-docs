@@ -396,7 +396,7 @@ Lorsque l'utilisateur clique sur "Subscribe" dans une communauté, un `Follow` e
 | `actor` | oui | L'utilisateur qui envoie la demande de suivi.
 | `object` | oui | La communauté à suivre |
 
-#### Unfollow
+#### Ne pas suivre
 
 Cliquer sur le bouton de désabonnement d'une communauté provoque l'envoi d'un `Undo/Follow`. La communauté supprime l'utilisateur de sa liste de followers après l'avoir reçu.
 
