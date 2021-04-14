@@ -9,3 +9,7 @@ title = "Lemmy Documentation"
 [language.es]
 name = "Español"
 title = "Documentación Lemmy"
+
+[language.ru]
+name = "Русский"
+title = "Документация Lemmy"
