@@ -1,6 +1,6 @@
-# Summary
-
-- [О нас](about/about.md)
+# Краткое изложение
+	
+  - [О нас](about/about.md)
   - [Возможности](about/features.md)
   - [Цели](about/goals.md)
   - [Посты и оценка комментариев](about/ranking.md)
