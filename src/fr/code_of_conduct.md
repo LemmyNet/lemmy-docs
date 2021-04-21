@@ -1,35 +1,35 @@
 # Code of Conduct
 
-- We are committed to providing a friendly, safe and welcoming environment for all, regardless of level of experience, gender identity and expression, sexual orientation, disability, personal appearance, body size, race, ethnicity, age, religion, nationality, or other similar characteristic.
-- Please avoid using overtly sexual aliases or other nicknames that might detract from a friendly, safe and welcoming environment for all.
-- Please be kind and courteous. There’s no need to be mean or rude.
-- Respect that people have differences of opinion and that every design or implementation choice carries a trade-off and numerous costs. There is seldom a right answer.
-- Please keep unstructured critique to a minimum. If you have solid ideas you want to experiment with, make a fork and see how it works.
-- We will exclude you from interaction if you insult, demean or harass anyone. That is not welcome behavior. We interpret the term “harassment” as including the definition in the [Citizen Code of Conduct](https://github.com/stumpsyn/policies/blob/master/citizen_code_of_conduct.md); if you have any lack of clarity about what might be included in that concept, please read their definition. In particular, we don’t tolerate behavior that excludes people in socially marginalized groups.
-- Private harassment is also unacceptable. No matter who you are, if you feel you have been or are being harassed or made uncomfortable by a community member, please contact one of the channel ops or any of the Lemmy moderation team immediately. Whether you’re a regular contributor or a newcomer, we care about making this community a safe place for you and we’ve got your back.
-- Likewise any spamming, trolling, flaming, baiting or other attention-stealing behavior is not welcome.
+- Nous nous engageons à mettre à disposition un environnement amical, sain et accueillant pour tous, sans distinction de niveau d'expérience, d'identité et d'expression de genre, d'orientation sexuelle, de handicap, d'apparence corporelle, de corpulence, de race, d'ethnie, d'âge, de religion, de nationalité ou de toute autre caractéristique similaire.
+- Nous vous remercions d’éviter d'utiliser une identité ayant une quelconque connotation sexuelle ou autres pseudonymes qui pourraient écarter d'un environnement amical, sain et accueillant pour tous.
+- Nous vous remercions aussi d’être gentil et courtois. Il n'y a pas besoin d'être méchant ou malpoli.
+- Respectez le fait que les personnes ont des opinions différentes et que chaque choix de concept ou d'implémentation comporte de nombreux compromis et différents coûts. Il y a rarement une bonne réponse pour tout le monde.
+- Veillez à éviter la critique non structurée dès que possible. Si vous avez de solides idées avec lesquelles expérimenter, faites un fork et voyez comment cela fonctionne.
+- Nous vous exclurons des interactions si vous insultez, rabaissez ou harcelez quelqu'un. Ceci n'est pas un comportement toléré. Nous interprétons le terme harcèlement comme incluant la définition du [Citizen Code of Conduct](https://github.com/stumpsyn/policies/blob/master/citizen_code_of_conduct.md); si le concept de harcèlement ne vous paraît pas parfaitement clair, s'il vous plaît lisez cette définition. En particulier nous ne tolérons pas les comportements qui excluent les gens dans des groupes sociaux marginalisés.
+- Le harcèlement privé est lui aussi inacceptable. Peu importe qui vous êtes, si vous avez le sentiment que vous avez été harcelé ou mis en situation inconfortable par un membre de la communauté, contactez immédiatement un des opérateurs du canal de discussion ou n'importe qui de L'équipe de modération de Lemmy . Que vous soyez un contributeur régulier ou un nouveau, nous tenons à faire de la communauté un endroit sain, et nous sommes là pour vous aider.
+- De même, les comportements comme le spam, le troll, l'injure, la provocation ou tout autre mécanisme de détournement d'attention ne sont pas les bienvenus.
 
-[**Message the Moderation Team on Mastodon**](https://mastodon.social/@LemmyDev)
+[**Écrire à l'équipe de modération sur Mastodon**](https://mastodon.social/@LemmyDev)
 
-[**Email The Moderation Team**](mailto:contact@lemmy.ml)
+[**Contacter l'équipe de modération par courriel**](mailto:contact@lemmy.ml)
 
 ## Moderation
 
-These are the policies for upholding our community’s standards of conduct. If you feel that a thread needs moderation, please contact the Lemmy moderation team .
+Ici se trouvent les politiques de maintien de nos standards de conduite communautaire. Si vous pensez qu’un fil nécessite une modération, contactez l'équipe de modération Lemmy.
 
-1. Remarks that violate the Lemmy standards of conduct, including hateful, hurtful, oppressive, or exclusionary remarks, are not allowed. (Cursing is allowed, but never targeting another user, and never in a hateful manner.)
-2. Remarks that moderators find inappropriate, whether listed in the code of conduct or not, are also not allowed.
-3. Moderators will first respond to such remarks with a warning, at the same time the offending content will likely be removed whenever possible.
-4. If the warning is unheeded, the user will be “kicked,” i.e., kicked out of the communication channel to cool off.
-5. If the user comes back and continues to make trouble, they will be banned, i.e., indefinitely excluded.
-6. Moderators may choose at their discretion to un-ban the user if it was a first offense and they offer the offended party a genuine apology.
-7. If a moderator bans someone and you think it was unjustified, please take it up with that moderator, or with a different moderator, in private. Complaints about bans in-channel are not allowed.
-8. Moderators are held to a higher standard than other community members. If a moderator creates an inappropriate situation, they should expect less leeway than others.
+1. Les remarques qui enfreignent les standards de conduite de Lemmy, incluant les remarques haineuses, blessantes, oppressives ou excluantes ne sont pas autorisées. (Jurer est autorisé, mais jamais envers une autre personne, et jamais de façon haineuse.)
+2. Les remarques que la modération considère inappropriées, qu’elles soient listées dans le code de conduite ou pas, ne sont pas non plus autorisées.
+3. La modération répondra d’abord à ce genre de remarques par un avertissement.
+4. Si l’avertissement est ignoré, la personne sera « exclue », c.-à-d. éjectée du canal de communication pour se calmer.
+5. Si la personne revient et continue à causer des problèmes, elle sera bannie, c.-à-d. définitivement exclue.
+6. Les modérateurs peuvent choisir à leur discrétion de débannir une personne si c’était sa première infraction et qu’elle offre une véritable excuse à la personne offensée.
+7. Si un·e modérateur/trice bannit quelqu’un·e et vous pensez que c’est injustifié, adressez-vous à ce·tte modérateur/trice ou un·e autre, en privé. Les plaintes sur le canal à propos des bannissements ne sont pas autorisées.
+8. La modération est tenue à un plus haut standard que le reste des membres de la communauté. Si un·e modérateur/trice cause une situation inappropriée, moins de marge lui sera donnée que les autres.
 
-In the Lemmy community we strive to go the extra step to look out for each other. Don’t just aim to be technically unimpeachable, try to be your best self. In particular, avoid flirting with offensive or sensitive issues, particularly if they’re off-topic; this all too often leads to unnecessary fights, hurt feelings, and damaged trust; worse, it can drive people away from the community entirely.
+Dans la communauté Lemmy, nous nous efforçons de nous occuper les uns des autres. N’essayez pas simplement d’être techniquement irréprochable, essayez de faire au mieux. En particulier, évitez de jouer avec des sujet offensants ou sensibles, en particulier si c’est hors-sujet; cela mène trop souvent à des disputes inutiles, des sentiments heurtés et une confiance endommagée; pire, cela peut faire totalement partir des gens de la communauté.
 
-And if someone takes issue with something you said or did, resist the urge to be defensive. Just stop doing what it was they complained about and apologize. Even if you feel you were misinterpreted or unfairly accused, chances are good there was something you could’ve communicated better — remember that it’s your responsibility to make others comfortable. Everyone wants to get along and we are all here first and foremost because we want to talk about cool technology. You will find that people will be eager to assume good intent and forgive as long as you earn their trust.
+Et si une personne relève quelque chose que vous avez dit ou fait, ne soyez pas sur la défensive. Arrêtez simplement de faire ce qui vous a été reproché et excusez-vous. Même si vous pensez avoir été mal interprété ou accusé injustement, il y a probablement quelque chose que vous pourriez avoir mieux communiqué — rappelez-vous que c’est votre responsabilité de mettre à l’aise les autres Rustacé·e·s. Tout le monde veut bien s’entendre et nous sommes ici en premier lieu car nous voulons parler de technologie cool. Vous verrez que les gens accepteront votre bonne foi et vous pardonneront si vous faites en sorte de gagner leur confiance.
 
-The enforcement policies listed above apply to all official Lemmy venues; including git repositories under [github.com/LemmyNet](https://github.com/LemmyNet) and [yerbamate.ml/LemmyNet](https://yerbamate.ml/LemmyNet), the [Matrix channel](https://matrix.to/#/!BZVTUuEiNmRcbFeLeI:matrix.org); [lemmy.ml](https://lemmy.ml) and other instances under that domain. For other projects adopting the Lemmy Code of Conduct, please contact the maintainers of those projects for enforcement. If you wish to use this code of conduct for your own project, consider explicitly mentioning your moderation policy or making a copy with your own moderation policy so as to avoid confusion.
+Les règles d’application listées ci-dessus s’appliquent à tous les lieux officiels de Lemmy; incluant les dépôts git [github.com/LemmyNet](https://github.com/LemmyNet) et [yerbamate.ml/LemmyNet](https://yerbamate.ml/LemmyNet), la [chaîne Matrix](https://matrix.to/#/!BZVTUuEiNmRcbFeLeI:matrix.org); [lemmy.ml](https://lemmy.ml) et autres instances sous le même nom de domaine. Pour les autres projets adoptant le code de conduite Lemmy, contactez la maintenance de ces projets pour son application. Si vous souhaitez utiliser ce code de conduite pour votre propre projet, envisagez de mentionner explicitement votre politique de modération ou faites une copie avec votre propre politique de modération pour éviter toute confusion.
 
-Adapted from the [Rust Code of Conduct](https://www.rust-lang.org/policies/code-of-conduct), which is based on the [Node.js Policy on Trolling](http://blog.izs.me/post/30036893703/policy-on-trolling) as well as the [Contributor Covenant v1.3.0](https://www.contributor-covenant.org/version/1/3/0/).
+Adapté du [Rust Code of Conduct](https://www.rust-lang.org/policies/code-of-conduct), qui est lui-même basé du [Node.js Policy on Trolling](http://blog.izs.me/post/30036893703/policy-on-trolling) ainsi que [Contributor Covenant v1.3.0](https://www.contributor-covenant.org/version/1/3/0/).
