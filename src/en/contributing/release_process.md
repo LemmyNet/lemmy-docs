@@ -12,8 +12,8 @@ In general, our handling of branches is the one described in [A stable mainline 
 - Make a beta or release candidate version with `docker/prod/deploy.sh`
 - Do the same for `lemmy-ui`: `./deploy.sh 0.x.0-rc-x`
 - Deploy to federation test instances
-    -  keeping one instance at the last stable version to test federation compatibility (automate this with ansible)
-    -  eg: `ansible-playbook -i federation playbooks/site.yml --vault-password-file vault_pass -e "override_lemmy_image=dessalines/lemmy:0.x.0-rc.x override_lemmy_ui_image=dessalines/lemmy-ui:0.x.0-rc.x"`
+    -  Keeping one instance at the last stable version to test federation compatibility (automate this with ansible)
+    -  `ansible-playbook -i federation playbooks/site.yml --vault-password-file vault_pass -e rc_version=0.x.0-rc.x`
 - Test that everything works as expected, make new beta/rc releases if needed
 - Deploy to lemmy.ml, to discover remaining problems
 - If that went well, make the official `0.x.0` release with `docker/prod/deploy.sh`
