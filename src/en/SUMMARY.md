@@ -28,4 +28,5 @@
   - [Local Development](contributing/local_development.md)
   - [Tests](contributing/tests.md)
   - [Federation Development](contributing/federation_development.md)
+  - [Release Process](contributing/release_process.md)
 - [Code of Conduct](code_of_conduct.md)
