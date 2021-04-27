@@ -1,5 +1,4 @@
-Branching and Releases
-===
+# Branching and Releases
 
 ## Branches
 
