@@ -60,7 +60,7 @@ In the following tables, "mandatory" refers to whether or not Lemmy will accept 
             "sc": "http://schema.org#",
             "stickied": "as:stickied",
             "sensitive": "as:sensitive",
-            "pt": "https://join.lemmy.ml#",
+            "pt": "https://join-lemmy.org#",
             "comments_enabled": {
                 "type": "sc:Boolean",
                 "id": "pt:commentsEnabled"

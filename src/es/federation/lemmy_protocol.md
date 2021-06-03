@@ -60,7 +60,7 @@ En las siguientes tablas, "obligatorio" se refiere a si Lemmy aceptará o no una
             "sc": "http://schema.org#",
             "stickied": "as:stickied",
             "sensitive": "as:sensitive",
-            "pt": "https://join.lemmy.ml#",
+            "pt": "https://join-lemmy.org#",
             "comments_enabled": {
                 "type": "sc:Boolean",
                 "id": "pt:commentsEnabled"

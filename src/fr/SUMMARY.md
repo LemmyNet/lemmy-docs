@@ -20,7 +20,7 @@
 - [Client Development](client_development/client_development.md)
   - [Theming Guide](client_development/theming.md)
   - [API reference](client_development/api_reference.md)
-  - [WebSocket API](https://join.lemmy.ml/api/index.html)
+  - [WebSocket API](https://join-lemmy.org/api/index.html)
   - [HTTP API](client_development/http_api.md)
   - [Creating a Custom Frontend](client_development/custom_frontend.md)
 - [Contributing](contributing/contributing.md)
