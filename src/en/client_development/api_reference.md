@@ -1,7 +1,7 @@
 # API reference
 
 Lemmy has two, intertwined APIs:
-- [WebSocket](https://join.lemmy.ml/api/index.html)
+- [WebSocket](https://join-lemmy.org/api/index.html)
 - [HTTP](http_api.md)
 
 This page describes concepts that are common to both.
