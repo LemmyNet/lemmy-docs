@@ -1,5 +1,7 @@
 ### Install build requirements
-#### Ubuntu
+Install Rust using [the recommended option on rust-lang.org](https://www.rust-lang.org/tools/install) (rustup).
+
+#### Debian-based distro
 ```
 sudo apt install git cargo libssl-dev pkg-config libpq-dev yarn curl gnupg2 espeak
 # install yarn
@@ -8,11 +10,15 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/source
 sudo apt update && sudo apt install yarn
 ```
 
+#### Arch-based distro
+```
+sudo pacman -S git cargo libssl-dev pkg-config libpq-dev yarn curl gnupg2 espeak
+# install yarn (stable)
+curl -o- -L https://yarnpkg.com/install.sh | bash
+```
+
 #### macOS
-
-Install Rust using [the recommended option on rust-lang.org](https://www.rust-lang.org/tools/install) (rustup).
-
-Then, install [Homebrew](https://brew.sh/) if you don't already have it installed.
+Install [Homebrew](https://brew.sh/) if you don't already have it installed.
 
 Finally, install Node and Yarn.
 
@@ -39,9 +45,20 @@ git clone https://github.com/LemmyNet/lemmy-ui.git --recurse-submodules
 ```
 
 ### Setup postgresql
-#### Ubuntu
+#### Debian-based disto
 ```
 sudo apt install postgresql
+sudo systemctl start postgresql
+
+# Either execute db-init.sh, or manually initialize the postgres database:
+sudo -u postgres psql -c "create user lemmy with password 'password' superuser;" -U postgres
+sudo -u postgres psql -c 'create database lemmy with owner lemmy;' -U postgres
+export LEMMY_DATABASE_URL=postgres://lemmy:password@localhost:5432/lemmy
+```
+
+#### Arch-based distro
+```
+sudo pacman -S postgresql
 sudo systemctl start postgresql
 
 # Either execute db-init.sh, or manually initialize the postgres database:
