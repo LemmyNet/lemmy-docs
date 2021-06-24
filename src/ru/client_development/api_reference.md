@@ -1,7 +1,7 @@
 # Справочник по API 
 
 Lemmy имеет два взаимосвязанных API:
-- [WebSocket (анг.язык)](https://join.lemmy.ml/api/index.html)
+- [WebSocket (анг.язык)](https://join-lemmy.org/api/index.html)
 - [HTTP (анг.язык)](http_api.md)
 
 На этой странице описаны общие для них концепции.
