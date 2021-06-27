@@ -1,40 +1,39 @@
-# Contributing
+# Contribuir al Proyecto
 
-Information about contributing to Lemmy, whether it is translating, testing, designing or programming.
+Información sobre como contribuir a Lemmy, ya sea traduciendo, probando, diseñando o programando.
 
-## Issue tracking / Repositories
+## Seguimiento de problemas (issues) / Repositorios
 
-- [GitHub (for issues and pull requests)](https://github.com/LemmyNet/lemmy)
-- [Gitea (only for pull requests)](https://yerbamate.ml/LemmyNet/lemmy)
+- [GitHub (para issues y pull requests)](https://github.com/LemmyNet/lemmy)
+- [Gitea (solo para pull requests)](https://yerbamate.ml/LemmyNet/lemmy)
 - [Codeberg](https://codeberg.org/LemmyNet/lemmy)
 
-## Translating
+## Traduciendo
 
-Check out [Lemmy's Weblate](https://weblate.yerbamate.ml/projects/lemmy/) for translations. You can also help by [translating this documentation](https://github.com/LemmyNet/lemmy-docs#adding-a-new-language).
+Mira el  [Weblate de Lemmy](https://weblate.yerbamate.ml/projects/lemmy/) para las traducciones. Tú también puedes ayudar [traduciendo esta documentación](https://github.com/LemmyNet/lemmy-docs#adding-a-new-language).
 
-
-## Architecture
+## Arquitectura
 
 ### Front end
 
-- The front end is written in `typescript`, using a react-like framework called [inferno](https://infernojs.org/). All UI elements are reusable `.tsx` components.
-- The front end repository is [lemmy-ui](https://github.com/LemmyNet/lemmy-ui).
-- The routes are at `src/shared/routes.ts`.
-- The components are located in `src/shared/components`.
+- El front end está escrito en `typescript`, usando un framework similar a React llamado [inferno](https://infernojs.org/). Todos los elementos de la interfaz de usuario (UI) son componentes `.tsx` reutilizables.
+- El repositorio del front end es [lemmy-ui](https://github.com/LemmyNet/lemmy-ui).
+- Las rutas están en `src/shared/routes.ts`.
+- Los componentes están localizados en `src/shared/components`.
 
 ### Back end
 
-- The back end is written in `rust`, using `diesel`, and `actix`.
-- The server source code is split into main sections in `src`. These include: 
-  - `db` - The low level database actions.
-    - Database additions are done using diesel migrations. Run `diesel migration generate xxxxx` to add new things.
-  - `api` - The high level user interactions (things like `CreateComment`)
-  - `routes` - The server endpoints .
-  - `apub` - The activitypub conversions.
-  - `websocket` - Creates the websocket server. 
+- El back end está escrito en `rust`, usando `diesel`, y `actix`.
+- El código fuente del servidor está divido en secciones *main* in `src`. Estos incluyen:
+  - `db` - Las acciones de bajo nivel de la base de datos.
+    - Las adiciones a la base de datos se realizan mediante migraciones. Ejecuta `diesel migration generate xxxxx` para añadir cosas nuevas.
+  - `api` - Las iteracciones de alto nivel del usuario (cosas como `CreateComment`)
+  - `routes` - Los puntos finales (endpoints) del servidor.
+  - `apub` - Las conversiones activitypub.
+  - `websocket` - Crea el sevidor del websocket. 
 
-## Linting / Formatting
+## Linting / Formateo
 
-- Every front and back end commit is automatically formatted then linted using `husky`, and `lint-staged`.
-- Rust with `cargo fmt` and `cargo clippy`.
-- Typescript with `prettier` and `eslint`.
+- Cada commit del front end y back end se formatea automáticamente y luego se hace un linting usando `husky`, y `lint-staged`.
+- Rust con `cargo fmt` y `cargo clippy`.
+- Typescript con `prettier` y `eslint`.

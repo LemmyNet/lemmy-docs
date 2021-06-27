@@ -1,6 +1,8 @@
-# Docker Development
+# Desarrollo con Docker
 
-## Dependencies (on Ubuntu)
+## Dependencias
+
+### Distro basada en Debian
 
 ```bash
 sudo apt install git docker-compose
@@ -8,18 +10,26 @@ sudo systemctl start docker
 git clone https://github.com/LemmyNet/lemmy
 ```
 
-## Running
+### Distro basada en Arch
+
+```bash
+sudo -S git docker-compose
+sudo systemctl start docker
+git clone https://github.com/LemmyNet/lemmy
+```
+
+## Ejecución
 
 ```bash
 cd docker/dev
 ./docker_update.sh
 ```
 
-and go to http://localhost:1235.
+Finalmente abre la siguiente dirección en tu navegador: `http://localhost:1235`.
 
-*Note: many features (like docs and pictures) will not work without using an nginx profile like that in `ansible/templates/nginx.conf`.
+**Nota:** muchas características (como docs e imagenes) no funcionarán sin usar un perfil de nginx como en `ansible/templates/nginx.conf`.
 
-To speed up the Docker compile, add the following to `/etc/docker/daemon.json` and restart Docker.
+Para acelerar la compilación de Docker, añade el siguiente código a `/etc/docker/daemon.json` y reinicia Docker.
 ```
 {
   "features": {
@@ -28,5 +38,4 @@ To speed up the Docker compile, add the following to `/etc/docker/daemon.json` a
 }
 ```
 
-If the build is still too slow, you will have to use a
-[local build](local_development.md) instead.
+Si la compilación sigue siendo muy lenta, tendrás que usar un [desarrollo local](local_development.md) en su lugar.
