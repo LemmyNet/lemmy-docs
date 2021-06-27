@@ -1,49 +1,49 @@
-# API reference
+# Referencia de la API
 
-Lemmy has two, intertwined APIs:
+Lemmy tiene dos APIs entrelazadas:
 - [WebSocket](https://join-lemmy.org/api/index.html)
 - [HTTP](http_api.md)
 
-This page describes concepts that are common to both.
+Esta página describe conceptos que son comúnes para ambas.
 
 <!-- toc -->
 
-- [Basic usage](#basic-usage)
-- [Data types](#data-types)
-  * [Lemmy types](#lemmy-types)
-  * [Lower-level types](#lower-level-types)
-- [Default rate limits](#default-rate-limits)
+- [Uso básico](#uso-básico)
+- [Tipos de datos](#tipos-de-datos)
+  * [Tipos de Lemmy](#tipos-de-lemmy)
+  * [Tipos de bajo nivel](#tipos-de-bajo-nivel)
+- [Límites de tarifa por defecto](#límites-de-tarifa-por-defecto)
 
 <!-- tocstop -->
 
-## Basic usage
+## Uso básico
 
-Request and response strings are in [JSON format](https://www.json.org).
+Las cadenas de solicitud `request` y respuesta `response` están en [formato JSON](https://www.json.org/json-es.html).
 
-## Data types
+## Tipos de datos
 
-### Lemmy types
+### Tipos de Lemmy
 
-- [Source tables, that have the columns / fields](https://github.com/LemmyNet/lemmy-js-client/blob/main/src/interfaces/source.ts)
-- [Aggregates (for things like scores)](https://github.com/LemmyNet/lemmy-js-client/blob/main/src/interfaces/aggregates.ts)
-- [Views - The main lemmy return types](https://github.com/LemmyNet/lemmy-js-client/blob/main/src/interfaces/views.ts)
-- [Request Forms / Responses are in this folder](https://github.com/LemmyNet/lemmy-js-client/tree/main/src/interfaces/api)
+- [tablas que tienen las columnas / campos](https://github.com/LemmyNet/lemmy-js-client/blob/main/src/interfaces/source.ts)
+- [Aggregates (para cosas como las puntuaciones)](https://github.com/LemmyNet/lemmy-js-client/blob/main/src/interfaces/aggregates.ts)
+- [Views (vistas) - The main lemmy return types](https://github.com/LemmyNet/lemmy-js-client/blob/main/src/interfaces/views.ts)
+- [Los formularios de solicitud (Request) / respuesta (Responses)](https://github.com/LemmyNet/lemmy-js-client/tree/main/src/interfaces/api)
 
-### Lower-level types
+### Tipos de bajo nivel
 
-- `?` designates an option which may be omitted in requests and not be present in responses. It will be of type ***SomeType***.
-- `[SomeType]` is a list which contains objects of type ***SomeType***.
-- Times and dates are timestamp strings in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. Timestamps will be UTC, your client must do the UTC to local conversion.
+- `?` designa una opción que puede omitirse en las solicitudes y no estar presenet en las respuestas. Será de tipo ***SomeType*** (AlgúnTipo).
+- `[SomeType]` es una lista que contiene objetos del tipo ***SomeType***.
+- Las horas (times) y fechas (dates) son cadenas de marcas de tiempo (timestamp) en formato [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601). Timestamps serán UTC, tú cliente debe hacer la conversión de UTC a local.
 
-## Default rate limits
+## Límites de tasa por defecto
 
-These can be edited in your `lemmy.hjson` file, by copying the relevant section from [defaults.hjson](https://github.com/LemmyNet/lemmy/blob/main/config/defaults.hjson).
+Estos límites pueden ser editados en tú archivo `lemmy.hjson`, copiando la sección relevante de [defaults.hjson](https://github.com/LemmyNet/lemmy/blob/main/config/defaults.hjson).
 
-- 3 per hour for signups and community creation.
-- 6 per hour for image posting.
-- 6 per 10 minutes for post creation.
-- 180 actions per minute for post voting and comment creation.
+- 3 por hora para inscripciones y creación de comunidades.
+- 6 por hora para publicación de imágenes.
+- 6 por 10 minutos para la creación de publicaciones.
+- 180 acciones por minuto para la votación de publicaciones y la creación de comentarios.
 
-Everything else is not rate-limited.
+El resto no cuenta con límites de tasa.
 
-**See also:** [rate limiting for custom front-ends](custom_frontend.md#rate-limiting).
+**Véase también:** [Limitación de la tasa para front-ends personalizados](custom_frontend.md#limitación-de-la-tasa).
