@@ -1,9 +1,18 @@
 # Docker Development
 
-## Dependencies (on Ubuntu)
+## Dependencies
+### Debian-based distro
 
 ```bash
 sudo apt install git docker-compose
+sudo systemctl start docker
+git clone https://github.com/LemmyNet/lemmy
+```
+
+### Arch-based distro
+
+```bash
+sudo pacman -S git docker-compose
 sudo systemctl start docker
 git clone https://github.com/LemmyNet/lemmy
 ```
