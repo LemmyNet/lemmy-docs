@@ -29,4 +29,5 @@
   - [Desarrollo Local](contributing/local_development.md)
   - [Pruebas](contributing/tests.md)
   - [Desarrollo de la Federación](contributing/federation_development.md)
+  - [Bifurcaciones y Liberaciones](contributing/release_process.md)
 - [Código de Conducta](code_of_conduct.md)
