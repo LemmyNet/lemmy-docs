@@ -37,7 +37,7 @@ mdbook serve
 
 ## Troubleshooting
 
-### Invalid route/document
+### Invalid path/document
 
 Avoid having a markdown file with only a link as its content, for example:
 
