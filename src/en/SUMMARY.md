@@ -2,7 +2,6 @@
 
 - [About](about/about.md)
   - [Features](about/features.md)
-  - [Goals](about/goals.md)
   - [Post and Comment Ranking](about/ranking.md)
   - [Guide](about/guide.md)
 - [Administration](administration/administration.md)
@@ -30,4 +29,5 @@
   - [Tests](contributing/tests.md)
   - [Federation Development](contributing/federation_development.md)
   - [Release Process](contributing/release_process.md)
+  - [Resources](contributing/resources.md)
 - [Code of Conduct](code_of_conduct.md)
