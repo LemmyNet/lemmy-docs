@@ -1,4 +1,4 @@
-# Resources / Potential Libraries
+# Resources / Libraries
 
 - [Diesel to Postgres data types](https://kotiri.com/2018/01/31/postgresql-diesel-rust-types.html)
 - [helpful diesel examples](http://siciarz.net/24-days-rust-diesel/)
