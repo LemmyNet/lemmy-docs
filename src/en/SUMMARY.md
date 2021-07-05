@@ -15,7 +15,6 @@
   - [Backup and Restore](administration/backup_and_restore.md)
 - [Federation](federation/federation.md)
   - [Federation Overview](federation/overview.md)
-  - [Resources](federation/resources.md)
   - [Lemmy Protocol](federation/lemmy_protocol.md)
 - [Client Development](client_development/client_development.md)
   - [Theming Guide](client_development/theming.md)
