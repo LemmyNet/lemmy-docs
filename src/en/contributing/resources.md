@@ -1,24 +1,4 @@
-# Goals
-
-- Come up with a name / codename.
-- Must have communities.
-- Must have threaded comments.
-- Must be federated: liking and following communities across instances.
-- Be live-updating: have a right pane for new comments, and a main pane for the full threaded view.
-  - Use websockets for post / gets to your own instance.
-
-# Questions
-
-- How does voting work? Should we go back to the old way of showing up and downvote counts? Or just a score?
-- Decide on tech to be used
-  - Backend: Actix, Diesel.
-  - Frontend: inferno, typescript and bootstrap for now.
-- Should it allow bots?
-- Should the comments / votes be static, or feel like a chat, like [flowchat?](https://flow-chat.com).
-  - Two pane model - Right pane is live comments, left pane is live tree view.
-  - On mobile, allow you to switch between them. Default?
-
-# Resources / Potential Libraries
+# Resources / Libraries
 
 - [Diesel to Postgres data types](https://kotiri.com/2018/01/31/postgresql-diesel-rust-types.html)
 - [helpful diesel examples](http://siciarz.net/24-days-rust-diesel/)
@@ -37,3 +17,26 @@
 - [Zurb mentions](https://github.com/zurb/tribute)
 - [TippyJS](https://github.com/atomiks/tippyjs)
 - [SQL function indexes](https://sorentwo.com/2013/12/30/let-postgres-do-the-work.html)
+
+# ActivityPub Resources
+
+## Official Documents
+
+- [ActivityPub standard](https://www.w3.org/TR/activitypub/)
+- [Activitypub vocabulary](https://www.w3.org/TR/activitystreams-vocabulary/)
+
+## Explanations
+
+- [ActivityPub - one protocol to rule them all?](https://schub.io/blog/2018/02/01/activitypub-one-protocol-to-rule-them-all.html)
+- [A highly opinionated guide to learning about ActivityPub](https://tinysubversions.com/notes/reading-activitypub/)
+- [Activitypub implementers guide](https://socialhub.activitypub.rocks/t/draft-guide-for-new-activitypub-implementers/479)
+- [Mastodon Blog: How to implement a basic ActivityPub server](https://blog.joinmastodon.org/2018/06/how-to-implement-a-basic-activitypub-server/)
+- [Mastodon Blog: Implementing an ActivityPub inbox](https://blog.joinmastodon.org/2018/07/how-to-make-friends-and-verify-requests/)
+- [Data storage questions](https://socialhub.activitypub.rocks/t/data-storage-questions/579)
+- [Activitypub as it has been understood](https://flak.tedunangst.com/post/ActivityPub-as-it-has-been-understood)
+
+## Examples and Libraries
+
+- [ActivityPub example server](https://github.com/tOkeshu/activitypub-example)
+- [ActivityStreams crate](https://docs.rs/activitystreams/)
+- [HTTP Signatures crate](https://git.asonix.dog/Aardwolf/http-signature-normalization)

@@ -2,7 +2,6 @@
 
 - [About](about/about.md)
   - [Features](about/features.md)
-  - [Goals](about/goals.md)
   - [Post and Comment Ranking](about/ranking.md)
   - [Guide](about/guide.md)
 - [Administration](administration/administration.md)
@@ -16,7 +15,6 @@
   - [Backup and Restore](administration/backup_and_restore.md)
 - [Federation](federation/federation.md)
   - [Federation Overview](federation/overview.md)
-  - [Resources](federation/resources.md)
   - [Lemmy Protocol](federation/lemmy_protocol.md)
 - [Client Development](client_development/client_development.md)
   - [Theming Guide](client_development/theming.md)
@@ -30,4 +28,5 @@
   - [Tests](contributing/tests.md)
   - [Federation Development](contributing/federation_development.md)
   - [Release Process](contributing/release_process.md)
+  - [Resources](contributing/resources.md)
 - [Code of Conduct](code_of_conduct.md)
