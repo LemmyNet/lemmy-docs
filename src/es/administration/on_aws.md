@@ -2,14 +2,11 @@
 
 > ⚠️ **Descargo de responsabilidad:** este método de instalación no está recomendado por los desarrolladores de Lemmy. Si tienes algún problema, debes resolverlo tú mismo o preguntar a los respectivos autores. Si observas algún fallo de Lemmy en una instancia instalada de este modo, por favor, menciónalo en el informe de fallos.
 
->  ℹ️ Este documento no cuenta con traducción al carecer de soporte y ser de un caracter experimental.
-
 ## Lemmy AWS CDK
 
-This contains the necessary infrastructure definitions to deploy [Lemmy](https://github.com/LemmyNet/lemmy)
-to AWS using their [Cloud Development Kit](https://docs.aws.amazon.com/cdk/latest/guide/home.html).
+Contiene las definiciones de infraestructura necesarias para desplegar [Lemmy](https://github.com/LemmyNet/lemmy) en AWS su [Cloud Development Kit](https://docs.aws.amazon.com/cdk/latest/guide/home.html).
 
-### Included:
+### Incluye:
 
 * ECS fargate cluster
   * Lemmy-UI
@@ -17,24 +14,24 @@ to AWS using their [Cloud Development Kit](https://docs.aws.amazon.com/cdk/lates
   * Pictrs
   * IFramely
 * CloudFront CDN
-* EFS storage for image uploads
+* Almacenamiento EFS para subir imágenes.
 * Aurora Serverless Postgres DB
 * Bastion VPC host
-* Load balancers for Lemmy and IFramely
-* DNS records for your site
+* Balanceadores de carga para Lemmy y IFramely
+* Registros DNS para tu sitio.
 
-## Quickstart
+## Inicio rápido
 
-Clone the [Lemmy-CDK]( https://github.com/jetbridge/lemmy-cdk). 
+Clona el [Lemmy-CDK]( https://github.com/jetbridge/lemmy-cdk). 
 
-Clone [Lemmy](https://github.com/LemmyNet/lemmy) and [Lemmy-UI](https://github.com/LemmyNet/lemmy-ui) to the directory above this.
+Clona [Lemmy](https://github.com/LemmyNet/lemmy) y [Lemmy-UI](https://github.com/LemmyNet/lemmy-ui) en el directorio de arriba.
 
 ```shell
 cp example.env.local .env.local
 # edit .env.local
 ```
 
-You should edit .env.local with your site settings.
+Debes editar .env.local con la configuración de tu sitio.
 
 ```shell
 npm install -g aws-cdk
@@ -43,14 +40,14 @@ cdk bootstrap
 cdk deploy
 ```
 
-## Cost
-This is *not* the cheapest way to run Lemmy. The Serverless Aurora DB can run you ~$90/mo if it doesn't go to sleep.
+## Coste
+Esta *no* es la forma más barata de ejecutar Lemmy. La base de datos sin servidor (serverless) Aurora puede costarte ~$90/mes (en dólares) si no duerme.
 
-## Useful CDK commands
+## Comandos del CDK útiles
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `cdk deploy`      deploy this stack to your default AWS account/region
-* `cdk diff`        compare deployed stack with current state
-* `cdk synth`       emits the synthesized CloudFormation template
+* `npm run build`   compila typescript a js
+* `npm run watch`   vigila los cambios y compila
+* `npm run test`    realiza las pruebas unitarias de jest
+* `cdk deploy`      despliega esta pila en tu cuenta/región de AWS por defecto
+* `cdk diff`        compara la pila desplegada con el estado actual
+* `cdk synth`       emite la plantilla de CloudFormation sintetizada
