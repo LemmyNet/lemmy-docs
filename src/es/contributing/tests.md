@@ -1,18 +1,17 @@
-### Tests
+### Pruebas
 
 #### Rust
 
-After installing [local development dependencies](local_development.md), run the
-following commands:
+Después de instalar las [dependencias para el desarrollo local](local_development.md), ejecuta el siguiente comando:
 
 ```bash
 psql -U lemmy -c "DROP SCHEMA public CASCADE; CREATE SCHEMA public;"
 ./test.sh
 ```
 
-### Federation
+### Federación
 
-Install the [Local development dependencies](local_development.md), and add the following lines to `/etc/hosts`:
+Instala las [dependencias para el desarrollo local](local_development.md), y agrega las siguientes a `/etc/hosts`:
 
 ```
 127.0.0.1       lemmy-alpha
@@ -22,7 +21,8 @@ Install the [Local development dependencies](local_development.md), and add the 
 127.0.0.1       lemmy-epsilon
 ```
 
-Then use the following script to run the tests:
+Después usa el siguiente script para correr las pruebas:
+
 ```
 cd api_tests
 ./run-federation-test.bash

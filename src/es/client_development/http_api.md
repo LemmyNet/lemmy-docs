@@ -1,35 +1,36 @@
-# Lemmy HTTP API
+# API HTTP de Lemmy
 
 
 <!-- toc -->
 
-- [Websocket vs HTTP API](#websocket-vs-http-api)
-- [Examples](#examples)
+- [Websocket vs API HTTP](#websocket-vs-api-http)
+- [Ejemplos](#ejemplos)
   * [TypeScript](#typescript)
   * [Curl](#curl)
-    + [GET](#get-example)
-    + [POST](#post-example)
-- [HTTP API exclusive features](#http-api-exclusive-features)
+    + [GET](#ejemplo-get)
+    + [POST](#ejemplo-post)
+- [Características exclusivas de la API HTTP](#características-exclusivas-de-la-api-http)
   * [RSS/Atom feeds](#rss-atom-feeds)
-  * [Images](#images)
-    + [Create (request)](#create-request)
-    + [Create (response)](#create-response)
+  * [Imagenes](#imagenes)
+    + [Crear (request)](#crear-request)
+    + [Crear (response)](#crear-response)
     * [Delete](#delete)
 
 <!-- tocstop -->
 
-## WebSocket vs HTTP API
-Lemmy's HTTP API is almost identical to its WebSocket API:
-- **WebSocket API** needs `let send = { op: userOperation[op], data: form}` as shown in [the WebSocketAPI specification](https://join-lemmy.org/api/index.html)
-- **HTTP API** needs the form (data) at the top level, an HTTP operation (GET, PUT or POST) and endpoint (at `http(s)://host/api/v2/endpoint`). For example:
+## WebSocket vs API HTTP
+La API HTTP de Lemmy es casi parecida a la API del Websocket:
+- **API WebSocket** necesita `let send = { op: userOperation[op], data: form}` como se muestra en [la especificación de la API WebSocket](https://join-lemmy.org/api/index.html)
+- **API HTTP** necesita el formulario (datos) en el primer nivel; una operación HTTP (GET, PUT o POST) y endpoint (en `http(s)://host/api/v2/endpoint`). Por ejemplo:
 
 > `POST {username_or_email: X, password: X}`
 
-For more information, see the [http.ts](https://github.com/LemmyNet/lemmy-js-client/blob/main/src/http.ts) file.
+Para más información. Véase el archivo
+[http.ts](https://github.com/LemmyNet/lemmy-js-client/blob/main/src/http.ts) .
 
-[The WebSocket API](https://join-lemmy.org/api/index.html) should be regarded as the primary source for the HTTP API since it also provides information about how to form HTTP API calls.
+[El API del WebSocket](https://join-lemmy.org/api/index.html) debería considerarse como la fuente principal para la API HTPP, ya que también proporciona información sobre cómo formular las llamadas a la API HTTP.
 
-## Examples
+## Ejemplos
 
 ### TypeScript
 
@@ -39,19 +40,19 @@ For more information, see the [http.ts](https://github.com/LemmyNet/lemmy-js-cli
   }
 ```
 
-| Type | URL | Body type | Return type |
+| Tipo | URL | Tipo de cuerpo | Tipo de Retorno |
 | --- | --- | --- | --- |
 | `PUT` | `/comment` | `EditComment` | `CommentResponse` |
 
 ### Curl
 
-**GET example**
+#### Ejemplo GET
 
 ```
 curl "http://localhost:8536/api/v2/community/list?sort=Hot"`
 ```
 
-**POST example**
+#### Ejemplo POST
 
 ```
 curl -i -H \
@@ -65,34 +66,36 @@ curl -i -H \
 http://localhost:8536/api/v2/comment/like
 ```
 
-## HTTP API exclusive features
+## Características exclusivas de la API HTTP
 
-These features cannot be accessed from the WebSocket API:
+Estas características no pueden ser accesadas desde la API del WebSocket:
 
 - [RSS/Atom feeds](#rss-atom-feeds)
-- [Images](#images)
+- [Imagenes](#imagenes)
 
 ### RSS/Atom feeds
 
-- All - `/feeds/all.xml?sort=Hot`
-- Community - `/feeds/c/community-name.xml?sort=Hot`
-- User - `/feeds/u/user-name.xml?sort=Hot`
+- All (Todo) - `/feeds/all.xml?sort=Hot`
+- Community (Comunidad) - `/feeds/c/community-name.xml?sort=Hot`
+- User (usuario) - `/feeds/u/user-name.xml?sort=Hot`
 
-### Images
+### Imagenes
 
-Lemmy forwards image requests to a locally running Pictrs.
+Leemy reenvía las peticiones de imagenes a un Pictrs que se ejecuta localmenet.
 
 `GET /pictrs/image/{filename}?format={webp, jpg, ...}&thumbnail={96}`
 
-*Format and thumbnail are optional.*
+*El formato (format) y la miniatura (thumbnail) son opcionales*
 
-#### Create (request)
+#### Crear (request)
+
+El contenido subido debe ser un formulario (multipart/form-data) válido con una matriz de imagenes situada dentro de la clave `images[]`.
 
 Uploaded content must be valid multipart/form-data with an image array located within the images[] key.
 
 `POST /pictrs/image` 
 
-#### Create (response)
+#### Crear (response)
 
 ```
 {
@@ -111,6 +114,7 @@ Uploaded content must be valid multipart/form-data with an image array located w
 `GET /pictrs/image/delete/{delete_token}/{file}`
 
 
-# Note
+# Nota
 
-This documentation may lag behind the actual [API endpoints](https://github.com/LemmyNet/lemmy-js-client/blob/main/src/http.ts) and the API itself should be considered unstable (since it may change at any time).
+Esta documentación puede tener un retraso con respecto a la actual
+[API endpoints](https://github.com/LemmyNet/lemmy-js-client/blob/main/src/http.ts). La API misma debería ser considerada inestable (está sujeta a cambios en cualquier momento).

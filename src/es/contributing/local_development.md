@@ -1,5 +1,9 @@
-### Install build requirements
-#### Ubuntu
+# Desarrollo Local
+
+### Instalar requisitos
+Instala Rust utilizando [la opción recomendada en rust-lang.org](https://www.rust-lang.org/tools/install) (rustup).
+
+#### Distro basada en Debian
 ```
 sudo apt install git cargo libssl-dev pkg-config libpq-dev yarn curl gnupg2 espeak
 # install yarn
@@ -8,40 +12,55 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/source
 sudo apt update && sudo apt install yarn
 ```
 
+#### Distro basada en Arch
+```
+sudo pacman -S git cargo libssl-dev pkg-config libpq-dev yarn curl gnupg2 espeak
+# install yarn (stable)
+curl -o- -L https://yarnpkg.com/install.sh | bash
+```
+
 #### macOS
+Instala [Homebrew](https://brew.sh/) si aún no lo has instalado.
 
-Install Rust using [the recommended option on rust-lang.org](https://www.rust-lang.org/tools/install) (rustup).
-
-Then, install [Homebrew](https://brew.sh/) if you don't already have it installed.
-
-Finally, install Node and Yarn.
+Finalmente, instala Node y Yarn.
 
 ```
 brew install node yarn
 ```
 
-### Get the back end source code
+### Obtener el código fuente del back end
 ```
 git clone https://github.com/LemmyNet/lemmy.git
 # or alternatively from gitea
 # git clone https://yerbamate.ml/LemmyNet/lemmy.git
 ```
 
-### Build the backend (Rust)
+### Compila el backend (Rust)
 ```
 cargo build
-# for development, use `cargo check` instead)
+# para desarrollo, usa `cargo check` en su lugar)
 ```
 
-### Get the front end source code
+### Obtener el código fuente del front end
 ```
 git clone https://github.com/LemmyNet/lemmy-ui.git --recurse-submodules
 ```
 
-### Setup postgresql
-#### Ubuntu
+### Configurar postgresql
+#### Distro basada en Debian
 ```
 sudo apt install postgresql
+sudo systemctl start postgresql
+
+# Either execute db-init.sh, or manually initialize the postgres database:
+sudo -u postgres psql -c "create user lemmy with password 'password' superuser;" -U postgres
+sudo -u postgres psql -c 'create database lemmy with owner lemmy;' -U postgres
+export LEMMY_DATABASE_URL=postgres://lemmy:password@localhost:5432/lemmy
+```
+
+#### Distro basada en Arch
+```
+sudo pacman -S postgresql
 sudo systemctl start postgresql
 
 # Either execute db-init.sh, or manually initialize the postgres database:
@@ -62,15 +81,15 @@ psql -c 'create database lemmy with owner lemmy;' -U postgres
 export LEMMY_DATABASE_URL=postgres://lemmy:password@localhost:5432/lemmy
 ```
 
-### Run a local development instance
+### Ejecutar una instancia de desarrollo local
 ```
 cd lemmy
 cargo run
 ```
 
-Then open [localhost:1235](http://localhost:1235) in your browser. To reload back-end changes, you will have to rerun `cargo run`. You can use `cargo check` as a faster way to find compilation errors.
+Después abre [localhost:1235](http://localhost:1235) en tu navegador. Para recargar los cambios en el back-end, tendrás que volver ejecutar `cargo run`. Puedes usar `cargo check` como una manera mas rapida de econtrar errores de compilación.
 
-To do front end development:
+Para hacer desarrollo front end:
 
 ```
 cd lemmy-ui
@@ -78,8 +97,6 @@ yarn
 yarn dev
 ```
 
-and go to [localhost:1234](http://localhost:1234). Front end saves should rebuild the project.
+Enseguida entra a [localhost:1234](http://localhost:1234). Al guardar cambios, el frond end se debe recargar automáticamenete. 
 
-Note that this setup doesn't include image uploads or link previews (provided by pict-rs and
-iframely respectively). If you want to test those, you should use the
-[Docker development](docker_development.md).
+Toma en cuenta que esta configuración no incluye la carga de imagenes ni la previsualización de enlaces (proporcionada por pict-rs y iframely respectivamente). Si quieres probarlos, debes de usar el [desarrollo Docker](docker_development.md).

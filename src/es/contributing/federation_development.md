@@ -1,43 +1,41 @@
-# Federation Development
+# Desarrollo de la Federación
 
-## Running locally
+## Ejecutando localmente
 
-Install the dependencies as described in [Docker development](docker_development.md). Then run the following
+Instala las dependencias necesarias como esta descrito en el documento [Desarrollo con Docker](docker_development.md). Enseguida ejecuta lo siguiente:
 
 ```bash
 cd docker/federation
 ./start-local-instances.bash
 ```
 
-The federation test sets up 5 instances:
+Las pruebas de federación establecen 5 instancias:
 
-Instance | Username | Location | Notes
+Instancia | Nombre de usuario | Localización | Notas
 --- | --- | --- | ---
-lemmy-alpha | lemmy_alpha | [127.0.0.1:8540](http://127.0.0.1:8540) | federated with all other instances
-lemmy-beta | lemmy_beta | [127.0.0.1:8550](http://127.0.0.1:8550) | federated with all other instances
-lemmy-gamma | lemmy_gamma | [127.0.0.1:8560](http://127.0.0.1:8560) | federated with all other instances
-lemmy-delta | lemmy_delta | [127.0.0.1:8570](http://127.0.0.1:8570) | only allows federation with lemmy-beta
-lemmy-epsilon | lemmy_epsilon | [127.0.0.1:8580](http://127.0.0.1:8580) | uses blocklist, has lemmy-alpha blocked
+lemmy-alpha | lemmy_alpha | [127.0.0.1:8540](http://127.0.0.1:8540) | federada con todas las demás instancias
+lemmy-beta | lemmy_beta | [127.0.0.1:8550](http://127.0.0.1:8550) | federada con todas las demás instancias
+lemmy-gamma | lemmy_gamma | [127.0.0.1:8560](http://127.0.0.1:8560) | federada con todas las demás instancias
+lemmy-delta | lemmy_delta | [127.0.0.1:8570](http://127.0.0.1:8570) | solo permite federación con lemmy-beta
+lemmy-epsilon | lemmy_epsilon | [127.0.0.1:8580](http://127.0.0.1:8580) | usa la lista de bloqueo, tiene lemmy-alpha bloqueada
 
-You can log into each using the instance name, and `lemmy` as the password, IE (`lemmy_alpha`, `lemmy`). 
+Puedes registrarte en cada una usando el nombre de la instancia, y `lemmy` como la contraseña, ejemplo: (`lemmy_alpha`, `lemmy`). 
 
-To start federation between instances, visit one of them and search for a user, community or post, like this. Note that
-the Lemmy backend runs on a different port than the frontend, so you have to increment the port number from 
-the URL bar by one.
+Para iniciar la federación entre instancias, visita una de ellas y busca un
+usuario, comunidad o publicación, como en este ejemplo. Nota que el backend de Lemmy se ejecuta en un puerto diferente al del frontend, por lo que tienes que incrementar en uno el número de puerto de la barra de URL.
 - `!main@lemmy-alpha:8541`
 - `http://lemmy-beta:8551/post/3`
 - `@lemmy-gamma@lemmy-gamma:8561`
 
-Firefox containers are a good way to test them interacting.
+Los contenedores de Firefox son una buena forma de probar su interacción.
 
-## Running on a server
+## Ejecutando en un servidor
 
-Note that federation is currently in alpha. **Only use it for testing**, not on any production server, and be aware that turning on federation may break your instance.
+Ten en cuenta que la federación está actualmente en fase alfa. **Únicamente utilícela para pruebas**, no en un servidor de producción, y sé cuidadoso, que activar la federación puede romper tu instancia.
 
-Follow the normal installation instructions, either with [Ansible](../administration/install_ansible.md) or
-[manually](../administration/install_docker.md). Then replace the line `image: dessalines/lemmy:v0.x.x` in 
-`/lemmy/docker-compose.yml` with `image: dessalines/lemmy:federation`. Also add the following in
-`/lemmy/lemmy.hjson`:
+Sigue las instrucciones normales de instalación, ya sea con [Ansible](../administration/install_ansible.md) o
+[manualmente con Docker](../administration/install_docker.md). Luego reemplaza la linea `image: dessalines/lemmy:v0.x.x` en 
+`/lemmy/docker-compose.yml` con `image: dessalines/lemmy:federation`. También añade lo siguiente en `/lemmy/lemmy.hjson`:
 
 ```
     federation: {
@@ -47,7 +45,7 @@ Follow the normal installation instructions, either with [Ansible](../administra
     }
 ```
 
-Afterwards, and whenever you want to update to the latest version, run these commands on the server:
+Después, y siempre que quieras actualizar a la última versión, ejecuta estos comandos en el servidor:
 
 ```
 cd /lemmy/
@@ -55,15 +53,10 @@ sudo docker-compose pull
 sudo docker-compose up -d
 ```
 
-## Security Model
+## Modelo de seguridad
 
-- HTTP signature verify: This ensures that activity really comes from the activity that it claims
-- check_is_apub_valid : Makes sure its in our allowed instances list
-- Lower level checks: To make sure that the user that creates/updates/removes a post is actually on the same instance as that post
+- Verificación de la firma HTTP: Garantiza que la actividad proviene realmente de la actividad que afirma
+- check_is_apub_valid : Asegura que está en nuestra lista de instancias permitidas
+- Comprobaciones de nivel inferior: Para asegurarse de que el usuario que crea/actualiza/elimina una publicación está realmente en la misma instancia que esa publicación
 
-For the last point, note that we are *not* checking whether the actor that sends the create activity for a post is
-actually identical to the post's creator, or that the user that removes a post is a mod/admin. These things are checked
-by the API code, and its the responsibility of each instance to check user permissions. This does not leave any attack
-vector, as a normal instance user cant do actions that violate the API rules. The only one who could do that is the
-admin (and the software deployed by the admin). But the admin can do anything on the instance, including send activities
-from other user accounts. So we wouldnt actually gain any security by checking mod permissions or similar.
+Para el último punto, ten en cuenta que *no* estamos comprobando si el actor que envía la actividad de creación para una publicación es realmente idéntico al creador de la publicación, o si el usuario que elimina una entrada es un mod/admin. Estas cosas se comprueban por el código de la API, y es responsabilidad de cada instancia comprobar los permisos de los usuarios. Esto no deja ningún vector de ataque, ya que un usuario normal de la instancia no puede realizar acciones que violen las reglas de la API. El único que podría hacerlo es el administrador (y el software desplegado por el administrador). Pero el administrador puede hacer cualquier cosa en la instancia, incluso enviar actividades desde otras cuentas de usuario. Así que en realidad no ganaríamos nada de seguridad comprobando los permisos de los mods o similares.

@@ -1,19 +1,19 @@
-# Theming Guide
+# Guía para Temas
 
-Lemmy uses [Bootstrap v4](https://getbootstrap.com/), and very few custom css classes, so any bootstrap v4 compatible theme should work fine.
+Lemmy usa [Bootstrap v4](https://getbootstrap.com/), y algunas clases css customizadas por lo que cualquier tema compatible con bootstrap v4 debería de funcionar.
 
-## Creating
+## Creación
 
-- Use a tool like [bootstrap.build](https://bootstrap.build/) to create a bootstrap v4 theme. Export the `bootstrap.min.css` once you're done, and save the `_variables.scss` too.
+- Usa una herramienta, por ejemplo [bootstrap.build](https://bootstrap.build/) para crear tú tema de bootstrap v4. Exporta el archivo `bootstrap.min.css` una vez terminado el tema, y conserva támbién el archivo generado `_variables.scss`.
 
-## Testing
+## Prueba
 
-- To test out a theme, you can either use your browser's web tools, or a plugin like stylus to copy-paste a theme, when viewing Lemmy.
+- Para probar el tema, puedes también usar las herramientas del navegador web, o un plugin como *stylus* para copiar/pegar un tema, y verlo en Lemmy.
 
-## Adding
+## Subir / Publicar
 
-1. Fork the [lemmy-ui](https://github.com/LemmyNet/lemmy-ui).
-1. Copy `{my-theme-name}.min.css` to `src/assets/css/themes`. (You can also copy the `_variables.scss` here if you want).
-1. Go to `src/shared/utils.ts` and add `{my-theme-name}` to the themes list.
-1. Test locally
-1. Do a pull request with those changes.
+1. Haz un *fork* de [lemmy-ui](https://github.com/LemmyNet/lemmy-ui).
+1. Copia el archivo `{nombre-de-mi-tema}.min.css` a la carpeta `src/assets/css/themes`. (Aquí puedes copiar el archivo `_variables.scss` si lo deseas).
+1. Abre el archivo `src/shared/utils.ts` y agregas `{nombre-de-mi-tema}` a la lista de temas.
+1. Pruebalo localmente
+1. Haz *pull request* con los cambios que hiciste.
