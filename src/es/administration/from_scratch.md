@@ -26,7 +26,6 @@ Tuve que cambiar de usar `sudo` a `su` en algunos lugares ya que el usuario esta
 | dev-db                       | [postgresql](https://www.postgresql.org/) |
 | www-servers                  | [nginx](https://nginx.org/en/)            |
 | sys-apps                     | [yarn](https://yarnpkg.com/)              |
-| (opcional) app-accessibility | espeak                                    |
 | app-shells                   | bash-completion                           |
 |                              |                                           |
 

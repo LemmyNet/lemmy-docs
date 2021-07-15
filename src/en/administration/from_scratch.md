@@ -26,7 +26,6 @@ I had to switch from using `sudo` to `su`'ing in some places as the user was doi
 | dev-db                       | [postgresql](https://www.postgresql.org/) |
 | www-servers                  | [nginx](https://nginx.org/en/)            |
 | sys-apps                     | [yarn](https://yarnpkg.com/)              |
-| (optional) app-accessibility | espeak                                    |
 | app-shells                   | bash-completion                           |
 
 
