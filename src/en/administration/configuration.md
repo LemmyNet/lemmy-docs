@@ -12,3 +12,5 @@ If the Docker container is not used, manually create the database specified abov
 cd server
 ./db-init.sh
 ```
+
+Federation is *not set up* by default. You can add this [this federation block](https://github.com/lemmynet/lemmy/blob/main/config/config.hjson#L64) to your `lemmy.hjson`, and ask other servers to add you to their allowlist.
