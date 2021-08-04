@@ -5,7 +5,6 @@ Lemmy has three types of federation:
 - Allowlist: Explicitly list instances to connect to.
 - BlockList: Explicitly list instances to not connect to. Federation is open to all other instances.
 - Open: Federate with all potential instances.
-- Strict Allowlist: Only federate with allowlist, and block everything else.
 
 **Federation is not set up by default.** You can add this [this federation block](https://github.com/lemmynet/lemmy/blob/main/config/config.hjson#L64) to your `lemmy.hjson`, and ask other servers to add you to their allowlist.
 
