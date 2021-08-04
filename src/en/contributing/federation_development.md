@@ -36,16 +36,7 @@ Note that federation is currently in alpha. **Only use it for testing**, not on 
 
 Follow the normal installation instructions, either with [Ansible](../administration/install_ansible.md) or
 [manually](../administration/install_docker.md). Then replace the line `image: dessalines/lemmy:v0.x.x` in 
-`/lemmy/docker-compose.yml` with `image: dessalines/lemmy:federation`. Also add the following in
-`/lemmy/lemmy.hjson`:
-
-```
-    federation: {
-        enabled: true
-        tls_enabled: true,
-        allowed_instances: example.com,
-    }
-```
+`/lemmy/docker-compose.yml` with `image: dessalines/lemmy:federation`. Add and configure [this federation block](https://github.com/lemmynet/lemmy/blob/main/config/config.hjson#L64) to your `lemmy.hjson`.
 
 Afterwards, and whenever you want to update to the latest version, run these commands on the server:
 
