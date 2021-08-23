@@ -1,5 +1,7 @@
 # Lemmy HTTP API Extras
 
+This contains extras not in the [API docs](/api).
+
 <!-- toc -->
 
 - [Curl Examples](#curl-examples)
