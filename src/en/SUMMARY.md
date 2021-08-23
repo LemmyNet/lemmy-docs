@@ -17,7 +17,6 @@
   - [Federation Overview](federation/overview.md)
   - [Lemmy Protocol](federation/lemmy_protocol.md)
 - [Client Development](client_development/client_development.md)
-  - [API docs](/api)
   - [HTTP API extras](client_development/http_api_extras.md)
   - [Theming Guide](client_development/theming.md)
   - [Creating a Custom Frontend](client_development/custom_frontend.md)
