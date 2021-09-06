@@ -101,35 +101,6 @@ sudo -u postgres psql -c "create user lemmy with password 'password' superuser;"
 sudo -u postgres psql -c 'create database lemmy with owner lemmy;' -U postgres
 ```
 
-### iFramely install
-
-git and nodejs required, but nodejs should be installed as a dependency of yarn.
-
-#### Mentioned in case iFramely installed on separate system
-
-```bash
-useradd -m -s /bin/bash iframely
-
-cd ~iframely
-sudo -Hu iframely git clone https://github.com/itteco/iframely.git
-cd iframely
-sudo -Hu iframely git tag -l
-sudo -Hu iframely git checkout tags/v1.5.0
-sudo -Hu iframely npm install
-```
-
-Replace port 80 in this config? - why not leave at 8061; also, potentially replace or disable cache storage for now?  (CACHE_ENGINE: 'no-cache')
-
-```bash
-sudo -Hu iframely cp ~lemmy/lemmy/docker/iframely.config.local.js ~lemmy/iframely/config.local.js
-```
-
-Start the iframely server OR, use an [init script](#initiframely) instead, which is better than running this manually
-
-```bash
-sudo -Hu iframely node server
-```
-
 ### pict-rs install
 
 ```bash
@@ -232,19 +203,6 @@ yarn build:prod
 
 restart lemmy-ui
 
-### iFramely update
-
-```bash
-su - iframely
-cd iframely
-git fetch
-git tag -l
-git checkout tags/v1.6.0  # Or whatever the current appropriate release is
-npm install
-```
-
-restart iframely
-
 ### pict-rs update
 
 ```bash
@@ -283,7 +241,6 @@ config/config.hjson example
   port: 8536
   docs_dir: "/home/lemmy/lemmy/docs/book"
   pictrs_url: "http://localhost:9000"
-  iframely_url: "http://localhost:8061"
   federation: {
     enabled: true
     allowed_instances: ""
@@ -298,30 +255,6 @@ config/config.hjson example
 ```
 
 ### init scripts
-
-##### init/iframely
-
-```bash
-#!/sbin/openrc-run
-
-name="Iframely Daemon"
-
-depend() {
-        need localmount
-        need net
-}
-
-start() {
-        ebegin "Starting Iframely"
-        start-stop-daemon --start --background --make-pidfile --user iframely --group iframely --pidfile /home/iframely/iframely.pid --chdir /home/iframely/iframely -3 /usr/bin/logger -4 /usr/bin/logger --exec node -- server
-        eend $?
-}
-
-stop() {
-        start-stop-daemon --stop --signal TERM --pidfile /home/iframely/iframely.pid
-        eend $?
-}
-```
 
 ##### init/lemmy
 
