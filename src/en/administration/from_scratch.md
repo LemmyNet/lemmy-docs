@@ -49,7 +49,7 @@ Environment=LEMMY_CONFIG_LOCATION=/etc/lemmy/lemmy.hjson
 Restart=on-failure
 
 # Hardening
-ProtectSystem=full
+ProtectSystem=yes
 PrivateTmp=true
 MemoryDenyWriteExecute=true
 NoNewPrivileges=true
@@ -136,11 +136,8 @@ curl https://raw.githubusercontent.com/LemmyNet/lemmy/main/ansible/templates/ngi
     --output /etc/nginx/sites-enabled/lemmy.conf
 # put your actual domain instead of example.com
 sed -i -e 's/{{domain}}/example.com/g' /etc/nginx/sites-enabled/lemmy.conf
-# need to run this again because the variable is used both with and without spaces
-# TODO: only use one variant in the original file
-sed -i -e 's/{{ domain }}/example.com/g' /etc/nginx/sites-enabled/lemmy.conf
-sed -i -e 's/{{ lemmy_port }}/8536/g' /etc/nginx/sites-enabled/lemmy.conf
-sed -i -e 's/{{ lemmy_ui_port }}/1234/g' /etc/nginx/sites-enabled/lemmy.conf
+sed -i -e 's/{{lemmy_port}}/8536/g' /etc/nginx/sites-enabled/lemmy.conf
+sed -i -e 's/{{lemmy_ui_port}}/1234/g' /etc/nginx/sites-enabled/lemmy.conf
 nginx -s reload
 ```
 
@@ -151,7 +148,7 @@ Now open your Lemmy domain in the browser, and it should show you a configuratio
 Pict-rs requires a newer Rust version than the one available in Ubuntu 20.04 repos. So you need to install [Rustup](https://rustup.rs/) which installs the toolchain for you.
 
 ```bash
-apt install ffmpeg imagemagick exiftool --no-install-recommends
+apt install ffmpeg exiftool --no-install-recommends
 adduser pictrs --system --disabled-login --no-create-home --group
 mkdir /var/lib/pictrs-source
 cd /var/lib/pictrs
@@ -167,6 +164,15 @@ mkdir /var/lib/pictrs
 chown pictrs:pictrs /var/lib/pictrs
 ```
 
+Pict-rs requires the `magick` command which comes with Imagemagick version 7, but Ubuntu 20.04 only comes with Imagemagick 6. So you need to install that command manually, eg from the [official website](https://imagemagick.org/script/download.php#linux).
+```
+wget https://download.imagemagick.org/ImageMagick/download/binaries/magick
+# compare hash with the "message digest" on the official page linked above
+sha256sum magick
+mv magick /usr/bin/
+chmod 755 /usr/bin/magick
+```
+
 Just like before, place the config below in `/etc/systemd/system/pictrs.service`, then run `systemctl enable pictrs` and `systemctl start pictrs`.
 ```
 [Unit]
@@ -179,12 +185,6 @@ ExecStart=/usr/bin/pict-rs
 Environment=PICTRS_PATH=/var/lib/pictrs
 Environment=PICTRS_ADDR=127.0.0.1:8080
 Restart=on-failure
-
-# Hardening
-ProtectSystem=full
-PrivateTmp=true
-MemoryDenyWriteExecute=true
-NoNewPrivileges=true
 
 [Install]
 WantedBy=multi-user.target
