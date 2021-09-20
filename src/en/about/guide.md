@@ -2,16 +2,6 @@
 
 So you want to join Lemmy and get posting. Great! Here's how to dive straight in.
 
-## Let's start with the basics. What is this?
-
-[Lemmy](https://github.com/LemmyNet/lemmy) is similar to sites like [Reddit](https://reddit.com/), [Lobste.rs](https://lobste.rs/), [Raddle](https://raddle.me/), or [Hacker News](https://news.ycombinator.com/): you subscribe to forums you're interested in, post links and discussions, then vote, and comment on them. Behind the scenes, it is very different; anyone can easily run a server, and all these servers are federated (think email), and connected to the same universe, called the [Fediverse](https://en.wikipedia.org/wiki/Fediverse).
-
-*The word “fediverse” (federated universe) refers to the network of all Lemmy servers [and other projects](https://blog.joinmastodon.org/2018/06/why-activitypub-is-the-future/), users of which are able to talk to each other seamlessly.*
-
-Like email, wherever you sign up on GMail or Outlook, you know you’ll be able to email everyone you need to so long as you know their address. On Lemmy you'll be able to subscribe to communities on any other server, and can have discussions with users registered elsewhere.
-
-This means there’s no big uncaring company running it all, no shareholders, no central control, none of the targeted advertising we’re all fed up with, just a bunch of people sharing the things they want to share with each other.
-
 ## Where do I sign up?
 
 The first thing you have to do is **choose your server**. This is an extra step compared to sites like Reddit, but isn’t as difficult as it may seem.
