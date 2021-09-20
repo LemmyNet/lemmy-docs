@@ -22,7 +22,7 @@ Take a moment before registering to check out the rules of your chosen server an
 
 Servers usually define their rules in a simple way on the sidebar on the right of the site. From top to bottom, you will usually find the list of "Trending communities" followed by "Subscribed to communities", a brief description of the server, the rules, some stats and the username of the administrators.
 
-Admins are super friendly people who are usually running the server out of their own pocket so it’s good to get to know them like you would a landlord. Many accept donations to cover the running costs and if you’re able to contribute then it’s always appreciated.
+Admins are super friendly people who are usually running the server out of their own pocket so it’s good to get to know them. Many accept donations to cover the running costs and if you’re able to contribute then it’s always appreciated.
 
 ## I think I found my new home!
 
@@ -30,11 +30,11 @@ Head to the Login page `(https://your.server/login)` of your server and choose y
 
 Next thing to do is upload your profile picture, give the settings page `(https://your.server/settings)` a good once-over (and do come back to it when you’ve been on Lemmy a week or so just to make any tweaks that might help your experience) and get ready to introduce yourself.
 
-*Some interesting settings worth checking are: your default feed sorting filter bewteen subscribed, local or all and your default sorting type.*
+*Some interesting settings worth checking are: your default feed sorting filter between subscribed, local or all and your default sorting type.*
 
 While you can simply enjoy reading Lemmy, the real fun begins as you dive in and start participating yourself by posting, voting and commenting.
 
-To share a post, click the “Create Post” button on the top side of the screen. You’ll be taken to a form where you can enter an URL of the link or upload your image and input a title and body for the post. You will also need to enter the communitie where you’d like your post to appear. Before doing so, it’s a good idea to head to that communitie’s page and read the posting guidelines that appear on the right side of the screen. This will ensure you are abiding by the particular ethos of the communitie. For example, on the `!privacy` communitie, you are not allowed to promote proprietary software.
+To share a post, click the “Create Post” button on the top side of the screen. You’ll be taken to a form where you can enter an URL of the link or upload your image and input a title and body for the post. You will also need to enter the community where you’d like your post to appear. Before doing so, it’s a good idea to head to that communitie’s page and read the posting guidelines that appear on the right side of the screen. This will ensure you are abiding by the particular ethos of the community. For example, on the [`!privacy@lemmy.ml`](https://lemmy.ml/c/privacy) community, you are not allowed to promote proprietary software.
 
 When all the fields are filled out, click “Create” and your post will go live.
 
