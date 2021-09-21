@@ -1,4 +1,4 @@
-# Lemmy quick start guide
+# Lemmy Quick Start Guide
 
 So you want to join Lemmy and get posting. Great! Here's how to dive straight in.
 
@@ -8,9 +8,9 @@ The first thing you have to do is **choose your server**. This is an extra step 
 
 *Like with email, your identity is hosted by the server you sign up on. So for example, I joined lemmy.ml so to mention me you can type @retiolus@lemmy.ml in your post.*
 
-If what you want to talk about most fits into a clear category (maybe it’s video games or art or queer life or coding or fiction or whatever) then it might be worth making your first server one where that will primarily host that sort of content – it’ll be easier to make connections and find like-minded folk. Some consider your server to be like a neighbourhood or a venue, where the general chatter can have a specific focus.
+If what you want to talk about most fits into a clear category (maybe it’s video games or art or queer life or coding or fiction, etc) then it might be worth making your first server one where that will primarily host that sort of content – it’ll be easier to make connections and find like-minded folk. Think of your server as a neighbourhood or a venue, where the general chatter can have a specific focus.
 
-*You have the ability to view all public local posts that have been made by people on your server in the so-called “Local” tab.*
+*You have the ability to view all public local posts that have been made by people on your server in the “Local” tab.*
 
 If you aren’t here to stick mainly to one topic, you’ll likely want to pick a server that caters to general interests. Either way, there’s a helpful servers list on [join-lemmy.org](https://join-lemmy.org/instances).
 
@@ -50,11 +50,11 @@ By writing a new post or comment, start typing...
 
 The standard Lemmy interface has a single feed. You can change the content of the feed by using the filters:
 
-**Subsribed** includes the posts of people on your server and on other servers, all that matters is that it’s people you follow.
+**Subscribed** includes the posts of people on your server and on other servers, all that matters is that it’s community you follow.
 
-**Local** is the feed of all the posts of people on your server. On many servers, particularly smaller ones and ones focused on a particular topic, this is where the magic happens. You can reply to people from there, and it’s a great place to meet people who share the same interests as you.
+**Local** is the feed of all the posts of communities on your server. On many servers, particularly smaller ones and ones focused on a particular topic, this is where the magic happens. You can reply to people from there, and it’s a great place to meet people who share the same interests as you.
 
-**All**, or the **federated timeline**, is a view of all the public posts your servers knows about from across the whole network (including local ones). The most common reason that something appears in the federated timeline is that someone from your server follows the author of that post.
+**All**, or the **federated timeline**, is a view of all the public posts your servers knows about from across the whole network (including local ones). The most common reason that something appears in the federated timeline is that someone from your server might follow a community that's on another server.
 
 | Type | Description |
 | --- | --- |
