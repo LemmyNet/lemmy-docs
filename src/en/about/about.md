@@ -8,9 +8,11 @@ Front Page|Post
 
 *The word “fediverse” (federated universe) refers to the network of all Lemmy servers [and other projects](https://blog.joinmastodon.org/2018/06/why-activitypub-is-the-future/), users of which are able to talk to each other seamlessly.*
 
-Like email, wherever you sign up on GMail or Outlook, you know you’ll be able to email everyone you need to so long as you know their address. On Lemmy you'll be able to subscribe to communities on any other server, and can have discussions with users registered elsewhere.
+Like email, whether you sign up on GMail or Outlook, you know you’ll be able to email everyone you need to, as long as you know their address. On Lemmy you're able to subscribe to communities on any other server, and can have discussions with users registered elsewhere.
 
-The overall goal is to create an easily self-hostable, decentralized alternative to reddit and other link aggregators, without big uncaring company running it all, no shareholders, no central control, none of the targeted advertising we’re all fed up with, just a bunch of people sharing the things they want to share with each other.
+The overall goal is to create an easily self-hostable, decentralized alternative to reddit and other link aggregators, without a single company running the show.
+
+There are no shareholders, and no targeted advertising: only people sharing the things they want to share with each other.
 
 Each lemmy server can set its own moderation policy; appointing site-wide admins, and community moderators to keep out the trolls, and foster a healthy, non-toxic environment where all can feel comfortable contributing.
 
