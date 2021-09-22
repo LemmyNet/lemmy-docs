@@ -4,7 +4,7 @@ On Lemmy a **moderator** is someone who manages and has rights over a community.
 An **administrator** has full rights on the entire server, and thus also in each community.
 
 | Action | Result | Permission level |
-| --- | --- | --- | --- |
+| --- | --- | --- |
 | lock | Prevents making new comments under the post | Moderator |
 | sticky | Pin the publication to the top of the community listing | Moderator |
 | remove | Delete the post | Moderator |
