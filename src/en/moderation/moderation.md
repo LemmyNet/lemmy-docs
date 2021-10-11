@@ -11,6 +11,7 @@ An **administrator** has full rights on the entire server, and thus also in each
 | remove | Delete the post | Moderator |
 | ban | Ban user from the community | Moderator |
 | apoint as mod | Gives the user moderator status | Moderator |
+| apoint as admin | Gives the user administrator status | Admin |
 | ban from site | Ban user from the server | Admin |
 
 To take a moderation action on a user, you need a post from that user and click on the 3 dots at the bottom right of the title.
