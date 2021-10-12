@@ -32,10 +32,10 @@ After this, have a look at the [config file](configuration.md) named `lemmy.hjso
 
 You can access the lemmy-ui at `http://localhost:1235`
 
-To make Lemmy available outside the server, you need to setup a reverse proxy, like Nginx. [A sample nginx config](https://raw.githubusercontent.com/LemmyNet/lemmy/main/ansible/templates/nginx.conf), could be setup with:
+To make Lemmy available outside the server, you need to setup a reverse proxy, like Nginx. [A sample nginx config](https://github.com/LemmyNet/lemmy-ansible/blob/main/templates/nginx.conf), could be setup with:
 
 ```bash
-wget https://raw.githubusercontent.com/LemmyNet/lemmy/main/ansible/templates/nginx.conf
+wget https://raw.githubusercontent.com/LemmyNet/lemmy-ansible/main/templates/nginx.conf
 # Replace the {{ vars }}
 # The default lemmy_port is 8536
 # The default lemmy_ui_port is 1235
