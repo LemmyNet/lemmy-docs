@@ -27,7 +27,7 @@ In the meantime you can always promote your server on other social networks like
 
 ## Keeping up to date
 
-You can subscribe to the Github RSS feed to be informed of the latest releases:
+You can subscribe to the Github RSS feeds to be informed of the latest releases:
 - [lemmy](https://github.com/LemmyNet/lemmy/releases.atom)
 - [lemmy-ui](https://github.com/LemmyNet/lemmy-ui/releases.atom)
 - [lemmy-js-client](https://github.com/LemmyNet/lemmy-js-client/releases.atom)
