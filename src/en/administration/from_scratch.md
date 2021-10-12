@@ -132,7 +132,7 @@ Let's Encrypt certificates should be renewed automatically, so add the line belo
 
 Finally, add the nginx config. After downloading, you need to replace some variables in the file.
 ```bash
-curl https://raw.githubusercontent.com/LemmyNet/lemmy/main/ansible/templates/nginx.conf \
+curl https://raw.githubusercontent.com/LemmyNet/lemmy-ansible/main/templates/nginx.conf \
     --output /etc/nginx/sites-enabled/lemmy.conf
 # put your actual domain instead of example.com
 sed -i -e 's/{{domain}}/example.com/g' /etc/nginx/sites-enabled/lemmy.conf
@@ -154,7 +154,7 @@ mkdir /var/lib/pictrs-source
 cd /var/lib/pictrs
 git clone https://git.asonix.dog/asonix/pict-rs.git .
 # check docker-compose.yml for pict-rs version used by lemmy
-# https://github.com/LemmyNet/lemmy/blob/main/ansible/templates/docker-compose.yml#L40 
+# https://github.com/LemmyNet/lemmy-ansible/blob/main/templates/docker-compose.yml#L40 
 git checkout v0.2.6-r2
 # or simply add the bin folder to your $PATH
 $HOME/.cargo/bin/cargo build --release
@@ -227,7 +227,7 @@ cd /var/lib/pictrs-source
 git checkout main
 git pull --tags
 # check docker-compose.yml for pict-rs version used by lemmy
-# https://github.com/LemmyNet/lemmy/blob/main/ansible/templates/docker-compose.yml#L40 
+# https://github.com/LemmyNet/lemmy-ansible/blob/main/templates/docker-compose.yml#L40 
 git checkout v0.2.6-r2
 # or simply add the bin folder to your $PATH
 $HOME/.cargo/bin/cargo build --release
