@@ -1,6 +1,6 @@
 # Administration First Steps
 
-After you successfully installed Lemmy either [manually with Docker](https://join-lemmy.org/docs/en/administration/administration.html) or [automatically with Ansible](https://join-lemmy.org/docs/en/administration/install_ansible.html) here are some recommendations for a new administrator of a Lemmy server.
+After you successfully installed Lemmy either [manually with Docker](https://join-lemmy.org/docs/en/administration/install_docker.html) or [automatically with Ansible](https://join-lemmy.org/docs/en/administration/install_ansible.html) here are some recommendations for a new administrator of a Lemmy server.
 
 ## Admin Settings
 
