@@ -2,6 +2,7 @@
 set -e
 
 git submodule init
+git submodule foreach git pull
 git submodule update --recursive --remote
 ls -la lemmy
 
