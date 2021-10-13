@@ -12,5 +12,5 @@ steps:
     image: rust:1.55-slim-buster
     commands:
       - apt update
-      - apt install git --yes
+      - apt install pkg-config libssl-dev libpq-dev --yes
       - ./build.sh
