@@ -1,2 +1,4 @@
 book
 generated
+node_modules
+.idea
