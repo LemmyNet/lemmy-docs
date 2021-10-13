@@ -3,7 +3,7 @@ set -e
 
 # generate config docs
 pushd lemmy
-mkdir ../generated
+mkdir -p ../generated
 cargo run -- --print-config-docs >> ../generated/config.hjson
 # replace // comments with #
 sed -i "s/\/\//#/" ../generated/config.hjson
