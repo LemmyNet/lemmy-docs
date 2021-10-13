@@ -13,12 +13,11 @@ to AWS using their [Cloud Development Kit](https://docs.aws.amazon.com/cdk/lates
   * Lemmy-UI
   * Lemmy
   * Pictrs
-  * IFramely
 * CloudFront CDN
 * EFS storage for image uploads
 * Aurora Serverless Postgres DB
 * Bastion VPC host
-* Load balancers for Lemmy and IFramely
+* Load balancers for Lemmy
 * DNS records for your site
 
 ## Quickstart
