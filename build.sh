@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 
+git submodule init
 git submodule update --recursive --remote
 ls -la lemmy
 
