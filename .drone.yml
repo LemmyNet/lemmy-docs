@@ -5,6 +5,7 @@ steps:
   - name: check documentation build
     image: rust:1.49-slim-buster
     commands:
+      - apt update
       - apt install git
       - git submodule init
       - git submodule update --recursive --remote
