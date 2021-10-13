@@ -5,4 +5,4 @@ steps:
   - name: check documentation build
     image: rust:1.49-slim-buster
     commands:
-      - build.sh
+      - ./build.sh
