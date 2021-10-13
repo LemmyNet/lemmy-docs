@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+git submodule update --recursive --remote
+ls -la lemmy
+
 # generate config docs
 pushd lemmy
 mkdir -p ../generated

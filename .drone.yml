@@ -7,5 +7,4 @@ steps:
     commands:
       - apt update
       - apt install git --yes
-      - git submodule update --recursive --remote
       - ./build.sh
