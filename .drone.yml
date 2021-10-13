@@ -9,7 +9,7 @@ steps:
       - git submodule update --recursive --remote
 
   - name: check documentation build
-    image: rust:1.49-slim-buster
+    image: rust:1.55-slim-buster
     commands:
       - apt update
       - apt install git --yes
