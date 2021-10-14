@@ -21,7 +21,7 @@ To test that your instance federation is working correctly execute `curl -H 'Acc
 To be included in the list of Lemmy instances on [join-lemmy.org](https://join-lemmy.org/instances) you must meet the following requirements:
 - [x] Federate with at least one instance from the list
 - [x] Have a site description and icon
-- [x] Be patient and wait to be approved, there's no fixed schedule for that
+- [x] Be patient and wait the site to be updated, there's no fixed schedule for that
 
 In the meantime you can always promote your server on other social networks like Mastodon using the hashtag `#Lemmy`.
 
