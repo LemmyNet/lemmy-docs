@@ -9,6 +9,7 @@
   - [Install with Ansible](administration/install_ansible.md)
   - [Install from Scratch](administration/from_scratch.md)
   - [Install on AWS](administration/on_aws.md)
+  - [First Steps](administration/first_steps.md)
   - [Configuration](administration/configuration.md)
   - [Getting started with Federation](administration/federation_getting_started.md)
   - [Troubleshooting](administration/troubleshooting.md)
