@@ -8,13 +8,13 @@ The first thing to do is to go to your admin panel, which can be found by clicki
 
 Take the time to browse through the entire page to discover the different options you have to customize your Lemmy instance, on the same page you can edit your [configuration file](administration/configuration.html), where you can find information about your database, the email used by the server, the federation options or the main administrator.
 
-It is always good to define another administrator than yourself, for if it is necessary to take actions while you make your best nap. Take a look at the [moderation guide](moderation/moderation.html) for more information on how to do this.
+It is always good to define another administrator than yourself, in case it is necessary to take actions while you take your best nap. Take a look at the [moderation guide](moderation/moderation.html) for more information on how to do this.
 
 ## Check that everything is working properly
 
 ### Federation
 
-To test that your instance federation is working correctly execute `curl -H 'Accept: application/activity+json' https://your-instance.com/u/your-username`, it should return a .json file, and not an .html one.
+To test that your instance federation is working correctly execute `curl -H 'Accept: application/activity+json' https://your-instance.com/u/your-username`, it should return a json data, and not an .html file. If that is unclear to you, it should look similar to the output of `curl -H 'Accept: application/activity+json' https://lemmy.ml/u/nutomic`.
 
 ## Inclusion on join-lemmy.org instance list
 
