@@ -14,6 +14,8 @@ It is always good to define another administrator than yourself, in case it is n
 
 ### Federation
 
+Federation is disabled by default, and needs to be enabled either through the online admin panel or directly through the `config.json` file.
+
 To test that your instance federation is working correctly execute `curl -H 'Accept: application/activity+json' https://your-instance.com/u/your-username`, it should return a json data, and not an .html file. If that is unclear to you, it should look similar to the output of `curl -H 'Accept: application/activity+json' https://lemmy.ml/u/nutomic`.
 
 ## Inclusion on join-lemmy.org instance list
