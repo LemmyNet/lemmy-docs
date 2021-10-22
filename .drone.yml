@@ -9,8 +9,8 @@ steps:
       - git submodule update --recursive --remote
 
   - name: check documentation build
-    image: rust:1.55-slim-buster
+    image: rust:1.49-slim-buster
     commands:
-      - apt update
-      - apt install pkg-config libssl-dev libpq-dev --yes
-      - ./build.sh
+      - cargo install mdbook --git https://github.com/Nutomic/mdBook.git --branch localization
+            --rev 0982a82 --force --debug
+      - mdbook build .

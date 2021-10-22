@@ -84,42 +84,7 @@ Sends activities to user: `Accept/Follow`, `Announce`
 Receives activities from user: `Follow`, `Undo/Follow`, `Create`, `Update`, `Like`, `Dislike`, `Remove` (only admin/mod), `Delete` (only creator), `Undo` (only for own actions)
 
 ```json
-{
-    "@context": ...,
-    "id": "https://enterprise.lemmy.ml/c/main",
-    "type": "Group",
-    "preferredUsername": "main",
-    "name": "The Main Community",
-    "sensitive": false,
-    "content": "Welcome to the default community!",
-    "mediaType": "text/html",
-    "source": {
-        "content": "Welcome to the default community!",
-        "mediaType": "text/markdown"
-    },
-    "icon": {
-        "type": "Image",
-        "url": "https://enterprise.lemmy.ml/pictrs/image/Z8pFFb21cl.png"
-    },
-    "image": {
-        "type": "Image",
-        "url": "https://enterprise.lemmy.ml/pictrs/image/Wt8zoMcCmE.jpg"
-    },
-    "inbox": "https://enterprise.lemmy.ml/c/main/inbox",
-    "outbox": "https://enterprise.lemmy.ml/c/main/outbox",
-    "followers": "https://enterprise.lemmy.ml/c/main/followers",
-    "moderators": "https://enterprise.lemmy.ml/c/main/moderators",
-    "endpoints": {
-        "sharedInbox": "https://enterprise.lemmy.ml/inbox"
-    },
-    "published": "2020-10-06T17:27:43.282386+00:00",
-    "updated": "2020-10-08T11:57:50.545821+00:00",
-    "publicKey": {
-        "id": "https://enterprise.lemmy.ml/c/main#main-key",
-        "owner": "https://enterprise.lemmy.ml/c/main",
-        "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA9JJ7Ybp/H7iXeLkWFepg\ny4PHyIXY1TO9rK3lIBmAjNnkNywyGXMgUiiVhGyN9yU7Km8aWayQsNHOkPL7wMZK\nnY2Q+CTQv49kprEdcDVPGABi6EbCSOcRFVaUjjvRHf9Olod2QP/9OtX0oIFKN2KN\nPIUjeKK5tw4EWB8N1i5HOuOjuTcl2BXSemCQLAlXerLjT8xCarGi21xHPaQvAuns\nHt8ye7fUZKPRT10kwDMapjQ9Tsd+9HeBvNa4SDjJX1ONskNh2j4bqHHs2WUymLpX\n1cgf2jmaXAsz6jD9u0wfrLPelPJog8RSuvOzDPrtwX6uyQOl5NK00RlBZwj7bMDx\nzwIDAQAB\n-----END PUBLIC KEY-----\n"
-    }
-}
+{{#include ../../../lemmy/crates/apub/assets/lemmy-community.json}}
 ```
 
 | Field Name | Mandatory | Description |
@@ -194,38 +159,7 @@ Receives activities from Community: `Accept/Follow`, `Announce`
 Sends and receives activities from/to other users: `Create/Note`, `Update/Note`, `Delete/Note`, `Undo/Delete/Note` (all those related to private messages)
 
 ```json
-{
-    "@context": ...,
-    "id": "https://enterprise.lemmy.ml/u/picard",
-    "type": "Person",
-    "preferredUsername": "picard",
-    "name": "Jean-Luc Picard",
-    "content": "The user bio",
-    "mediaType": "text/html",
-    "source": {
-        "content": "The user bio",
-        "mediaType": "text/markdown"
-    },
-    "icon": {
-        "type": "Image",
-        "url": "https://enterprise.lemmy.ml/pictrs/image/DS3q0colRA.jpg"
-    },
-    "image": {
-        "type": "Image",
-        "url": "https://enterprise.lemmy.ml/pictrs/image/XenaYI5hTn.png"
-    },
-    "inbox": "https://enterprise.lemmy.ml/u/picard/inbox",
-    "endpoints": {
-        "sharedInbox": "https://enterprise.lemmy.ml/inbox"
-    },
-    "published": "2020-10-06T17:27:43.234391+00:00",
-    "updated": "2020-10-08T11:27:17.905625+00:00",
-    "publicKey": {
-        "id": "https://enterprise.lemmy.ml/u/picard#main-key",
-        "owner": "https://enterprise.lemmy.ml/u/picard",
-        "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyH9iH83+idw/T4QpuRSY\n5YgQ/T5pJCNxvQWb6qcCu3gEVigfbreqZKJpOih4YT36wu4GjPfoIkbWJXcfcEzq\nMEQoYbPStuwnklpN2zj3lRIPfGLht9CAlENLWikTUoW5kZLyU6UQtOGdT2b1hDuK\nsUEn67In6qYx6pal8fUbO6X3O2BKzGeofnXgHCu7QNIuH4RPzkWsLhvwqEJYP0zG\nodao2j+qmhKFsI4oNOUCGkdJejO7q+9gdoNxAtNNKilIOwUFBYXeZJb+XGlzo0X+\n70jdJ/xQCPlPlItU4pD/0FwPLtuReoOpMzLi20oDsPXJBvn+/NJaxqDINuywcN5p\n4wIDAQAB\n-----END PUBLIC KEY-----\n"
-    }
-}
+{{#include ../../../lemmy/crates/apub/assets/lemmy-person.json}}
 ```
 
 | Field Name | Mandatory | Description |
@@ -262,33 +196,7 @@ The user inbox is not actually implemented yet, and is only a placeholder for Ac
 A page with title, and optional URL and text content. The URL often leads to an image, in which case a thumbnail is included. Each post belongs to exactly one community.
 
 ```json
-{
-    "@context": ...,
-    "id": "https://voyager.lemmy.ml/post/29",
-    "type": "Page",
-    "attributedTo": "https://voyager.lemmy.ml/u/picard",
-    "to": [
-      "https://voyager.lemmy.ml/c/main",
-      "https://www.w3.org/ns/activitystreams#Public"
-    ],
-    "name": "Test thumbnail 2",
-    "content": "blub blub",
-    "mediaType": "text/html",
-    "source": {
-        "content": "blub blub",
-        "mediaType": "text/markdown"
-    },
-    "url": "https://voyager.lemmy.ml:/pictrs/image/fzGwCsq7BJ.jpg",
-    "image": {
-        "type": "Image",
-        "url": "https://voyager.lemmy.ml/pictrs/image/UejwBqrJM2.jpg"
-    },
-    "commentsEnabled": true,
-    "sensitive": false,
-    "stickied": false,
-    "published": "2020-09-24T17:42:50.396237+00:00",
-    "updated": "2020-09-24T18:31:14.158618+00:00"
-}
+{{#include ../../../lemmy/crates/apub/assets/lemmy-post.json}}
 ```
 
 | Field Name | Mandatory | Description |
@@ -310,25 +218,7 @@ A page with title, and optional URL and text content. The URL often leads to an 
 A reply to a post, or reply to another comment. Contains only text (including references to other users or communities). Lemmy displays comments in a tree structure.
 
 ```json
-{
-    "@context": ...,
-    "id": "https://enterprise.lemmy.ml/comment/95",
-    "type": "Note",
-    "attributedTo": "https://enterprise.lemmy.ml/u/picard",
-    "to": "https://www.w3.org/ns/activitystreams#Public",
-    "content": "mmmk",
-    "mediaType": "text/html",
-    "source": {
-        "content": "mmmk",
-        "mediaType": "text/markdown"
-    },
-    "inReplyTo": [
-        "https://enterprise.lemmy.ml/post/38",
-        "https://voyager.lemmy.ml/comment/73"
-    ],
-    "published": "2020-10-06T17:53:22.174836+00:00",
-    "updated": "2020-10-06T17:53:22.174836+00:00"
-}
+{{#include ../../../lemmy/crates/apub/assets/lemmy-comment.json}}
 ```
 
 | Field Name | Mandatory | Description |
@@ -345,21 +235,7 @@ A reply to a post, or reply to another comment. Contains only text (including re
 A direct message from one user to another. Can not include additional users. Threading is not implemented yet, so the `inReplyTo` field is missing.
 
 ```json
-{
-    "@context": ...,
-    "id": "https://enterprise.lemmy.ml/private_message/34",
-    "type": "Note",
-    "attributedTo": "https://enterprise.lemmy.ml/u/picard",
-    "to": "https://voyager.lemmy.ml/u/janeway",
-    "content": "test",
-    "source": {
-        "content": "test",
-        "mediaType": "text/markdown"
-    },
-    "mediaType": "text/markdown",
-    "published": "2020-10-08T19:10:46.542820+00:00",
-    "updated": "2020-10-08T20:13:52.547156+00:00"
-}
+{{#include ../../../lemmy/crates/apub/assets/lemmy-private-message.json}}
 ```
 
 | Field Name | Mandatory | Description |
