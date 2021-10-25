@@ -14,6 +14,6 @@ steps:
       - cargo install mdbook --git https://github.com/Ruin0x11/mdBook.git --branch localization
             --rev 9d8147c --force --debug
       - apt-get update
-      - apt-get install curl
+      - apt-get install curl -y
       - ./update-includes.sh
       - mdbook build .
