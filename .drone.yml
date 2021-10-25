@@ -13,7 +13,7 @@ steps:
     commands:
       - cargo install mdbook --git https://github.com/Ruin0x11/mdBook.git --branch localization
             --rev 9d8147c --force --debug
-      - aptu-get update
+      - apt-get update
       - apt-get install curl
       - ./update-includes.sh
       - mdbook build .
