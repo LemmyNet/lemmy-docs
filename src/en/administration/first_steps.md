@@ -12,6 +12,12 @@ It is always good to define another administrator than yourself, in case it is n
 
 ## Check that everything is working properly
 
+### Email
+
+The easiest way to check that the email is set up correctly is to request a password renewal. You will need to set up an email in your settings if you have not already done so.
+
+After that just log out, go to the `Login` page, enter your email in the `Email or Username` box and press `forgot password`. If everything is set up correctly, you should receive an email to renew your password. You can ignore this email.
+
 ### Federation
 
 Federation is disabled by default, and needs to be enabled either through the online admin panel or directly through the `config.json` file.
