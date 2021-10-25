@@ -148,7 +148,7 @@ Now open your Lemmy domain in the browser, and it should show you a configuratio
 Pict-rs requires a newer Rust version than the one available in Ubuntu 20.04 repos. So you need to install [Rustup](https://rustup.rs/) which installs the toolchain for you.
 
 ```bash
-apt install ffmpeg exiftool --no-install-recommends
+apt install ffmpeg exiftool libgexiv2-dev --no-install-recommends
 adduser pictrs --system --disabled-login --no-create-home --group
 mkdir /var/lib/pictrs-source
 cd /var/lib/pictrs
