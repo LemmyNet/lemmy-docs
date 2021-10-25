@@ -11,6 +11,7 @@ Our documentation tool [mdbook](https://github.com/rust-lang/mdBook) doesn't sup
 ```bash
 cargo install mdbook --git https://github.com/Ruin0x11/mdBook.git \
     --branch localization --rev 9d8147c
+./update-includes.sh
 # generate static page in `book` subfolder
 mdbook build
 # serve the book at `http://localhost:3000`, and rebuilds on changes

@@ -16,5 +16,5 @@ cd server
 ## Full config with default values
 
 ```hjson
-{{#include ../../../lemmy/config/defaults.hjson}}
+{{#include ../../../include/config/defaults.hjson}}
 ```

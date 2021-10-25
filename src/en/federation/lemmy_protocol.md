@@ -84,7 +84,7 @@ Sends activities to user: `Accept/Follow`, `Announce`
 Receives activities from user: `Follow`, `Undo/Follow`, `Create`, `Update`, `Like`, `Dislike`, `Remove` (only admin/mod), `Delete` (only creator), `Undo` (only for own actions)
 
 ```json
-{{#include ../../../lemmy/crates/apub/assets/lemmy-community.json}}
+{{#include ../../../include/activitypub/lemmy-community.json}}
 ```
 
 | Field Name | Mandatory | Description |
@@ -159,7 +159,7 @@ Receives activities from Community: `Accept/Follow`, `Announce`
 Sends and receives activities from/to other users: `Create/Note`, `Update/Note`, `Delete/Note`, `Undo/Delete/Note` (all those related to private messages)
 
 ```json
-{{#include ../../../lemmy/crates/apub/assets/lemmy-person.json}}
+{{#include ../../../include/activitypub/lemmy-person.json}}
 ```
 
 | Field Name | Mandatory | Description |
@@ -196,7 +196,7 @@ The user inbox is not actually implemented yet, and is only a placeholder for Ac
 A page with title, and optional URL and text content. The URL often leads to an image, in which case a thumbnail is included. Each post belongs to exactly one community.
 
 ```json
-{{#include ../../../lemmy/crates/apub/assets/lemmy-post.json}}
+{{#include ../../../include/activitypub/lemmy-post.json}}
 ```
 
 | Field Name | Mandatory | Description |
@@ -218,7 +218,7 @@ A page with title, and optional URL and text content. The URL often leads to an 
 A reply to a post, or reply to another comment. Contains only text (including references to other users or communities). Lemmy displays comments in a tree structure.
 
 ```json
-{{#include ../../../lemmy/crates/apub/assets/lemmy-comment.json}}
+{{#include ../../../include/activitypub/lemmy-comment.json}}
 ```
 
 | Field Name | Mandatory | Description |
@@ -235,7 +235,7 @@ A reply to a post, or reply to another comment. Contains only text (including re
 A direct message from one user to another. Can not include additional users. Threading is not implemented yet, so the `inReplyTo` field is missing.
 
 ```json
-{{#include ../../../lemmy/crates/apub/assets/lemmy-private-message.json}}
+{{#include ../../../include/activitypub/lemmy-private-message.json}}
 ```
 
 | Field Name | Mandatory | Description |
