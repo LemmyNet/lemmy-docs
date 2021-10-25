@@ -2,9 +2,18 @@ kind: pipeline
 name: default
 
 steps:
+  - name: fetch git submodules
+    image: alpine/git
+    commands:
+      - git submodule init
+      - git submodule update --recursive --remote
+
   - name: check documentation build
     image: rust:1.49-slim-buster
     commands:
-      - cargo install mdbook --git https://github.com/Nutomic/mdBook.git --branch localization
-            --rev 0982a82 --force --debug
+      - cargo install mdbook --git https://github.com/Ruin0x11/mdBook.git --branch localization
+            --rev 9d8147c --force --debug
+      - apt-get update
+      - apt-get install curl -y
+      - ./update-includes.sh
       - mdbook build .

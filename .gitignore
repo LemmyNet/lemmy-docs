@@ -1,1 +1,4 @@
 book
+include
+node_modules
+.idea
