@@ -21,6 +21,10 @@ Open up your `docker-compose.yml`, and make sure `LEMMY_EXTERNAL_HOST` for `lemm
 ```
 - LEMMY_INTERNAL_HOST=lemmy:8536
 - LEMMY_EXTERNAL_HOST=your-domain.com
+
+You may also want to disable HTTPS for local development:
+
+```
 - LEMMY_HTTPS=false
 ```
 
@@ -43,6 +47,27 @@ sudo mv nginx.conf /etc/nginx/sites-enabled/lemmy.conf
 ```
 
 You will also need to setup TLS, for example with [Let's Encrypt](https://letsencrypt.org/). After this you need to restart Nginx to reload the config.
+
+## Cerbot on NGINX
+
+
+Install Certbot on Debian/Ubuntu: 
+```
+sudo apt install certbot nginx 
+```
+
+then run:
+
+```
+sudo systemctl stop nginx
+sudo certbot certonly --standalone --post-hook "systemctl restart nginx"
+```
+
+Follow instructions, and finally restart NGINX:
+
+```
+sudo systemctl reload nginx
+```
 
 ## Updating
 
