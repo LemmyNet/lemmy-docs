@@ -2,6 +2,8 @@
 
 On Lemmy a **moderator** is someone who manages and has rights over a community.
 
+The **community creator** is this first **moderator** of a community since he created it.
+
 An **administrator** has full rights on the entire server, and thus also in each community.
 
 | Action | Result | Permission level |
