@@ -3,6 +3,12 @@
 - Open source, [AGPL License](/LICENSE).
 - Self hostable, easy to deploy.
   - Comes with [Docker](#docker) and [Ansible](#ansible).
+- Federated with Mastodon and Pleroma.
+  - View Lemmy communities, user profiles, posts and comments.
+  - Follow Lemmy communities to receive new posts and comments.
+  - Replies (mentions) work in both directions, including notifications.
+  - Pleroma users can exchange private messages with Lemmy users.
+  - Projects whose federation works similar to Pleroma/Mastodon will likely also federate.
 - Clean, mobile-friendly interface.
   - Only a minimum of a username and password is required to sign up!
   - User avatar support.
