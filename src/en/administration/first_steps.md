@@ -6,9 +6,9 @@ After you successfully installed Lemmy either [manually with Docker](administrat
 
 The first thing to do is to go to your admin panel, which can be found by clicking on the cog at the top right next to the search icon. Here you can define a description for your site, so that people know if it is about one specific topic or if all subjects are welcome. You can also add an icon and a banner that define your server, it can for example be the logo of your organization.
 
-Take the time to browse through the entire page to discover the different options you have to customize your Lemmy instance, on the same page you can edit your [configuration file](administration/configuration.html), where you can find information about your database, the email used by the server, the federation options or who is the main administrator.
+Take the time to browse through the entire page to discover the different options you have to customize your Lemmy instance, on the same page you can edit your [configuration file](configuration.html), where you can find information about your database, the email used by the server, the federation options or who is the main administrator.
 
-It is always good to define another administrator than yourself, in case it is necessary to take actions while you take your best nap. Take a look at the [moderation guide](moderation/moderation.html) for more information on how to do this.
+It is always good to define another administrator than yourself, in case it is necessary to take actions while you take your best nap. Take a look at the [moderation guide](../moderation/moderation.html) for more information on how to do this.
 
 ## Check that everything is working properly
 
