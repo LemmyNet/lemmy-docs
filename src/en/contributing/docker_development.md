@@ -24,7 +24,7 @@ cd docker/dev
 ./docker_update.sh
 ```
 
-and go to http://localhost:1235.
+and go to http://localhost:1236
 
 *Note: many features (like docs and pictures) will not work without using an nginx profile like that in `ansible/templates/nginx.conf`.
 
@@ -37,5 +37,4 @@ To speed up the Docker compile, add the following to `/etc/docker/daemon.json` a
 }
 ```
 
-If the build is still too slow, you will have to use a
-[local build](local_development.md) instead.
+If the build is still too slow, you will have to use a [local build](local_development.md) instead.
