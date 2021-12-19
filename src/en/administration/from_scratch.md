@@ -14,7 +14,10 @@ Compile and install Lemmy, setup database:
 ```bash
 apt install pkg-config libssl-dev libpq-dev cargo postgresql
 # installs latest release, you can also specify one with --version
-cargo install lemmy_server --target-dir /usr/bin/
+# The --locked argument uses the exact versions of dependencies specified in
+# `cargo.lock`at release time. Running it without the flag will use newer minor 
+# release versions of those dependencies, which are not always guaranteed to compile.
+cargo install lemmy_server --target-dir /usr/bin/ --locked
 # replace db-passwd with a randomly generated password
 sudo -iu postgres psql -c "CREATE USER lemmy WITH PASSWORD 'db-passwd';"
 sudo -iu postgres psql -c "CREATE DATABASE lemmy WITH OWNER lemmy;"
