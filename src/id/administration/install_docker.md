@@ -1,22 +1,22 @@
-# Docker Installation
+# Pemasangan Menggunakan Docker
 
-Make sure you have both docker and docker-compose(>=`1.24.0`) installed. On Ubuntu, just run `apt install docker-compose docker.io`. Next, 
+Pastikan Anda sudah punya docker dan docker-compose(>=`1.24.0`) terpasang. Di Ubuntu, tinggal jalankan `apt install docker-compose docker.io`. Kemudian,
 
 ```bash
-# create a folder for the lemmy files. the location doesnt matter, you can put this anywhere you want
+# buat sebuah folder untuk berkas lemmy. lokasinya tidak penting, bisa ditaruh dimana saja
 mkdir /lemmy
 cd /lemmy
 
-# download default config files
+# unduh berkas konfigurasi baku
 wget https://raw.githubusercontent.com/LemmyNet/lemmy/main/docker/prod/docker-compose.yml
 wget https://raw.githubusercontent.com/LemmyNet/lemmy/main/docker/lemmy.hjson
 
-# Set correct permissions for pictrs folder
+# atur izin yang benar untuk folder pictrs
 mkdir -p volumes/pictrs
 sudo chown -R 991:991 volumes/pictrs
 ```
 
-Open up your `docker-compose.yml`, and make sure `LEMMY_EXTERNAL_HOST` for `lemmy-ui` is set to your correct host.
+Buka `docker-compose.yml` Anda dan pastikan `LEMMY_EXTERNAL_HOST` untuk `lemmy-ui` diatur ke hos yang benar Anda.
 
 ```
 - LEMMY_INTERNAL_HOST=lemmy:8536
@@ -24,29 +24,29 @@ Open up your `docker-compose.yml`, and make sure `LEMMY_EXTERNAL_HOST` for `lemm
 - LEMMY_HTTPS=false
 ```
 
-If you'd like a different database password, you should also change it in the `docker-compose.yml` **before** your first run.
+Jika Anda ingin kata sandi basis data yang berbeda, Anda harus menggantinya juga di `docker-compose.yml` **sebelum** pemulaian pertama Anda.
 
-After this, have a look at the [config file](configuration.md) named `lemmy.hjson`, and adjust it, in particular the hostname, and possibly the db password. Then run:
+Setelah ini, coba lihat ke [berkas konfigurasi](configuration.md) bernama `lemmy.hjson` dan coba sesuaikan, khususnya nama hos dan mungkin kata sandi basis data. Kemudian jalankan: 
 
 `docker-compose up -d`
 
-You can access the lemmy-ui at `http://localhost:1235`
+Anda bisa mengakses lemmy-ui di `http://localhost:1235`
 
-To make Lemmy available outside the server, you need to setup a reverse proxy, like Nginx. [A sample nginx config](https://github.com/LemmyNet/lemmy-ansible/blob/main/templates/nginx.conf), could be setup with:
+Untuk membuat Lemmy tersedia di luar peladen, Anda perlu mengatur proksi balik, seperti Nginx. [Contoh konfigurasi nginx](https://github.com/LemmyNet/lemmy-ansible/blob/main/templates/nginx.conf), dapat disiapkan dengan:
 
 ```bash
 wget https://raw.githubusercontent.com/LemmyNet/lemmy-ansible/main/templates/nginx.conf
-# Replace the {{ vars }}
-# The default lemmy_port is 8536
-# The default lemmy_ui_port is 1235
+# ganti dengan {{ vars }}
+# lemmy_port baku adalah 8536
+# lemmy_ui_port baku adalah 1235
 sudo mv nginx.conf /etc/nginx/sites-enabled/lemmy.conf
 ```
 
-You will also need to setup TLS, for example with [Let's Encrypt](https://letsencrypt.org/). After this you need to restart Nginx to reload the config.
+Anda juga harus menyiapkan TLS, seperti [Let's Encrypt](https://letsencrypt.org/). Setelah ini, Anda harus memulai ulang Nginx untuk memuat ulang konfigurasi.
 
-## Updating
+## Memperbarui
 
-To update to the newest version, you can manually change the version in `docker-compose.yml`. Alternatively, fetch the latest version from our git repo:
+Untuk memperbarui ke versi terbaru, Anda bisa secara manual mengganti versi di `docker-compose.yml`. Atau, ambil versi terbaru dari repositori git kami:
 
 ```bash
 wget https://raw.githubusercontent.com/LemmyNet/lemmy/main/docker/prod/docker-compose.yml

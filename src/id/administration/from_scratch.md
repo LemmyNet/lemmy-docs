@@ -1,12 +1,12 @@
-# From Scratch 
+# Dari Awal
 
-> ⚠️ **Disclaimer:** this installation method is not recommended by the Lemmy developers. If you have any problems, you need to solve them yourself or ask the respective authors. If you notice any Lemmy bugs on an instance installed like this, please mention it in the bug report.
+> ⚠️ **Peringatan:** metode pemasangan ini tidak direkomendasikan oleh pengembang Lemmy. Jika Anda ada masalah, Anda harus menyelesaikannya sendiri atau tanya pembuat terkait. Jika Anda melihat ada galat di peladen yang dipasang menggunakan metode ini, harap sebutkan di laporan galat.
 
-These instructions are written for Ubuntu 20.04.
+Instruksi ini ditulis untuk Ubuntu 20.04.
 
-## Installation
+## Pemasangan
 
-### Lemmy Backend
+### Bagian-Belakang Lemmy
 
 It is built from source, so this may take a while, especially on slow devices. For example, Lemmy v0.12.2 takes 17 minutes to build on a dual core VPS. If you prefer prebuilt binaries, use Docker.
 

@@ -1,24 +1,24 @@
-# Trending / Hot / Best Sorting algorithm
+# Algoritma Pengurutan Tren/Hangat/Terbaik
 
-## Goals
+## Tujuan
 
-- During the day, new posts and comments should be near the top, so they can be voted on.
-- After a day or so, the time factor should go away.
-- Use a log scale, since votes tend to snowball, and so the first 10 votes are just as important as the next hundred.
+- Saat hari pertama, pos dan komentar baru harus berada di atas, sehingga mereka bisa dipilih atas/bawah.
+- Setelah sekitar satu hari, faktor waktu akan hilang.
+- Gunakan skala log, karena suara cenderung menggelinding, dan 10 suara pertama sama pentingnya dengan seratus berikutnya.
 
-## Implementations
+## Implementasi
 
 ### Reddit
 
-Does not take the lifetime of the thread into account, [giving early comments an overwhelming advantage over later ones,](https://minimaxir.com/2016/11/first-comment/) with the effect being even worse in small communities. New comments pool at the bottom of the thread, effectively killing off discussion and making each thread a race to comment early.  This lowers the quality of conversation and rewards comments that are repetitive and spammy.
+Tidak memperhitungkan masa hidup utas, [memberikan komentar awal keuntungan besar terhadap yang setelahnya](https://minimaxir.com/2016/11/first-comment/), berefek lebih buruk di komunitas kecil. Jajak komentar baru berada di bawah utas, secara efektif membunuh diskusi dan membuat setiap utas balapan untuk komentar lebih dulu. Ini menurunkan kualitas pembicaraan dan menghargai komentar yang repetitif dan spam.
 
 ### Hacker News
 
-While far superior to Reddit's implementation for its decay of scores over time, [Hacker News' ranking algorithm](https://medium.com/hacking-and-gonzo/how-hacker-news-ranking-algorithm-works-1d9b0cf2c08d) does not use a logarithmic scale for scores.
+Meskipun jauh lebih unggul daripada implementasi Reddit karena pembusukan skornya dari waktu ke waktu, [algoritma peringkat Hacker News](https://medium.com/hacking-and-gonzo/how-hacker-news-ranking-algorithm-works-1d9b0cf2c08d) tidak menggunakan skala logaritmik untuk skor.
 
 ### Lemmy
 
-Counterbalances the snowballing effect of votes over time with a logarithmic scale.  Negates the inherent advantage of early comments while still ensuring that votes still matter in the long-term, not nuking older popular comments.
+Menyeimbangkan efek bola salju suara dari waktu ke waktu dengan skala logaritmik. Meniadakan keuntungan yang melekat dari komentar awal sambil tetap memastikan bahwa suara tetap penting dalam jangka panjang, tidak menghapus komentar populer yang lama.
 
 ```
 Rank = ScaleFactor * log(Max(1, 3 + Score)) / (Time + 2)^Gravity
@@ -27,20 +27,20 @@ Score = Upvotes - Downvotes
 Time = time since submission (in hours)
 Gravity = Decay gravity, 1.8 is default
 ```
-- Lemmy uses the same `Rank` algorithm above, in two sorts: `Active`, and `Hot`.
-  - `Active` uses the post votes, and latest comment time (limited to two days).
-  - `Hot` uses the post votes, and the post published time.
-- Use Max(1, score) to make sure all comments are affected by time decay.
-- Add 3 to the score, so that everything that has less than 3 downvotes will seem new. Otherwise all new comments would stay at zero, near the bottom.
-- The sign and abs of the score are necessary for dealing with the log of negative scores.
-- A scale factor of 10k gets the rank in integer form.
+- Lemmy menggunakan algoritma `Rank` yang sama di atas, dengan dua cara: `Active` dan `Hot`
+  - `Active` menggunakan suara pos, dan waktu komentar terakhir (dibatasi hingga dua hari).
+  - `Hot` menggunakan suara pos, dan waktu pos diterbitkan.
+- Menggunakan Max(1, score) untuk memastikan semua komentar terpengaruh pembusukan waktu.
+- Tambahkan 3 ke skor, sehingga semua yang memiliki kurang dari 3 pilih bawah akan tampak baru. Atau tidak, semua komentar baru akan tetap nol, dekat di bawah.
+- Tanda dan abs skor diperlukan untuk menangani log skor negatif.
+- Faktor skala 10 ribu menggenapkan peringkat dalam bentuk bilangan bulat.
 
-A plot of rank over 24 hours, of scores of 1, 5, 10, 100, 1000, with a scale factor of 10k.
+Plot peringkat lebih dari 24 jam, dengan skor 1, 5, 10, 100, 1000, dengan faktor skala 10 ribu.
 
 ![](rank_algorithm.png)
 
-#### Active User counts
+#### Penghitungan Pengguna Aktif
 
-Lemmy also shows counts of *active users* for your site, and its communities. These are counted within the last `day`, `week`, `month`, and `half year`, and are cached on starting up lemmy, and every hour.
+Lemmy juga menampilkan jumlah *pengguna aktif* untuk situs Anda, dan komunitasnya. Ini dihitung dalam `hari`, `pekan`, `bulan`, dan `setengah tahun` terakhir, dan ditembolokkan dalam pemulaian Lemmy, dan setiap jam.
 
-An active user is someone who has posted or commented on our instance or community within the last given time frame. For site counts, only local users are counted. For community counts, federated users are included.
+Pengguna aktif merupakan seseorang yang mempos atau berkomentar di peladen atau komunitas dalam jangka waktu terakhir yang ditentukan. Untuk penghitungan situs, hanya pengguna lokal yang dihitung. Untuk penghitungan komunitas, pengguna terfederasi juga dihitung.

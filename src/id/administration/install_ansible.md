@@ -1,3 +1,3 @@
-# Ansible Installation
+# Pemasangan Menggunakan Ansible
 
-Follow the instructions on the [Lemmy-Ansible](https://github.com/LemmyNet/lemmy-ansible) repo.
+Ikuti instruksi di repositori [Lemmy-Ansible](https://github.com/LemmyNet/lemmy-ansible). 

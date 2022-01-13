@@ -1,44 +1,40 @@
-# Federation Development
+# Pengembangan Federasi
 
-## Running locally
+## Menjalankan secara lokal
 
-Install the dependencies as described in [Docker development](docker_development.md). Then run the following
+Pasang dependensi yang dijelaskan di [pengembangan Docker](docker_development.md). Kemudian, jalankan berikut 
 
 ```bash
 cd docker/federation
 ./start-local-instances.bash
 ```
 
-The federation test sets up 5 instances:
+Pengujian federasi membangun lima peladen: 
 
-Instance | Username | Location | Notes
+Peladen | Nama Pengguna | Lokasi | Catatan
 --- | --- | --- | ---
-lemmy-alpha | lemmy_alpha | [127.0.0.1:8540](http://127.0.0.1:8540) | federated with all other instances
-lemmy-beta | lemmy_beta | [127.0.0.1:8550](http://127.0.0.1:8550) | federated with all other instances
-lemmy-gamma | lemmy_gamma | [127.0.0.1:8560](http://127.0.0.1:8560) | federated with all other instances
-lemmy-delta | lemmy_delta | [127.0.0.1:8570](http://127.0.0.1:8570) | only allows federation with lemmy-beta
-lemmy-epsilon | lemmy_epsilon | [127.0.0.1:8580](http://127.0.0.1:8580) | uses blocklist, has lemmy-alpha blocked
+lemmy-alpha | lemmy_alpha | [127.0.0.1:8540](http://127.0.0.1:8540) | terfederasi dengan seluruh peladen lainnya
+lemmy-beta | lemmy_beta | [127.0.0.1:8550](http://127.0.0.1:8550) | terfederasi dengan seluruh peladen lainnya
+lemmy-gamma | lemmy_gamma | [127.0.0.1:8560](http://127.0.0.1:8560) | terfederasi dengan seluruh peladen lainnya
+lemmy-delta | lemmy_delta | [127.0.0.1:8570](http://127.0.0.1:8570) | hanya memperbolehkan federasi dengan lemmy-beta
+lemmy-epsilon | lemmy_epsilon | [127.0.0.1:8580](http://127.0.0.1:8580) | menggunakan daftar-hitam, memblokir lemmy-alpha
 
-You can log into each using the instance name, and `lemmy` as the password, IE (`lemmy_alpha`, `lemmy`). 
+Anda bisa masuk ke setiap itu dengan nama peladen dan `lemmy` sebagai kata sandinya, misal (`lemmy_alpha`, `lemmy`). 
 
-To start federation between instances, visit one of them and search for a user, community or post, like this. Note that
-the Lemmy backend runs on a different port than the frontend, so you have to increment the port number from 
-the URL bar by one.
+Untuk memulai federasi antar peladen, kunjungi salah satu dari itu dan cari satu pengguna, komunitas, atau pos, seperti ini. Mohon dicatat bahwa bagian-belakang Lemmy berjalan di port yang berbeda dari antarmuka, jadi Anda harus menambahkan angka port di bilah URL dengan satu.
 - `!main@lemmy-alpha:8541`
 - `http://lemmy-beta:8551/post/3`
 - `@lemmy-gamma@lemmy-gamma:8561`
 
-Firefox containers are a good way to test them interacting.
+Kontainer Firefox merupakan cara terbaik untuk menguji interaksi mereka.
 
-## Running on a server
+## Jalankan di sebuah peladen
 
-Note that federation is currently in alpha. **Only use it for testing**, not on any production server, and be aware that turning on federation may break your instance.
+**Gunakan hanya untuk pengujian**, tidak di peladen aktif, dan ketahuilah bahwa mengaktifkan federasi dapat merusak peladen Anda.
 
-Follow the normal installation instructions, either with [Ansible](../administration/install_ansible.md) or
-[manually](../administration/install_docker.md). Then replace the line `image: dessalines/lemmy:v0.x.x` in 
-`/lemmy/docker-compose.yml` with `image: dessalines/lemmy:federation`. Add and configure [this federation block](https://github.com/lemmynet/lemmy/blob/main/config/config.hjson#L64) to your `lemmy.hjson`.
+Ikuti instruksi pemasangan normal, entah menggunakan [Ansible](../administration/install_ansible.md) atau [secara manual](../administration/install_docker.md). Kemudian, ganti baris `image: dessalines/lemmy:v0.x.x` di `/lemmy/docker-compose.yml` dengan `image: dessalines/lemmy:federation`. Tambah dan konfigurasi [blok federasi ini](https://github.com/lemmynet/lemmy/blob/main/config/config.hjson#L64) ke `lemmy.hjson` Anda.
 
-Afterwards, and whenever you want to update to the latest version, run these commands on the server:
+Setelah itu, dan kapan pun yang Anda inginkan untuk memperbarui ke versi terbaru, jalankan perintah ini di peladen: 
 
 ```
 cd /lemmy/
@@ -46,15 +42,10 @@ sudo docker-compose pull
 sudo docker-compose up -d
 ```
 
-## Security Model
+## Model Keamanan
 
-- HTTP signature verify: This ensures that activity really comes from the activity that it claims
-- check_is_apub_valid : Makes sure its in our allowed instances list
-- Lower level checks: To make sure that the user that creates/updates/removes a post is actually on the same instance as that post
+- Verifikasi tanda digital HTTP : Ini menjamin bahwa aktifitas memang datang dari aktifitas yang diklaim
+- check_is_apub_valid : Memastikan bahwa itu ada di daftar peladen yang diperbolehkan Makes sure its in our allowed instances list
+- Pemeriksaan tingkat rendah : Untuk memastikan bahwa pengguna bisa membuat/memperbarui/menghapus pos di peladen yang sama dengan pos tersebut
 
-For the last point, note that we are *not* checking whether the actor that sends the create activity for a post is
-actually identical to the post's creator, or that the user that removes a post is a mod/admin. These things are checked
-by the API code, and its the responsibility of each instance to check user permissions. This does not leave any attack
-vector, as a normal instance user cant do actions that violate the API rules. The only one who could do that is the
-admin (and the software deployed by the admin). But the admin can do anything on the instance, including send activities
-from other user accounts. So we wouldnt actually gain any security by checking mod permissions or similar.
+Untuk poin terakhir, harap dicatat bahwa kita *tidak* memeriksa apakah aktor yang mengirimkan aktifitas membuat sebuah pos sebenarnya sama dengan pembuat pos, atau pengguna yang menghapus pos merupakan moderator/admin. Hal tersebut diperiksa oleh kode API, dan merupakan tanggung jawab setiap peladen untuk memeriksa izin pengguna. Ini tidak meninggalkan vektor serangan apa pun, karena sebagai pengguna peladen normal tidak bisa melakukan aksi yang melanggar peraturan API. Satu-satunya yang bisa melakukannya adalah admin (dan perangkat lunak yang digunakan oleh admin). Tapi admin bisa melakukan apa pun di peladen, termasuk mengirim aktifitas dari akun pengguna lainnya. Jadi kita tidak akan mendapatkan keamanan apa pun dengan memeriksa izin mod dan serupa.
