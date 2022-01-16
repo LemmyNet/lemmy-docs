@@ -6,7 +6,7 @@ Pasang Rust menggunakan [opsi yang direkomendasikan di rust-lang.org](https://ww
 #### Distro berbasis Debian
 ```
 sudo apt install git cargo libssl-dev pkg-config libpq-dev yarn curl gnupg2 espeak
-# install yarn
+# pasang yarn
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 sudo apt update && sudo apt install yarn
@@ -15,7 +15,7 @@ sudo apt update && sudo apt install yarn
 #### Distro berbasis Arch
 ```
 sudo pacman -S git cargo libssl-dev pkg-config libpq-dev yarn curl gnupg2 espeak
-# install yarn (stable)
+# pasang yarn (stabil)
 curl -o- -L https://yarnpkg.com/install.sh | bash
 ```
 
@@ -31,14 +31,14 @@ brew install node yarn
 ### Dapatkan kode sumber bagian-belakang
 ```
 git clone https://github.com/LemmyNet/lemmy.git
-# or alternatively from gitea
+# atau alternatif dari gitea
 # git clone https://yerbamate.ml/LemmyNet/lemmy.git
 ```
 
 ### Susun bagian-belakang (Rust)
 ```
 cargo build
-# for development, use `cargo check` instead)
+# untuk pengembangan, gunakan `cargo check`
 ```
 
 ### Dapatkan kode sumber antarmuka
@@ -46,13 +46,13 @@ cargo build
 git clone https://github.com/LemmyNet/lemmy-ui.git --recurse-submodules
 ```
 
-### Siapkan postgresql
+### Siapkan PostgreSQL
 #### Distro berbasis Debian
 ```
 sudo apt install postgresql
 sudo systemctl start postgresql
 
-# Either execute db-init.sh, or manually initialize the postgres database:
+# jalankan db-init.sh, atau inisialisasi basis data postgres secara manual:
 sudo -u postgres psql -c "create user lemmy with password 'password' superuser;" -U postgres
 sudo -u postgres psql -c 'create database lemmy with owner lemmy;' -U postgres
 export LEMMY_DATABASE_URL=postgres://lemmy:password@localhost:5432/lemmy
@@ -63,7 +63,7 @@ export LEMMY_DATABASE_URL=postgres://lemmy:password@localhost:5432/lemmy
 sudo pacman -S postgresql
 sudo systemctl start postgresql
 
-# Either execute db-init.sh, or manually initialize the postgres database:
+# jalankan db-init.sh, atau inisialisasi basis data postgres secara manual:
 sudo -u postgres psql -c "create user lemmy with password 'password' superuser;" -U postgres
 sudo -u postgres psql -c 'create database lemmy with owner lemmy;' -U postgres
 export LEMMY_DATABASE_URL=postgres://lemmy:password@localhost:5432/lemmy
@@ -75,7 +75,7 @@ brew install postgresql
 brew services start postgresql
 /usr/local/opt/postgres/bin/createuser -s postgres
 
-# Either execute db-init.sh, or manually initialize the postgres database:
+# jalankan db-init.sh, atau inisialisasi basis data postgres secara manual:
 psql -c "create user lemmy with password 'password' superuser;" -U postgres
 psql -c 'create database lemmy with owner lemmy;' -U postgres
 export LEMMY_DATABASE_URL=postgres://lemmy:password@localhost:5432/lemmy

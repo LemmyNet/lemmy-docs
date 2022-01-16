@@ -4,7 +4,7 @@ The Lemmy Protocol (or Lemmy Federation Protocol) is a subset of the [ActivityPu
 
 This document is targeted at developers who are familiar with the ActivityPub and ActivityStreams protocols. It gives a detailed outline of the actors, objects and activities used by Lemmy.
 
-Before reading this, have a look at our [Federation Overview](overview.md) to get an idea how Lemmy federation works on a high level.
+Before reading this, have a look at our [Federation Overview](contributing_federation_overview.md) to get an idea how Lemmy federation works on a high level.
 
 <!-- toc -->
 

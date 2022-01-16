@@ -1,37 +1,36 @@
-# Installing on AWS
+# Pemasangan di AWS
 
-> ⚠️ **Disclaimer:** this installation method is not recommended by the Lemmy developers. If you have any problems, you need to solve them yourself or ask the respective authors. If you notice any Lemmy bugs on an instance installed like this, please mention it in the bug report.
+> ⚠️ **Peringatan:** metode pemasangan ini tidak direkomendasikan oleh pengembang Lemmy. Jika Anda ada masalah, Anda harus menyelesaikannya sendiri atau tanya pembuat terkait. Jika Anda melihat ada galat di peladen yang dipasang menggunakan metode ini, harap sebutkan di laporan galat.
 
-## Lemmy AWS CDK
+## CDK Lemmy AWS
 
-This contains the necessary infrastructure definitions to deploy [Lemmy](https://github.com/LemmyNet/lemmy)
-to AWS using their [Cloud Development Kit](https://docs.aws.amazon.com/cdk/latest/guide/home.html).
+Ini mengadung definisi infrastruktur yang diperlukan untuk memasang [Lemmy](https://github.com/LemmyNet/lemmy) ke AWS menggunakan [Kit Pengembangan Awan](https://docs.aws.amazon.com/cdk/latest/guide/home.html) mereka.
 
-### Included:
+### Termasuk:
 
-* ECS fargate cluster
+* Kluster fargate ECS
   * Lemmy-UI
   * Lemmy
   * Pictrs
-* CloudFront CDN
-* EFS storage for image uploads
-* Aurora Serverless Postgres DB
-* Bastion VPC host
-* Load balancers for Lemmy
-* DNS records for your site
+* CDN CloudFront
+* Penyimpanan EFS untuk pengunggahan gambar
+* Basis Data Postgres Aurora Tanpa Peladen
+* Hos VPC Bastion
+* Penyeimbang beban untuk Lemmy
+* Rekaman DNS untuk situs Anda
 
-## Quickstart
+## Mulai cepat
 
-Clone the [Lemmy-CDK]( https://github.com/jetbridge/lemmy-cdk). 
+Klon [Lemmy-CDK]( https://github.com/jetbridge/lemmy-cdk). 
 
-Clone [Lemmy](https://github.com/LemmyNet/lemmy) and [Lemmy-UI](https://github.com/LemmyNet/lemmy-ui) to the directory above this.
+Klon [Lemmy](https://github.com/LemmyNet/lemmy) dan [Lemmy-UI](https://github.com/LemmyNet/lemmy-ui) ke direktori di atas ini.
 
 ```shell
 cp example.env.local .env.local
-# edit .env.local
+# sunting .env.local
 ```
 
-You should edit .env.local with your site settings.
+Anda harus menyunting .env.local dengan pengaturan situs Anda.
 
 ```shell
 npm install -g aws-cdk
@@ -40,14 +39,14 @@ cdk bootstrap
 cdk deploy
 ```
 
-## Cost
-This is *not* the cheapest way to run Lemmy. The Serverless Aurora DB can run you ~$90/mo if it doesn't go to sleep.
+## Harga
+Ini *bukan* cara termurah untuk menjalankan Lemmy. Basis Data Aurora Tanpa Peladen bisa membebani Anda ~$90/bulan jika tidak pergi tidur.
 
-## Useful CDK commands
+## Perintah CDK yang Berguna
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `cdk deploy`      deploy this stack to your default AWS account/region
-* `cdk diff`        compare deployed stack with current state
-* `cdk synth`       emits the synthesized CloudFormation template
+* `npm run build`   susun typescript ke js
+* `npm run watch`   lacak perubahan dan susun
+* `npm run test`    laksanakan uji unit jest
+* `cdk deploy`      jalankan tumpukan (stack) ini ke akun/wilayah AWS baku Anda
+* `cdk diff`        bandingkan tumpukan yang jalan denga kondisi saat ini
+* `cdk synth`       memancarkan templat CloudFormation yang disintesis

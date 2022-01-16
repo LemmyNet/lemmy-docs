@@ -33,8 +33,8 @@ Periksa [Weblate Lemmy](https://weblate.yerbamate.ml/projects/lemmy/) untuk pene
   - `apub` - Konversi activitypub.
   - `websocket` - Membuat peladen websocket. 
 
-## Linting / Formatting
+## Linting/Pemformatan
 
-- Every front and back end commit is automatically formatted then linted using `husky`, and `lint-staged`.
-- Rust with `cargo fmt` and `cargo clippy`.
-- Typescript with `prettier` and `eslint`.
+- Setiap pengodean antarmuka dan bagian-belakang secara otomatis diformat kemudian dilinting menggunakan `husky` dan `lint-staged`.
+- Rust dengan `cargo fmt` dan `cargo clippy`.
+- Typescript dengan `prettier` dan `eslint`.
