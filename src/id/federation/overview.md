@@ -1,7 +1,7 @@
-# Federation Overview
+# Tinjauan Federasi
 
 
-This document is for anyone who wants to know how Lemmy federation works, without being overly technical. It is meant provide a high-level overview of ActivityPub federation in Lemmy. If you are implementing ActivityPub yourself and want to be compatible with Lemmy, read our [ActivityPub API outline](contributing_apub_api_outline.md).
+Dokumen ini untuk siapa saja yang ingin mengetahui bagaimana federasi Lemmy bekerja, tanpa terlalu teknis. Ini dimaksudkan untuk memberikan tinjauan umum tingkat tinggi terhadap federasi ActivityPub di Lemmy. Jika Anda mengimplementasikan ActivityPub sendiri dan ingin kompatibel dengan Lemmy, baca [Garis Besar API ActivityPub](contributing_apub_api_outline.md) kami.
 
 ## Documentation conventions
 

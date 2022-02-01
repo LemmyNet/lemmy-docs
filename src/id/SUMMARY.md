@@ -13,7 +13,7 @@
   - [Konfigurasi](administration/configuration.md)
   - [Memulai dengan Federasi](administration/federation_getting_started.md)
   - [Penyelesaian Masalah](administration/troubleshooting.md)
-  - [Cadangan dan Pemulihan](administration/backup_and_restore.md)
+  - [Pencadangan dan Pemulihan](administration/backup_and_restore.md)
 - [Federasi](federation/federation.md)
   - [Tinjauan Federasi](federation/overview.md)
   - [Protokol Lemmy](federation/lemmy_protocol.md)

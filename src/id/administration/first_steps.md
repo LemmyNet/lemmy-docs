@@ -1,44 +1,44 @@
-# Administration First Steps
+# Langkah Pertama Administrasi
 
-After you successfully installed Lemmy either [manually with Docker](administration/install_docker.html) or [automatically with Ansible](administration/install_ansible.html) here are some recommendations for a new administrator of a Lemmy server.
+Setelah Anda berhasil memasang Lemmy entah [secara manual dengan Docker](install_docker.md) atau [secara otomatis dengan Ansible](install_ansible.md), berikut adalah beberapa rekomendasi untuk administrator baru peladen Lemmy.
 
-## Admin Settings
+## Pengaturan Admin
 
-The first thing to do is to go to your admin panel, which can be found by clicking on the cog at the top right next to the search icon. Here you can define a description for your site, so that people know if it is about one specific topic or if all subjects are welcome. You can also add an icon and a banner that define your server, it can for example be the logo of your organization.
+Hal pertama yang dilakukan adalah pergi ke panel admin Anda, yang mana bisa ditemukan dengan mengklik gir di kanan atas di sebelah ikon pencarian. Di sini Anda bisa menentukan deskripsi situs Anda, sehingga orang-orang tahu jika situs Anda tentang topik tertentu atau semua topik diterima. Anda juga bisa menambahkan ikon dan spanduk yang mendefinisikan peladen Anda, contohnya logo organisasi Anda.
 
-Take the time to browse through the entire page to discover the different options you have to customize your Lemmy instance, on the same page you can edit your [configuration file](configuration.html), where you can find information about your database, the email used by the server, the federation options or who is the main administrator.
+Luangkan waktu untuk menjelajah seluruh halaman untuk menemukan opsi berbeda untuk menyesuaikan peladen Lemmy Anda, di halaman yang sama Anda bisa menyunting [berkas konfigurasi](configuration.md) Anda, di mana Anda bisa mencari informasi tentang basis data Anda, surel yang digunakan oleh peladen, opsi federasi, atau siapa administrator utama.
 
-It is always good to define another administrator than yourself, in case it is necessary to take actions while you take your best nap. Take a look at the [moderation guide](../moderation/moderation.html) for more information on how to do this.
+Merupakan ide bagus untuk menunjuk administrator lain selain diri Anda sendiri, di mana jika harus melakukan suatu tindakan saat Anda terlelap. Lihatlah ke [petunjuk moderasi](../moderation/moderation.md) untuk informasi lebih lanjut tentang hal ini.
 
-## Check that everything is working properly
+## Periksa bahwa semua sudah bekerja dengan benar
 
-### Email
+### Surel
 
-The easiest way to check that the email is set up correctly is to request a password renewal. You will need to set up an email in your settings if you have not already done so.
+Cara termudah untuk memeriksa bahwa surel sudah bekerja adalah meminta pembaruan kata sandi. Anda perlu untuk mengatur surel di pengaturan Anda jika Anda belum melakukannya.
 
-After that just log out, go to the `Login` page, enter your email in the `Email or Username` box and press `forgot password`. If everything is set up correctly, you should receive an email to renew your password. You can ignore this email.
+Setelah itu, tinggal keluar, pergi ke halaman `Masuk`, masukkan surel Anda di kotak `Surel atau Nama Pengguna` dan klik `lupa kata sandi`. Jika semuanya diatur dengan benar, Anda akan menerima sebuah surel untuk memperbarui kata sandi Anda. Anda bisa mengabaikan surel tersebut.
 
-### Federation
+### Federasi
 
-Federation is disabled by default, and needs to be enabled either through the online admin panel or directly through the `config.json` file.
+Federasi dimatikan secara baku dan perlu dinyalakan antara lewat panel admin daring atau langsung lewat berkas `config.json`.
 
-To test that your instance federation is working correctly execute `curl -H 'Accept: application/activity+json' https://your-instance.com/u/your-username`, it should return json data, and not an .html file. If that is unclear to you, it should look similar to the output of `curl -H 'Accept: application/activity+json' https://lemmy.ml/u/nutomic`.
+Untuk mencoba bahwa federasi peladen Anda bekerja dengan benar, jalankan `curl -H 'Accept: application/activity+json' https://your-instance.com/u/your-username`, itu seharusnya mengembalikan data json, bukan berkas .html. Jika itu tidak jelas untuk Anda, itu seharusnya sama dengan hasil dari `curl -H 'Accept: application/activity+json' https://lemmy.ml/u/nutomic`.
 
-## Inclusion on join-lemmy.org instance list
+## Penyertaan pada daftar peladen di join-lemmy.org
 
-To be included in the list of Lemmy instances on [join-lemmy.org](https://join-lemmy.org/instances) you must meet the following requirements:
-- [x] Federate with at least one instance from the list
-- [x] Have a site description and icon
-- [x] Be patient and wait the site to be updated, there's no fixed schedule for that
+Untuk dimasukkan pada daftar peladen Lemmy di [join-lemmy.org](https://join-lemmy.org/instances), Anda harus memenuhi persyaratan berikut:
+- [x] Terfederasi dengan paling tidak satu peladen dari daftar
+- [x] Mempunyai deskripsi dan ikon situs
+- [x] Bersabar dan menunggu situs untuk diperbarui, tidak ada jadwal pasti untuk itu
 
-In the meantime you can always promote your server on other social networks like Mastodon using the hashtag `#Lemmy`.
+Sementara menunggu, Anda selalu bisa mempromosikan peladen Anda di jejaring sosial lain seperti Mastodon menggunakan tagar `#Lemmy`.
 
-## Keeping up to date
+## Selalu terkini
 
-You can subscribe to the Github RSS feeds to be informed of the latest releases:
+Anda bisa berlangganan ke umpan RSS GitHub untuk diinformasikan tentang rilis terbaru:
 - [lemmy](https://github.com/LemmyNet/lemmy/releases.atom)
 - [lemmy-ui](https://github.com/LemmyNet/lemmy-ui/releases.atom)
 - [lemmy-js-client](https://github.com/LemmyNet/lemmy-js-client/releases.atom)
 - [joinlemmy-site](https://github.com/LemmyNet/joinlemmy-site/releases.atom)
 
-There is also a [Matrix chat](https://matrix.to/#/!OwmdVYiZSXrXbtCNLw:matrix.org) for instance administrators that you can join. You'll find some really friendly people there who will help you (or at least try to) if you run into any issue.
+Ada juga [Matrix](https://matrix.to/#/!OwmdVYiZSXrXbtCNLw:matrix.org) untuk administrator peladen yang Anda bisa gabung. Anda akan bertemu orang-orang yang bersahabat yang akan membantu (atau paling tidak mencoba) jika Anda bertemu suatu masalah.

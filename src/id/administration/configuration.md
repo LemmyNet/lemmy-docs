@@ -1,19 +1,19 @@
-# Configuration
+# Konfigurasi
 
-The configuration is based on the file config.hjson, which is located by default at `config/config.hjson`. To change the default location, you can set the environment variable `LEMMY_CONFIG_LOCATION`.
+Konfigurasi didasarkan pada berkas config.hjson, yang di mana ditempatkan secara baku di `config/config.hjson`. Untuk mengubah lokasi baku, Anda bisa mengatur variabel lingkungan `LEMMY_CONFIG_LOCATION`.
 
-An additional environment variable `LEMMY_DATABASE_URL` is available, which can be used with a PostgreSQL connection string like `postgres://lemmy:password@lemmy_db:5432/lemmy`, passing all connection details at once.
+Variabel lingkungan tambahan `LEMMY_DATABASE_URL` juga tersedia, yang bisa digunakan dengan string koneksi PostgreSQL seperti `postgres://lemmy:password@lemmy_db:5432/lemmy`, meneruskan semua detail koneksi sekaligus. 
 
-If the Docker container is not used, manually create the database specified above by running the following commands:
+Jika kontainer Docker tidak digunakan, buat basis data yang disebutkan di atas secara manual dengan menjalankan perintah berikut:
 
 ```bash
 cd server
 ./db-init.sh
 ```
 
-**Federation is not set up by default.** You can add this [this federation block](https://github.com/lemmynet/lemmy/blob/main/config/config.hjson#L64) to your `lemmy.hjson`, and ask other servers to add you to their allowlist.
+**Federasi tidak diatur secara baku.** Anda bisa menambahkan [blok federasi ini](https://github.com/lemmynet/lemmy/blob/main/config/config.hjson#L64) ke `lemmy.hjson` Anda dan minta peladen lain untuk menambahkan Anda ke daftar yang diperbolehkan mereka.
 
-## Full config with default values
+## Semua konfigurasi dengan nilai baku
 
 ```hjson
 {{#include ../../../include/config/defaults.hjson}}

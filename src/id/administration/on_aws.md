@@ -48,5 +48,5 @@ Ini *bukan* cara termurah untuk menjalankan Lemmy. Basis Data Aurora Tanpa Pelad
 * `npm run watch`   lacak perubahan dan susun
 * `npm run test`    laksanakan uji unit jest
 * `cdk deploy`      jalankan tumpukan (stack) ini ke akun/wilayah AWS baku Anda
-* `cdk diff`        bandingkan tumpukan yang jalan denga kondisi saat ini
+* `cdk diff`        bandingkan tumpukan yang jalan dengan kondisi saat ini
 * `cdk synth`       memancarkan templat CloudFormation yang disintesis
