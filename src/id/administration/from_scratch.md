@@ -8,38 +8,38 @@ Instruksi ini ditulis untuk Ubuntu 20.04.
 
 ### Bagian-Belakang Lemmy
 
-It is built from source, so this may take a while, especially on slow devices. For example, Lemmy v0.12.2 takes 17 minutes to build on a dual core VPS. If you prefer prebuilt binaries, use Docker.
+Karena dibuat dari sumber, jadi mungkin akan memakan waktu yang lama, terutama pada perangkat yang lambat. Contohnya, Lemmy v0.12.2 membutuhkan 17 menit untuk dibangun pada VPS inti ganda. Jika Anda lebih suka binari sudah siap, gunakan Docker.
 
-Compile and install Lemmy, setup database:
+Susun dan pasang Lemmy, siapkan basis data:
 ```bash
 apt install pkg-config libssl-dev libpq-dev cargo postgresql
-# installs latest release, you can also specify one with --version
-# The --locked argument uses the exact versions of dependencies specified in
-# `cargo.lock`at release time. Running it without the flag will use newer minor 
-# release versions of those dependencies, which are not always guaranteed to compile.
+# pasang rilis terbaru, anda juga bisa menspesifikkannya dengan --version
+# argumen --locked menggunakan versi dependensi yang sama dengan yang dispesifikkan di
+# `cargo.lock` saat waktu perilisan. menjalankannya tanpa bendera akan menggunakan versi
+# rilis minor dari dependensi tersebut, yang tidak selalu terjamin akan tersusun.
 cargo install lemmy_server --target-dir /usr/bin/ --locked
-# replace db-passwd with a randomly generated password
+# ganti db-passwd dengan kata sandi yang dibuat acak
 sudo -iu postgres psql -c "CREATE USER lemmy WITH PASSWORD 'db-passwd';"
 sudo -iu postgres psql -c "CREATE DATABASE lemmy WITH OWNER lemmy;"
 adduser lemmy --system --disabled-login --no-create-home --group
 ```
 
-Minimal Lemmy config, put this in `/etc/lemmy/lemmy.hjson` (see [here](https://github.com/LemmyNet/lemmy/blob/main/config/config.hjson) for more config options). Run `chown lemmy:lemmy /etc/lemmy/ -R` to set the correct owner.
+Konfigurasi minimal Lemmy, taruh ini di `/etc/lemmy/lemmy.hjson` (lihat di [sini](https://github.com/LemmyNet/lemmy/blob/main/config/config.hjson) untuk pilihan konfigurasi lebih banyak). Jalankan `chown lemmy:lemmy /etc/lemmy/ -R` untuk mengatur pemilik yang benar. 
 ```hjson
 {
   database: {
-    # put your db-passwd from above
+    # taruh db-passwd anda dari atas
     password: "db-passwd"
   }
-  # replace with your domain
+  # ganti dengan domain anda
   hostname: example.com
   bind: "127.0.0.1"
-  # put a random string here (required for login token encryption)
+  # taruh kata acak di sini (diperlukan untuk enkripsi token masuk)
   jwt_secret: "changeme"
 }
 ```
 
-Systemd unit file, so that Lemmy automatically starts and stops, logs are handled via journalctl etc. Put this file into /etc/systemd/system/lemmy.service, then run `systemctl enable lemmy` and `systemctl start lemmy`. 
+Berkas unit systemd, sehingga Lemmy bisa secara otomatis dimulai dan diberhentikan, log dikelola lewat journalctl dll. Taruh berkas ini ke /etc/systemd/system/lemmy.service, kemudian jalankan `systemctl enable lemmy` dan `systemctl start lemmy`. 
 ```
 [Unit]
 Description=Lemmy - A link aggregator for the fediverse
@@ -51,7 +51,7 @@ ExecStart=/usr/bin/lemmy_server
 Environment=LEMMY_CONFIG_LOCATION=/etc/lemmy/lemmy.hjson
 Restart=on-failure
 
-# Hardening
+# penguatan
 ProtectSystem=yes
 PrivateTmp=true
 MemoryDenyWriteExecute=true
@@ -61,11 +61,11 @@ NoNewPrivileges=true
 WantedBy=multi-user.target
 ```
 
-If you did everything right, the Lemmy logs from `journalctl -u lemmy` should show "Starting http server at 127.0.0.1:8536". You can also run `curl localhost:8536/api/v3/site` which should give a successful response, looking like `{"site_view":null,"admins":[],"banned":[],"online":0,"version":"unknown version","my_user":null,"federated_instances":null}`.
+Jika Anda melakukan semuanya dengan benar, log Lemmy dari `journalctl -u lemmy` akan menampilkan "Starting http server at 127.0.0.1:8536". Anda juga bisa menjalankan `curl localhost:8536/api/v3/site` yang seharusnya mengembalikan respons yang berhasil , seperti `{"site_view":null,"admins":[],"banned":[],"online":0,"version":"unknown version","my_user":null,"federated_instances":null}`. 
 
-### Install lemmy-ui (web frontend)
+### Pasang lemmy-ui (antarmuka web)
 
-Install dependencies (nodejs and yarn in Ubuntu 20.04 repos are too old)
+Pasang dependensi (nodejs dan yarn di repositori Ubuntu 20.04 terlalu tua)
 ```bash
 # https://classic.yarnpkg.com/en/docs/install/#debian-stable
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
@@ -75,21 +75,21 @@ curl -fsSL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 sudo apt install nodejs yarn
 ```
 
-Clone the git repo, checkout the version you want (0.12.2 in this case), and compile it.
+Klon repositori git, checkout versi yang Anda inginkan (dalam contoh ini adalah 0.12.2) dan susun itu. 
 ```bash
 mkdir /var/lib/lemmy-ui
 cd /var/lib/lemmy-ui
 chown lemmy:lemmy .
-# dont compile as admin
+# jangan susun sebagai admin
 sudo -u lemmy bash
 git clone https://github.com/LemmyNet/lemmy-ui.git --recursive .
-git checkout 0.12.2 # replace with the version you want to install
+git checkout 0.12.2 # ganti dengan versi yang ingin anda pasang
 yarn install --pure-lockfile
 yarn build:prod
 exit
 ```
 
-Add another systemd unit file, this time for lemmy-ui. You need to replace example.com with your actual domain. Put the file in `/etc/systemd/system/lemmy-ui.service`, then run `systemctl enable lemmy-ui` and `systemctl start lemmy-ui`.
+Tambahkan berkas unit systemd yang lain, kali ini untuk lemmy-ui. Anda perlu mengganti example.com dengan domain Anda. Taruh berkas di `/etc/systemd/system/lemmy-ui.service`, kemudian jalankan `systemctl enable lemmy-ui` dan `systemctl start lemmy-ui`. 
 ```
 [Unit]
 Description=Lemmy UI - Web frontend for Lemmy
@@ -114,41 +114,41 @@ NoNewPrivileges=true
 WantedBy=multi-user.target
 ```
 
-If everything went right, the command `curl -I localhost:1234` should show `200 OK` at the top.
+Jika semuanya benar, perintah `curl -I localhost:1234` seharusnya menampilkan `200 OK` di bagian atas. 
 
-### Configure reverse proxy and TLS
+### Mengonfigurasi proksi-balik dan TLS
 
-Install dependencies
+Pasang dependensi
 ```bash
 apt install nginx certbot python3-certbot-nginx
 ```
 
-Request Let's Encrypt TLS certificate (just follow the instructions)
+Minta sertifikat TLS Let's Encrypt (ikuti saja instruksinya)
 ```bash
 certbot certonly --nginx
 ```
 
-Let's Encrypt certificates should be renewed automatically, so add the line below to your crontab, by running `sudo crontab -e`. Replace example.com with your actual domain.
+Sertifikat Let's Encrypt akan diperbarui secara otomatis, jadi tambahkan baris di bawah ini ke crontab Anda, dengan menjalankan `sudo crontab -e`. Ganti example.com dengan domain Anda. 
 ```
 @daily certbot certonly --nginx --cert-name example.com -d example.com --deploy-hook 'nginx -s reload'
 ```
 
-Finally, add the nginx config. After downloading, you need to replace some variables in the file.
+Akhirnya, tambahkan konfigurasi nginx. Setelah mengunduh, Anda perlu mengubah beberapa variabel di berkas. 
 ```bash
 curl https://raw.githubusercontent.com/LemmyNet/lemmy-ansible/main/templates/nginx.conf \
     --output /etc/nginx/sites-enabled/lemmy.conf
-# put your actual domain instead of example.com
+# taruh domain anda alih-alih example.com
 sed -i -e 's/{{domain}}/example.com/g' /etc/nginx/sites-enabled/lemmy.conf
 sed -i -e 's/{{lemmy_port}}/8536/g' /etc/nginx/sites-enabled/lemmy.conf
 sed -i -e 's/{{lemmy_ui_port}}/1234/g' /etc/nginx/sites-enabled/lemmy.conf
 nginx -s reload
 ```
 
-Now open your Lemmy domain in the browser, and it should show you a configuration screen. Use it to create the first admin user and the default community.
+Sekarang buka domain Lemmy Anda di peramban, dan itu seharusnya menampilkan sebuah layar konfigurasi. Gunakan untuk membuat pengguna admin pertama dan komunitas baku. 
 
-### Pict-rs (for image hosting, optional)
+### Pict-rs (untuk hos gambar, opsional)
 
-Pict-rs requires a newer Rust version than the one available in Ubuntu 20.04 repos. So you need to install [Rustup](https://rustup.rs/) which installs the toolchain for you.
+Pict-rs memerlukan Rust versi yang lebih baru dari yang tersedia di repositori Ubuntu 20.04. Jadi Anda perlu memasang [Rustup](https://rustup.rs/) yang akan memasang toolchain untuk Anda.
 
 ```bash
 apt install ffmpeg exiftool libgexiv2-dev --no-install-recommends
@@ -156,27 +156,27 @@ adduser pictrs --system --disabled-login --no-create-home --group
 mkdir /var/lib/pictrs-source
 cd /var/lib/pictrs
 git clone https://git.asonix.dog/asonix/pict-rs.git .
-# check docker-compose.yml for pict-rs version used by lemmy
+# periksa docker-compose.yml untuk versi pict-rs yang digunakan oleh lemmy
 # https://github.com/LemmyNet/lemmy-ansible/blob/main/templates/docker-compose.yml#L40 
 git checkout v0.2.6-r2
-# or simply add the bin folder to your $PATH
+# atau tinggal tambahkan folder bin ke $PATH anda
 $HOME/.cargo/bin/cargo build --release
 cp target/release/pict-rs /usr/bin/
-# create folder to store image data
+# buat folder untuk menyimpan data gambar
 mkdir /var/lib/pictrs
 chown pictrs:pictrs /var/lib/pictrs
 ```
 
-Pict-rs requires the `magick` command which comes with Imagemagick version 7, but Ubuntu 20.04 only comes with Imagemagick 6. So you need to install that command manually, eg from the [official website](https://imagemagick.org/script/download.php#linux).
+Pict-rs memerlukan perintah `magick` yang ada di ImageMagick versi 7, tapi Ubuntu 20.04 hanya ada ImageMagick 6. Jadi Anda harus memasangnya secara manual, seperti lewat [situs web resmi](https://imagemagick.org/script/download.php#linux). 
 ```
 wget https://download.imagemagick.org/ImageMagick/download/binaries/magick
-# compare hash with the "message digest" on the official page linked above
+# bandingkan hash dengan "message digest" di halaman resmi yang ditautkan di atas
 sha256sum magick
 mv magick /usr/bin/
 chmod 755 /usr/bin/magick
 ```
 
-Just like before, place the config below in `/etc/systemd/system/pictrs.service`, then run `systemctl enable pictrs` and `systemctl start pictrs`.
+Seperti sebelumnya, letakkan konfigurasi di bawah ini ke `/etc/systemd/system/pictrs.service`, kemudian jalankan `systemctl enable pictrs` dan `systemctl start pictrs`.
 ```
 [Unit]
 Description=pict-rs - A simple image host
@@ -193,16 +193,16 @@ Restart=on-failure
 WantedBy=multi-user.target
 ```
 
-If it is working correctly, `curl 127.0.0.1:8080` should output nothing (particularly no errors).
+Jika berjalan dengan benar, `curl 127.0.0.1:8080` seharusnya tidak menampilkan apa-apa (terutama tidak ada galat). 
 
-Now add the line `pictrs_url: "http://127.0.0.1:8080"` to `/etc/lemmy/lemmy.hjson` so that Lemmy knows how to reach Pict-rs. Then restart Lemmy with `systemctl restart lemmy`, and image uploads should be working.
+Sekarang tambahkan baris `pictrs_url: "http://127.0.0.1:8080"` ke `/etc/lemmy/lemmy.hjson` sehingga Lemmy mengetahui bagaimana menjangkau Pict-rs. Kemudian mulai ulang Lemmy dengan `systemctl restart lemmy` dan pengunggahan gambar seharusnya bisa bekerja. 
 
-## Upgrading
+## Meningkatkan/Memperbarui
 
 ### Lemmy
 
 ```bash
-# installs latest release, you can also specify one with --version
+# pasang rilis terbaru, anda juga bisa menspesifikkannya dengan --version
 cargo install lemmy_server --target-dir /usr/bin/
 systemctl restart lemmy
 ```
@@ -214,7 +214,7 @@ cd /var/lib/lemmy-ui
 sudo -u lemmy
 git checkout main
 git pull --tags
-git checkout 0.12.2 # replace with the version you want to install
+git checkout 0.12.2 # ganti dengan versi yang ingin anda pasang
 git submodule update
 yarn install --pure-lockfile
 yarn build:prod
@@ -229,10 +229,10 @@ rustup update
 cd /var/lib/pictrs-source
 git checkout main
 git pull --tags
-# check docker-compose.yml for pict-rs version used by lemmy
+# periksa docker-compose.yml untuk versi pict-rs yang digunakan oleh lemmy
 # https://github.com/LemmyNet/lemmy-ansible/blob/main/templates/docker-compose.yml#L40 
 git checkout v0.2.6-r2
-# or simply add the bin folder to your $PATH
+# atau tinggal tambahkan folder bin ke $PATH anda
 $HOME/.cargo/bin/cargo build --release
 cp target/release/pict-rs /usr/bin/
 systemctl restart pictrs

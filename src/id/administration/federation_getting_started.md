@@ -1,45 +1,45 @@
-# Federation
+# Federasi
 
-Lemmy has three types of federation:
+Lemmy memiliki tiga jenis federasi:
 
-- Allowlist: Explicitly list instances to connect to.
-- BlockList: Explicitly list instances to not connect to. Federation is open to all other instances.
-- Open: Federate with all potential instances.
+- Daftar yang diperbolehkan: Secara jelas mendaftar peladen untuk terhubung.
+- Daftar yang diblokir: Secara jelas mendaftar peladen untuk tidak terhubung. Federasi masih bisa untuk semua peladen lainnya.
+- Terbuka: Terfederasi dengan semua peladen yang mungkin.
 
-**Federation is not set up by default.** You can add this [this federation block](https://github.com/lemmynet/lemmy/blob/main/config/config.hjson#L64) to your `lemmy.hjson`, and ask other servers to add you to their allowlist.
+**Federasi tidak diatur secara baku.** Anda bisa menambahkan [blok federasi ini](https://github.com/lemmynet/lemmy/blob/main/config/config.hjson#L64) ke `lemmy.hjson` Anda dan minta peladen lain untuk menambahkan Anda ke daftar yang diperbolehkan mereka.
 
-Lemmy uses the ActivityPub protocol (a W3C standard) to enable federation between different servers (often called instances). This is very similar to the way email works. For example, if you use gmail.com, then you can not only send mails to other gmail.com users, but also to yahoo.com, yandex.ru and so on. Email uses the SMTP protocol to achieve this, so you can think of ActivityPub as "SMTP for social media". The amount of different actions possible on social media (post, comment, like, share, etc) means that ActivityPub is much more complicated than SMTP.
+Lemmy menggunakan protokol ActivityPub (standar W3C) untuk mengaktifkan federasi antar peladen berbeda. Ini sangat sama dengan bagaimana surel bekerja. Contohnya, jika Anda menggunakan gmail.com, maka Anda bisa tidak hanya mengirim surel ke pengguna gmail.com lain, tapi juga ke pengguna yahoo.com, yandex.ru, dll. Surel menggunakan protokol SMTP untuk mencapai hal tersebut, jadi Anda bisa menganggap ActivityPub adalah "SMTP untuk media sosial". Jumlah tindakan berbeda yang mungkin dilakukan di media sosial (pos, komentar, suka, bagikan, dll) berarti bahwa ActivityPub jauh lebih rumit daripada SMTP.
 
-As with email, ActivityPub federation happens only between servers. So if you are registered on `enterprise.lemmy.ml`, you only connect to the API of `enterprise.lemmy.ml`, while the server takes care of sending and receiving data from other instances (eg `voyager.lemmy.ml`). The great advantage of this approach is that the average user doesn't have to do anything to use federation. In fact if you are using Lemmy, you are likely already using it. One way to confirm is by going to a community or user profile. If you are on `enterprise.lemmy.ml` and you see a user like `@nutomic@voyager.lemmy.ml`, or a community like `!main@ds9.lemmy.ml`, then those are federated, meaning they use a different instance from yours.
+Sama seperti surel, federasi ActivityPub hanya terjadi antar peladen. Jadi jika Anda terdaftar pada `enterprise.lemmy.ml`, Anda hanya terhubung ke API dari `enterprise.lemmy.ml`, sementara peladen mengurus pengiriman dan penerimaan data dari peladen lainnya (mis. `voyager.lemmy.ml`). Keuntungan besar dari pendekatan ini adalah pengguna biasa tidak harus melakukan apa pun untuk menggunakan federasi. Bahkan jika Anda menggunakan Lemmy, kemungkinan besar Anda sudah menggunakannya. Salah satu cara untuk mengonfirmasinya adalah dengan membuka komunitas atau profil pengguna. Jika Anda berada di `enterprise.lemmy.ml` dan Anda melihat pengguna seperti `@nutomic@voyager.lemmy.ml`, atau komunitas seperti `!main@ds9.lemmy.ml`, maka itu berarti Anda sudah terfederasi, artinya mereka menggunakan peladen yang berbeda dari Anda.
 
-One way you can take advantage of federation is by opening a different instance, like `ds9.lemmy.ml`, and browsing it. If you see an interesting community, post or user that you want to interact with, just copy its URL and paste it into the search of your own instance. Your instance will connect to the other one (assuming the allowlist/blocklist allows it), and directly display the remote content to you, so that you can follow a community or comment on a post. Here are some examples of working searches:
+Salah satu cara Anda bisa mengambil keuntungan dari federasi adalah dengan membuka peladen lain, seperti `ds9.lemmy.ml` dan jelajahi itu. Jika Anda melihat sebuah komunitas, pos, atau pengguna yang menarik yang Anda ingin berinteraksi dengan mereka, tinggal salin URL-nya dan tempel itu di pencarian dari peladen Anda sendiri. Peladen Anda akan terhubung ke yang disebutkan (menganggap daftar yang diperbolehkan/diblokir memperbolehkannya), dan secara langsung menampilkan konten jarak jauh untuk Anda, sehingga Anda bisa mengikuti sebuah komunitas atau berkomentar di sebuah pos. Berikut adalah beberapa contoh dari pencarian yang bekerja: 
 
-- `!main@lemmy.ml` (Community)
-- `@nutomic@lemmy.ml` (User)
-- `https://lemmy.ml/c/programming` (Community)
-- `https://lemmy.ml/u/nutomic` (User)
-- `https://lemmy.ml/post/123` (Post)
-- `https://lemmy.ml/comment/321` (Comment)
+- `!main@lemmy.ml` (Komunitas)
+- `@nutomic@lemmy.ml` (Pengguna)
+- `https://lemmy.ml/c/programming` (Komunitas)
+- `https://lemmy.ml/u/nutomic` (Pengguna)
+- `https://lemmy.ml/post/123` (Pos)
+- `https://lemmy.ml/comment/321` (Komentar)
 
-You can see the list of linked instances by following the "Instances" link at the bottom of any Lemmy page.
+Anda bisa melihat daftar dari peladen yang terhubung dengan mengikuti pada tautan "Peladen" pada bagian bawah dari setiap halaman Lemmy.
 
-## Fetching communities
+## Mengambil komunitas
 
-If you search for a community first time, 20 posts are fetched initially. Only if a least one user on your instance subscribes to the remote community, will the community send updates to your instance. Updates include: 
+Jika Anda mencari sebuah komunitas untuk pertama kali, awal-awal 20 pos akan diambil. Hanya jika paling tidak satu pengguna dari peladen Anda berlangganan ke komunitas jarak jauh yang akan membuat komunitas tersebut mengirim pembaruan ke peladen Anda. Pembaruan termasuk:
 
-- New posts, comments
-- Votes
-- Post, comment edits and deletions
-- Mod actions
+- Pos dan komentar baru
+- Pilihan (Pilih Atas/Bawah)
+- Penyuntingan dan penghapusan pos dan komentar
+- Tindakan moderator
 
-You can copy the URL of the community from the address bar in your browser and insert it in your search field. Wait a few seconds, the post will appear below. At the moment there is no loading indicator for the search, so wait a few seconds if it shows "no results".
+Anda bisa menyalin URL dari komunitas di bilah alamat peramban Anda dan memasukkannya ke bilah pencarian Anda. Tunggu beberapa saat dan pos akan muncul. Saat ini tidak ada penunjuk sedang memuat untuk pencarian, jadi tunggu beberapa saat jika muncul "no results".
 
-## Fetching posts
+## Mengambil pos
 
-Paste the URL of a post into your Lemmy instance's search field. Wait a few seconds until the post appears. This will also fetch the community profile, and the profile of the post creator.
+Tempel URL dari pos ke bilah pencarian peladen Lemmy Anda. Tunggu beberapa saat sampai posnya muncul. Ini juga akan mengambil profil komunitas dan profil dari pembuat pos.
 
-## Fetching comments
+## Mengambil komentar
 
-If you find an interesting comment under a posting on another instance, you can find below the comment in the 3-dot-menu the link-symbol. Copy this link. It looks like `https://lemmy.ml/post/56382/comment/40796`. Remove the `post/XXX` part and put it into your search-bar. For this example, search for `https://lemmy.ml/comment/40796`. This comment, all parent comments, users and community and the corresponding post are fetched from the remote instance, if they are not known locally.
+Jika Anda menemukan sebuah komentar yang menarik di bawah pos di peladen lain, Anda bisa mencari di bawah komentar di menu 3 tombol sebuah ikon tautan. Salin tautan tersebut. Bentuknya seperti `https://lemmy.ml/post/56382/comment/40796`. Hapus bagian `post/XXX` dan taruh di bilah pencarian Anda. Untuk contoh tadi, bentuknya seperti `https://lemmy.ml/comment/40796`. Komentar tersebut, semua komentar induk, pengguna dan komunitas, dan semua pos yang berhubungan diambil dari peladen jarak jauh, jika mereka belum dikenali secara lokal.
 
-Sibling comments are not fetched! If you want more comments from older posts, you have to search for each of them as described above.
+Komentar saudara tidak diambil! Jika Anda ingin lebih banyak komentar dari pos lama, Anda harus mencari mereka satu per satu seperti yang dijelaskan di atas.

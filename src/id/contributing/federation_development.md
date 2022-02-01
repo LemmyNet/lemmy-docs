@@ -45,7 +45,7 @@ sudo docker-compose up -d
 ## Model Keamanan
 
 - Verifikasi tanda digital HTTP : Ini menjamin bahwa aktifitas memang datang dari aktifitas yang diklaim
-- check_is_apub_valid : Memastikan bahwa itu ada di daftar peladen yang diperbolehkan Makes sure its in our allowed instances list
+- check_is_apub_valid : Memastikan bahwa itu ada di daftar peladen yang diperbolehkan
 - Pemeriksaan tingkat rendah : Untuk memastikan bahwa pengguna bisa membuat/memperbarui/menghapus pos di peladen yang sama dengan pos tersebut
 
 Untuk poin terakhir, harap dicatat bahwa kita *tidak* memeriksa apakah aktor yang mengirimkan aktifitas membuat sebuah pos sebenarnya sama dengan pembuat pos, atau pengguna yang menghapus pos merupakan moderator/admin. Hal tersebut diperiksa oleh kode API, dan merupakan tanggung jawab setiap peladen untuk memeriksa izin pengguna. Ini tidak meninggalkan vektor serangan apa pun, karena sebagai pengguna peladen normal tidak bisa melakukan aksi yang melanggar peraturan API. Satu-satunya yang bisa melakukannya adalah admin (dan perangkat lunak yang digunakan oleh admin). Tapi admin bisa melakukan apa pun di peladen, termasuk mengirim aktifitas dari akun pengguna lainnya. Jadi kita tidak akan mendapatkan keamanan apa pun dengan memeriksa izin mod dan serupa.
