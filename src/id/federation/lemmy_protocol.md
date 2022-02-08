@@ -340,7 +340,7 @@ Remove an existing mod from the community. Has to be sent by an existing communi
 Blocks a user from a community, so he can't participate in it.
 
 ```json
-{{#include ../../../include/crates/apub/assets/lemmy/activities/community/block_user.json}}
+{{#include ../../../include/crates/apub/assets/lemmy/activities/block/block_user.json}}
 ```
 
 #### Undo Block User
@@ -348,7 +348,7 @@ Blocks a user from a community, so he can't participate in it.
 Reverts a previous user block.
 
 ```json
-{{#include ../../../include/crates/apub/assets/lemmy/activities/community/block_user.json}}
+{{#include ../../../include/crates/apub/assets/lemmy/activities/block/block_user.json}}
 ```
 
 ### User to User

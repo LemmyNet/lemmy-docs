@@ -12,6 +12,7 @@ Before reading this, have a look at our [Federation Overview](contributing_feder
 - [Actors](#actors)
   * [Community](#community)
   * [User](#user)
+  * [Instance](#instance)
 - [Objects](#objects)
   * [Post](#post)
   * [Comment](#comment)
@@ -116,6 +117,27 @@ Sends and receives activities from/to other users: `Create/Note`, `Update/Note`,
 | `publicKey` | The public key used to verify signatures from this actor |
 
 The user inbox is not actually implemented yet, and is only a placeholder for ActivityPub implementations which require it.
+
+### Instance
+
+Represents a Lemmy instance, and is used to federate global data like the instance description or site bans. It can be fetched from the root path.
+
+```json
+{{#include ../../../include/crates/apub/assets/lemmy/objects/instance.json}}
+```
+
+| Field Name  | Description                                              |
+|-------------|----------------------------------------------------------|
+| `name`      | Instance name                                            |
+| `summary`   | Short description                                        |
+| `content`   | Long description (sidebar)                               |
+| `icon`      | Instance icon                                            |
+| `image`     | Instance banner                                          |
+| `inbox`     | ActivityPub inbox URL                                    |
+| `endpoints` | Contains URL of shared inbox                             |
+| `published` | Datetime when the instance was created                   |
+| `updated`   | Datetime when the instance metadata                      |
+| `publicKey` | The public key used to verify signatures from this actor |
 
 ## Objects
 
@@ -337,10 +359,11 @@ Remove an existing mod from the community. Has to be sent by an existing communi
 
 #### Block User
 
-Blocks a user from a community, so he can't participate in it.
+Blocks a user so he can't participate anymore. The scope is determined by the `target` field: either a community, or a whole instance. The `remove_data` field can optionally be set to indicate that all previous posts of the user should
+be deleted.
 
 ```json
-{{#include ../../../include/crates/apub/assets/lemmy/activities/community/block_user.json}}
+{{#include ../../../include/crates/apub/assets/lemmy/activities/block/block_user.json}}
 ```
 
 #### Undo Block User
@@ -348,7 +371,7 @@ Blocks a user from a community, so he can't participate in it.
 Reverts a previous user block.
 
 ```json
-{{#include ../../../include/crates/apub/assets/lemmy/activities/community/block_user.json}}
+{{#include ../../../include/crates/apub/assets/lemmy/activities/block/undo_block_user.json}}
 ```
 
 ### User to User
