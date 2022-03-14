@@ -62,3 +62,7 @@ curl -H "Accept: application/activity+json" https://your-instance.com/comment/12
 Check that [federation is allowed on both instances](../federation/administration.md#instance-allowlist-and-blocklist).
 
 Also ensure that the time is accurately set on your server. Activities are signed with a timestamp, and will be discarded if it is off by more than 10 seconds.
+
+### Other instances don't receive actions reliably
+
+Lemmy uses a queue to send out activities. The size of this queue is specified by the config value `federation.worker_count`. Very large instances might need to increase this value. Search the logs for "Activity queue stats", if it is consistently larger than the worker_count (default: 64), the count needs to be increased.

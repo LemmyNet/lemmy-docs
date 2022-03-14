@@ -11,6 +11,8 @@ Lemmy has two primary installation methods:
 
 We recommend using Ansible, because it simplifies the installation and also makes updating easier.
 
+Lemmy uses roughly 150 MB of RAM in the default Docker installation. CPU usage is negligible. 
+
 ### Other installation methods
 > ⚠️ **Under your own risk.**
 
