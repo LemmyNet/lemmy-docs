@@ -8,8 +8,8 @@ mkdir /lemmy
 cd /lemmy
 
 # download default config files
-wget https://raw.githubusercontent.com/LemmyNet/lemmy/main/docker/prod/docker-compose.yml
-wget https://raw.githubusercontent.com/LemmyNet/lemmy/main/docker/lemmy.hjson
+wget https://raw.githubusercontent.com/LemmyNet/lemmy-ansible/main/templates/docker-compose.yml
+wget https://raw.githubusercontent.com/LemmyNet/lemmy-ansible/main/examples/config.hjson
 
 # Set correct permissions for pictrs folder
 mkdir -p volumes/pictrs
@@ -46,9 +46,4 @@ You will also need to setup TLS, for example with [Let's Encrypt](https://letsen
 
 ## Updating
 
-To update to the newest version, you can manually change the version in `docker-compose.yml`. Alternatively, fetch the latest version from our git repo:
-
-```bash
-wget https://raw.githubusercontent.com/LemmyNet/lemmy/main/docker/prod/docker-compose.yml
-docker-compose up -d
-```
+To update to the newest version, you need to change the versions for lemmy and lemmy-ui in `docker-compose.yml`.
