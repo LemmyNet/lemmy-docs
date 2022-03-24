@@ -11,7 +11,7 @@
   - [Install on AWS](administration/on_aws.md)
   - [First Steps](administration/first_steps.md)
   - [Configuration](administration/configuration.md)
-  - [Theming Guide](client_development/theming.md)
+  - [Theming Guide](administration/theming.md)
   - [Getting started with Federation](administration/federation_getting_started.md)
   - [Troubleshooting](administration/troubleshooting.md)
   - [Backup and Restore](administration/backup_and_restore.md)
