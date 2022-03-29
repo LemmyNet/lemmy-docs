@@ -34,8 +34,9 @@ Minimal Lemmy config, put this in `/etc/lemmy/lemmy.hjson` (see [here](https://g
   # replace with your domain
   hostname: example.com
   bind: "127.0.0.1"
-  # put a random string here (required for login token encryption)
-  jwt_secret: "changeme"
+  federation: {
+    enabled: true
+  }
 }
 ```
 
