@@ -30,9 +30,9 @@ brew install node yarn
 
 ### Get the back end source code
 ```
-git clone https://github.com/LemmyNet/lemmy.git
+git clone https://github.com/LemmyNet/lemmy.git --recursive
 # or alternatively from gitea
-# git clone https://yerbamate.ml/LemmyNet/lemmy.git
+# git clone https://yerbamate.ml/LemmyNet/lemmy.git --recursive
 ```
 
 ### Build the backend (Rust)
@@ -43,7 +43,7 @@ cargo build
 
 ### Get the front end source code
 ```
-git clone https://github.com/LemmyNet/lemmy-ui.git --recurse-submodules
+git clone https://github.com/LemmyNet/lemmy-ui.git --recursive
 ```
 
 ### Setup postgresql
