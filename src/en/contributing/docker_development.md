@@ -6,7 +6,7 @@
 ```bash
 sudo apt install git docker-compose
 sudo systemctl start docker
-git clone https://github.com/LemmyNet/lemmy
+git clone https://github.com/LemmyNet/lemmy --recursive
 ```
 
 ### Arch-based distro
@@ -14,7 +14,7 @@ git clone https://github.com/LemmyNet/lemmy
 ```bash
 sudo pacman -S git docker-compose
 sudo systemctl start docker
-git clone https://github.com/LemmyNet/lemmy
+git clone https://github.com/LemmyNet/lemmy --recursive
 ```
 
 ## Running
