@@ -3,46 +3,46 @@
 
 Dokumen ini untuk siapa saja yang ingin mengetahui bagaimana federasi Lemmy bekerja, tanpa terlalu teknis. Ini dimaksudkan untuk memberikan tinjauan umum tingkat tinggi terhadap federasi ActivityPub di Lemmy. Jika Anda mengimplementasikan ActivityPub sendiri dan ingin kompatibel dengan Lemmy, baca [Garis Besar API ActivityPub](contributing_apub_api_outline.md) kami.
 
-## Documentation conventions
+## Konvensi dokumentasi
 
-To keep things simple, sometimes you will see things formatted like `Create/Note` or `Delete/Event` or `Undo/Follow`. The thing before the slash is the Activity, and the thing after the slash is the Object inside the Activity, in an `object` property. So these are to be read as follows:
+Untuk mempermudah, kadang kala Anda akan melihat sesuatu diformat seperti `Create/Note` atau `Delete/Event` atau `Undo/Follow`. Hal sebelum garis miring adalah Aktivitas dan setelahnya adalah Objek di dalam Aktivitas, di properti `object`. Jadi itu dibaca sebagai berikut:
 
-* `Create/Note`: a `Create` activity containing a `Note` in the `object` field 
-* `Delete/Event`: a `Delete` activity containing an `Event` in the `object` field
-* `Undo/Follow`: an `Undo` activity containing a `Follow` in the `object` field
+* `Create/Note`: sebuah aktivitas `Create` yang mengandung `Note` di bidang `object`
+* `Delete/Event`: sebuah aktivitas `Delete` yang mengandung `Event` di bidang `object`
+* `Undo/Follow`: sebuah aktivitas `Undo` yang mengandung `Follow` di bidang `object`
 
-In Lemmy we use some specific terms to refer to ActivityPub items. They are essentially our specific implementations of well-known ActivityPub concepts:
+Di Lemmy, kami menggunakan beberapa hal spesifik yang merujuk kepada item ActivityPub. Mereka sejatinya adalah implementasi kami terhadap konsep ActivityPub: 
 
-- Community: `Group`
-- User: `Person`
-- Post: `Page`
-- Comment: `Note`
+- Komunitas: `Group`
+- Pengguna: `Person`
+- Pos: `Page`
+- Komentar: `Note`
 
-This document has three main sections:
+Dokumentasi ini memiliki tiga bagian utama:
 
-* __Federation philosophy__ lays out the general model of how this is intended to federate
-* __User Activities__ describes which actions that a User can take to interact
-* __Community Activities__ describes what the Community does in response to certain User actions
+* __Filosofi Federasi__ menjabarkan gambaran umum bagaimana ini ditujukan untuk federasi
+* __Aktivitas Pengguna__ menjelaskan tindakan apa yang Pengguna bisa lakukan untuk berinteraksi
+* __Aktivitas Komunitas__ menjelaskan apa yang Komunitas lakukan sebagai respons terhadap tindakan beberapa Pengguna
 
-## Federation philosophy
+## Filosofi Federasi
 
-The primary Actor in Lemmy is the Community. Each community resides on a single instance, and consists of a list of Posts and a list of followers. The primary interaction is that of a User sending a Post or Comment related activity to the Community inbox, which then announces it to all its followers. 
+Aktor utama di Lemmy adalah Komunitas. Setiap komunitas berada di suatu peladen tunggal dan terdiri dari daftar Pos dan daftar pengikut. Interaksi utama adalah Pengguna mengirim Pos atau Komentar terkait aktivitas ke kotak masuk Komunitas, yang kemudian mengumumkannya ke seluruh pengikutnya.
 
-Each Community has a specific creator User, who is responsible for setting rules, appointing moderators, and removing content that violates the rules.
+Setiap Komunitas memiliki Pengguna pembuat tertentu, yang bertanggung jawab untuk mengatur peraturan, mengangkat moderator, dan menghapus konten yang melanggar peraturan. 
 
-Besides moderation on the community level, each instance has a set of administrator Users, who have the power to do site-wide removals and bans.
+Selain moderasi di tingkat komunitas, setiap peladen memiliki seperangkat Pengguna administrator, yang mempunyai kekuasaan untuk melakukan penghapusan dan pelarangan tingkat situs.
 
-Users follow Communities that they are interested in, in order to receive Posts and Comments. They also vote on Posts and Comments, as well as creating new ones. Comments are organised in a tree structure and commonly sorted by number of votes. Direct messages between Users are also supported.
+Pengguna mengikuti Komunitas yang mereka tertarik kepada mereka untuk menerima Pos dan Komentar. Mereka juga memilih pada Pos dan Komentar, dan juga membuat yang baru. Komentar dikelola dalam struktur pohon dan biasanya diurut berdasarkan jumlah pilihan. Pesan langsung antar Pengguna juga didukung.
 
-Users can not follow each other, and neither can Communities follow anything.
+Pengguna tidak bisa mengikuti satu sama lain dan Komunitas juga tidak bisa mengikuti apa pun.
 
-Our federation implementation is already feature complete, but so far we haven't focused at all on complying with the ActivityPub spec. As such, Lemmy is likely not compatible with implementations which expect to send and receive valid activities. This is something we plan to fix in the near future. Check out [#698](https://github.com/LemmyNet/lemmy/issues/698) for an overview of our deviations.
+Implementasi federasi kami sudah komplit fitur, tapi kami sampai saat ini belum fokus untuk mengikuti spesifikasi ActivityPub. Karena itu, Lemmy kemungkinan besar tidak akan kompatibel dengan implementasi yang mengharapkan untuk mengirim dan menerima aktivitas yang valid. Ini adalah sesuatu yang kami akan perbaiki di masa mendatang. Periksa [#698](https://github.com/LemmyNet/lemmy/issues/698) untuk gambaran penyimpangan kami.
 
-## User Activities
+## Aktivitas Pengguna
 
-### Follow a Community
+### Mengikuti sebuah Komunitas
 
-Each Community page has a "Follow" button. Clicking this triggers a `Follow` activity to be sent from the user to the Community inbox. The Community will automatically respond with an `Accept/Follow` activity to the user inbox. It will also add the user to its list of followers, and deliver any activities about Posts/Comments in the Community to the user.
+Setiap halaman Komunitas memiliki tombol "Ikuti". Mengkliknya akan memicu sebuah aktivitas `Follow` untuk dikirim dari pengguna ke kotak masuk Komunitas. Komunitas akan secara otomatis merespons dengan aktivitas `Accept/Follow` ke kotak masuk pengguna. Itu juga akan menambahkan pengguna tersebut ke daftar pengikutnya dan mengirimkan setiap aktivitas terkait Pos/Komentar di Komunitas ke pengguna. 
 
 ### Unfollow a Community
 

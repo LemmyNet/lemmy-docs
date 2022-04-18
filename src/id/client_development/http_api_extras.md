@@ -1,28 +1,28 @@
-# Lemmy HTTP API Extras
+# Ekstra API HTTP Lemmy
 
-This contains extras not in the [API docs](/api).
+Dokumen ini mengandung ekstra yang tidak ada di [dokumentasi API](/api).
 
 <!-- toc -->
 
-- [Curl Examples](#curl-examples)
-- [HTTP API exclusive features](#http-api-exclusive-features)
-  * [RSS/Atom feeds](#rssatom-feeds)
-  * [Images](#images)
-    + [Create (request)](#create-request)
-    + [Create (response)](#create-response)
-    + [Delete](#delete)
+- [Contoh Curl](#contoh-curl)
+- [Fitur khusus API HTTP](#fitur-khusus-api-http)
+  * [Umpan RSS/Atom](#umpan-rssatom)
+  * [Gambar](#gambar)
+    + [Buat (permintaan)](#buat-permintaan)
+    + [Buat (respons)](#buat-respons)
+    + [Hapus](#hapus)
 
 <!-- tocstop -->
 
-## Curl Examples
+## Contoh Curl
 
-**GET example**
+**Contoh GET**
 
 ```
 curl "http://localhost:8536/api/v2/community/list?sort=Hot"`
 ```
 
-**POST example**
+**Contoh POST**
 
 ```
 curl -i -H \
@@ -36,34 +36,34 @@ curl -i -H \
 http://localhost:8536/api/v2/comment/like
 ```
 
-## HTTP API exclusive features
+## Fitur Khusus API HTTP
 
-These features cannot be accessed from the WebSocket API:
+Fitur berikut tidak bisa diakses dari API WebSocket:
 
-- [RSS/Atom feeds](#rss-atom-feeds)
-- [Images](#images)
+- [Umpan RSS/Atom](#umpan-rssatom)
+- [Gambar](#gambar)
 
-### RSS/Atom feeds
+### Umpan RSS/Atom
 
-- All - `/feeds/all.xml?sort=Hot`
-- Community - `/feeds/c/community-name.xml?sort=Hot`
-- User - `/feeds/u/user-name.xml?sort=Hot`
+- Semua - `/feeds/all.xml?sort=Hot`
+- Komunitas - `/feeds/c/community-name.xml?sort=Hot`
+- Pengguna - `/feeds/u/user-name.xml?sort=Hot`
 
-### Images
+### Gambar
 
-Lemmy forwards image requests to a locally running Pictrs.
+Lemmy meneruskan permintaan gambar ke Pictrs yang berjalan di lokal.
 
 `GET /pictrs/image/{filename}?format={webp, jpg, ...}&thumbnail={96}`
 
-*Format and thumbnail are optional.*
+*Format dan keluku opsional.*
 
-#### Create (request)
+#### Buat (Permintaan)
 
-Uploaded content must be valid multipart/form-data with an image array located within the images[] key.
+Konten yang diunggah harus merupakan data format/multi-bagian dengan _array_ gambar yang terletak di dalam kunci images[].
 
 `POST /pictrs/image` 
 
-#### Create (response)
+#### Buat (respons)
 
 ```
 {
@@ -77,6 +77,6 @@ Uploaded content must be valid multipart/form-data with an image array located w
 }
 ```
 
-#### Delete
+#### Hapus
 
 `GET /pictrs/image/delete/{delete_token}/{file}`
