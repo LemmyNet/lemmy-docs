@@ -21,7 +21,7 @@ lemmy-epsilon | lemmy_epsilon | [127.0.0.1:8580](http://127.0.0.1:8580) | menggu
 
 Anda bisa masuk ke setiap itu dengan nama peladen dan `lemmy` sebagai kata sandinya, misal (`lemmy_alpha`, `lemmy`). 
 
-Untuk memulai federasi antar peladen, kunjungi salah satu dari itu dan cari satu pengguna, komunitas, atau pos, seperti ini. Mohon dicatat bahwa bagian-belakang Lemmy berjalan di port yang berbeda dari antarmuka, jadi Anda harus menambahkan angka port di bilah URL dengan satu.
+Untuk memulai federasi antar peladen, kunjungi salah satu dari itu dan cari satu pengguna, komunitas, atau pos, seperti ini. Mohon dicatat bahwa bagian-belakang Lemmy berjalan di porta yang berbeda dari antarmuka, jadi Anda harus menambahkan angka porta di bilah URL dengan satu.
 - `!main@lemmy-alpha:8541`
 - `http://lemmy-beta:8551/post/3`
 - `@lemmy-gamma@lemmy-gamma:8561`

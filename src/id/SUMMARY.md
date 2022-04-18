@@ -20,7 +20,7 @@
 - [Pengembangan Klien](client_development/client_development.md)
   - [Ekstra API HTTP](client_development/http_api_extras.md)
   - [Panduan Membuat Tema](client_development/theming.md)
-  - [Membuat Tampilan Depan Kustom](client_development/custom_frontend.md)
+  - [Membuat Antarmuka Kustom](client_development/custom_frontend.md)
 - [Kontribusi](contributing/contributing.md)
   - [Pengembangan Docker](contributing/docker_development.md)
   - [Pengembangan Lokal](contributing/local_development.md)

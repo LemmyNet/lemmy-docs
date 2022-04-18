@@ -14,7 +14,7 @@ Tujuan utama proyek ini adalah untuk membuat alternatif dari Reddit dan pengumpu
 
 Tidak ada pemegang modal dan tidak ada iklan tertarget: hanya orang yang membagikan hal yang mereka ingin bagikan dengan yang lainnya.
 
-Setiap peladen Lemmy bisa menentukan kebijakan moderasinya sendiri-sendiri; mengangkat admin tingkat situs, moderator komunitas untuk waspada terhadap troll, dan memupuk lingkungan yang sehat di mana semua bisa dengan nyaman berkontribusi.
+Setiap peladen Lemmy bisa menentukan kebijakan moderasinya sendiri-sendiri; mengangkat admin tingkat situs, moderator komunitas untuk waspada terhadap _troll_, dan memupuk lingkungan yang sehat di mana semua bisa dengan nyaman berkontribusi.
 
 *Catatan: Federasi masih dalam pengembangan aktif*
 

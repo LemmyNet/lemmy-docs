@@ -1,14 +1,14 @@
-# Creating a Custom Frontend
+# Membuat Antarmuka Kustom
 
-The backend and frontend are completely decoupled, and run in independent Docker containers. They only communicate over the [Lemmy API](api_reference.md), which makes it quite easy to write alternative frontends.
+Bagian belakang dan antarmuka terpisah dan berjalan di kontainer Docker mandiri. Mereka hanya berkomunikasi lewat [API Lemmy](api_reference.md), yang membuat mudah untuk menulis antarmuka alternatif.
 
-This creates a lot of potential for custom frontends, which could change much of the design and user experience of Lemmy. For example, it would be possible to create a frontend in the style of a traditional forum like [phpBB](https://www.phpbb.com/), or a question-and-answer site like [stackoverflow](https://stackoverflow.com/). All without having to think about database queries, authentification or ActivityPub, which you essentially get for free.
+Ini membuka banyak potensi untuk antarmuka kustom, yang bisa mengubah banyak desain dan pengalaman pengguna Lemmy. Contoh, mungkin bisa untuk membuat sebuah antarmuka dalam gaya forum tradisional seperti [phpBB](https://www.phpbb.com/) atau gaya tanya-jawab seperti [stackoverflow](https://stackoverflow.com/), dll. Semuanya tanpa harus memikirkan tentang kueri basis data, autentikasi, atau ActivityPub, yang semua bisa Anda dapatkan secara gratis.
 
-## Development
+## Pengembangan
 
-You can use any language to create a custom frontend. The easiest option would be forking our [official frontend](https://github.com/LemmyNet/lemmy-ui), [lemmy-lite](https://github.com/IronOxidizer/lemmy-lite), or the [lemmy-frontend-example](https://github.com/LemmyNet/lemmy-front-end-example). In any case, the principle is the same: bind to `LEMMY_EXTERNAL_HOST` (default: `localhost:8536`) and handle requests using the Lemmy API at `LEMMY_INTERNAL_HOST` (default: `lemmy:8536`). Also use `LEMMY_HTTPS` to generate links with the correct protocol.
+Anda bisa menggunakan bahasa apa pun untuk membuat antarmuka kustom. Pilihan termudah adalah dengan _fork_ [antarmuka resmi](https://github.com/LemmyNet/lemmy-ui), [lemmy-lite](https://github.com/IronOxidizer/lemmy-lite), atau [lemmy-frontend-example](https://github.com/LemmyNet/lemmy-front-end-example). Apa pun itu, prinsipnya sama: _bind_ ke `LEMMY_EXTERNAL_HOST` (baku: `localhost:8536`) dan mengelola permintaan menggunakan API Lemmy di `LEMMY_INTERNAL_HOST` (baku: `lemmy:8536`). Gunakan juga `LEMMY_HTTPS` untuk membuat tautan dengan protokol yang benar.
 
-The next step is building a Docker image from your frontend. If you forked an existing project, it should already include a `Dockerfile` and instructions to build it. Otherwise, try searching for your language on [dockerhub](https://hub.docker.com/), official images usually have build instructions in their readme. Build a Docker image with a tag, then look for the following section in `docker/dev/docker-compose.yml`:
+Langkah selanjutnya adalah membangun _image_ Docker dari antarmuka Anda. Jika Anda _fork_ proyek yang sudah ada sebelumnya, seharusnya ada `Dockerfile` di sana dan instruksi untuk membangunnya. Kalau tidak, coba cari dalam bahasa Anda di [dockerhub](https://hub.docker.com/), _image_ resmi biasanya mempunyai instruksi membangun di README mereka. Buat sebuah _image_ Docker dengan tanda, kemudian cari bagian berikut di `docker/dev/docker-compose.yml`:
 
 ```
   lemmy-ui:
@@ -24,25 +24,25 @@ The next step is building a Docker image from your frontend. If you forked an ex
       - lemmy
 ```
 
-All you need to do is replace the value for `image` with the tag of your own Docker image (and possibly the environment variables if you need different ones). Then run `./docker_update.sh`, and after compilation, your frontend will be available on `http://localhost:1235`. You can also make the same change to `docker/federation/docker-compose.yml` and run `./start-local-instances.bash` to test federation with your frontend.
+Yang hanya harus Anda lakukan adalah mengganti nilai untuk `image` dengan tanda dari _image_ Docker Anda (dan kalau bisa variabel lingkungannya, jika Anda membutuhkan yang berbeda). Kemudian jalankan `./docker_update.sh`, dan setelah penyusunan, antarmuka Anda akan tersedia di `http://localhost:1235`. Anda juga bisa membuat perubahan yang sama ke `docker/federation/docker-compose.yml` dan jalankan `./start-local-instances.bash` untuk menguji federasi dengan antarmuka Anda.
 
-## Deploy with Docker
+## Pasang dengan Docker
 
-After building the Docker image, you need to push it to a Docker registry (such as [dockerhub](https://hub.docker.com/)). Then update the `docker-compose.yml` on your server, replacing the `image` for `lemmy-ui`, just as described above. Run `docker-compose.yml`, and after a short wait, your instance will use the new frontend.
+Setelah membangun _image_ Docker, Anda perlu memasukkannya ke sebuah registri Docker (seperti [dockerhub](https://hub.docker.com/)). Kemudian perbarui `docker-compose.yml` di peladen Anda, mengganti `image` untuk `lemmy-ui`, seperti yang dijelaskan di atas. Jalankan `docker-compose.yml`, kemudian setelah beberapa saat peladen Anda akan menggunakan antarmuka yang baru.
 
-Note, if your instance is deployed with Ansible, it will override `docker-compose.yml` with every run, reverting back to the default frontend. In that case you should copy the `ansible/` folder from this project to your own repository, and adjust `docker-compose.yml` directly in the repo.
+Perlu dicatat, jika peladen Anda dipasang menggunakan Ansible, ini akan menimpa `docker-compose.yml` di setiap pemulaian, mengembalikannya ke antarmuka baku. Jika begitu, Anda harus menyalin folder `ansible/` dari proyek ini ke repositori Anda, dan atur `docker-compose.yml` langsung di repo.
 
-It is also possible to use multiple frontends for the same Lemmy instance, either using subdomains or subfolders. To do that, don't edit the `lemmy-ui` section in `docker-compose.yml`, but duplicate it, adjusting the name, image and port so they are distinct for each. Then edit your nginx config to pass requests to the appropriate frontend, depending on the subdomain or path.
+Mungkin juga untuk menggunakan berbagai antarmuka untuk satu peladen yang sama, antara menggunakan subdomain atau subfolder. Untuk itu, jangan sunting bagian `lemmy-ui` di `docker-compose.yml`, tapi gandakan itu, atur nama, _image_, dan porta sehingga satu sama lain berbeda. Kemudian sunting konfigurasi nginx untuk meneruskan permintaan ke antarmuka yang sesuai, tergantung subdomain atau jalurnya.
 
-## Translations
+## Terjemahan
 
-You can add the [lemmy-translations](https://github.com/LemmyNet/lemmy-translations) repository to your project as a [git submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules). That way you can take advantage of same translations used in the official frontend, and you will also receive new translations contributed via weblate.
+Anda bisa menambahkan repositori [lemmy-translations](https://github.com/LemmyNet/lemmy-translations) ke proyek Anda sebagai [git submodule](https://git-scm.com/book/id/v2/Git-Tools-Submodules). Dengan begitu, Anda bisa memanfaatkan terjemahan yang sama dengan yang digunakan di antarmuka resmi dan juga akan bisa menerima terjemahan baru yang dikontribusikan lewat Weblate.
 
-## Rate limiting
+## Pembatasan
 
-Lemmy does rate limiting for many actions based on the client IP. But if you make any API calls on the server side (eg in the case of server-side rendering, or javascript pre-rendering), Lemmy will take the IP of the Docker container. Meaning that all requests come from the same IP, and get rate limited much earlier. To avoid this problem, you need to pass the headers `X-REAL-IP` and `X-FORWARDED-FOR` on to Lemmy (the headers are set by our nginx config).
+Lemmy melakukan pembatasan untuk banyak tindakan berdasarkan IP klien. Tetapi, jika Anda melakukan panggilan API di sisi peladen (cth. seperti _rendering_ sisi peladen, atau pra-_rendering_ javascript), Lemmy akan mengambil IP dari kontainer Docker. Artinya semua permintaan datang dari IP yang sama, dan akan dibatasi lebih cepat. Untuk menghindari permasalahan ini, Anda perlu meneruskan tajuk `X-REAL-IP` dan `X-FORWARDED-FOR` ke Lemmy (tajuk diatur oleh konfigurasi nginx kami).
 
-Here is an example snipped for NodeJS:
+Berikut adalah contoh potongan untuk NodeJS:
 
 ```javascript
 function setForwardedHeaders(
