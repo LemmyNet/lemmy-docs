@@ -1,40 +1,40 @@
-# Federation Administration
+# Administrasi Federasi
 
-Note: ActivityPub federation is still under development. We recommend that you only enable it on test instances for now.
+Catatan: federasi ActivityPub sedang dalam pengembangan. Untuk saat ini, direkomendasikan hanya diaktifkan di peladen uji dulu.
 
-To enable federation, change the setting `federation.enabled` to `true` in `lemmy.hjson`, and restart Lemmy.
+Untuk mengaktifkan federasi, ubah pengaturan `federation.enabled` ke `true` di `lemmy.hjson`, dan mulai ulang Lemmy.
 
-Federation does not start automatically, but needs to be triggered manually through the search. To do this you have to enter a reference to a remote object, such as:
+Federasi tidak dimulai secara otomatis, tapi harus dipicu secara manual melalui pencarian. Untuk itu, Anda harus memasukkan referensi ke objek jarak jauh, seperti:
 
-- `!main@lemmy.ml` (Community)
-- `@nutomic@lemmy.ml` (User)
-- `https://lemmy.ml/c/programming` (Community)
-- `https://lemmy.ml/u/nutomic` (User)
-- `https://lemmy.ml/post/123` (Post)
-- `https://lemmy.ml/comment/321` (Comment)
+- `!main@lemmy.ml` (Komunitas)
+- `@nutomic@lemmy.ml` (Pengguna)
+- `https://lemmy.ml/c/programming` (Komunitas)
+- `https://lemmy.ml/u/nutomic` (Pengguna)
+- `https://lemmy.ml/post/123` (Pos)
+- `https://lemmy.ml/comment/321` (Komentar)
 
-For an overview of how federation in Lemmy works on a technical level, check out our [Federation Overview](contributing_federation_overview.md).
+Untuk tinjauan bagaimana federasi di Lemmy bekerja dalam tingkat teknis, periksa [Tinjauan Federasi](overview.md) kami.
 
-## Federation Modes
+## Mode Federasi
 
-Through the combination of federation config options, there are a couple different federation modes, differing in their restrictiveness. For now we don't recommend to use open federation, because moderation tools are lacking and there might be security problems in the federation code. Open federation should be fine for test instances and smaller instances, but bigger instances should prefer to use a more closed federation. 
+Melalui kombinasi pilihan konfigurasi federasi, ada beberapa mode federasi yang berbeda, tergantung kepada pembatasannya. Untuk sekarang, kami tidak merekomendasikan untuk menggunakan federasi terbuka, karena alat moderasi masih lacak dan mungkin masih ada masalah keamanan di kode federasi. Federasi terbuka seharusnya baik-baik saja untuk peladen uji atau kecil, tapi peladen besar disarankan untuk menggunakan federasi yang lebih tertutup.
 
-It is important to note that these settings only affect sending and receiving of data between instances. If allow federation with a certain instance, and then remove it from the allowlist, this will not affect previously federated data. These communities, users, posts and comments will still be shown. They will just not be updated anymore. And even if an instance is blocked, it can still fetch and display public data from your instance.
+Perlu dicatat bahwa pengaturan tersebut hanya mempengaruhi pengiriman dan penerimaan data antar peladen. Jika federasi dibolehkan dengan suatu peladen, kemudian dihapus dari daftar yang dibolehkan, ini tidak mempengaruhi data yang sudah difederasi sebelumnya. Komunitas, pengguna, pos, dan komentar tersebut masih terlihat, hanya tidak diperbarui saja. Dan bahkan jika suatu peladen diblokir, ia masih bisa mengambil dan menampilkan data publik dari peladen Anda.
 
-### Using allowlist, strict_allowlist = true
+### Menggunakan daftar yang dibolehkan, strict_allowlist = true
 
-The most strict mode. Lemmy will only federate with instances from the allowlist, and block everything else. This includes all posts, comments, votes and private messages, you will only see them if the author is on an allowed instance. This means that remote communities or threads can be incomplete, as your instance will block any posts or comments whose author is not on an allowed instance.
+Mode paling ketat. Lemmy hanya akan terfederasi dengan peladen dari daftar yang dibolehkan, dan memblokir yang lainnya. Ini termasuk semua pos, komentar, pilihan (pilih atas atau bawah), dan pesan pribadi, Anda hanya akan bisa melihat mereka jika pembuatnya ada di peladen yang dibolehkan. Ini berarti komunitas atau utas jarak jauh bisa tidak lengkap, karena peladen Anda memblokir semua pos dan komentar yang pembuatnya tidak di peladen yang dibolehkan.
 
-The blocklist is ignored in this mode.
+Daftar yang diblokir diabaikan.
 
-### Using allowlist, strict_allowlist = false
+### Menggunakan daftar yang dibolehkan, strict_allowlist = false
 
-This mode is a bit more open than the one above. For local communities, the behaviour is identical, only users from allowed instances can post, comment or vote. The difference is with remote communities. The allowlist doesn't apply to them, so you will see all posts, comments and votes in remote communities (unless the author's instance is blocked). Private messages can be sent by any remote user that isn't blocked.
+Mode ini lebih terbuka dari pada yang sebelumnya. Untuk komunitas lokal, perilakunya identik, hanya pengguna dari peladen yang dibolehkan yang bisa pos, komentar, atau memilih. Perbedaannya adalah dengan komunitas jarak jauh. Daftar yang dibolehkan tidak berlaku untuk mereka, jadi Anda akan melihat semua pos, komentar, dan pilihan di komunitas jarak jauh (kecuali peladen yang buat diblokir). Pesan pribadi bisa dikirim oleh pengguna jarak jauh yang tidak diblokir.
 
-If a blocklist is set, all communication with the blocked instances will be prevented, no matter in which context.
+Jika daftar yang diblokir diatur, semua komunikasi dengan peladen yang diblokir akan dicegah, apa pun itu.
 
-### Using only blocklist
+### Hanya menggunakan daftar yang diblokir
 
-If no allowlist is specified, Lemmy will federate with any instance. This is the most open mode, and potentially the most risky, as someone could create a malicious instance, and immediately send spam or other problematic content to your instance. You can use the blocklist to prevent federation with such instances one by one.
+Jika tidak ada daftar yang dibolehkan yang ditunjukkan, Lemmy akan terfederasi dengan peladen apa pun. Ini adalah mode federasi paling terbuka, dan paling riskan, karena bisa saja seseorang membuat peladen yang berbahaya dan langsung mengirim _spam_ dan konten problematis lainnya ke peladen Anda. Anda bisa menggunakan daftar yang diblokir untuk mencegah terfederasi dengan peladen seperti itu.
 
-`strict_allowlist` is ignored in this case.
+`strict_allowlist` diabaikan.

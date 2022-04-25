@@ -1,10 +1,10 @@
-# Lemmy Federation Protocol
+# Protokol Federasi Lemmy
 
-The Lemmy Protocol (or Lemmy Federation Protocol) is a subset of the [ActivityPub Protocol](https://www.w3.org/TR/activitypub/), with some extensions.
+Protokol Lemmy (atau Protokol Federasi Lemmy) merupakan bagian dari Protokol ActivityPub, dengan beberapa tambahan.
 
-This document is targeted at developers who are familiar with the ActivityPub and ActivityStreams protocols. It gives a detailed outline of the actors, objects and activities used by Lemmy.
+Dokumen ini ditujukan untuk pengembang yang familiar dengan protokol ActivityPub dan ActivityStreams. Dokumen ini memberikan gambaran rinci tentang aktor, objek, dan aktivitas yang digunakan oleh Lemmy.
 
-Before reading this, have a look at our [Federation Overview](contributing_federation_overview.md) to get an idea how Lemmy federation works on a high level.
+Sebelum membaca bagian ini, coba lihat pada [Tinjauan Federasi](overview.md) kami untuk mendapatkan gambaran bagaimana federasi Lemmy bekerja pada tingkat tinggi.
 
 <!-- toc -->
 
@@ -49,329 +49,329 @@ Before reading this, have a look at our [Federation Overview](contributing_feder
 
 <!-- tocstop -->
 
-## Context
+## Konteks
 
 ```json
 {{#include ../../../include/crates/apub/assets/lemmy/context.json}}
 ```
 
-The context is identical for all activities and objects.
+Konteks identik untuk semua aktivitas dan objek.
 
-## Actors
+## Aktor
 
-### Community
+### Komunitas
 
-An automated actor. Users can send posts or comments to it, which the community forwards to its followers in the form of `Announce`.
+Aktor terotomatisasi. Pengguna bisa mengirim pos atau komentar ke ini, yang mana komunitas meneruskannya ke pengikutnya dalam bentuk `Announce`.
 
-Sends activities to user: `Accept/Follow`, `Announce`
+Mengirim aktivitas ke pengguna: `Accept/Follow`, `Announce`.
 
-Receives activities from user: `Follow`, `Undo/Follow`, `Create`, `Update`, `Like`, `Dislike`, `Remove` (only admin/mod), `Delete` (only creator), `Undo` (only for own actions)
+Menerima aktivitas dari pengguna: `Follow`, `Undo/Follow`, `Create`, `Update`, `Like`, `Dislike`, `Remove` (hanya admin/moderator), `Delete`  (hanya pembuat), Undo (hanya untuk tindakan sendiri)
 
 ```json
 {{#include ../../../include/crates/apub/assets/lemmy/objects/group.json}}
 ```
 
-| Field Name | Description |
+| Nama Bidang | Deskripsi |
 |---|---|
-| `preferredUsername` | Name of the actor |
-| `name` | Title of the community |
-| `sensitive` | True indicates that all posts in the community are nsfw |
-| `attributedTo` | First the community creator, then all the remaining moderators |
-| `content` | Text for the community sidebar, usually containing a description and rules |
-| `icon` | Icon, shown next to the community name |
-| `image` | Banner image, shown on top of the community page |
-| `inbox` | ActivityPub inbox URL |
-| `outbox` | ActivityPub outbox URL, only contains up to 20 latest posts, no comments, votes or other activities |
-| `followers` | Follower collection URL, only contains the number of followers, no references to individual followers |
-| `endpoints` | Contains URL of shared inbox |
-| `published` | Datetime when the community was first created |
-| `updated` | Datetime when the community was last changed |
-| `publicKey` | The public key used to verify signatures from this actor |
+| `preferredUsername` | Nama aktor |
+| `name` | Judul komunitas |
+| `sensitive` | True menunjukkan bahwa semua pos di komunitas adalah NSFW |
+| `attributedTo` | Pertama, pembuat komunitas, kemudian moderator lainnya |
+| `content` | Teks untuk bilah samping komunitas, biasanya memuat deskripsi dan peraturan |
+| `icon` | Ikon, ditampilkan di sebelah nama komunitas |
+| `image` | Gambar spanduk, ditampilkan di bagian atas halaman komunitas |
+| `inbox` | URL kotak masuk ActivityPub |
+| `outbox` | URL kotak keluar ActivityPub, hanya mengandung 20 pos terakhir, tidak ada komentar, pilihan suara, atau aktivitas lainnya |
+| `followers` | URL koleksi pengikut, hanya mengandung jumlah pengikut, tidak ada penunjuk terhadap pengikut individual |
+| `endpoints` | URL kotak masuk bersama |
+| `published` | Tanggal waktu komunitas dibuat |
+| `updated` | Tanggal waktu komunitas terakhir diubah |
+| `publicKey` | Kunci publik yang digunakan untuk memverifikasi tanda tangan dari aktor ini |
 
-### User
+### Pengguna
 
-A person, interacts primarily with the community where it sends and receives posts/comments. Can also create and moderate communities, and send private messages to other users.
+Orang, yang berinteraksi secara umum dengan komunitas, di mana ia mengirim dan menerima pos dan/atau komentar. Bisa juga membuat dan memoderasi komunitas dan mengirim pesan pribadi ke pengguna lain.
 
-Sends activities to Community: `Follow`, `Undo/Follow`, `Create`, `Update`, `Like`, `Dislike`, `Remove` (only admin/mod), `Delete` (only creator), `Undo` (only for own actions)
+Mengirim aktivitas ke komunitas: `Follow`, `Undo/Follow`, `Create`, `Update`, `Like`, `Dislike`, `Remove` (hanya admin/moderator), `Delete`  (hanya pembuat), `Undo` (hanya untuk tindakan sendiri).
 
-Receives activities from Community: `Accept/Follow`, `Announce`
+Menerima aktivitas dari komunitas: `Accept/Follow`, `Announce`
 
-Sends and receives activities from/to other users: `Create/Note`, `Update/Note`, `Delete/Note`, `Undo/Delete/Note` (all those related to private messages)
+Menerima dan mengirim aktivitas dari/ke pengguna lain: `Create/Note`, `Update/Note`, `Delete/Note`, `Undo/Delete/Note` (semua itu terkait dengan pesan pribadi)
 
 ```json
 {{#include ../../../include/crates/apub/assets/lemmy/objects/person.json}}
 ```
 
-| Field Name | Description |
+| Nama Bidang | Deskripsi |
 |---|---|
-| `preferredUsername` | Name of the actor |
-| `name` | The user's displayname |
-| `content` | User bio |
-| `icon` | The user's avatar, shown next to the username |
-| `image` | The user's banner, shown on top of the profile |
-| `inbox` | ActivityPub inbox URL |
-| `endpoints` | Contains URL of shared inbox |
-| `published` | Datetime when the user signed up |
-| `updated` | Datetime when the user profile was last changed |
-| `publicKey` | The public key used to verify signatures from this actor |
+| `preferredUsername` | Nama aktor |
+| `name` | Nama tampilan pengguna |
+| `content` | Bio pengguna |
+| `icon` | Avatar pengguna, ditampilkan di sebelah nama pengguna |
+| `image` | Spanduk pengguna, ditampilkan di bagian atas profil pengguna |
+| `inbox` | URL kotak masuk ActivityPub |
+| `endpoints` | URL kotak masuk bersama |
+| `published` | Tanggal waktu pengguna mendaftar |
+| `updated` | Tanggal waktu profil pengguna terakhir diubah |
+| `publicKey` | Kunci publik yang digunakan untuk memverifikasi tanda tangan dari aktor ini |
 
-The user inbox is not actually implemented yet, and is only a placeholder for ActivityPub implementations which require it.
+Kotak masuk pengguna sebenarnya belum diimplementasikan dan hanya sebagai papan nama untuk implementasi ActivityPub yang membutuhkannya.
 
-## Objects
+## Objek
 
-### Post
+### Pos
 
-A page with title, and optional URL and text content. The URL often leads to an image, in which case a thumbnail is included. Each post belongs to exactly one community.
+Halaman dengan judul, dan opsional ada URL dan konten teks. URL biasanya merujuk ke gambar, yang mana kelukunya disertakan. Setiap pos dimiliki oleh hanya satu komunitas.
 
 ```json
 {{#include ../../../include/crates/apub/assets/lemmy/objects/page.json}}
 ```
 
-| Field Name | Description |
+| Nama Bidang | Deskripsi |
 |---|---|
-| `attributedTo` | ID of the user which created this post |
-| `to` | ID of the community where it was posted to |
-| `name` | Title of the post |
-| `content` | Body of the post |
-| `url` | An arbitrary link to be shared |
-| `image` | Thumbnail for `url`, only present if it is an image link |
-| `commentsEnabled` | False indicates that the post is locked, and no comments can be added |
-| `sensitive` | True marks the post as NSFW, blurs the thumbnail and hides it from users with NSFW settign disabled |
-| `stickied` | True means that it is shown on top of the community |
-| `published` | Datetime when the post was created |
-| `updated` | Datetime when the post was edited (not present if it was never edited) |
+| `attributedTo` | ID dari pengguna yang membuat pos tersebut |
+| `to` | ID dari komunitas di mana pos tersebut dipos |
+| `name` | Judul pos |
+| `content` | Badan/Konten pos |
+| `url` | Tautan apa pun untuk dibagian |
+| `image` | Keluku untuk `url`, hanya ada jika tautannya adalah tautan gambar |
+| `commentsEnabled` | False menunjukkan bahwa pos tersebut dikunci dan tidak ada komentar lagi yang bisa ditambahkan |
+| `sensitive` | True menandai pos tersebut sebagai NSFW, mengaburkan kelukunya, dan menyembunyikannya dari pengguna dari pengguna yang pengaturan NSFW-nya dimatikan |
+| `stickied` | True menunjukkan bahwa pos tersebut ditampilkan di bagian atas komunitas |
+| `published` | Tanggal waktu pos dibuat |
+| `updated` | Tanggal waktu pos disunting (tidak ada jika tidak pernah disunting) |
 
-### Comment
+### Komentar
 
-A reply to a post, or reply to another comment. Contains only text (including references to other users or communities). Lemmy displays comments in a tree structure.
+Balasan kepada pos, atau balasan ke komentar lain. Hanya mengandung teks (termasuk referensi ke pengguna atau komunitas lain). Lemmy menampilkan komentar dalam struktur pohon.
 
 ```json
 {{#include ../../../include/crates/apub/assets/lemmy/objects/note.json}}
 ```
 
-| Field Name | Description |
+| Nama Bidang | Deskripsi |
 |---|---|
-| `attributedTo` | ID of the user who created the comment |
-| `to` | Community where the comment was made |
-| `content` | The comment text |
-| `inReplyTo` | IDs of the post where this comment was made, and the parent comment. If this is a top-level comment, `inReplyTo` only contains the post |
-| `published` | Datetime when the comment was created |
-| `updated` | Datetime when the comment was edited (not present if it was never edited) |
+| `attributedTo` | ID dari pengguna yang membuat pos |
+| `to` | Komunitas di mana komentar tersebut dibuat |
+| `content` | Teks komentar |
+| `inReplyTo` | ID pos di mana komentar tersebut dibuat, dan komentar induk (jika ada). Jika komentar ini adalah komentar induk, bidang ini hanya berisi ID pos saja |
+| `published` | Tanggal waktu komentar dibuat |
+| `updated` | Tanggal waktu komentar disunting (tidak ada jika tidak pernah disunting) |
 
-### Private Message
+### Pesan Pribadi
 
-A direct message from one user to another. Can not include additional users. Threading is not implemented yet, so the `inReplyTo` field is missing.
+Pesan langsung dari satu pengguna ke pengguna lain. Tidak bisa ada pengguna ketiga yang bergabung. Pengutasan belum diimplementasikan, jadi bidang `inReplyTo` tidak ada.
 
 ```json
 {{#include ../../../include/crates/apub/assets/lemmy/objects/chat_message.json}}
 ```
 
-| Field Name | Description |
+| Nama Bidang | Deskripsi |
 |---|---|
-| `attributedTo` | ID of the user who created this private message |
-| `to` | ID of the recipient |
-| `content` | The text of the private message |
-| `published` | Datetime when the message was created |
-| `updated` | Datetime when the message was edited (not present if it was never edited) |
+| `attributedTo` | ID pengguna yang membuat pesan pribadi |
+| `to` | ID penerima |
+| `content` | Teks pesan pribadi |
+| `published` | Tanggal waktu pesan dibuat |
+| `updated` | Tanggal waktu pesan disunting (tidak ada jika tidak pernah disunting) |
 
-## Collections
+## Koleksi
 
-### Community Outbox
+### Kotak Keluar Komunitas
 
 ```json
 {{#include ../../../include/crates/apub/assets/lemmy/collections/group_outbox.json}}
 ```
 
-The outbox only contains `Create/Post` activities for now.
+Saat ini, kotak keluar hanya mengandung aktivitas `Create/Post`.
 
-### Community Followers
+### Pengikut Komunitas
 
 ```json
 {{#include ../../../include/crates/apub/assets/lemmy/collections/group_followers.json}}
 ```
 
-The followers collection is only used to expose the number of followers. Actor IDs are not included, to protect user privacy.
+Koleksi/Statistik pengikut hanya digunakan untuk menampilkan jumlah pengikut komunitas. ID aktor tidak diikutkan untuk melindungi privasi pengguna.
 
-### Community Moderators
+### Moderator Komunitas
 
 ```json
 {{#include ../../../include/crates/apub/assets/lemmy/collections/group_moderators.json}}
 ```
 
-### User Outbox
+### Kotak Keluar Pengguna
 
 ```json
 {{#include ../../../include/crates/apub/assets/lemmy/collections/person_outbox.json}}
 ```
 
-## Activities
+## Aktivitas
 
-### User to Community
+### Pengguna ke Komunitas
 
-#### Follow
+#### Ikuti
 
-When the user clicks "Subscribe" in a community, a `Follow` is sent. The community automatically responds with an `Accept/Follow`.
+Ketika pengguna mengklik "Langgan" di komunitas, aktivitas `Follow`  dikirim. Secara otomatis komunitas membalas dengan `Accept/Follow`.
 
 ```json
 {{#include ../../../include/crates/apub/assets/lemmy/activities/following/follow.json}}
 ```
 
-#### Unfollow
+#### Batal Ikuti
 
-Clicking on the unsubscribe button in a community causes an `Undo/Follow` to be sent. The community removes the user from its follower list after receiving it.
+Ketika pengguna mengklik "Berhenti Berlangganan" di komunitas, aktivitas `Undo/Follow` dikirim. Setelah menerima aktivitas tersebut, komunitas menghapus pengguna tersebut dari daftar pengikutnya.
 
 ```json
 {{#include ../../../include/crates/apub/assets/lemmy/activities/following/undo_follow.json}}
 ```
 
 
-#### Report Post or Comment
+#### Lapor Pos atau Komentar
 
-Reports a post or comment for rule violation, so that mods/admins review it.
+Melaporkan pos atau komentar sebagai pelanggaran peraturan, supaya admin/moderator bisa meninjaunya.
 
 ```json
 {{#include ../../../include/crates/apub/assets/lemmy/activities/community/report_page.json}}
 ```
 
-### Community to User
+### Komunitas ke Pengguna
 
-#### Accept Follow
+#### Menerima Ikuti
 
-Automatically sent by the community in response to a `Follow`. At the same time, the community adds this user to its followers list.
+Secara otomatis dikirim oleh komunitas sebagai balasan untuk aktivitas `Follow`. Saat yang bersamaan, komunitas menambahkan pengguna tersebut ke daftar pengikutnya.
 
 ```json
 {{#include ../../../include/crates/apub/assets/lemmy/activities/following/accept.json}}
 ```
 
-#### Announce
+#### Mengumumkan
 
-When the community receives a post or comment activity, it wraps that into an `Announce` and sends it to all followers.
+Ketika komunitas menerima aktivitas pos atau komentar, itu kemudian dibungkus menjadi aktivitas `Announce` dan mengirimkannya ke seluruh pengikutnya.
 
 ```json
 {{#include ../../../include/crates/apub/assets/lemmy/activities/community/announce_create_page.json}}
 ```
 
-### Announcable
+### Bisa Diumumkan
 
-All of these activities are sent from a user to a community. The community then wraps it in an Announce activity, and sends it to its followers.
+Semua aktivitas di bawah ini dikirim dari pengguna ke komunitas. Komunitas kemudian membungkusnya sebagai aktivitas `Announce` dan mengirimkannya ke pengikutnya.
 
-#### Create or Update Post
+#### Buat atau Perbarui Pos
 
-When a user creates a new post, it is sent to the respective community. Editing a previously created post sends an almost identical activity, except the `type` being `Update`. We don't support mentions in posts yet.
+Ketika pengguna membuat pos baru, itu dikirim ke komunitas terkait. Menyunting pos yang sudah dibuat sebelumnya akan mengirim aktivitas yang hampir identik, perbedaannya adalah `type` menjadi `Update`. Penyebutan di pos belum didukung.
 
 ```json
 {{#include ../../../include/crates/apub/assets/lemmy/activities/create_or_update/create_page.json}}
 ```
 
-#### Create or Update Comment
+#### Buat atau Perbarui Komentar
 
-A reply to a post, or to another comment. Can contain mentions of other users. Editing a previously created post sends an almost identical activity, except the `type` being `Update`.
+Balasan kepada pos, atau komentar lain. Bisa mengandung penyebutan pengguna lain. Menyunting komentar yang sudah dibuat sebelumnya akan mengirim aktivitas yang hampir identik, perbedaannya adalah `type` menjadi `Update`.
 
 ```json
 {{#include ../../../include/crates/apub/assets/lemmy/activities/create_or_update/create_note.json}}
 ```
 
-#### Like Post or Comment
+#### Sukai Pos atau Komentar
 
-An upvote for a post or comment.
+Pilih naik untuk pos atau komentar.
 
 ```json
 {{#include ../../../include/crates/apub/assets/lemmy/activities/voting/like_note.json}}
 ```
 
-#### Dislike Post or Comment
+#### Tidak Sukai Pos atau Komentar
 
-A downvote for a post or comment.
+Pilih turun untuk pos atau komentar.
 
 ```json
 {{#include ../../../include/crates/apub/assets/lemmy/activities/voting/dislike_page.json}}
 ```
 
-#### Undo Like or Dislike Post or Comment
+#### Urung Sukai atau Tidak Sukai Pos atau Komentar
 
-Remove a vote that was previously done by the same user.
+Hapus suara (pilih atas atau pilih turun) yang dilakukan oleh pengguna yang sama.
 
 ```json
 {{#include ../../../include/crates/apub/assets/lemmy/activities/voting/undo_like_note.json}}
 ```
 
-#### Delete Post or Comment
+#### Hapus Pos atau Komentar
 
-Deletes a previously created post or comment. This can only be done by the original creator of that post/comment.
+Hapus pos atau komentar. Ini hanya bisa dilakukan oleh pembuat pos atau komentar tersebut.
 
 ```json
 {{#include ../../../include/crates/apub/assets/lemmy/activities/deletion/delete_page.json}}
 ```
 
-#### Remove Post or Comment
+#### Bersihkan Pos atau Komentar
 
-Removes a post or comment. This can only be done by a community mod, or by an admin on the instance where the community is hosted. The difference to delete is that remove activities have a summary field, which contains the reason for removal, as provided by the mod/admin.
+Bersihkan pos atau komentar. Ini hanya bisa dilakukan oleh moderator komunitas atau admin dari peladen di mana komunitas tersebut berada. Perbedaan dari penghapusan adalah aktivitas pembersihan mempunyai bidang ringkasan, yang mengandung alasan pembersihan, yang diberikan oleh moderator atau admin.
 
 ```json
 {{#include ../../../include/crates/apub/assets/lemmy/activities/deletion/remove_note.json}}
 ```
 
-#### Undo Delete or Remove
+#### Urung Penghapusan atau Pembersihan
 
-Reverts the action done by the activity in the object field. In this example, the removed Note is restored.
+Urung tindakan oleh aktivitas di bidang objek. Dalam contoh di bawah, komentar yang dibersihkan dipulihkan.
 
 ```json
 {{#include ../../../include/crates/apub/assets/lemmy/activities/deletion/undo_remove_note.json}}
 ```
 
-#### Add Mod
+#### Tambah Moderator
 
-Add a new mod to the community. Has to be sent by an existing community mod, or an admin of the community's instance.
+Tambah moderator baru ke sebuah komunitas. Harus dikirim dari moderator komunitas tersebut, atau admin dari peladen di mana komunitas tersebut berada.
 
 ```json
 {{#include ../../../include/crates/apub/assets/lemmy/activities/community/add_mod.json}}
 ```
 
-#### Remove Mod
+#### Keluarkan Moderator
 
-Remove an existing mod from the community. Has to be sent by an existing community mod, or an admin of the community's instance.
+Keluarkan moderator yang saat itu dari sebuah komunitas. Harus dikirim dari moderator komunitas tersebut, atau admin dari peladen di mana komunitas tersebut berada.
 
 ```json
 {{#include ../../../include/crates/apub/assets/lemmy/activities/community/remove_mod.json}}
 ```
 
-#### Block User
+#### Larang Pengguna
 
-Blocks a user from a community, so he can't participate in it.
-
-```json
-{{#include ../../../include/crates/apub/assets/lemmy/activities/block/block_user.json}}
-```
-
-#### Undo Block User
-
-Reverts a previous user block.
+Larang pengguna dari sebuah komunitas, sehingga ia tidak bisa berpartisipasi di komunitas tersebut.
 
 ```json
 {{#include ../../../include/crates/apub/assets/lemmy/activities/block/block_user.json}}
 ```
 
-### User to User
+#### Urung Larang Pengguna
 
-#### Create or Update Private message 
+Urung pelarangan pengguna.
 
-Creates a new private message between two users.
+```json
+{{#include ../../../include/crates/apub/assets/lemmy/activities/block/block_user.json}}
+```
+
+### Pengguna ke Pengguna
+
+#### Buat atau Perbarui Pesan Pribadi
+
+Buat pesan pribadi antar dua pengguna.
 
 ```json
 {{#include ../../../include/crates/apub/assets/lemmy/activities/private_message/create.json}}
 ```
 
-#### Delete Private Message
+#### Hapus Pesan Pribadi
 
-Deletes a previous private message.
+Hapus pesan pribadi.
 
 ```json
 {{#include ../../../include/crates/apub/assets/lemmy/activities/private_message/delete.json}}
 ```
 
-#### Undo Delete Private Message
+#### Urung Hapus Pesan Pribadi
 
-Restores a previously deleted private message. The `object` is regenerated from scratch, as such the activity ID and other fields are different.
+Pulihkan pesan pribadi yang dihapus. `object` kembali dihasilkan dari awal, karena itu ID aktivitas dan bidang lainnya berbeda dengan yang sebelumnya.
 
 ```json
 {{#include ../../../include/crates/apub/assets/lemmy/activities/private_message/undo_delete.json}}

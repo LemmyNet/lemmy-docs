@@ -44,84 +44,80 @@ Implementasi federasi kami sudah komplit fitur, tapi kami sampai saat ini belum 
 
 Setiap halaman Komunitas memiliki tombol "Ikuti". Mengkliknya akan memicu sebuah aktivitas `Follow` untuk dikirim dari pengguna ke kotak masuk Komunitas. Komunitas akan secara otomatis merespons dengan aktivitas `Accept/Follow` ke kotak masuk pengguna. Itu juga akan menambahkan pengguna tersebut ke daftar pengikutnya dan mengirimkan setiap aktivitas terkait Pos/Komentar di Komunitas ke pengguna. 
 
-### Unfollow a Community
+### Batal Mengikuti Komunitas
 
-After following a Community, the "Follow" button is replaced by "Unfollow". Clicking this sends an `Undo/Follow` activity to the Community inbox. The Community removes the User from its followers list and doesn't send any activities to it anymore.
+Setelah mengikuti sebuah Komunitas, tombol "Ikuti" berubah menjadi "Batal Ikuti". Mengklik ini akan mengirim aktivitas `Undo/Follow` ke kotak masuk Komunitas. Komunitas tersebut menghapus Pengguna dari daftar pengikutnya dan tidak akan mengirim aktivitas apa pun lagi ke ia.
 
-### Create a Post
+### Membuat Pos
 
-When a user creates a new Post in a given Community, it is sent as `Create/Page` to the  Community
-inbox. 
+Ketika pengguna membuat Pos di Komunitas tertentu, itu akan dikirim sebagai `Create/Page` ke kotak masuk Komunitas tersebut.
 
-### Create a Comment
+### Membuat Komentar
 
-When a new Comment is created for a Post, both the Post ID and the parent Comment ID (if it exists)
-are written to the `in_reply_to` field. This allows assigning it to the correct Post, and building
-the Comment tree. It is then sent to the Community inbox as `Create/Note`
+Ketika sebuah Komentar baru dibuat untuk sebuah Pos, baik ID Pos dan ID Komentar induk (jika ada) ditulis ke bidang `in_reply_to`. Ini memungkinkan untuk menetapkannya ke Pos yang benar dan membangun pohon Komentar. Kemudian itu dikirim ke kotak masuk Komunitas sebagai `Create/Note` 
 
-The origin instance also scans the Comment for any User mentions, and sends the `Create/Note` to
-those Users as well.
+Peladen asal juga memindai Komentar untuk sebutan Pengguna apa pun dan mengirim aktivitas `Create/Note` ke Pengguna tersebut.
 
-### Edit a Post
+### Menyunting Pos
 
-Changes the content of an existing Post. Can only be done by the creating User.
+Mengubah konten dari Pos yang sudah ada. Hanya bisa dilakukan oleh Pengguna yang membuat.
 
-### Edit a Comment
+### Menyunting Komentar
 
-Changes the content of an existing Comment. Can only be done by the creating User.
+Mengubah konten dari Komentar yang sudah ada. Hanya bisa dilakukan oleh Pengguna yang membuat.
 
-### Likes and Dislikes
+### Suka dan Tidak Suka
 
-Users can like or dislike any Post or Comment. These are sent as `Like/Page`, `Dislike/Note` etc to the Community inbox.
+Pengguna bisa suka dan tidak sukai Pos atau Komentar apa pun. Itu dikirim sebagai `Like/Page`, `Dislike/Note`, dll. ke kotak masuk Komunitas.
 
-### Deletions
+### Penghapusan
 
-The creator of a Post, Comment or Community can delete it. It is then sent to the Community followers. The item is then hidden from all users.
+Pembuat dari Pos, Komentar, atau Komunitas bisa menghapus yang dibuatnya. Itu kemudian dikirim ke pengikut Komunitas. Kemudian itu disembunyikan dari seluruh pengguna.
 
-### Removals
+### Pembersihan
 
-Mods can remove Posts and Comments from their Communities. Admins can remove any Posts or Comments on the entire site. Communities can also be removed by admins. The item is then hidden from all users.
+Moderator bisa membersihkan Pos dan Komentar dari Komunitas mereka. Administrator bisa membersihkan Pos dan Komentar apa pun dari seluruh peladen ia sendiri. Komunitas juga bisa dibersihkan oleh administrator. Kemudian, itu disembunyikan dari seluruh pengguna.
 
-Removals are sent to all followers of the Community, so that they also take effect there. The exception is if an admin removes an item from a Community which is hosted on a different instance. In this case, the removal only takes effect locally.
+Pembersihan dikirim ke seluruh pengikut dari sebuah Komunitass, supaya mereka akan terkena efeknya di sana. Pengecualian dari ini adalah jika administrator membersihkan sesuatu dari Komunitas yang dihos di peladen yang berbeda. Jika begitu, pembersihan hanya berefek secara lokal.
 
-### Revert a previous Action
+### Mengurungkan Tindakan Sebelumnya
 
-We don't delete anything from our database, just hide it from users. Deleted or removed Communities/Posts/Comments have a "restore" button. This button generates an `Undo` activity which sets the original delete/remove activity as object, such as `Undo/Remove/Post` or `Undo/Delete/Community`.
+Tidak ada yang dihapus dari basis data, hanya menyembunyikannya dari pengguna. Komunitas/Pos/Komentar yang telah dihapus atau dibersihkan memiliki tombol "pulihkan". Tombol ini menghasilkan aktivitas `Undo` yang menetapkan aktivitas penghapusan/pembersihan sebelumnya sebagai objek, seperti `Undo/Remove/Post` atau `Undo/Delete/Community`.
 
-Clicking on the upvote button of an already upvoted post/comment (or the downvote button of an already downvoted post/comment) also generates an `Undo`. In this case and `Undo/Like/Post` or `Undo/Dislike/Comment`.
+Mengklik tombol pilih naik dari pos/komentar yang sudah dipilih naikkan (atau pilih turun dari pos/komentar yang sudah dipilih turunkan) akan juga menghasilkan `Undo`. Dalam contoh tersebut akan menghasilkan `Undo/Like/Post` atau `Undo/Dislike/Comment`.
 
-### Create private message
+### Buat Pesan Pribadi
 
-User profiles have a "Send Message" button, which opens a dialog permitting to send a private message to this user. It is sent as a `Create/Note` to the user inbox. Private messages can only be directed at a single User.
+Di profil pengguna ada tombol "Kirim Pesan", yang akan membuka dialog perizinan untuk mengirimkan pesan pribadi ke pengguna ini. Ini dikirim sebagai `Create/Note` ke kotak masuk pengguna tersebut. Pesan pribadi hanya bisa ditujukan kepada satu pengguna tunggal.
 
-### Edit private message
+### Sunting Pesan Pribadi
 
-`Update/Note` changes the text of a previously sent message
+`Update/Note` mengubah teks dari pesan yang telah dikirim sebelumnya.
 
-### Delete private message
+### Hapus Pesan Pribadi
 
-`Delete/Note` deletes a private message.
+`Delete/Note` menghapus pesan pribadi.
 
-### Restore private message
+### Memulihkan Pesan Pribadi
 
-`Undo/Delete/Note` reverts the deletion of a private message.
+`Undo/Delete/Note` mengurungkan penghapusan pesan pribadi.
 
-## Community Activities
+## Aktivitas Komunitas
 
-The Community is essentially a bot, which will only do anything in reaction to actions from Users. The User who first created the Community becomes the first moderator, and can add additional moderators. In general, whenever the Community receives a valid activity in its inbox, that activity is forwarded to all its followers.
+Komunitas itu secara dasarnya adalah bot, yang hanya akan melakukan sesuatu sebagai balasan untuk tindakan dari pengguna. Pengguna yang pertama kali membuat komunitas akan menjadi moderator pertama dan bisa menambahkan moderator tambahan. Secara umum, kapan pun komunitas menerima aktivitas yang valid di kotak masuknya, aktivitas tersebut akan diteruskan ke seluruh pengikutnya.
 
-### Accept follow
+### Menerima Ikuti
 
-If the Community receives a `Follow` activity, it automatically responds with `Accept/Follow`. It also adds the User to its list of followers. 
+Jika komunitas menerima aktivitas `Follow`, maka komunitas akan secara otomatis membalas dengan `Accept/Follow`. Komunitas juga menambahkan pengguna tersebut ke daftar pengikutnya. 
 
-### Unfollow
+### Batal Ikuti
 
-Upon receiving an `Undo/Follow`, the Community removes the User from its followers list.
+Ketika menerima `Undo/Follow`, Komunitas menghapus Pengguna tersebut dari daftar pengikutnya.
  
-### Announce
+### Mengumumkan
 
-If the Community receives any Post or Comment related activity (Create, Update, Like, Dislike, Remove, Delete, Undo), it will Announce this to its followers. For this, an Announce is created with the Community as actor, and the received activity as object. Following instances thus stay updated about any actions in Communities they follow.
+Jika Komunitas menerima aktivitas terkait Pos atau Komentar (Buat, Perbarui, Suka, Tidak Suka, Hapus, Bersihkan, Urung), Komunitas akan mengumumkannya ke pengikutnya. Untuk ini, Mengumumkan dibuat dengan Komunitas sebagai aktor dan aktivitas yang diterima sebagai objek. Karena itu, peladen tersebut dapat terus pembaruan terkait aktivitas di Komunitas yang diikutinya.
 
-### Delete Community
+### Menghapus Komunitas
 
-If the creator or an admin deletes the Community, it sends a `Delete/Group` to all its followers.
+Jika pembuat atau administrator menghapus sebuah Komunitas, itu mengirim `Delete/Group` ke seluruh pengikutnya.
