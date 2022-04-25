@@ -1,3 +1,5 @@
+> This document is available in many language thanks to the contributor. To change the language, click the globe icon above.
+
 ## About The Project
 
 Front Page|Post
