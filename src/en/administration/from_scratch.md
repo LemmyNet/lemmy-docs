@@ -62,7 +62,7 @@ NoNewPrivileges=true
 WantedBy=multi-user.target
 ```
 
-If you did everything right, the Lemmy logs from `journalctl -u lemmy` should show "Starting http server at 127.0.0.1:8536". You can also run `curl localhost:8536/api/v3/site` which should give a successful response, looking like `{"site_view":null,"admins":[],"banned":[],"online":0,"version":"unknown version","my_user":null,"federated_instances":null}`.
+If you did everything right, the Lemmy logs from `journalctl -u lemmy` should show "Starting http server at 127.0.0.1:8536". You can also run `curl localhost:8536/api/{version}/site` which should give a successful response, looking like `{"site_view":null,"admins":[],"banned":[],"online":0,"version":"unknown version","my_user":null,"federated_instances":null}`.
 
 ### Install lemmy-ui (web frontend)
 

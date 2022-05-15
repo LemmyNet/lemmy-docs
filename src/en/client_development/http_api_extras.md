@@ -19,7 +19,7 @@ This contains extras not in the [API docs](/api).
 **GET example**
 
 ```
-curl "http://localhost:8536/api/v2/community/list?sort=Hot"`
+curl "http://localhost:8536/api/{version}/community/list?sort=Hot"`
 ```
 
 **POST example**
@@ -33,7 +33,7 @@ curl -i -H \
   "score": 1,
   "auth": eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MiwiaXNzIjoidGVzdC5sZW1teS5tbCJ9.P77RX_kpz1a_geY5eCp29sl_5mAm-k27Cwnk8JcIZJk
 }' \
-http://localhost:8536/api/v2/comment/like
+http://localhost:8536/api/{version}/comment/like
 ```
 
 ## HTTP API exclusive features
