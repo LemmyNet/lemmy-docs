@@ -9,11 +9,12 @@ steps:
       - git submodule update --recursive --remote
 
   - name: check documentation build
-    image: rust:1.61-slim-buster
+    image: michaelfbryan/mdbook-docker-image:latest
     commands:
+      - apt-get update
+      - apt-get install git cargo -y
       - cargo install mdbook --git https://github.com/Ruin0x11/mdBook.git --branch localization
             --rev 9d8147c --force --debug
-      - apt-get update
-      - apt-get install git -y
       - ./update-includes.sh
+      - echo "\n\n[output.html]\n\n[output.linkcheck]" >> "book.toml"
       - mdbook build .
