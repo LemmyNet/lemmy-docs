@@ -56,7 +56,7 @@ inbox.
 ### Create a Comment
 
 When a new Comment is created for a Post, both the Post ID and the parent Comment ID (if it exists)
-are written to the `in_reply_to` field. This allows assigning it to the correct Post, and building
+are written to the `inReplyTo` field. This allows assigning it to the correct Post, and building
 the Comment tree. It is then sent to the Community inbox as `Create/Note`
 
 The origin instance also scans the Comment for any User mentions, and sends the `Create/Note` to
