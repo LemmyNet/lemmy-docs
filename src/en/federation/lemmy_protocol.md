@@ -381,7 +381,7 @@ Reverts a previous user block.
 Creates a new private message between two users.
 
 ```json
-{{#include ../../../include/crates/apub/assets/lemmy/activities/private_message/create.json}}
+{{#include ../../../include/crates/apub/assets/lemmy/activities/create_or_update/create_private_message.json}}
 ```
 
 #### Delete Private Message
@@ -389,7 +389,7 @@ Creates a new private message between two users.
 Deletes a previous private message.
 
 ```json
-{{#include ../../../include/crates/apub/assets/lemmy/activities/private_message/delete.json}}
+{{#include ../../../include/crates/apub/assets/lemmy/activities/deletion/delete_private_message.json}}
 ```
 
 #### Undo Delete Private Message
@@ -397,5 +397,5 @@ Deletes a previous private message.
 Restores a previously deleted private message. The `object` is regenerated from scratch, as such the activity ID and other fields are different.
 
 ```json
-{{#include ../../../include/crates/apub/assets/lemmy/activities/private_message/undo_delete.json}}
+{{#include ../../../include/crates/apub/assets/lemmy/activities/deletion/undo_delete_private_message.json}}
 ```

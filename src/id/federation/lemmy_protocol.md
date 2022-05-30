@@ -358,7 +358,7 @@ Urung pelarangan pengguna.
 Buat pesan pribadi antar dua pengguna.
 
 ```json
-{{#include ../../../include/crates/apub/assets/lemmy/activities/private_message/create.json}}
+{{#include ../../../include/crates/apub/assets/lemmy/activities/create_or_update/create_private_message.json}}
 ```
 
 #### Hapus Pesan Pribadi
@@ -366,7 +366,7 @@ Buat pesan pribadi antar dua pengguna.
 Hapus pesan pribadi.
 
 ```json
-{{#include ../../../include/crates/apub/assets/lemmy/activities/private_message/delete.json}}
+{{#include ../../../include/crates/apub/assets/lemmy/activities/deletion/delete_private_message.json}}
 ```
 
 #### Urung Hapus Pesan Pribadi
@@ -374,5 +374,5 @@ Hapus pesan pribadi.
 Pulihkan pesan pribadi yang dihapus. `object` kembali dihasilkan dari awal, karena itu ID aktivitas dan bidang lainnya berbeda dengan yang sebelumnya.
 
 ```json
-{{#include ../../../include/crates/apub/assets/lemmy/activities/private_message/undo_delete.json}}
+{{#include ../../../include/crates/apub/assets/lemmy/activities/deletion/undo_delete_private_message.json}}
 ```
