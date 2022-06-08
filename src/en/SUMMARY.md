@@ -21,6 +21,7 @@
   - [Lemmy Protocol](federation/lemmy_protocol.md)
 - [Client Development](client_development/client_development.md)
   - [HTTP API extras](client_development/http_api_extras.md)
+  - [Rust API](client_development/rust_api.md)
   - [Creating a Custom Frontend](client_development/custom_frontend.md)
 - [Contributing](contributing/contributing.md)
   - [Docker Development](contributing/docker_development.md)
