@@ -18,6 +18,8 @@ This contains extras not in the [API docs](/api).
 
 **GET example**
 
+The current api `{version}` is [here](https://github.com/LemmyNet/lemmy-js-client/blob/main/src/interfaces/others.ts#L1).
+
 ```
 curl "http://localhost:8536/api/{version}/community/list?sort=Hot"`
 ```
