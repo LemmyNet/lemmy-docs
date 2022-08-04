@@ -18,3 +18,7 @@ cd server
 ```hjson
 {{#include ../../../include/config/defaults.hjson}}
 ```
+
+## Lemmy-UI configuration
+
+Lemmy-UI can be configured using environment variables, detailed in its [README](https://github.com/LemmyNet/lemmy-ui#readme).
