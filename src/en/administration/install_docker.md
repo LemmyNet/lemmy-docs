@@ -1,6 +1,6 @@
 # Docker Installation
 
-Make sure you have both docker and docker-compose(>=`1.24.0`) installed. On Ubuntu, just run `apt install docker-compose docker.io`. Next, 
+Make sure you have both docker and docker-compose(>=`1.24.0`) installed. On Ubuntu, just run `apt install docker-compose docker.io`. Next,
 
 ```bash
 # create a folder for the lemmy files. the location doesnt matter, you can put this anywhere you want
@@ -8,8 +8,8 @@ mkdir /lemmy
 cd /lemmy
 
 # download default config files
-wget https://raw.githubusercontent.com/LemmyNet/lemmy/main/docker/prod/docker-compose.yml
-wget https://raw.githubusercontent.com/LemmyNet/lemmy/main/docker/prod/lemmy.hjson
+wget https://raw.githubusercontent.com/LemmyNet/lemmy/release/v0.16/docker/prod/docker-compose.yml
+wget https://raw.githubusercontent.com/LemmyNet/lemmy/release/v0.16/docker/lemmy.hjson
 
 # Set correct permissions for pictrs folder
 mkdir -p volumes/pictrs
