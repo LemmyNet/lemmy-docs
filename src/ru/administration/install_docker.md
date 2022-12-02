@@ -8,9 +8,8 @@ mkdir /lemmy
 cd /lemmy
 
 # загрузите кнфигурацию по умолчанию
-wget https://raw.githubusercontent.com/LemmyNet/lemmy/main/docker/prod/docker-compose.yml
-wget https://raw.githubusercontent.com/LemmyNet/lemmy/main/docker/lemmy.hjson
-wget https://raw.githubusercontent.com/LemmyNet/lemmy/main/docker/iframely.config.local.js
+wget https://raw.githubusercontent.com/LemmyNet/lemmy/release/v0.16/docker/prod/docker-compose.yml
+wget https://raw.githubusercontent.com/LemmyNet/lemmy/release/v0.16/docker/prod/lemmy.hjson
 
 # Установите корректные разрешения для каталога pictrs
 mkdir -p volumes/pictrs
