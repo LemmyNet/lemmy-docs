@@ -9,7 +9,7 @@ cd /lemmy
 
 # download default config files
 wget https://raw.githubusercontent.com/LemmyNet/lemmy/main/docker/prod/docker-compose.yml
-wget https://raw.githubusercontent.com/LemmyNet/lemmy/main/docker/lemmy.hjson
+wget https://raw.githubusercontent.com/LemmyNet/lemmy/main/docker/prod/lemmy.hjson
 
 # Set correct permissions for pictrs folder
 mkdir -p volumes/pictrs
