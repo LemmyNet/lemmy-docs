@@ -4,7 +4,7 @@ Documentation for the Lemmy project
 
 ## Building
 
-You need to have [Cargo](https://doc.rust-lang.org/cargo/) installed.
+You need to have [Cargo](https://doc.rust-lang.org/cargo/) 1.61 installed.
 
 Our documentation tool [mdbook](https://github.com/rust-lang/mdBook) doesn't support localisation yet, so we are using code that is still work on progress to create our documentation with localisation. Note that this code still has some rough edges. See [github.com/rust-lang/mdBook/pull/1306](https://github.com/rust-lang/mdBook/pull/1306) for more details.
 
