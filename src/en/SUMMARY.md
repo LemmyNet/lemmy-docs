@@ -15,6 +15,7 @@
   - [Getting started with Federation](administration/federation_getting_started.md)
   - [Troubleshooting](administration/troubleshooting.md)
   - [Backup and Restore](administration/backup_and_restore.md)
+  - [Using Caddy as a reverse proxy](administration/caddy.md)
 - [Moderation](moderation/moderation.md)
 - [Federation](federation/federation.md)
   - [Federation Overview](federation/overview.md)
