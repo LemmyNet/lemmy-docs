@@ -20,3 +20,7 @@ In some cases, it might be necessary to use different installation methods. But 
 - [From Scratch](from_scratch.md)
 - [Yunohost](https://install-app.yunohost.org/?app=lemmy) ([source code](https://github.com/YunoHost-Apps/lemmy_ynh))
 - [On Amazon Web Services (AWS)](on_aws.md)
+
+### You could use any other reverse proxy
+
+An Example [Caddy configuration](caddy.md).
