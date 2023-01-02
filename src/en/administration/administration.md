@@ -2,6 +2,8 @@
 
 Information for Lemmy instance admins, and those who want to run a server.
 
+If you have any problems in the installation, you can ask for help in [!lemmy_support](https://lemmy.ml/c/lemmy_support). Do not use Github for support.
+
 ## Install
 ### Official/Supported methods
 
@@ -16,7 +18,7 @@ Lemmy uses roughly 150 MB of RAM in the default Docker installation. CPU usage i
 ### Other installation methods
 > ⚠️ **Under your own risk.**
 
-In some cases, it might be necessary to use different installation methods. But we don't recommend this, and can't provide support for them.
+In some cases, it might be necessary to use different installation methods.
 - [From Scratch](from_scratch.md)
 - [Yunohost](https://install-app.yunohost.org/?app=lemmy) ([source code](https://github.com/YunoHost-Apps/lemmy_ynh))
 - [On Amazon Web Services (AWS)](on_aws.md)
