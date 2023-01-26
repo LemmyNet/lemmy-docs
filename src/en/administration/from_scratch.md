@@ -8,14 +8,30 @@ These instructions are written for Ubuntu 20.04.
 
 It is built from source, so this may take a while, especially on slow devices. For example, Lemmy v0.12.2 takes 17 minutes to build on a dual core VPS. If you prefer prebuilt binaries, use Docker.
 
+Install Rust by following the instructions on [Rustup](https://rustup.rs/).
+
+Lemmy supports image hosting using [pict-rs](https://git.asonix.dog/asonix/pict-rs/). We need to install a couple of dependencies for this. You can also skip these steps if you don't require image hosting.
+
+Pict-rs requires the `magick` command which comes with Imagemagick version 7, but Ubuntu 20.04 only comes with Imagemagick 6. So you need to install that command manually, eg from the [official website](https://imagemagick.org/script/download.php#linux).
+
+```bash
+apt install ffmpeg exiftool libgexiv2-dev --no-install-recommends
+wget https://download.imagemagick.org/ImageMagick/download/binaries/magick
+# compare hash with the "message digest" on the official page linked above
+sha256sum magick
+mv magick /usr/bin/
+chmod 755 /usr/bin/magick
+```
+
 Compile and install Lemmy, setup database:
 ```bash
-apt install pkg-config libssl-dev libpq-dev cargo postgresql
+apt install pkg-config libssl-dev libpq-dev postgresql
 # installs latest release, you can also specify one with --version
 # The --locked argument uses the exact versions of dependencies specified in
 # `cargo.lock`at release time. Running it without the flag will use newer minor 
 # release versions of those dependencies, which are not always guaranteed to compile.
-cargo install lemmy_server --target-dir /usr/bin/ --locked
+# Remove the parameter `--features embed-pictrs` if you don't require image hosting.
+cargo install lemmy_server --target-dir /usr/bin/ --locked --features embed-pictrs
 # replace db-passwd with a randomly generated password
 sudo -iu postgres psql -c "CREATE USER lemmy WITH PASSWORD 'db-passwd';"
 sudo -iu postgres psql -c "CREATE DATABASE lemmy WITH OWNER lemmy;"
@@ -35,6 +51,10 @@ Minimal Lemmy config, put this in `/etc/lemmy/lemmy.hjson` (see [here](https://g
   federation: {
     enabled: true
   }
+  # remove this block if you don't require image hosting
+  pictrs: {
+    url: "http://localhost:8080/"
+  }
 }
 ```
 
@@ -48,6 +68,9 @@ After=network.target
 User=lemmy
 ExecStart=/usr/bin/lemmy_server
 Environment=LEMMY_CONFIG_LOCATION=/etc/lemmy/lemmy.hjson
+# remove these two lines if you don't need pict-rs
+Environment=PICTRS_PATH=/var/lib/pictrs
+Environment=PICTRS_ADDR=127.0.0.1:8080
 Restart=on-failure
 
 # Hardening
@@ -60,7 +83,7 @@ NoNewPrivileges=true
 WantedBy=multi-user.target
 ```
 
-If you did everything right, the Lemmy logs from `journalctl -u lemmy` should show "Starting http server at 127.0.0.1:8536". You can also run `curl localhost:8536/api/{version}/site` which should give a successful response, looking like `{"site_view":null,"admins":[],"banned":[],"online":0,"version":"unknown version","my_user":null,"federated_instances":null}`.
+If you did everything right, the Lemmy logs from `journalctl -u lemmy` should show "Starting http server at 127.0.0.1:8536". You can also run `curl localhost:8536/api/{version}/site` which should give a successful response, looking like `{"site_view":null,"admins":[],"banned":[],"online":0,"version":"unknown version","my_user":null,"federated_instances":null}`. For pict-rs, run `curl 127.0.0.1:8080` and ensure that it outputs nothing (particularly no errors).
 
 ### Install lemmy-ui (web frontend)
 
@@ -74,7 +97,7 @@ curl -fsSL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 sudo apt install nodejs yarn
 ```
 
-Clone the git repo, checkout the version you want (0.12.2 in this case), and compile it.
+Clone the git repo, checkout the version you want (0.16.7 in this case), and compile it.
 ```bash
 mkdir /var/lib/lemmy-ui
 cd /var/lib/lemmy-ui
@@ -82,7 +105,7 @@ chown lemmy:lemmy .
 # dont compile as admin
 sudo -u lemmy bash
 git clone https://github.com/LemmyNet/lemmy-ui.git --recursive .
-git checkout 0.12.2 # replace with the version you want to install
+git checkout 0.16.7 # replace with the version you want to install
 yarn install --pure-lockfile
 yarn build:prod
 exit
@@ -145,64 +168,13 @@ nginx -s reload
 
 Now open your Lemmy domain in the browser, and it should show you a configuration screen. Use it to create the first admin user and the default community.
 
-### Pict-rs (for image hosting, optional)
-
-Pict-rs requires a newer Rust version than the one available in Ubuntu 20.04 repos. So you need to install [Rustup](https://rustup.rs/) which installs the toolchain for you.
-
-```bash
-apt install ffmpeg exiftool libgexiv2-dev --no-install-recommends
-adduser pictrs --system --disabled-login --no-create-home --group
-mkdir /var/lib/pictrs-source
-cd /var/lib/pictrs
-git clone https://git.asonix.dog/asonix/pict-rs.git .
-# check docker-compose.yml for pict-rs version used by lemmy
-# https://github.com/LemmyNet/lemmy-ansible/blob/main/templates/docker-compose.yml#L40 
-git checkout v0.2.6-r2
-# or simply add the bin folder to your $PATH
-$HOME/.cargo/bin/cargo build --release
-cp target/release/pict-rs /usr/bin/
-# create folder to store image data
-mkdir /var/lib/pictrs
-chown pictrs:pictrs /var/lib/pictrs
-```
-
-Pict-rs requires the `magick` command which comes with Imagemagick version 7, but Ubuntu 20.04 only comes with Imagemagick 6. So you need to install that command manually, eg from the [official website](https://imagemagick.org/script/download.php#linux).
-```
-wget https://download.imagemagick.org/ImageMagick/download/binaries/magick
-# compare hash with the "message digest" on the official page linked above
-sha256sum magick
-mv magick /usr/bin/
-chmod 755 /usr/bin/magick
-```
-
-Just like before, place the config below in `/etc/systemd/system/pictrs.service`, then run `systemctl enable pictrs` and `systemctl start pictrs`.
-```
-[Unit]
-Description=pict-rs - A simple image host
-After=network.target
-
-[Service]
-User=pictrs
-ExecStart=/usr/bin/pict-rs
-Environment=PICTRS_PATH=/var/lib/pictrs
-Environment=PICTRS_ADDR=127.0.0.1:8080
-Restart=on-failure
-
-[Install]
-WantedBy=multi-user.target
-```
-
-If it is working correctly, `curl 127.0.0.1:8080` should output nothing (particularly no errors).
-
-Now add the line `pictrs_url: "http://127.0.0.1:8080"` to `/etc/lemmy/lemmy.hjson` so that Lemmy knows how to reach Pict-rs. Then restart Lemmy with `systemctl restart lemmy`, and image uploads should be working.
-
 ## Upgrading
 
 ### Lemmy
 
 ```bash
 # installs latest release, you can also specify one with --version
-cargo install lemmy_server --target-dir /usr/bin/
+cargo install lemmy_server --target-dir /usr/bin/ --features embed-pictrs
 systemctl restart lemmy
 ```
 
