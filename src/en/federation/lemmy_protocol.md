@@ -359,7 +359,7 @@ Remove an existing mod from the community. Has to be sent by an existing communi
 
 #### Block User
 
-Blocks a user so he can't participate anymore. The scope is determined by the `target` field: either a community, or a whole instance. The `remove_data` field can optionally be set to indicate that all previous posts of the user should
+Blocks a user so he can't participate anymore. The scope is determined by the `target` field: either a community, or a whole instance. The `removeData` field can optionally be set to indicate that all previous posts of the user should
 be deleted.
 
 ```json
