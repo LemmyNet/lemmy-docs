@@ -10,43 +10,43 @@ Before reading this, have a look at our [Federation Overview](contributing_feder
 
 - [Context](#context)
 - [Actors](#actors)
-  * [Community](#community)
-  * [User](#user)
-  * [Instance](#instance)
+  - [Community](#community)
+  - [User](#user)
+  - [Instance](#instance)
 - [Objects](#objects)
-  * [Post](#post)
-  * [Comment](#comment)
-  * [Private Message](#private-message)
+  - [Post](#post)
+  - [Comment](#comment)
+  - [Private Message](#private-message)
 - [Collections](#collections)
-  * [Community Outbox](#community-outbox)
-  * [Community Followers](#community-followers)
-  * [Community Moderators](#community-moderators)
-  * [User Outbox](#user-outbox)
+  - [Community Outbox](#community-outbox)
+  - [Community Followers](#community-followers)
+  - [Community Moderators](#community-moderators)
+  - [User Outbox](#user-outbox)
 - [Activities](#activities)
-  * [User to Community](#user-to-community)
-    + [Follow](#follow)
-    + [Unfollow](#unfollow)
-    + [Report Post or Comment](#report-post-or-comment)
-  * [Community to User](#community-to-user)
-    + [Accept Follow](#accept-follow)
-    + [Announce](#announce)
-  * [Announcable](#announcable)
-    + [Create or Update Post](#create-or-update-post)
-    + [Create or Update Comment](#create-or-update-comment)
-    + [Like Post or Comment](#like-post-or-comment)
-    + [Dislike Post or Comment](#dislike-post-or-comment)
-    + [Undo Like or Dislike Post or Comment](#undo-like-or-dislike-post-or-comment)
-    + [Delete Post or Comment](#delete-post-or-comment)
-    + [Remove Post or Comment](#remove-post-or-comment)
-    + [Undo Delete or Remove](#undo-delete-or-remove)
-    + [Add Mod](#add-mod)
-    + [Remove Mod](#remove-mod)
-    + [Block User](#block-user)
-    + [Undo Block User](#undo-block-user)
-  * [User to User](#user-to-user)
-    + [Create or Update Private message](#create-or-update-private-message)
-    + [Delete Private Message](#delete-private-message)
-    + [Undo Delete Private Message](#undo-delete-private-message)
+  - [User to Community](#user-to-community)
+    - [Follow](#follow)
+    - [Unfollow](#unfollow)
+    - [Report Post or Comment](#report-post-or-comment)
+  - [Community to User](#community-to-user)
+    - [Accept Follow](#accept-follow)
+    - [Announce](#announce)
+  - [Announcable](#announcable)
+    - [Create or Update Post](#create-or-update-post)
+    - [Create or Update Comment](#create-or-update-comment)
+    - [Like Post or Comment](#like-post-or-comment)
+    - [Dislike Post or Comment](#dislike-post-or-comment)
+    - [Undo Like or Dislike Post or Comment](#undo-like-or-dislike-post-or-comment)
+    - [Delete Post or Comment](#delete-post-or-comment)
+    - [Remove Post or Comment](#remove-post-or-comment)
+    - [Undo Delete or Remove](#undo-delete-or-remove)
+    - [Add Mod](#add-mod)
+    - [Remove Mod](#remove-mod)
+    - [Block User](#block-user)
+    - [Undo Block User](#undo-block-user)
+  - [User to User](#user-to-user)
+    - [Create or Update Private message](#create-or-update-private-message)
+    - [Delete Private Message](#delete-private-message)
+    - [Undo Delete Private Message](#undo-delete-private-message)
 
 <!-- tocstop -->
 
@@ -72,22 +72,22 @@ Receives activities from user: `Follow`, `Undo/Follow`, `Create`, `Update`, `Lik
 {{#include ../../../include/crates/apub/assets/lemmy/objects/group.json}}
 ```
 
-| Field Name | Description |
-|---|---|
-| `preferredUsername` | Name of the actor |
-| `name` | Title of the community |
-| `sensitive` | True indicates that all posts in the community are nsfw |
-| `attributedTo` | First the community creator, then all the remaining moderators |
-| `content` | Text for the community sidebar, usually containing a description and rules |
-| `icon` | Icon, shown next to the community name |
-| `image` | Banner image, shown on top of the community page |
-| `inbox` | ActivityPub inbox URL |
-| `outbox` | ActivityPub outbox URL, only contains up to 20 latest posts, no comments, votes or other activities |
-| `followers` | Follower collection URL, only contains the number of followers, no references to individual followers |
-| `endpoints` | Contains URL of shared inbox |
-| `published` | Datetime when the community was first created |
-| `updated` | Datetime when the community was last changed |
-| `publicKey` | The public key used to verify signatures from this actor |
+| Field Name          | Description                                                                                           |
+| ------------------- | ----------------------------------------------------------------------------------------------------- |
+| `preferredUsername` | Name of the actor                                                                                     |
+| `name`              | Title of the community                                                                                |
+| `sensitive`         | True indicates that all posts in the community are nsfw                                               |
+| `attributedTo`      | First the community creator, then all the remaining moderators                                        |
+| `content`           | Text for the community sidebar, usually containing a description and rules                            |
+| `icon`              | Icon, shown next to the community name                                                                |
+| `image`             | Banner image, shown on top of the community page                                                      |
+| `inbox`             | ActivityPub inbox URL                                                                                 |
+| `outbox`            | ActivityPub outbox URL, only contains up to 20 latest posts, no comments, votes or other activities   |
+| `followers`         | Follower collection URL, only contains the number of followers, no references to individual followers |
+| `endpoints`         | Contains URL of shared inbox                                                                          |
+| `published`         | Datetime when the community was first created                                                         |
+| `updated`           | Datetime when the community was last changed                                                          |
+| `publicKey`         | The public key used to verify signatures from this actor                                              |
 
 ### User
 
@@ -103,18 +103,18 @@ Sends and receives activities from/to other users: `Create/Note`, `Update/Note`,
 {{#include ../../../include/crates/apub/assets/lemmy/objects/person.json}}
 ```
 
-| Field Name | Description |
-|---|---|
-| `preferredUsername` | Name of the actor |
-| `name` | The user's displayname |
-| `content` | User bio |
-| `icon` | The user's avatar, shown next to the username |
-| `image` | The user's banner, shown on top of the profile |
-| `inbox` | ActivityPub inbox URL |
-| `endpoints` | Contains URL of shared inbox |
-| `published` | Datetime when the user signed up |
-| `updated` | Datetime when the user profile was last changed |
-| `publicKey` | The public key used to verify signatures from this actor |
+| Field Name          | Description                                              |
+| ------------------- | -------------------------------------------------------- |
+| `preferredUsername` | Name of the actor                                        |
+| `name`              | The user's displayname                                   |
+| `content`           | User bio                                                 |
+| `icon`              | The user's avatar, shown next to the username            |
+| `image`             | The user's banner, shown on top of the profile           |
+| `inbox`             | ActivityPub inbox URL                                    |
+| `endpoints`         | Contains URL of shared inbox                             |
+| `published`         | Datetime when the user signed up                         |
+| `updated`           | Datetime when the user profile was last changed          |
+| `publicKey`         | The public key used to verify signatures from this actor |
 
 The user inbox is not actually implemented yet, and is only a placeholder for ActivityPub implementations which require it.
 
@@ -127,7 +127,7 @@ Represents a Lemmy instance, and is used to federate global data like the instan
 ```
 
 | Field Name  | Description                                              |
-|-------------|----------------------------------------------------------|
+| ----------- | -------------------------------------------------------- |
 | `name`      | Instance name                                            |
 | `summary`   | Short description                                        |
 | `content`   | Long description (sidebar)                               |
@@ -149,19 +149,19 @@ A page with title, and optional URL and text content. The URL often leads to an 
 {{#include ../../../include/crates/apub/assets/lemmy/objects/page.json}}
 ```
 
-| Field Name | Description |
-|---|---|
-| `attributedTo` | ID of the user which created this post |
-| `to` | ID of the community where it was posted to |
-| `name` | Title of the post |
-| `content` | Body of the post |
-| `url` | An arbitrary link to be shared |
-| `image` | Thumbnail for `url`, only present if it is an image link |
-| `commentsEnabled` | False indicates that the post is locked, and no comments can be added |
-| `sensitive` | True marks the post as NSFW, blurs the thumbnail and hides it from users with NSFW settign disabled |
-| `stickied` | True means that it is shown on top of the community |
-| `published` | Datetime when the post was created |
-| `updated` | Datetime when the post was edited (not present if it was never edited) |
+| Field Name        | Description                                                                                         |
+| ----------------- | --------------------------------------------------------------------------------------------------- |
+| `attributedTo`    | ID of the user which created this post                                                              |
+| `to`              | ID of the community where it was posted to                                                          |
+| `name`            | Title of the post                                                                                   |
+| `content`         | Body of the post                                                                                    |
+| `url`             | An arbitrary link to be shared                                                                      |
+| `image`           | Thumbnail for `url`, only present if it is an image link                                            |
+| `commentsEnabled` | False indicates that the post is locked, and no comments can be added                               |
+| `sensitive`       | True marks the post as NSFW, blurs the thumbnail and hides it from users with NSFW settign disabled |
+| `stickied`        | True means that it is shown on top of the community                                                 |
+| `published`       | Datetime when the post was created                                                                  |
+| `updated`         | Datetime when the post was edited (not present if it was never edited)                              |
 
 ### Comment
 
@@ -171,14 +171,14 @@ A reply to a post, or reply to another comment. Contains only text (including re
 {{#include ../../../include/crates/apub/assets/lemmy/objects/note.json}}
 ```
 
-| Field Name | Description |
-|---|---|
-| `attributedTo` | ID of the user who created the comment |
-| `to` | Community where the comment was made |
-| `content` | The comment text |
-| `inReplyTo` | IDs of the post where this comment was made, and the parent comment. If this is a top-level comment, `inReplyTo` only contains the post |
-| `published` | Datetime when the comment was created |
-| `updated` | Datetime when the comment was edited (not present if it was never edited) |
+| Field Name     | Description                                                                                                                             |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `attributedTo` | ID of the user who created the comment                                                                                                  |
+| `to`           | Community where the comment was made                                                                                                    |
+| `content`      | The comment text                                                                                                                        |
+| `inReplyTo`    | IDs of the post where this comment was made, and the parent comment. If this is a top-level comment, `inReplyTo` only contains the post |
+| `published`    | Datetime when the comment was created                                                                                                   |
+| `updated`      | Datetime when the comment was edited (not present if it was never edited)                                                               |
 
 ### Private Message
 
@@ -188,13 +188,13 @@ A direct message from one user to another. Can not include additional users. Thr
 {{#include ../../../include/crates/apub/assets/lemmy/objects/chat_message.json}}
 ```
 
-| Field Name | Description |
-|---|---|
-| `attributedTo` | ID of the user who created this private message |
-| `to` | ID of the recipient |
-| `content` | The text of the private message |
-| `published` | Datetime when the message was created |
-| `updated` | Datetime when the message was edited (not present if it was never edited) |
+| Field Name     | Description                                                               |
+| -------------- | ------------------------------------------------------------------------- |
+| `attributedTo` | ID of the user who created this private message                           |
+| `to`           | ID of the recipient                                                       |
+| `content`      | The text of the private message                                           |
+| `published`    | Datetime when the message was created                                     |
+| `updated`      | Datetime when the message was edited (not present if it was never edited) |
 
 ## Collections
 
@@ -245,7 +245,6 @@ Clicking on the unsubscribe button in a community causes an `Undo/Follow` to be 
 ```json
 {{#include ../../../include/crates/apub/assets/lemmy/activities/following/undo_follow.json}}
 ```
-
 
 #### Report Post or Comment
 
@@ -376,7 +375,7 @@ Reverts a previous user block.
 
 ### User to User
 
-#### Create or Update Private message 
+#### Create or Update Private message
 
 Creates a new private message between two users.
 

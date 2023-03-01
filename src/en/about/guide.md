@@ -6,11 +6,11 @@ So you want to join Lemmy and get posting. Great! Here's how to dive straight in
 
 The first thing you have to do is **choose your server**. This is an extra step compared to sites like Reddit, but isn’t as difficult as it may seem.
 
-*Like with email, your identity is hosted by the server you sign up on. So for example, I joined lemmy.ml so to mention me you can type @retiolus@lemmy.ml in your post.*
+_Like with email, your identity is hosted by the server you sign up on. So for example, I joined lemmy.ml so to mention me you can type @retiolus@lemmy.ml in your post._
 
 If what you want to talk about most fits into a clear category (maybe it’s video games or art or queer life or coding or fiction, etc) then it might be worth making your first server one where that will primarily host that sort of content – it’ll be easier to make connections and find like-minded folk. Think of your server as a neighbourhood or a venue, where the general chatter can have a specific focus.
 
-*You have the ability to view all public local posts that have been made by people on your server in the “Local” tab.*
+_You have the ability to view all public local posts that have been made by people on your server in the “Local” tab._
 
 If you aren’t here to stick mainly to one topic, you’ll likely want to pick a server that caters to general interests. Either way, there’s a helpful servers list on [join-lemmy.org](https://join-lemmy.org/instances).
 
@@ -30,7 +30,7 @@ Head to the Login page `(https://your.server/login)` of your server and choose y
 
 Next thing to do is upload your profile picture, give the settings page `(https://your.server/settings)` a good once-over (and do come back to it when you’ve been on Lemmy a week or so just to make any tweaks that might help your experience) and get ready to introduce yourself.
 
-*Some interesting settings worth checking are: your default feed sorting filter between subscribed, local or all and your default sorting type.*
+_Some interesting settings worth checking are: your default feed sorting filter between subscribed, local or all and your default sorting type._
 
 While you can simply enjoy reading Lemmy, the real fun begins as you dive in and start participating yourself by posting, voting and commenting.
 
@@ -56,17 +56,17 @@ The standard Lemmy interface has a single feed. You can change the content of th
 
 **All**, or the **federated timeline**, is a view of all the public posts your servers knows about from across the whole network (including local ones). The most common reason that something appears in the federated timeline is that someone from your server might follow a community that's on another server.
 
-| Type | Description |
-| --- | --- |
-| Posts | Only displays publications |
-| Comments | Displays only comments |
-| \-\-\- | \-\-\- |
-| Active | Trending sort based on the score, and the most recent comment time. |
-| Hot | Trending sort based on the score, and the post creation time. |
-| New | The newest items. |
-| Most Comments | The posts with the most comments. |
-| New Comments | The posts with most recent comments, IE a forum-style sort. |
-| Top | The highest scoring items in the given time frame. |
+| Type          | Description                                                         |
+| ------------- | ------------------------------------------------------------------- |
+| Posts         | Only displays publications                                          |
+| Comments      | Displays only comments                                              |
+| \-\-\-        | \-\-\-                                                              |
+| Active        | Trending sort based on the score, and the most recent comment time. |
+| Hot           | Trending sort based on the score, and the post creation time.       |
+| New           | The newest items.                                                   |
+| Most Comments | The posts with the most comments.                                   |
+| New Comments  | The posts with most recent comments, IE a forum-style sort.         |
+| Top           | The highest scoring items in the given time frame.                  |
 
 For more detail, check the [Post and Comment Ranking details](https://join-lemmy.org/docs/en/about/ranking.html).
 
@@ -74,22 +74,22 @@ For more detail, check the [Post and Comment Ranking details](https://join-lemmy
 
 Lemmy's posts are done using Markdown, there are of course shortcuts for you to use when writing but here is a table to help you if you want to go further.
 
-Type | Or | … to Get 
---- | --- | ---
-\*Italic\* | \_Italic\_  | _Italic_ 
-\*\*Bold\*\* | \_\_Bold\_\_ | **Bold** 
-\# Heading 1 | Heading 1 <br> ========= | <h4>Heading 1</h4>
-\## Heading 2 | Heading 2 <br>--------- | <h5>Heading 2</h5>
-\[Link\](http://a.com) | \[Link\]\[1\]<br>⋮ <br>\[1\]: http://b.org | [Link](https://commonmark.org/) 
-!\[Image\](http://url/a.png) | !\[Image\]\[1\]<br>⋮ <br>\[1\]: http://url/b.jpg | ![Markdown](https://commonmark.org/help/images/favicon.png) 
-\> Blockquote | | <blockquote>Blockquote</blockquote>
-\* List <br>\* List <br>\* List | \- List <br>\- List <br>\- List <br> | *   List <br>*   List <br>*   List <br>
-1\. One <br>2\. Two <br>3\. Three | 1) One<br>2) Two<br>3) Three | 1.  One<br>2.  Two<br>3.  Three
-Horizontal Rule <br>\--- | Horizontal Rule<br>\*\*\* | Horizontal Rule  <br><hr>
-\`Inline code\` with backticks | |`Inline code` with backticks 
-\`\`\`<br>\# code block <br>print '3 backticks or'<br>print 'indent 4 spaces' <br>\`\`\` | ····\# code block<br>····print '3 backticks or'<br>····print 'indent 4 spaces' | \# code block <br>print '3 backticks or'<br>print 'indent 4 spaces'
-::: spoiler hidden or nsfw stuff<br>*a bunch of spoilers here*<br>::: | | <details><summary> hidden or nsfw stuff </summary><p><em>a bunch of spoilers here</em></p></details>
-Some ~subscript~ text | | Some <sub>subscript</sub> text
-Some ^superscript^ text | | Some <sup>superscript</sup> text
+| Type                                                                                     | Or                                                                             | … to Get                                                                                             |
+| ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- |
+| \*Italic\*                                                                               | \_Italic\_                                                                     | _Italic_                                                                                             |
+| \*\*Bold\*\*                                                                             | \_\_Bold\_\_                                                                   | **Bold**                                                                                             |
+| \# Heading 1                                                                             | Heading 1 <br> =========                                                       | <h4>Heading 1</h4>                                                                                   |
+| \## Heading 2                                                                            | Heading 2 <br>---------                                                        | <h5>Heading 2</h5>                                                                                   |
+| \[Link\](http://a.com)                                                                   | \[Link\]\[1\]<br>⋮ <br>\[1\]: http://b.org                                     | [Link](https://commonmark.org/)                                                                      |
+| !\[Image\](http://url/a.png)                                                             | !\[Image\]\[1\]<br>⋮ <br>\[1\]: http://url/b.jpg                               | ![Markdown](https://commonmark.org/help/images/favicon.png)                                          |
+| \> Blockquote                                                                            |                                                                                | <blockquote>Blockquote</blockquote>                                                                  |
+| \* List <br>\* List <br>\* List                                                          | \- List <br>\- List <br>\- List <br>                                           | _ List <br>_ List <br>\* List <br>                                                                   |
+| 1\. One <br>2\. Two <br>3\. Three                                                        | 1) One<br>2) Two<br>3) Three                                                   | 1. One<br>2. Two<br>3. Three                                                                         |
+| Horizontal Rule <br>\---                                                                 | Horizontal Rule<br>\*\*\*                                                      | Horizontal Rule <br><hr>                                                                             |
+| \`Inline code\` with backticks                                                           |                                                                                | `Inline code` with backticks                                                                         |
+| \`\`\`<br>\# code block <br>print '3 backticks or'<br>print 'indent 4 spaces' <br>\`\`\` | ····\# code block<br>····print '3 backticks or'<br>····print 'indent 4 spaces' | \# code block <br>print '3 backticks or'<br>print 'indent 4 spaces'                                  |
+| ::: spoiler hidden or nsfw stuff<br>_a bunch of spoilers here_<br>:::                    |                                                                                | <details><summary> hidden or nsfw stuff </summary><p><em>a bunch of spoilers here</em></p></details> |
+| Some ~subscript~ text                                                                    |                                                                                | Some <sub>subscript</sub> text                                                                       |
+| Some ^superscript^ text                                                                  |                                                                                | Some <sup>superscript</sup> text                                                                     |
 
 [CommonMark Tutorial](https://commonmark.org/help/tutorial/)

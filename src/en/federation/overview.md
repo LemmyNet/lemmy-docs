@@ -1,15 +1,14 @@
 # Federation Overview
 
-
 This document is for anyone who wants to know how Lemmy federation works, without being overly technical. It is meant provide a high-level overview of ActivityPub federation in Lemmy. If you are implementing ActivityPub yourself and want to be compatible with Lemmy, read our [ActivityPub API outline](contributing_apub_api_outline.md).
 
 ## Documentation conventions
 
 To keep things simple, sometimes you will see things formatted like `Create/Note` or `Delete/Event` or `Undo/Follow`. The thing before the slash is the Activity, and the thing after the slash is the Object inside the Activity, in an `object` property. So these are to be read as follows:
 
-* `Create/Note`: a `Create` activity containing a `Note` in the `object` field 
-* `Delete/Event`: a `Delete` activity containing an `Event` in the `object` field
-* `Undo/Follow`: an `Undo` activity containing a `Follow` in the `object` field
+- `Create/Note`: a `Create` activity containing a `Note` in the `object` field
+- `Delete/Event`: a `Delete` activity containing an `Event` in the `object` field
+- `Undo/Follow`: an `Undo` activity containing a `Follow` in the `object` field
 
 In Lemmy we use some specific terms to refer to ActivityPub items. They are essentially our specific implementations of well-known ActivityPub concepts:
 
@@ -20,13 +19,13 @@ In Lemmy we use some specific terms to refer to ActivityPub items. They are esse
 
 This document has three main sections:
 
-* __Federation philosophy__ lays out the general model of how this is intended to federate
-* __User Activities__ describes which actions that a User can take to interact
-* __Community Activities__ describes what the Community does in response to certain User actions
+- **Federation philosophy** lays out the general model of how this is intended to federate
+- **User Activities** describes which actions that a User can take to interact
+- **Community Activities** describes what the Community does in response to certain User actions
 
 ## Federation philosophy
 
-The primary Actor in Lemmy is the Community. Each community resides on a single instance, and consists of a list of Posts and a list of followers. The primary interaction is that of a User sending a Post or Comment related activity to the Community inbox, which then announces it to all its followers. 
+The primary Actor in Lemmy is the Community. Each community resides on a single instance, and consists of a list of Posts and a list of followers. The primary interaction is that of a User sending a Post or Comment related activity to the Community inbox, which then announces it to all its followers.
 
 Each Community has a specific creator User, who is responsible for setting rules, appointing moderators, and removing content that violates the rules.
 
@@ -50,8 +49,8 @@ After following a Community, the "Follow" button is replaced by "Unfollow". Clic
 
 ### Create a Post
 
-When a user creates a new Post in a given Community, it is sent as `Create/Page` to the  Community
-inbox. 
+When a user creates a new Post in a given Community, it is sent as `Create/Page` to the Community
+inbox.
 
 ### Create a Comment
 
@@ -112,12 +111,12 @@ The Community is essentially a bot, which will only do anything in reaction to a
 
 ### Accept follow
 
-If the Community receives a `Follow` activity, it automatically responds with `Accept/Follow`. It also adds the User to its list of followers. 
+If the Community receives a `Follow` activity, it automatically responds with `Accept/Follow`. It also adds the User to its list of followers.
 
 ### Unfollow
 
 Upon receiving an `Undo/Follow`, the Community removes the User from its followers list.
- 
+
 ### Announce
 
 If the Community receives any Post or Comment related activity (Create, Update, Like, Dislike, Remove, Delete, Undo), it will Announce this to its followers. For this, an Announce is created with the Community as actor, and the received activity as object. Following instances thus stay updated about any actions in Communities they follow.

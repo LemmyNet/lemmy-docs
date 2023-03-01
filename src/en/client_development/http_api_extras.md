@@ -6,11 +6,11 @@ This contains extras not in the [API docs](/api).
 
 - [Curl Examples](#curl-examples)
 - [HTTP API exclusive features](#http-api-exclusive-features)
-  * [RSS/Atom feeds](#rssatom-feeds)
-  * [Images](#images)
-    + [Create (request)](#create-request)
-    + [Create (response)](#create-response)
-    + [Delete](#delete)
+  - [RSS/Atom feeds](#rssatom-feeds)
+  - [Images](#images)
+    - [Create (request)](#create-request)
+    - [Create (response)](#create-response)
+    - [Delete](#delete)
 
 <!-- tocstop -->
 
@@ -57,13 +57,13 @@ Lemmy forwards image requests to a locally running Pictrs.
 
 `GET /pictrs/image/{filename}?format={webp, jpg, ...}&thumbnail={96}`
 
-*Format and thumbnail are optional.*
+_Format and thumbnail are optional._
 
 #### Create (request)
 
 Uploaded content must be valid multipart/form-data with an image array located within the images[] key.
 
-`POST /pictrs/image` 
+`POST /pictrs/image`
 
 #### Create (response)
 

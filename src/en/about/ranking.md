@@ -10,7 +10,7 @@
 
 ### Reddit
 
-Does not take the lifetime of the thread into account, [giving early comments an overwhelming advantage over later ones,](https://minimaxir.com/2016/11/first-comment/) with the effect being even worse in small communities. New comments pool at the bottom of the thread, effectively killing off discussion and making each thread a race to comment early.  This lowers the quality of conversation and rewards comments that are repetitive and spammy.
+Does not take the lifetime of the thread into account, [giving early comments an overwhelming advantage over later ones,](https://minimaxir.com/2016/11/first-comment/) with the effect being even worse in small communities. New comments pool at the bottom of the thread, effectively killing off discussion and making each thread a race to comment early. This lowers the quality of conversation and rewards comments that are repetitive and spammy.
 
 ### Hacker News
 
@@ -18,7 +18,7 @@ While far superior to Reddit's implementation for its decay of scores over time,
 
 ### Lemmy
 
-Counterbalances the snowballing effect of votes over time with a logarithmic scale.  Negates the inherent advantage of early comments while still ensuring that votes still matter in the long-term, not nuking older popular comments.
+Counterbalances the snowballing effect of votes over time with a logarithmic scale. Negates the inherent advantage of early comments while still ensuring that votes still matter in the long-term, not nuking older popular comments.
 
 ```
 Rank = ScaleFactor * log(Max(1, 3 + Score)) / (Time + 2)^Gravity
@@ -27,6 +27,7 @@ Score = Upvotes - Downvotes
 Time = time since submission (in hours)
 Gravity = Decay gravity, 1.8 is default
 ```
+
 - Lemmy uses the same `Rank` algorithm above, in two sorts: `Active`, and `Hot`.
   - `Active` uses the post votes, and latest comment time (limited to two days).
   - `Hot` uses the post votes, and the post published time.
@@ -41,6 +42,6 @@ A plot of rank over 24 hours, of scores of 1, 5, 10, 100, 1000, with a scale fac
 
 #### Active User counts
 
-Lemmy also shows counts of *active users* for your site, and its communities. These are counted within the last `day`, `week`, `month`, and `half year`, and are cached on starting up lemmy, and every hour.
+Lemmy also shows counts of _active users_ for your site, and its communities. These are counted within the last `day`, `week`, `month`, and `half year`, and are cached on starting up lemmy, and every hour.
 
 An active user is someone who has posted or commented on our instance or community within the last given time frame. For site counts, only local users are counted. For community counts, federated users are included.

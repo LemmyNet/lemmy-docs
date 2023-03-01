@@ -1,6 +1,7 @@
 # Docker Development
 
 ## Dependencies
+
 ### Debian-based distro
 
 ```bash
@@ -26,9 +27,10 @@ cd docker/dev
 
 and go to http://localhost:1236
 
-*Note: many features (like docs and pictures) will not work without using an nginx profile like that in `ansible/templates/nginx.conf`.
+\*Note: many features (like docs and pictures) will not work without using an nginx profile like that in `ansible/templates/nginx.conf`.
 
 To speed up the Docker compile, add the following to `/etc/docker/daemon.json` and restart Docker.
+
 ```
 {
   "features": {

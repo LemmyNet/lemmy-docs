@@ -9,20 +9,20 @@ to AWS using their [Cloud Development Kit](https://docs.aws.amazon.com/cdk/lates
 
 ### Included:
 
-* ECS fargate cluster
-  * Lemmy-UI
-  * Lemmy
-  * Pictrs
-* CloudFront CDN
-* EFS storage for image uploads
-* Aurora Serverless Postgres DB
-* Bastion VPC host
-* Load balancers for Lemmy
-* DNS records for your site
+- ECS fargate cluster
+  - Lemmy-UI
+  - Lemmy
+  - Pictrs
+- CloudFront CDN
+- EFS storage for image uploads
+- Aurora Serverless Postgres DB
+- Bastion VPC host
+- Load balancers for Lemmy
+- DNS records for your site
 
 ## Quickstart
 
-Clone the [Lemmy-CDK]( https://github.com/jetbridge/lemmy-cdk). 
+Clone the [Lemmy-CDK](https://github.com/jetbridge/lemmy-cdk).
 
 Clone [Lemmy](https://github.com/LemmyNet/lemmy) and [Lemmy-UI](https://github.com/LemmyNet/lemmy-ui) to the directory above this.
 
@@ -41,13 +41,14 @@ cdk deploy
 ```
 
 ## Cost
-This is *not* the cheapest way to run Lemmy. The Serverless Aurora DB can run you ~$90/mo if it doesn't go to sleep.
+
+This is _not_ the cheapest way to run Lemmy. The Serverless Aurora DB can run you ~$90/mo if it doesn't go to sleep.
 
 ## Useful CDK commands
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `cdk deploy`      deploy this stack to your default AWS account/region
-* `cdk diff`        compare deployed stack with current state
-* `cdk synth`       emits the synthesized CloudFormation template
+- `npm run build` compile typescript to js
+- `npm run watch` watch for changes and compile
+- `npm run test` perform the jest unit tests
+- `cdk deploy` deploy this stack to your default AWS account/region
+- `cdk diff` compare deployed stack with current state
+- `cdk synth` emits the synthesized CloudFormation template

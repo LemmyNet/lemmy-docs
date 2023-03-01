@@ -2,13 +2,13 @@
 
 ## About The Project
 
-Front Page|Post
----|---
-![main screen](/docs/en/about/main_screen.png)|![chat screen](/docs/en/about/chat_screen.png)
+| Front Page                                     | Post                                           |
+| ---------------------------------------------- | ---------------------------------------------- |
+| ![main screen](/docs/en/about/main_screen.png) | ![chat screen](/docs/en/about/chat_screen.png) |
 
 [Lemmy](https://github.com/LemmyNet/lemmy) is similar to sites like [Reddit](https://reddit.com), [Lobste.rs](https://lobste.rs), [Raddle](https://raddle.me), or [Hacker News](https://news.ycombinator.com/): you subscribe to forums you're interested in, post links and discussions, then vote, and comment on them. Behind the scenes, it is very different; anyone can easily run a server, and all these servers are federated (think email), and connected to the same universe, called the [Fediverse](https://en.wikipedia.org/wiki/Fediverse).
 
-*The word “fediverse” (federated universe) refers to the network of all Lemmy servers [and other projects](https://blog.joinmastodon.org/2018/06/why-activitypub-is-the-future/), users of which are able to talk to each other seamlessly.*
+_The word “fediverse” (federated universe) refers to the network of all Lemmy servers [and other projects](https://blog.joinmastodon.org/2018/06/why-activitypub-is-the-future/), users of which are able to talk to each other seamlessly._
 
 Like email, whether you sign up on GMail or Outlook, you know you’ll be able to email everyone you need to, as long as you know their address. On Lemmy you're able to subscribe to communities on any other server, and can have discussions with users registered elsewhere.
 
@@ -18,7 +18,7 @@ There are no shareholders, and no targeted advertising: only people sharing the 
 
 Each lemmy server can set its own moderation policy; appointing site-wide admins, and community moderators to keep out the trolls, and foster a healthy, non-toxic environment where all can feel comfortable contributing.
 
-*Note: Federation is still in active development*
+_Note: Federation is still in active development_
 
 ### Why's it called Lemmy?
 

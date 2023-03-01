@@ -27,6 +27,7 @@ To test that your instance federation is working correctly execute `curl -H 'Acc
 ## Inclusion on join-lemmy.org instance list
 
 To be included in the list of Lemmy instances on [join-lemmy.org](https://join-lemmy.org/instances) you must meet the following requirements:
+
 - [x] Federate with at least one instance from the list
 - [x] Have a site description and icon
 - [x] Be patient and wait the site to be updated, there's no fixed schedule for that
@@ -36,6 +37,7 @@ In the meantime you can always promote your server on other social networks like
 ## Keeping up to date
 
 You can subscribe to the Github RSS feeds to be informed of the latest releases:
+
 - [lemmy](https://github.com/LemmyNet/lemmy/releases.atom)
 - [lemmy-ui](https://github.com/LemmyNet/lemmy-ui/releases.atom)
 - [lemmy-js-client](https://github.com/LemmyNet/lemmy-js-client/releases.atom)

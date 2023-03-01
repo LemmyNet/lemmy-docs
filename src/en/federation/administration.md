@@ -17,7 +17,7 @@ For an overview of how federation in Lemmy works on a technical level, check out
 
 ## Federation Modes
 
-Through the combination of federation config options, there are a couple different federation modes, differing in their restrictiveness. For now we don't recommend to use open federation, because moderation tools are lacking and there might be security problems in the federation code. Open federation should be fine for test instances and smaller instances, but bigger instances should prefer to use a more closed federation. 
+Through the combination of federation config options, there are a couple different federation modes, differing in their restrictiveness. For now we don't recommend to use open federation, because moderation tools are lacking and there might be security problems in the federation code. Open federation should be fine for test instances and smaller instances, but bigger instances should prefer to use a more closed federation.
 
 It is important to note that these settings only affect sending and receiving of data between instances. If allow federation with a certain instance, and then remove it from the allowlist, this will not affect previously federated data. These communities, users, posts and comments will still be shown. They will just not be updated anymore. And even if an instance is blocked, it can still fetch and display public data from your instance.
 

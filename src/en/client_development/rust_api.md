@@ -32,6 +32,6 @@ pub fn list_posts() -> GetPostsResponse {
 ```
 
 You can also look at the following real-world projects as examples:
+
 - [lemmyBB](https://github.com/Nutomic/lemmyBB)
 - [lemmy-stats-crawler](https://yerbamate.ml/LemmyNet/lemmy-stats-crawler)
-- 
