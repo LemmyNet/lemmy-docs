@@ -6,7 +6,7 @@ Lemmy has three types of federation:
 - BlockList: Explicitly list instances to not connect to. Federation is open to all other instances.
 - Open: Federate with all potential instances.
 
-**Federation is not set up by default.** You can add this [this federation block](https://github.com/lemmynet/lemmy/blob/main/config/config.hjson#L64) to your `lemmy.hjson`, and ask other servers to add you to their allowlist.
+**Federation is enabled by default.** You can add allowed and blocked instances, by adding a comma-delimited list in your instance admin panel. IE to only federate with these instances, add: `enterprise.lemmy.ml,lemmy.ml` to the allowed instances section.
 
 Lemmy uses the ActivityPub protocol (a W3C standard) to enable federation between different servers (often called instances). This is very similar to the way email works. For example, if you use gmail.com, then you can not only send mails to other gmail.com users, but also to yahoo.com, yandex.ru and so on. Email uses the SMTP protocol to achieve this, so you can think of ActivityPub as "SMTP for social media". The amount of different actions possible on social media (post, comment, like, share, etc) means that ActivityPub is much more complicated than SMTP.
 
@@ -25,7 +25,7 @@ You can see the list of linked instances by following the "Instances" link at th
 
 ## Fetching communities
 
-If you search for a community first time, 20 posts are fetched initially. Only if a least one user on your instance subscribes to the remote community, will the community send updates to your instance. Updates include: 
+If you search for a community first time, 20 posts are fetched initially. Only if a least one user on your instance subscribes to the remote community, will the community send updates to your instance. Updates include:
 
 - New posts, comments
 - Votes

@@ -18,7 +18,7 @@
   - i18n / internationalization support.
   - RSS / Atom feeds for `All`, `Subscribed`, `Inbox`, `User`, and `Community`.
 - Cross-posting support.
-  - A *similar post search* when creating new posts. Great for question / answer communities.
+  - A _similar post search_ when creating new posts. Great for question / answer communities.
 - Moderation abilities.
   - Public Moderation Logs.
   - Can sticky posts to the top of communities.

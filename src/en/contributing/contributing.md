@@ -12,7 +12,6 @@ Information about contributing to Lemmy, whether it is translating, testing, des
 
 Check out [Lemmy's Weblate](https://weblate.yerbamate.ml/projects/lemmy/) for translations. You can also help by [translating this documentation](https://github.com/LemmyNet/lemmy-docs#adding-a-new-language).
 
-
 ## Architecture
 
 ### Front end
@@ -25,13 +24,13 @@ Check out [Lemmy's Weblate](https://weblate.yerbamate.ml/projects/lemmy/) for tr
 ### Back end
 
 - The back end is written in `rust`, using `diesel`, and `actix`.
-- The server source code is split into main sections in `src`. These include: 
+- The server source code is split into main sections in `src`. These include:
   - `db` - The low level database actions.
     - Database additions are done using diesel migrations. Run `diesel migration generate xxxxx` to add new things.
   - `api` - The high level user interactions (things like `CreateComment`)
   - `routes` - The server endpoints .
   - `apub` - The activitypub conversions.
-  - `websocket` - Creates the websocket server. 
+  - `websocket` - Creates the websocket server.
 
 ## Linting / Formatting
 

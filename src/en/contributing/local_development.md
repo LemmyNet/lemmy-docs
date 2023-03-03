@@ -1,9 +1,11 @@
 # Local Development
 
 ### Install build requirements
+
 Install Rust using [the recommended option on rust-lang.org](https://www.rust-lang.org/tools/install) (rustup).
 
 #### Debian-based distro
+
 ```
 sudo apt install git cargo libssl-dev pkg-config libpq-dev curl
 # install yarn
@@ -13,6 +15,7 @@ sudo apt update && sudo apt install yarn
 ```
 
 #### Arch-based distro
+
 ```
 sudo pacman -S git cargo libssl-dev pkg-config libpq-dev curl
 # install yarn (stable)
@@ -20,6 +23,7 @@ curl -o- -L https://yarnpkg.com/install.sh | bash
 ```
 
 #### macOS
+
 Install [Homebrew](https://brew.sh/) if you don't already have it installed.
 
 Finally, install Node and Yarn.
@@ -29,6 +33,7 @@ brew install node yarn
 ```
 
 ### Get the back end source code
+
 ```
 git clone https://github.com/LemmyNet/lemmy.git --recursive
 # or alternatively from gitea
@@ -36,18 +41,22 @@ git clone https://github.com/LemmyNet/lemmy.git --recursive
 ```
 
 ### Build the backend (Rust)
+
 ```
 cargo build
 # for development, use `cargo check` instead)
 ```
 
 ### Get the front end source code
+
 ```
 git clone https://github.com/LemmyNet/lemmy-ui.git --recursive
 ```
 
 ### Setup postgresql
+
 #### Debian-based disto
+
 ```
 sudo apt install postgresql
 sudo systemctl start postgresql
@@ -59,6 +68,7 @@ export LEMMY_DATABASE_URL=postgres://lemmy:password@localhost:5432/lemmy
 ```
 
 #### Arch-based distro
+
 ```
 sudo pacman -S postgresql
 sudo systemctl start postgresql
@@ -70,6 +80,7 @@ export LEMMY_DATABASE_URL=postgres://lemmy:password@localhost:5432/lemmy
 ```
 
 #### macOS
+
 ```
 brew install postgresql
 brew services start postgresql
@@ -82,6 +93,7 @@ export LEMMY_DATABASE_URL=postgres://lemmy:password@localhost:5432/lemmy
 ```
 
 ### Run a local development instance
+
 ```
 cd lemmy
 cargo run

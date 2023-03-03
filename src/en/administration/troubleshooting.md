@@ -39,6 +39,7 @@ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 ### Other instances can't fetch local objects (community, post, etc)
 
 Your reverse proxy (eg nginx) needs to forward requests with header `Accept: application/activity+json` to the backend. This is handled by the following lines:
+
 ```
 set $proxpass "http://0.0.0.0:{{ lemmy_ui_port }}";
 if ($http_accept = "application/activity+json") {
@@ -51,12 +52,14 @@ proxy_pass $proxpass;
 ```
 
 You can test that it works correctly by running the following commands, all of them should return valid JSON:
+
 ```
 curl -H "Accept: application/activity+json" https://your-instance.com/u/some-local-user
 curl -H "Accept: application/activity+json" https://your-instance.com/c/some-local-community
 curl -H "Accept: application/activity+json" https://your-instance.com/post/123 # the id of a local post
 curl -H "Accept: application/activity+json" https://your-instance.com/comment/123 # the id of a local comment
 ```
+
 ### Fetching remote objects works, but posting/commenting in remote communities fails
 
 Check that [federation is allowed on both instances](../federation/administration.md#instance-allowlist-and-blocklist).
