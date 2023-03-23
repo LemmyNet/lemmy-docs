@@ -1,14 +1,11 @@
-kind: pipeline
-name: default
-
-steps:
-  - name: fetch git submodules
+pipeline:
+  fetch_git_submodules:
     image: alpine/git
     commands:
       - git submodule init
       - git submodule update --recursive --remote
 
-  - name: check documentation build
+  check_documentation_build:
     image: rust:1.61-slim-buster
     commands:
       - cargo install mdbook --git https://github.com/Ruin0x11/mdBook.git --branch localization
