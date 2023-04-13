@@ -17,4 +17,5 @@ pipeline:
   check_formatting:
     image: alpine:3
     commands:
+      - apk add prettier
       - prettier -c src
