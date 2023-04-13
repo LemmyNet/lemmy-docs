@@ -1,25 +1,26 @@
 # API HTTP de Lemmy
 
-
 <!-- toc -->
 
 - [Websocket vs API HTTP](#websocket-vs-api-http)
 - [Ejemplos](#ejemplos)
-  * [TypeScript](#typescript)
-  * [Curl](#curl)
-    + [GET](#ejemplo-get)
-    + [POST](#ejemplo-post)
+  - [TypeScript](#typescript)
+  - [Curl](#curl)
+    - [GET](#ejemplo-get)
+    - [POST](#ejemplo-post)
 - [Características exclusivas de la API HTTP](#características-exclusivas-de-la-api-http)
-  * [RSS/Atom feeds](#rss-atom-feeds)
-  * [Imagenes](#imagenes)
-    + [Crear (request)](#crear-request)
-    + [Crear (response)](#crear-response)
+  - [RSS/Atom feeds](#rss-atom-feeds)
+  - [Imagenes](#imagenes)
+    - [Crear (request)](#crear-request)
+    - [Crear (response)](#crear-response)
     * [Delete](#delete)
 
 <!-- tocstop -->
 
 ## WebSocket vs API HTTP
+
 La API HTTP de Lemmy es casi parecida a la API del Websocket:
+
 - **API WebSocket** necesita `let send = { op: userOperation[op], data: form}` como se muestra en [la especificación de la API WebSocket](https://join-lemmy.org/api/index.html)
 - **API HTTP** necesita el formulario (datos) en el primer nivel; una operación HTTP (GET, PUT o POST) y endpoint (en `http(s)://host/api/v2/endpoint`). Por ejemplo:
 
@@ -40,9 +41,9 @@ Para más información. Véase el archivo
   }
 ```
 
-| Tipo | URL | Tipo de cuerpo | Tipo de Retorno |
-| --- | --- | --- | --- |
-| `PUT` | `/comment` | `EditComment` | `CommentResponse` |
+| Tipo  | URL        | Tipo de cuerpo | Tipo de Retorno   |
+| ----- | ---------- | -------------- | ----------------- |
+| `PUT` | `/comment` | `EditComment`  | `CommentResponse` |
 
 ### Curl
 
@@ -85,7 +86,7 @@ Leemy reenvía las peticiones de imagenes a un Pictrs que se ejecuta localmenet.
 
 `GET /pictrs/image/{filename}?format={webp, jpg, ...}&thumbnail={96}`
 
-*El formato (format) y la miniatura (thumbnail) son opcionales*
+_El formato (format) y la miniatura (thumbnail) son opcionales_
 
 #### Crear (request)
 
@@ -93,7 +94,7 @@ El contenido subido debe ser un formulario (multipart/form-data) válido con una
 
 Uploaded content must be valid multipart/form-data with an image array located within the images[] key.
 
-`POST /pictrs/image` 
+`POST /pictrs/image`
 
 #### Crear (response)
 
@@ -112,7 +113,6 @@ Uploaded content must be valid multipart/form-data with an image array located w
 #### Delete
 
 `GET /pictrs/image/delete/{delete_token}/{file}`
-
 
 # Nota
 

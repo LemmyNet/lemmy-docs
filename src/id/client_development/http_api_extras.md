@@ -6,11 +6,11 @@ Dokumen ini mengandung ekstra yang tidak ada di [dokumentasi API](/api).
 
 - [Contoh Curl](#contoh-curl)
 - [Fitur khusus API HTTP](#fitur-khusus-api-http)
-  * [Umpan RSS/Atom](#umpan-rssatom)
-  * [Gambar](#gambar)
-    + [Buat (permintaan)](#buat-permintaan)
-    + [Buat (respons)](#buat-respons)
-    + [Hapus](#hapus)
+  - [Umpan RSS/Atom](#umpan-rssatom)
+  - [Gambar](#gambar)
+    - [Buat (permintaan)](#buat-permintaan)
+    - [Buat (respons)](#buat-respons)
+    - [Hapus](#hapus)
 
 <!-- tocstop -->
 
@@ -55,13 +55,13 @@ Lemmy meneruskan permintaan gambar ke Pictrs yang berjalan di lokal.
 
 `GET /pictrs/image/{filename}?format={webp, jpg, ...}&thumbnail={96}`
 
-*Format dan keluku opsional.*
+_Format dan keluku opsional._
 
 #### Buat (Permintaan)
 
 Konten yang diunggah harus merupakan data format/multi-bagian dengan _array_ gambar yang terletak di dalam kunci images[].
 
-`POST /pictrs/image` 
+`POST /pictrs/image`
 
 #### Buat (respons)
 

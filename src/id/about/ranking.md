@@ -27,6 +27,7 @@ Score = Upvotes - Downvotes
 Time = time since submission (in hours)
 Gravity = Decay gravity, 1.8 is default
 ```
+
 - Lemmy menggunakan algoritma `Rank` yang sama di atas, dengan dua cara: `Active` dan `Hot`
   - `Active` menggunakan suara pos, dan waktu komentar terakhir (dibatasi hingga dua hari).
   - `Hot` menggunakan suara pos, dan waktu pos diterbitkan.
@@ -41,6 +42,6 @@ Plot peringkat lebih dari 24 jam, dengan skor 1, 5, 10, 100, 1000, dengan faktor
 
 #### Penghitungan Pengguna Aktif
 
-Lemmy juga menampilkan jumlah *pengguna aktif* untuk situs Anda, dan komunitasnya. Ini dihitung dalam `hari`, `pekan`, `bulan`, dan `setengah tahun` terakhir, dan ditembolokkan dalam pemulaian Lemmy, dan setiap jam.
+Lemmy juga menampilkan jumlah _pengguna aktif_ untuk situs Anda, dan komunitasnya. Ini dihitung dalam `hari`, `pekan`, `bulan`, dan `setengah tahun` terakhir, dan ditembolokkan dalam pemulaian Lemmy, dan setiap jam.
 
 Pengguna aktif merupakan seseorang yang mempos atau berkomentar di peladen atau komunitas dalam jangka waktu terakhir yang ditentukan. Untuk penghitungan situs, hanya pengguna lokal yang dihitung. Untuk penghitungan komunitas, pengguna terfederasi juga dihitung.

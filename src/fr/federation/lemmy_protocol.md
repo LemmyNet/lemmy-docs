@@ -16,38 +16,38 @@ Dans les tableaux suivants, le terme "obligatoire" indique si Lemmy accepte ou n
 
 - [Contexte](#contexte)
 - [Acteurs](#acteurs)
-  * [Communauté](#communauté)
-    + [Boîte de sortie communautaire](#boîte-de-sortie-communautaire)
-    + [Suiveurs de la communauté](#suiveurs-de-la-communauté)
-    + [Modérateurs de la communauté](#modérateurs-de-la-communauté)
-  * [Utilisateur](#utilisateur)
-    + [Boîte de sortie de l'utilisateur](#boîte-de-sortie-de-lutilisateur)
+  - [Communauté](#communauté)
+    - [Boîte de sortie communautaire](#boîte-de-sortie-communautaire)
+    - [Suiveurs de la communauté](#suiveurs-de-la-communauté)
+    - [Modérateurs de la communauté](#modérateurs-de-la-communauté)
+  - [Utilisateur](#utilisateur)
+    - [Boîte de sortie de l'utilisateur](#boîte-de-sortie-de-lutilisateur)
 - [Objets](#objets)
-  * [Publication](#publication)
-  * [Commentaire](#commentaire)
-  * [Message privé](#message-privé)
+  - [Publication](#publication)
+  - [Commentaire](#commentaire)
+  - [Message privé](#message-privé)
 - [Activités](#activités)
-  * [De l'utilisateur à la communauté](#utilisateur-à-la-communauté)
-    + [Suivre](#suivre)
-    + [Ne pas suivre](#ne-pas-suivre)
-    + [Créer ou mettre à jour un poste](#créer-ou-mettre-à-jour-un-message)
-    + [Créer ou mettre à jour un commentaire](#créer-ou-mettre-à-jour-un-commentaire)
-    + [Aimer le message ou le commentaire](#jaime-un-message-ou-un-commentaire)
-    + [Ne pas aimer le message ou le commentaire](#naime-pas-le-message-ou-le-commentaire)
-    + [Supprimer un message ou un commentaire](#supprimer-un-message-ou-un-commentaire)
-    + [Retirer un message ou le commentaire](#retirer-un-message-ou-le-commentaire)
-    + [Défaire](#defaire)
-    + [Ajouter un modérateur](#ajouter-un-mod)
-    + [Supprimer un modérateur](#supprimer-un-mod)
-  * [De la communauté à l'utilisateur](#communauté-à-lutilisateur)
-    + [Accepter Suivre](#accepter-un-suivi)
-    + [Annoncer](#annoncer)
-    + [Retirer ou supprimer une communauté](#retirer-ou-supprimer-une-communauté)
-    + [Restaurer une communauté retiré ou effacée](#rétablir-la-communauté-supprimée-ou-retirée)
-  * [D'utilisateur à utilisateur](#utilisateur-à-utilisateur)
-    + [Créer ou mettre à jour un message privé](#créer-ou-mettre-à-jour-un-message-privé)
-    + [Supprimer un message privé](#supprimer-un-message-privé)
-    + [Défaire Supprimer un message privé](#annuler-la-suppression-dun-message-privé)⏎
+  - [De l'utilisateur à la communauté](#utilisateur-à-la-communauté)
+    - [Suivre](#suivre)
+    - [Ne pas suivre](#ne-pas-suivre)
+    - [Créer ou mettre à jour un poste](#créer-ou-mettre-à-jour-un-message)
+    - [Créer ou mettre à jour un commentaire](#créer-ou-mettre-à-jour-un-commentaire)
+    - [Aimer le message ou le commentaire](#jaime-un-message-ou-un-commentaire)
+    - [Ne pas aimer le message ou le commentaire](#naime-pas-le-message-ou-le-commentaire)
+    - [Supprimer un message ou un commentaire](#supprimer-un-message-ou-un-commentaire)
+    - [Retirer un message ou le commentaire](#retirer-un-message-ou-le-commentaire)
+    - [Défaire](#defaire)
+    - [Ajouter un modérateur](#ajouter-un-mod)
+    - [Supprimer un modérateur](#supprimer-un-mod)
+  - [De la communauté à l'utilisateur](#communauté-à-lutilisateur)
+    - [Accepter Suivre](#accepter-un-suivi)
+    - [Annoncer](#annoncer)
+    - [Retirer ou supprimer une communauté](#retirer-ou-supprimer-une-communauté)
+    - [Restaurer une communauté retiré ou effacée](#rétablir-la-communauté-supprimée-ou-retirée)
+  - [D'utilisateur à utilisateur](#utilisateur-à-utilisateur)
+    - [Créer ou mettre à jour un message privé](#créer-ou-mettre-à-jour-un-message-privé)
+    - [Supprimer un message privé](#supprimer-un-message-privé)
+    - [Défaire Supprimer un message privé](#annuler-la-suppression-dun-message-privé)⏎
 
 <!-- tocstop -->
 
@@ -55,21 +55,21 @@ Dans les tableaux suivants, le terme "obligatoire" indique si Lemmy accepte ou n
 
 ```json
 {
-    "@context": [
-        "https://www.w3.org/ns/activitystreams",
-        {
-            "moderators": "as:moderators",
-            "sc": "http://schema.org#",
-            "stickied": "as:stickied",
-            "sensitive": "as:sensitive",
-            "pt": "https://join.lemmy.ml#",
-            "comments_enabled": {
-                "type": "sc:Boolean",
-                "id": "pt:commentsEnabled"
-            }
-        },
-        "https://w3id.org/security/v1"
-    ]
+  "@context": [
+    "https://www.w3.org/ns/activitystreams",
+    {
+      "moderators": "as:moderators",
+      "sc": "http://schema.org#",
+      "stickied": "as:stickied",
+      "sensitive": "as:sensitive",
+      "pt": "https://join.lemmy.ml#",
+      "comments_enabled": {
+        "type": "sc:Boolean",
+        "id": "pt:commentsEnabled"
+      }
+    },
+    "https://w3id.org/security/v1"
+  ]
 }
 ```
 
@@ -124,23 +124,23 @@ Reçoit des activités de l'utilisateur : `Follow`, `Undo/Follow`, `Create`, `Up
 }
 ```
 
-| Nom du champ | Obligatoire | Description |
-|---|---|---|
-| `preferredUsername` | oui | Nom de l'acteur |
-| `name` | oui | Titre de la communauté |
-| `sensitive` | oui | True indique que tous les messages dans la communauté sont nsfw |
-| `attributedTo` | oui | D'abord le créateur de la communauté, puis tous les autres modérateurs. |
-| `content` | non | Texte pour la barre latérale de la communauté, contenant généralement une description et des règles. |
-| `icon` | non | Icône, affichée à côté du nom de la communauté |
-| `image` | non | Image de bannière, affichée en haut de la page de la communauté |
-| `inbox` | non | URL de la boîte de réception ActivityPub |
-| `outbox` | non | ActivityPub URL de la boîte de sortie, contient uniquement les 20 derniers messages, sans commentaires, votes ou autres activités. |
-| `followers` | non | URL de la collection de suiveurs, contenant uniquement le nombre de suiveurs, sans référence à des suiveurs individuels. |
-| `endpoints` | non | Contient l'URL de la boîte de réception partagée |
-| `published` | non | Date à laquelle la communauté a été créée pour la première fois |
-| `updated` | non | Date à laquelle la communauté a été modifiée pour la dernière fois |
-| `publicKey` | oui | La clé publique utilisée pour vérifier les signatures de cet acteur. |
-   
+| Nom du champ        | Obligatoire | Description                                                                                                                        |
+| ------------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `preferredUsername` | oui         | Nom de l'acteur                                                                                                                    |
+| `name`              | oui         | Titre de la communauté                                                                                                             |
+| `sensitive`         | oui         | True indique que tous les messages dans la communauté sont nsfw                                                                    |
+| `attributedTo`      | oui         | D'abord le créateur de la communauté, puis tous les autres modérateurs.                                                            |
+| `content`           | non         | Texte pour la barre latérale de la communauté, contenant généralement une description et des règles.                               |
+| `icon`              | non         | Icône, affichée à côté du nom de la communauté                                                                                     |
+| `image`             | non         | Image de bannière, affichée en haut de la page de la communauté                                                                    |
+| `inbox`             | non         | URL de la boîte de réception ActivityPub                                                                                           |
+| `outbox`            | non         | ActivityPub URL de la boîte de sortie, contient uniquement les 20 derniers messages, sans commentaires, votes ou autres activités. |
+| `followers`         | non         | URL de la collection de suiveurs, contenant uniquement le nombre de suiveurs, sans référence à des suiveurs individuels.           |
+| `endpoints`         | non         | Contient l'URL de la boîte de réception partagée                                                                                   |
+| `published`         | non         | Date à laquelle la communauté a été créée pour la première fois                                                                    |
+| `updated`           | non         | Date à laquelle la communauté a été modifiée pour la dernière fois                                                                 |
+| `publicKey`         | oui         | La clé publique utilisée pour vérifier les signatures de cet acteur.                                                               |
+
 #### Boîte de sortie communautaire
 
 ```json
@@ -230,18 +230,18 @@ Envoie et reçoit des activités de/vers d'autres utilisateurs : Créer/Note `Cr
 }
 ```
 
-| Nom du champ | Obligatoire | Description |
-|---|---|---|
-| `preferredUsername` | oui | Nom de l'acteur |
-| `name` | non | Nom d'affichage de l'utilisateur |
-| `content` | non | Biographie de l'utilisateur |
-| `icon` | non | L'avatar de l'utilisateur, affiché à côté de son nom d'utilisateur |
-| `image` | non | La bannière de l'utilisateur, affichée en haut du profil |
-| `inbox` | non | URL de la boîte de réception d'ActivityPub |
-| `endpoints` | non | Contient l'URL de la boîte de réception partagée |
-| `published` | non | La date de l'inscription de l'utilisateur. 
-| `updated` | non | Date à laquelle le profil de l'utilisateur a été modifié en dernier lieu |
-| `publicKey` | oui | La clé publique utilisée pour vérifier les signatures de cet acteur |
+| Nom du champ        | Obligatoire | Description                                                              |
+| ------------------- | ----------- | ------------------------------------------------------------------------ |
+| `preferredUsername` | oui         | Nom de l'acteur                                                          |
+| `name`              | non         | Nom d'affichage de l'utilisateur                                         |
+| `content`           | non         | Biographie de l'utilisateur                                              |
+| `icon`              | non         | L'avatar de l'utilisateur, affiché à côté de son nom d'utilisateur       |
+| `image`             | non         | La bannière de l'utilisateur, affichée en haut du profil                 |
+| `inbox`             | non         | URL de la boîte de réception d'ActivityPub                               |
+| `endpoints`         | non         | Contient l'URL de la boîte de réception partagée                         |
+| `published`         | non         | La date de l'inscription de l'utilisateur.                               |
+| `updated`           | non         | Date à laquelle le profil de l'utilisateur a été modifié en dernier lieu |
+| `publicKey`         | oui         | La clé publique utilisée pour vérifier les signatures de cet acteur      |
 
 #### Boîte de sortie de l'utilisateur
 
@@ -293,19 +293,19 @@ Une page avec un titre, une URL facultative et un contenu textuel. L'URL mène s
 }
 ```
 
-| Nom du champ | Obligatoire | Description |
-|---|---|---|
-| `attributedTo` | oui | ID de l'utilisateur qui a créé ce message |
-| `to` | oui | ID de la communauté où il a été posté |
-| `name` | oui | Titre du message |
-| `content` | non | Corps du message |
-| `url` | non | Un lien arbitraire à partager |
-| `image` | non | Miniature pour `url`, seulement présent si c'est un lien d'image |
-| `commentsEnabled` | oui | False indique que le message est verrouillé, et qu'aucun commentaire ne peut être ajouté |
-| `sensitive` | oui | True marque le message comme NSFW, brouille la vignette et la cache aux utilisateurs dont le paramètre NSFW est désactivé |
-| `stickied` | oui | Le message est affiché en haut de la page de la communauté. |
-| `published` | non | La date et l'heure de création de l'article. |
-| `updated` | non | La date à laquelle le message a été édité (non présent s'il n'a jamais été édité). |
+| Nom du champ      | Obligatoire | Description                                                                                                               |
+| ----------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `attributedTo`    | oui         | ID de l'utilisateur qui a créé ce message                                                                                 |
+| `to`              | oui         | ID de la communauté où il a été posté                                                                                     |
+| `name`            | oui         | Titre du message                                                                                                          |
+| `content`         | non         | Corps du message                                                                                                          |
+| `url`             | non         | Un lien arbitraire à partager                                                                                             |
+| `image`           | non         | Miniature pour `url`, seulement présent si c'est un lien d'image                                                          |
+| `commentsEnabled` | oui         | False indique que le message est verrouillé, et qu'aucun commentaire ne peut être ajouté                                  |
+| `sensitive`       | oui         | True marque le message comme NSFW, brouille la vignette et la cache aux utilisateurs dont le paramètre NSFW est désactivé |
+| `stickied`        | oui         | Le message est affiché en haut de la page de la communauté.                                                               |
+| `published`       | non         | La date et l'heure de création de l'article.                                                                              |
+| `updated`         | non         | La date à laquelle le message a été édité (non présent s'il n'a jamais été édité).                                        |
 
 ### Commentaire
 
@@ -333,14 +333,14 @@ Une réponse à un message, ou une réponse à un autre commentaire. Ne contient
 }
 ```
 
-| Nom du champ | Obligatoire | Description |
-|---|---|---|
-| `attributedTo` | oui | ID de l'utilisateur qui a créé le commentaire |
-| `to` | oui | Communauté où le commentaire a été fait |
-| `content` | oui | Le texte du commentaire |
-| `inReplyTo` | oui | IDs du message où ce commentaire a été fait, et du commentaire parent. S'il s'agit d'un commentaire de haut niveau, `inReplyTo` ne contient que l'article. |
-| `published` | non | La date de création du commentaire. |
-| `updated` | non | Date à laquelle le commentaire a été modifié (non présent s'il n'a jamais été modifié) |
+| Nom du champ   | Obligatoire | Description                                                                                                                                                |
+| -------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `attributedTo` | oui         | ID de l'utilisateur qui a créé le commentaire                                                                                                              |
+| `to`           | oui         | Communauté où le commentaire a été fait                                                                                                                    |
+| `content`      | oui         | Le texte du commentaire                                                                                                                                    |
+| `inReplyTo`    | oui         | IDs du message où ce commentaire a été fait, et du commentaire parent. S'il s'agit d'un commentaire de haut niveau, `inReplyTo` ne contient que l'article. |
+| `published`    | non         | La date de création du commentaire.                                                                                                                        |
+| `updated`      | non         | Date à laquelle le commentaire a été modifié (non présent s'il n'a jamais été modifié)                                                                     |
 
 ### Message privé
 
@@ -364,13 +364,13 @@ Un message direct d'un utilisateur à un autre. Il ne peut pas inclure d'autres 
 }
 ```
 
-| Nom du champ | Obligatoire | Description |
-|---|---|---|
+| Nom du champ   | Obligatoire                                     | Description                                                                        |
+| -------------- | ----------------------------------------------- | ---------------------------------------------------------------------------------- |
 | `attributedTo` | ID de l'utilisateur qui a créé ce message privé |
-| `to` | ID du destinataire |
-| `content` | oui | Le texte du message privé |
-| `published` | non | Date à laquelle le message a été créé |
-| `updated` | non | Date à laquelle le message a été modifié (non présent s'il n'a jamais été modifié) |
+| `to`           | ID du destinataire                              |
+| `content`      | oui                                             | Le texte du message privé                                                          |
+| `published`    | non                                             | Date à laquelle le message a été créé                                              |
+| `updated`      | non                                             | Date à laquelle le message a été modifié (non présent s'il n'a jamais été modifié) |
 
 ## Activités
 
@@ -391,10 +391,10 @@ Lorsque l'utilisateur clique sur "Subscribe" dans une communauté, un `Follow` e
 }
 ```
 
-| Nom du champ | Obligatoire | Description |
-|---|---|---|
-| `actor` | oui | L'utilisateur qui envoie la demande de suivi.
-| `object` | oui | La communauté à suivre |
+| Nom du champ | Obligatoire | Description                                   |
+| ------------ | ----------- | --------------------------------------------- |
+| `actor`      | oui         | L'utilisateur qui envoie la demande de suivi. |
+| `object`     | oui         | La communauté à suivre                        |
 
 #### Ne pas suivre
 
@@ -435,11 +435,11 @@ Lorsqu'un utilisateur crée un nouveau message, celui-ci est envoyé à la commu
 }
 ```
 
-| Nom du champ | Obligatoire | Description |
-|---|---|---|
-| `type` | oui | soit `Create`, soit `Update` |...
-| `cc` | oui | Communauté où le message est créé |
-| `object` | oui | Le message en cours de création |
+| Nom du champ | Obligatoire | Description                       |
+| ------------ | ----------- | --------------------------------- | --- |
+| `type`       | oui         | soit `Create`, soit `Update`      | ... |
+| `cc`         | oui         | Communauté où le message est créé |
+| `object`     | oui         | Le message en cours de création   |
 
 #### Créer ou mettre à jour un commentaire
 
@@ -465,11 +465,11 @@ Une réponse à un article ou à un autre commentaire. Peut contenir des mention
 }
 ```
 
-| Nom du champ | Obligatoire | Description |
-|---|---|---|
-| `tag` | non | Liste des utilisateurs mentionnés dans le commentaire (comme `@utilisateur@exemple.com`) |
-| `cc`| oui | La liste des utilisateurs mentionnés dans le commentaire (par exemple, `@`).
-| `object` | oui | Le commentaire en cours de création |
+| Nom du champ | Obligatoire | Description                                                                              |
+| ------------ | ----------- | ---------------------------------------------------------------------------------------- |
+| `tag`        | non         | Liste des utilisateurs mentionnés dans le commentaire (comme `@utilisateur@exemple.com`) |
+| `cc`         | oui         | La liste des utilisateurs mentionnés dans le commentaire (par exemple, `@`).             |
+| `object`     | oui         | Le commentaire en cours de création                                                      |
 
 #### J'aime un message ou un commentaire
 
@@ -489,10 +489,10 @@ Un vote positif pour un message ou un commentaire.
 }
 ```
 
-| Nom du champ | Obligatoire | Description |
-|---|---|---|
-| `cc` | oui | L'ID de la communauté où se trouve le message/commentaire. |
-| `object` | oui | Le message ou le commentaire en cours de validation |
+| Nom du champ | Obligatoire | Description                                                |
+| ------------ | ----------- | ---------------------------------------------------------- |
+| `cc`         | oui         | L'ID de la communauté où se trouve le message/commentaire. |
+| `object`     | oui         | Le message ou le commentaire en cours de validation        |
 
 #### N'aime pas le message ou le commentaire
 
@@ -512,10 +512,10 @@ Un vote négatif pour un message ou un commentaire.
 }
 ```
 
-| Nom du champ | Obligatoire | Description |
-|---|---|---|
-| `cc` | oui | L'ID de la communauté où se trouve le message/commentaire. |
-| `object` | oui | Le message ou le commentaire en cours de validation |
+| Nom du champ | Obligatoire | Description                                                |
+| ------------ | ----------- | ---------------------------------------------------------- |
+| `cc`         | oui         | L'ID de la communauté où se trouve le message/commentaire. |
+| `object`     | oui         | Le message ou le commentaire en cours de validation        |
 
 #### Supprimer un message ou un commentaire
 
@@ -535,10 +535,10 @@ Supprime un message ou un commentaire précédemment créé. Ceci ne peut être 
 }
 ```
 
-| Nom du champ | Obligatoire | Description |
-|---|---|---|
-| `cc` | oui | L'ID de la communauté où se trouve le message/commentaire. |
-| `object` | oui | ID du message ou du commentaire à supprimer |
+| Nom du champ | Obligatoire | Description                                                |
+| ------------ | ----------- | ---------------------------------------------------------- |
+| `cc`         | oui         | L'ID de la communauté où se trouve le message/commentaire. |
+| `object`     | oui         | ID du message ou du commentaire à supprimer                |
 
 #### Supprimer un message ou un commentaire
 
@@ -558,10 +558,10 @@ Supprime un message ou un commentaire. Cela ne peut être fait que par un mod de
 }
 ```
 
-| Nom du champ | Obligatoire | Description |
-|---|---|---|
-| `cc` | oui | L'ID de la communauté où se trouve le message/commentaire. |
-| `object` | oui | ID du message ou du commentaire à supprimer |
+| Nom du champ | Obligatoire | Description                                                |
+| ------------ | ----------- | ---------------------------------------------------------- |
+| `cc`         | oui         | L'ID de la communauté où se trouve le message/commentaire. |
+| `object`     | oui         | ID du message ou du commentaire à supprimer                |
 
 #### Défaire
 
@@ -581,9 +581,9 @@ Défait une activité précédente, ne peut être fait que par l'acteur `actor` 
 }
 ```
 
-| Nom du champ | Obligatoire | Description |
-|---|---|---|
-| `object` | oui | Toute activité `Like`, `Dislike`, `Delete` ou `Remove` comme décrit ci-dessus |
+| Nom du champ | Obligatoire | Description                                                                   |
+| ------------ | ----------- | ----------------------------------------------------------------------------- |
+| `object`     | oui         | Toute activité `Like`, `Dislike`, `Delete` ou `Remove` comme décrit ci-dessus |
 
 #### Ajouter un mod
 
@@ -622,6 +622,7 @@ Supprime un mod existant de la communauté. Doit être envoyé par un mod exista
     "target": "https://enterprise.lemmy.ml/c/main/moderators"
 }
 ```
+
 ### Communauté à l'utilisateur
 
 #### Accepter un suivi
@@ -645,11 +646,11 @@ Envoyé automatiquement par la communauté en réponse à un `Follow`. En même 
 }
 ```
 
-| Nom du champ | Obligatoire | Description |
-|---|---|---|
-| `actor` | oui | La même communauté que celle de l'activité `Follow` |
-| `to` | non | L'ID de l'utilisateur qui a envoyé le `Follow` |
-| `object` | oui | L'activité `Follow` précédemment envoyée |
+| Nom du champ | Obligatoire | Description                                         |
+| ------------ | ----------- | --------------------------------------------------- |
+| `actor`      | oui         | La même communauté que celle de l'activité `Follow` |
+| `to`         | non         | L'ID de l'utilisateur qui a envoyé le `Follow`      |
+| `object`     | oui         | L'activité `Follow` précédemment envoyée            |
 
 #### Annoncer
 
@@ -669,13 +670,13 @@ Lorsque la communauté reçoit une activité de post ou de commentaire, elle l'i
 }
 ```
 
-| Nom du champ | Obligatoire | Description |
-|---|---|---|
-| `object` | oui | Toute activité de type `Create`, `Update`, `Like`, `Dislike`, `Delete` `Remove` ou `Undo` décrite dans la section [User to Community](#user-to-community) |
+| Nom du champ | Obligatoire | Description                                                                                                                                               |
+| ------------ | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `object`     | oui         | Toute activité de type `Create`, `Update`, `Like`, `Dislike`, `Delete` `Remove` ou `Undo` décrite dans la section [User to Community](#user-to-community) |
 
 #### Retirer ou supprimer une communauté
 
-Un administrateur d'instance peut supprimer la communauté, ou un mod peut la supprimer. 
+Un administrateur d'instance peut supprimer la communauté, ou un mod peut la supprimer.
 
 ```json
 {
@@ -691,9 +692,9 @@ Un administrateur d'instance peut supprimer la communauté, ou un mod peut la su
 }
 ```
 
-| Nom du champ | Obligatoire | Description |
-|---|---|---|
-| `type` | oui | Soit `Remove` soit `Delete` |
+| Nom du champ | Obligatoire | Description                 |
+| ------------ | ----------- | --------------------------- |
+| `type`       | oui         | Soit `Remove` soit `Delete` |
 
 #### Rétablir la communauté supprimée ou retirée
 
@@ -723,13 +724,14 @@ Rétablit le retrait ou la suppression.
 }
 
 ```
-| Nom du champ | Obligatoire | Description |
-|---|---|---|
-| `object.type` | oui | Soit `Remove` ou `Delete` |
+
+| Nom du champ  | Obligatoire | Description               |
+| ------------- | ----------- | ------------------------- |
+| `object.type` | oui         | Soit `Remove` ou `Delete` |
 
 ### Utilisateur à Utilisateur
 
-#### Créer ou mettre à jour un message privé 
+#### Créer ou mettre à jour un message privé
 
 Crée un nouveau message privé entre deux utilisateurs.
 
@@ -744,10 +746,10 @@ Crée un nouveau message privé entre deux utilisateurs.
 }
 ```
 
-| Nom du champ | Obligatoire | Description |
-|---|---|---|
-| `type` | oui | Soit `Create`, soit `Update` |...
-| `object` | oui | A [Private Message](#private-message) |
+| Nom du champ | Obligatoire | Description                           |
+| ------------ | ----------- | ------------------------------------- | --- |
+| `type`       | oui         | Soit `Create`, soit `Update`          | ... |
+| `object`     | oui         | A [Private Message](#private-message) |
 
 #### Supprimer un message privé
 

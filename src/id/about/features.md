@@ -7,7 +7,7 @@
   - Yang dibutuhkan untuk mendaftar adalah nama pengguna dan kata sandi!
   - Dukungan avatar pengguna.
   - Utas komentar dengan pembaruan langsung.
-  - Skor pilihan penuh  `(+/-)` seperti Reddit yang lama.
+  - Skor pilihan penuh `(+/-)` seperti Reddit yang lama.
   - Banyak tema, termasuk terang, gelap, dan solarized.
   - Emoji dengan dukungan ketik otomatis. Mulai mengetik `:`
   - Tandai pengguna menggunakan `@`, tandai komunitas menggunakan `!`.
@@ -18,7 +18,7 @@
   - i18n/dukungan penginternasionalan
   - Umpan RSS/Atom untuk `Semua`, `Berlangganan`, `Kotak Masuk`, `Pengguna`, dan `Komunitas`.
 - Dukungan pos-lintas.
-  - Sebuah *pencarian pos serupa* ketika membuat pos baru. Bagus untuk komunitas tanya/jawab.
+  - Sebuah _pencarian pos serupa_ ketika membuat pos baru. Bagus untuk komunitas tanya/jawab.
 - Kemampuan moderasi.
   - Log Moderasi Publik.
   - Bisa melengketkan pos ke bagian atas komunitas.

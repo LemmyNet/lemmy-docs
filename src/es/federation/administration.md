@@ -17,7 +17,7 @@ For an overview of how federation in Lemmy works on a technical level, check out
 
 ## Instance allowlist and blocklist
 
-The federation section of Lemmy's config has two variables `allowed_instances` and `blocked_instances`. These control which other instances Lemmy will federate with. Both settings take a comma separated list of domains, eg `lemmy.ml,example.com`. You can either change those settings via `/admin`, or directly on the server filesystem. 
+The federation section of Lemmy's config has two variables `allowed_instances` and `blocked_instances`. These control which other instances Lemmy will federate with. Both settings take a comma separated list of domains, eg `lemmy.ml,example.com`. You can either change those settings via `/admin`, or directly on the server filesystem.
 
 It is important to note that these settings only affect sending and receiving of data between instances. If allow federation with a certain instance, and then remove it from the allowlist, this will not affect previously federated data. These communities, users, posts and comments will still be shown. They will just not be updated anymore. And even if an instance is blocked, it can still fetch and display public data from your instance.
 
@@ -25,4 +25,4 @@ By default, both `allowed_instances` and `blocked_instances` values are empty, w
 
 What we do recommend is putting a list of trusted instances into `allowed_instances`, and only federating with those. Note that both sides need to add each other to their `allowed_instances` to allow two-way federation.
 
-Alternatively you can also use blocklist based federation. In this case, add the domains of instances you do *not* want to federate with. You can only set one of `allowed_instances` and `blocked_instances`, as setting both doesn't make sense.
+Alternatively you can also use blocklist based federation. In this case, add the domains of instances you do _not_ want to federate with. You can only set one of `allowed_instances` and `blocked_instances`, as setting both doesn't make sense.

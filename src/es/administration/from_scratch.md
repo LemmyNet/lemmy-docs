@@ -12,23 +12,22 @@ Instrucciones para instalar Lemmy de forma Nativa, sin depender de docker. Origi
 
 Ten en cuenta que la construcción de Lemmy requiere de una gran cantidad de recursos de hardware. Si quieres ejecutar Lemmy en un pequeño VPS con una memoria RAM muy limitada (que parece una forma perfectamente aceptable para ejecutar una instancia de producción), es mejor seguir con la imagen docker, o usar un sistema que tenga más RAM. El uso de RAM es enorme con las builds de Rust.
 
-Las versiones de etiqueta/lanzamiento incluidas en esta nota provienen de lemmy/docker/prod/docker-compose.yml y estaban actualizadas en el momento en que se creó este documento.  **Definitivamente ajustar a las versiones apropiadas como sea necesario**.
+Las versiones de etiqueta/lanzamiento incluidas en esta nota provienen de lemmy/docker/prod/docker-compose.yml y estaban actualizadas en el momento en que se creó este documento. **Definitivamente ajustar a las versiones apropiadas como sea necesario**.
 
 Tuve que cambiar de usar `sudo` a `su` en algunos lugares ya que el usuario estaba haciendo algo raro/incompleto con el env de sudo para pictrs
 
 ## Configuración
 
-| Dependencias                 |                                           |
-|------------------------------|-------------------------------------------|
-| app-admin                    | sudo                                      |
-| dev-vcs                      | [git](https://git-scm.com/)               |
-| dev-lang                     | [rust](https://www.rust-lang.org/)        |
-| dev-db                       | [postgresql](https://www.postgresql.org/) |
-| www-servers                  | [nginx](https://nginx.org/en/)            |
-| sys-apps                     | [yarn](https://yarnpkg.com/)              |
-| app-shells                   | bash-completion                           |
-|                              |                                           |
-
+| Dependencias |                                           |
+| ------------ | ----------------------------------------- |
+| app-admin    | sudo                                      |
+| dev-vcs      | [git](https://git-scm.com/)               |
+| dev-lang     | [rust](https://www.rust-lang.org/)        |
+| dev-db       | [postgresql](https://www.postgresql.org/) |
+| www-servers  | [nginx](https://nginx.org/en/)            |
+| sys-apps     | [yarn](https://yarnpkg.com/)              |
+| app-shells   | bash-completion                           |
+|              |                                           |
 
 ### Poner en marcha el postgresql
 
@@ -48,7 +47,7 @@ sudo -Hu lemmy git tag -l
 sudo -Hu lemmy git checkout tags/v0.11.0
 ```
 
-### Build para producción?  (Remover --release para dev)
+### Build para producción? (Remover --release para dev)
 
 ```bash
 sudo -Hu lemmy cargo build --release
@@ -149,7 +148,7 @@ echo "*/* -llvm_targets_NVPTX -llvm_targets_AMDGPU" >> /etc/portage/package.use
 Instalar paquetes extra requeridos para pict-rs:
 
 | Paquetes    |                                                  |
-|-------------|--------------------------------------------------|
+| ----------- | ------------------------------------------------ |
 | media-libs  | [gexiv2](https://gitlab.gnome.org/GNOME/gexiv2)  |
 | media-gfx   | [imagemagick](https://imagemagick.org/index.php) |
 | media-video | [ffmpeg](https://ffmpeg.org/)                    |
@@ -158,7 +157,7 @@ Instalar paquetes extra requeridos para pict-rs:
 Paquetes requeridos para pict-rs (en caso de un sistema separado):
 
 | Paquetes |                                    |
-|----------|------------------------------------|
+| -------- | ---------------------------------- |
 | dev-lang | [rust](https://www.rust-lang.org/) |
 
 **Opcional** Hacer un script o ejecutarlo manualmente como usuario.
@@ -178,7 +177,7 @@ mkdir pictrs-data
 
 **Falta algo en el README de pict-rs - creó y utilaza una carpeta pict-rs in /tmp**
 
-Si haces algo raro como yo (cambiar el usuario con el que se ejecuta pict-rs) y terminas con problemas de permisos (que los registros no te dicen *Qué* está teniendo un problema de permisos), este podría ser tu problema. Además, el tiempo dirá si esta carpeta se limpia adecuadamente o no.
+Si haces algo raro como yo (cambiar el usuario con el que se ejecuta pict-rs) y terminas con problemas de permisos (que los registros no te dicen _Qué_ está teniendo un problema de permisos), este podría ser tu problema. Además, el tiempo dirá si esta carpeta se limpia adecuadamente o no.
 
 Ejecutar pictrs de acuerdo a la siguiente línea:
 
@@ -186,10 +185,9 @@ Ejecutar pictrs de acuerdo a la siguiente línea:
 pict-rs/pict-rs -a 127.0.0.1:9000 -p ~pictrs/pictrs-data/
 ```
 
-Pero sólo usaremos el script init. 
+Pero sólo usaremos el script init.
 
 En este punto, corre todo a través de los [scripts de inicio](#scripts-de-inicio-init-scripts). Configura los scripts de inicio para que se ejecuten en el tiempo de arranque. Presumiblemente has configurado nginx y puedes llegar a tu instancia.
-
 
 ---
 
@@ -391,4 +389,3 @@ stop() {
         eend $?
 }
 ```
-

@@ -1,15 +1,14 @@
 # Aperçu de la fédération
 
-
 Ce document est destiné à tous ceux qui veulent savoir comment fonctionne la fédération Lemmy, sans être trop technique. Il est destiné à fournir un aperçu de haut niveau de la fédération ActivityPub dans Lemmy. Si vous implémentez ActivityPub vous-même et souhaitez être compatible avec Lemmy, lisez notre [ActivityPub API outline](contributing_apub_api_outline.md).
 
 ## Conventions de documentation
 
 Pour garder les choses simples, vous verrez parfois des choses formatées comme `Create/Note`, `Delete/Event` ou `Undo/Follow`. La chose avant le slash est l'activité, et la chose après le slash est l'objet à l'intérieur de l'activité, dans une propriété `object`. Il faut donc les lire comme suit :
 
-* `Create/Note` : une activité `Create` contenant une `Note` dans le champ `object`. 
-* `Delete/Event` : une activité `Delete` contenant un `Event` dans le champ `object`.
-* `Undo/Follow` : une activité `Undo` contenant un `Follow` dans le champ `object`.
+- `Create/Note` : une activité `Create` contenant une `Note` dans le champ `object`.
+- `Delete/Event` : une activité `Delete` contenant un `Event` dans le champ `object`.
+- `Undo/Follow` : une activité `Undo` contenant un `Follow` dans le champ `object`.
 
 Dans Lemmy, nous utilisons certains termes spécifiques pour désigner les éléments ActivityPub. Il s'agit essentiellement de nos implémentations spécifiques de concepts ActivityPub bien connus :
 
@@ -20,13 +19,13 @@ Dans Lemmy, nous utilisons certains termes spécifiques pour désigner les élé
 
 Ce document comporte trois sections principales :
 
-* __Philosophie de la fédération__ expose le modèle général de la manière dont le projet est censé se fédérer.
-* __Les activités des utilisateurs__ décrivent les actions qu'un utilisateur peut entreprendre pour interagir.
-* __Activités de la communauté__ décrit ce que la communauté fait en réponse à certaines actions de l'utilisateur.
+- **Philosophie de la fédération** expose le modèle général de la manière dont le projet est censé se fédérer.
+- **Les activités des utilisateurs** décrivent les actions qu'un utilisateur peut entreprendre pour interagir.
+- **Activités de la communauté** décrit ce que la communauté fait en réponse à certaines actions de l'utilisateur.
 
 ## Philosophie de la Fédération
 
-L'acteur principal de Lemmy est la communauté. Chaque communauté réside sur une seule instance, et se compose d'une liste de messages et d'une liste de followers. L'interaction principale est celle d'un utilisateur qui envoie une activité liée à un message ou à un commentaire à la boîte de réception de la communauté, qui l'annonce ensuite à tous ses suiveurs. 
+L'acteur principal de Lemmy est la communauté. Chaque communauté réside sur une seule instance, et se compose d'une liste de messages et d'une liste de followers. L'interaction principale est celle d'un utilisateur qui envoie une activité liée à un message ou à un commentaire à la boîte de réception de la communauté, qui l'annonce ensuite à tous ses suiveurs.
 
 Chaque communauté a un utilisateur créateur spécifique, qui est responsable de la définition des règles, de la nomination des modérateurs et de la suppression du contenu qui viole les règles.
 
@@ -109,12 +108,12 @@ La communauté est essentiellement un robot, qui n'agit qu'en réaction aux acti
 
 ### Accepter le suivi
 
-Si la communauté reçoit une activité "Follow", elle répond automatiquement par "Accept/Follow". Elle ajoute également l'utilisateur à sa liste de suiveurs. 
+Si la communauté reçoit une activité "Follow", elle répond automatiquement par "Accept/Follow". Elle ajoute également l'utilisateur à sa liste de suiveurs.
 
 ### Unfollow
 
 À la réception d'un `Undo/Follow`, la communauté supprime l'utilisateur de sa liste de followers.
- 
+
 #### Annoncer
 
 Si la communauté reçoit une activité liée à un message ou à un commentaire (créer, mettre à jour, aimer, détester, retirer, supprimer, annuler), elle l'annoncera à ses membres. Pour cela, une Annonce est créée avec la Communauté comme acteur, et l'activité reçue comme objet. Les instances qui suivent restent ainsi informées de toutes les actions des communautés qu'elles suivent.

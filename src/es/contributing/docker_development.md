@@ -30,6 +30,7 @@ Finalmente abre la siguiente dirección en tu navegador: `http://localhost:1235`
 **Nota:** muchas características (como docs e imagenes) no funcionarán sin usar un perfil de nginx como en `ansible/templates/nginx.conf`.
 
 Para acelerar la compilación de Docker, añade el siguiente código a `/etc/docker/daemon.json` y reinicia Docker.
+
 ```
 {
   "features": {

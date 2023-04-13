@@ -1,4 +1,4 @@
-# Protocolo de la Federación Lemmy 
+# Protocolo de la Federación Lemmy
 
 El protocolo de Lemmy (o Protocolo de la Federación Lemmy) es un subconjunto estricto del [Protocolo ActivityPub](https://www.w3.org/TR/activitypub/). Cualquier desviación del protocolo ActivityPub es un error (bug) en Lemmy o en esta documentación (o ambos).
 
@@ -16,36 +16,36 @@ En las siguientes tablas, "obligatorio" se refiere a si Lemmy aceptará o no una
 
 - [Contexto](#context)
 - [Actores](#actors)
-  * [Comunidad](#community)
-    + [Bandeja de salida de la Comunidad](#community-outbox)
-    + [Seguidores de la Comunidad](#community-followers)
-    + [Moderadores de la Comunidad](#community-moderators)
-  * [Usuario](#user)
-    + [Bandeja de salida del Usuario](#user-outbox)
+  - [Comunidad](#community)
+    - [Bandeja de salida de la Comunidad](#community-outbox)
+    - [Seguidores de la Comunidad](#community-followers)
+    - [Moderadores de la Comunidad](#community-moderators)
+  - [Usuario](#user)
+    - [Bandeja de salida del Usuario](#user-outbox)
 - [Objectos](#objects)
-  * [Publicación](#post)
-  * [Comentario](#comment)
-  * [Mensaje privado](#private-message)
+  - [Publicación](#post)
+  - [Comentario](#comment)
+  - [Mensaje privado](#private-message)
 - [Actividades](#activities)
-  * [Usuario a Comunidad](#user-to-community)
-    + [Seguir](#follow)
-    + [Dejar de seguir](#unfollow)
-    + [Crear o Actualizar Publicación](#create-or-update-post)
-    + [Crear o Actualizar Comentario](#create-or-update-comment)
-    + [Me gusta Publicación o Comentario](#like-post-or-comment)
-    + [No me gusta Publicación o Comentario](#dislike-post-or-comment)
-    + [Eliminar Publicación o Comentario](#delete-post-or-comment)
-    + [Remover Publicación o Comentario](#remove-post-or-comment)
-    + [Deshacer](#undo)
-  * [Comunidad a Usuario](#community-to-user)
-    + [Aceptar Seguir](#accept-follow)
-    + [Anunciar](#announce)
-    + [Remover o Eliminar Comunidad](#remove-or-delete-community)
-    + [Restaurar Comunidad Removida o Eliminada](#restore-removed-or-deleted-community)
-  * [Usuario a Usuario](#user-to-user)
-    + [Crear o Actualizar Mensaje Privado](#create-or-update-private-message)
-    + [Eliminar Mensaje Privado](#delete-private-message)
-    + [Deshacer la Eliminación del Mensaje Privado](#undo-delete-private-message)⏎
+  - [Usuario a Comunidad](#user-to-community)
+    - [Seguir](#follow)
+    - [Dejar de seguir](#unfollow)
+    - [Crear o Actualizar Publicación](#create-or-update-post)
+    - [Crear o Actualizar Comentario](#create-or-update-comment)
+    - [Me gusta Publicación o Comentario](#like-post-or-comment)
+    - [No me gusta Publicación o Comentario](#dislike-post-or-comment)
+    - [Eliminar Publicación o Comentario](#delete-post-or-comment)
+    - [Remover Publicación o Comentario](#remove-post-or-comment)
+    - [Deshacer](#undo)
+  - [Comunidad a Usuario](#community-to-user)
+    - [Aceptar Seguir](#accept-follow)
+    - [Anunciar](#announce)
+    - [Remover o Eliminar Comunidad](#remove-or-delete-community)
+    - [Restaurar Comunidad Removida o Eliminada](#restore-removed-or-deleted-community)
+  - [Usuario a Usuario](#user-to-user)
+    - [Crear o Actualizar Mensaje Privado](#create-or-update-private-message)
+    - [Eliminar Mensaje Privado](#delete-private-message)
+    - [Deshacer la Eliminación del Mensaje Privado](#undo-delete-private-message)⏎
 
 <!-- tocstop -->
 
@@ -53,21 +53,21 @@ En las siguientes tablas, "obligatorio" se refiere a si Lemmy aceptará o no una
 
 ```json
 {
-    "@context": [
-        "https://www.w3.org/ns/activitystreams",
-        {
-            "moderators": "as:moderators",
-            "sc": "http://schema.org#",
-            "stickied": "as:stickied",
-            "sensitive": "as:sensitive",
-            "pt": "https://join.lemmy.ml#",
-            "comments_enabled": {
-                "type": "sc:Boolean",
-                "id": "pt:commentsEnabled"
-            }
-        },
-        "https://w3id.org/security/v1"
-    ]
+  "@context": [
+    "https://www.w3.org/ns/activitystreams",
+    {
+      "moderators": "as:moderators",
+      "sc": "http://schema.org#",
+      "stickied": "as:stickied",
+      "sensitive": "as:sensitive",
+      "pt": "https://join.lemmy.ml#",
+      "comments_enabled": {
+        "type": "sc:Boolean",
+        "id": "pt:commentsEnabled"
+      }
+    },
+    "https://w3id.org/security/v1"
+  ]
 }
 ```
 
@@ -122,23 +122,23 @@ Recibe actividades del usuario: Seguir `Follow`, Deshacer/Seguir `Undo/Follow`, 
 }
 ```
 
-| Nombre del Campo | Obligatorio | Descripción |
-|---|---|---|
-| `preferredUsername` | si | Nombre del actor |
-| `name` | si | Titulo de la comunidad |
-| `sensitive` | si | True indica que todas las publicaciones en la comunidad son nsfw |
-| `attributedTo` | si | Primero el creador de la comunidad, luego el resto de los moderadores |
-| `content` | no | Texto para la barra lateral de lac comunidad, que suele contener una descripción y normas |
-| `icon` | no | Icono que aparece junto al nombre de la comunidad |
-| `image` | no | Imagen de banner, mostrada en la parte superior de la página de la comunidad |
-| `inbox` | no | URL de la bandeja de entrada de ActivityPub |
-| `outbox` | no | URL de la bandeja de salida de ActivityPub, sólo contiene las últimas 20 publicaciones sin comentarios, votos u otras actividades |
-| `followers` | no | URL de la colección de seguidores, sólo contiene el número de seguidores, sin referencias a seguidores individuales |
-| `endpoints` | no | Contiene la URL de la bandeja de entrada compartida |
-| `published` | no | Fecha de creación de la comunidad |
-| `updated` | no | Fecha de la última modificación de la comunidad |
-| `publicKey` | si | La clave pública utilizada para verificar las firmas de este actor |
-   
+| Nombre del Campo    | Obligatorio | Descripción                                                                                                                       |
+| ------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `preferredUsername` | si          | Nombre del actor                                                                                                                  |
+| `name`              | si          | Titulo de la comunidad                                                                                                            |
+| `sensitive`         | si          | True indica que todas las publicaciones en la comunidad son nsfw                                                                  |
+| `attributedTo`      | si          | Primero el creador de la comunidad, luego el resto de los moderadores                                                             |
+| `content`           | no          | Texto para la barra lateral de lac comunidad, que suele contener una descripción y normas                                         |
+| `icon`              | no          | Icono que aparece junto al nombre de la comunidad                                                                                 |
+| `image`             | no          | Imagen de banner, mostrada en la parte superior de la página de la comunidad                                                      |
+| `inbox`             | no          | URL de la bandeja de entrada de ActivityPub                                                                                       |
+| `outbox`            | no          | URL de la bandeja de salida de ActivityPub, sólo contiene las últimas 20 publicaciones sin comentarios, votos u otras actividades |
+| `followers`         | no          | URL de la colección de seguidores, sólo contiene el número de seguidores, sin referencias a seguidores individuales               |
+| `endpoints`         | no          | Contiene la URL de la bandeja de entrada compartida                                                                               |
+| `published`         | no          | Fecha de creación de la comunidad                                                                                                 |
+| `updated`           | no          | Fecha de la última modificación de la comunidad                                                                                   |
+| `publicKey`         | si          | La clave pública utilizada para verificar las firmas de este actor                                                                |
+
 #### Bandeja de Salida de la Comunidad
 
 ```json
@@ -228,18 +228,18 @@ Envía y recibe actividades de/para otros usuarios: Crear/Nota `Create/Note`, Ac
 }
 ```
 
-| Nombre del Campo | Obligatorio | Descripción |
-|---|---|---|
-| `preferredUsername` | si | Nombre del actor |
-| `name` | no | El nombre para mostrar del usuario |
-| `content` | no | La biografía del usuario |
-| `icon` | no | El avatar del usuario, que aparece junto al nombre del usuario |
-| `image` | no | Banner del usuario, mostrada en la parte superior del perfil |
-| `inbox` | no | URL de la bandeja de entrada de ActivityPub |
-| `endpoints` | no | Contiene la URL de la bandeja de entrada compartida |
-| `published` | no | Fecha de registro del usuario |
-| `updated` | no | Fecha de la última actualización del perfil del usuario |
-| `publicKey` | si | La clave pública utilizada para verificar las firmas de este actor |
+| Nombre del Campo    | Obligatorio | Descripción                                                        |
+| ------------------- | ----------- | ------------------------------------------------------------------ |
+| `preferredUsername` | si          | Nombre del actor                                                   |
+| `name`              | no          | El nombre para mostrar del usuario                                 |
+| `content`           | no          | La biografía del usuario                                           |
+| `icon`              | no          | El avatar del usuario, que aparece junto al nombre del usuario     |
+| `image`             | no          | Banner del usuario, mostrada en la parte superior del perfil       |
+| `inbox`             | no          | URL de la bandeja de entrada de ActivityPub                        |
+| `endpoints`         | no          | Contiene la URL de la bandeja de entrada compartida                |
+| `published`         | no          | Fecha de registro del usuario                                      |
+| `updated`           | no          | Fecha de la última actualización del perfil del usuario            |
+| `publicKey`         | si          | La clave pública utilizada para verificar las firmas de este actor |
 
 #### Bandeja de salida del Usuario
 
@@ -291,19 +291,19 @@ Una página con título, y contenido opcional de URL y texto. La URL suele lleva
 }
 ```
 
-| Nombre del Campo | Obligatorio | Description |
-|---|---|---|
-| `attributedTo` | si | ID del usuario que creó esta publicación |
-| `to` | si | ID de la comunidad en la que se publicó |
-| `name` | si | Título de la publicación |
-| `content` | no | Cuerpo de la publicación |
-| `url` | no | Un enlace arbitrario para compartir |
-| `image` | no | Miniatura para la `url`, sólo aparece si es un enlace de imagen |
-| `commentsEnabled` | si | False indica que la publicación está bloqueada, y no se pueden añadir comentarios |
-| `sensitive` | si | True marca la publicación como NSFW,difumina la miniatura y la oculta a los usuarios con la configuración NSFW desactivada |
-| `stickied` | si | True significa que se muestra en la parte superior de la comunidad |
-| `published` | no | Fecha de creación de la publicación |
-| `updated` | no | Fecha en la que se editó la publicación (no está presente si nunca se editó) |
+| Nombre del Campo  | Obligatorio | Description                                                                                                                |
+| ----------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `attributedTo`    | si          | ID del usuario que creó esta publicación                                                                                   |
+| `to`              | si          | ID de la comunidad en la que se publicó                                                                                    |
+| `name`            | si          | Título de la publicación                                                                                                   |
+| `content`         | no          | Cuerpo de la publicación                                                                                                   |
+| `url`             | no          | Un enlace arbitrario para compartir                                                                                        |
+| `image`           | no          | Miniatura para la `url`, sólo aparece si es un enlace de imagen                                                            |
+| `commentsEnabled` | si          | False indica que la publicación está bloqueada, y no se pueden añadir comentarios                                          |
+| `sensitive`       | si          | True marca la publicación como NSFW,difumina la miniatura y la oculta a los usuarios con la configuración NSFW desactivada |
+| `stickied`        | si          | True significa que se muestra en la parte superior de la comunidad                                                         |
+| `published`       | no          | Fecha de creación de la publicación                                                                                        |
+| `updated`         | no          | Fecha en la que se editó la publicación (no está presente si nunca se editó)                                               |
 
 ### Comentario
 
@@ -331,14 +331,14 @@ Una respuesta a una publicación, o una respuesta a otro comentario. Contiene s�
 }
 ```
 
-| Nombre del Campo | Obligatorio | Descripción |
-|---|---|---|
-| `attributedTo` | si | ID del usuario que creó el comentario |
-| `to` | si | Comunidad donde se hizo el comentario |
-| `content` | si | El texto del comentario |
-| `inReplyTo` | si | ID de la publicación donde se hizo el comentario, y el comentario padre. Si este es un comentario de nivel superior, `inReplyTo` sólo contiene la publicación |
-| `published` | no | Fecha de creación del comentario |
-| `updated` | no | Fecha en la que se editó la publicación (no está presente si nunca se editó) |
+| Nombre del Campo | Obligatorio | Descripción                                                                                                                                                   |
+| ---------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `attributedTo`   | si          | ID del usuario que creó el comentario                                                                                                                         |
+| `to`             | si          | Comunidad donde se hizo el comentario                                                                                                                         |
+| `content`        | si          | El texto del comentario                                                                                                                                       |
+| `inReplyTo`      | si          | ID de la publicación donde se hizo el comentario, y el comentario padre. Si este es un comentario de nivel superior, `inReplyTo` sólo contiene la publicación |
+| `published`      | no          | Fecha de creación del comentario                                                                                                                              |
+| `updated`        | no          | Fecha en la que se editó la publicación (no está presente si nunca se editó)                                                                                  |
 
 ### Mensaje Privado
 
@@ -361,15 +361,16 @@ Un mensaje directo de un usuario a otro. No puede incluir usuarios adicionales. 
     "updated": "2020-10-08T20:13:52.547156+00:00"
 }
 ```
+
 <!-- Fix table in english version --->
 
-| Nombre del Campo | Obligatorio | Descripción |
-|---|---|---|
-| `attributedTo` | | ID del usuario que creo este mensaje |
-| `to` | | ID del destinatario |
-| `content` | si | El texto del mensaje privado |
-| `published` | no | Fecha de creación del mensaje |
-| `updated` | no |  Fecha en la que se editó la publicación (no está presente si nunca se editó) |
+| Nombre del Campo | Obligatorio | Descripción                                                                  |
+| ---------------- | ----------- | ---------------------------------------------------------------------------- |
+| `attributedTo`   |             | ID del usuario que creo este mensaje                                         |
+| `to`             |             | ID del destinatario                                                          |
+| `content`        | si          | El texto del mensaje privado                                                 |
+| `published`      | no          | Fecha de creación del mensaje                                                |
+| `updated`        | no          | Fecha en la que se editó la publicación (no está presente si nunca se editó) |
 
 ## Actividades
 
@@ -390,14 +391,14 @@ Cuando el usuario hace clic en "Suscribirse" en una comunidad, se envía un `Fol
 }
 ```
 
-| Nombre del Campo | Obligatorio | Descripción |
-|---|---|---|
-| `actor` | si | El usuario que envía la solicitud de seguimiento `Follow` |
-| `object` | si | La comunidad a seguir |
+| Nombre del Campo | Obligatorio | Descripción                                               |
+| ---------------- | ----------- | --------------------------------------------------------- |
+| `actor`          | si          | El usuario que envía la solicitud de seguimiento `Follow` |
+| `object`         | si          | La comunidad a seguir                                     |
 
 #### Dejar de Seguir
 
-Al pulsar el botón de "dar de baja"  en una comunidad se envía un `Undo/Follow`. La comunidad retira al usuario de su lista de seguidores tras recibirlo.
+Al pulsar el botón de "dar de baja" en una comunidad se envía un `Undo/Follow`. La comunidad retira al usuario de su lista de seguidores tras recibirlo.
 
 ```json
 {
@@ -434,11 +435,11 @@ Cuando un usuario crea una nueva publicación, ésta se envía a la comunidad co
 }
 ```
 
-| Nombre del Campo | Obligatorio | Descripción |
-|---|---|---|
-| `type` | si | Crear `Create` o Actualizar `Update` |
-| `cc` | si | Comunidad donde se hizo la publicación |
-| `object` | si | La publicación que se crea |
+| Nombre del Campo | Obligatorio | Descripción                            |
+| ---------------- | ----------- | -------------------------------------- |
+| `type`           | si          | Crear `Create` o Actualizar `Update`   |
+| `cc`             | si          | Comunidad donde se hizo la publicación |
+| `object`         | si          | La publicación que se crea             |
 
 #### Crear o Actulizar Comentario
 
@@ -464,11 +465,11 @@ Una respuesta a una publicación, o a otro comentario. Puede contener menciones 
 }
 ```
 
-| Nombre del Campo | Obligatorio | Descripción |
-|---|---|---|
-| `tag` | no | Lista de los usuarios que se mencionan en el comentario (como `@usuario@ejemplo.com`) |
-| `cc` | si | Comunidad en la que se hace la publicación, el usuario al que se responde (creador de la publicación/comentario principal), así como los usuarios mencionados |
-| `object` | si | El comentario que se crea |
+| Nombre del Campo | Obligatorio | Descripción                                                                                                                                                   |
+| ---------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `tag`            | no          | Lista de los usuarios que se mencionan en el comentario (como `@usuario@ejemplo.com`)                                                                         |
+| `cc`             | si          | Comunidad en la que se hace la publicación, el usuario al que se responde (creador de la publicación/comentario principal), así como los usuarios mencionados |
+| `object`         | si          | El comentario que se crea                                                                                                                                     |
 
 #### Me gusta Publicación o Comentario
 
@@ -488,10 +489,10 @@ Un voto positivo para una publicación o un comentario
 }
 ```
 
-| Nombre del Campo | Obligatorio | Descripción|
-|---|---|---|
-| `cc` | si | ID de la comunidad en la que se encuentra la publicación/comentario |
-| `object` | si | La publicación o comentario que se ha votado |
+| Nombre del Campo | Obligatorio | Descripción                                                         |
+| ---------------- | ----------- | ------------------------------------------------------------------- |
+| `cc`             | si          | ID de la comunidad en la que se encuentra la publicación/comentario |
+| `object`         | si          | La publicación o comentario que se ha votado                        |
 
 #### No me gusta Publicación o Comentario
 
@@ -511,10 +512,10 @@ Un voto negativo para una publicación o un comentario
 }
 ```
 
-| Nombre del Campo | Obligatorio | Descripción|
-|---|---|---|
-| `cc` | si | ID de la comunidad en la que se encuentra la publicación/comentario |
-| `object` | si | La publicación o comentario que se ha votado |
+| Nombre del Campo | Obligatorio | Descripción                                                         |
+| ---------------- | ----------- | ------------------------------------------------------------------- |
+| `cc`             | si          | ID de la comunidad en la que se encuentra la publicación/comentario |
+| `object`         | si          | La publicación o comentario que se ha votado                        |
 
 #### Eliminar Publicación o Comentario
 
@@ -534,12 +535,12 @@ Elimina una publicación o comentario creado anteriormente. Esto sólo lo puede 
 }
 ```
 
-| Nombre del Campo | Obligatorio | Descripción|
-|---|---|---|
-| `cc` | si | ID de la comunidad en la que se encuentra la publicación/comentario |
-| `object` | si | La publicación o comentario que se está eliminando |
+| Nombre del Campo | Obligatorio | Descripción                                                         |
+| ---------------- | ----------- | ------------------------------------------------------------------- |
+| `cc`             | si          | ID de la comunidad en la que se encuentra la publicación/comentario |
+| `object`         | si          | La publicación o comentario que se está eliminando                  |
 
-#### Remover Publicación o Comentario 
+#### Remover Publicación o Comentario
 
 Remover una publicación o un comentario. Esto sólo puede hacerlo un mod de la comunidad, o un administrador en la instancia donde se aloja la comunidad.
 
@@ -557,10 +558,10 @@ Remover una publicación o un comentario. Esto sólo puede hacerlo un mod de la 
 }
 ```
 
-| Nombre del Campo | Obligatorio | Descripción|
-|---|---|---|
-| `cc` | si | ID de la comunidad en la que se encuentra la publicación/comentario |
-| `object` | si | La publicación o comentario que se está removiendo |
+| Nombre del Campo | Obligatorio | Descripción                                                         |
+| ---------------- | ----------- | ------------------------------------------------------------------- |
+| `cc`             | si          | ID de la comunidad en la que se encuentra la publicación/comentario |
+| `object`         | si          | La publicación o comentario que se está removiendo                  |
 
 #### Deshacer
 
@@ -580,9 +581,9 @@ Revierte una actividad anterior, sólo puede hacerlo el actor `actor` del objeto
 }
 ```
 
-| Nombre del Campo | Obligatorio | Descripción |
-|---|---|---|
-| `object` | si | Cualquier actividad `Like`, `Dislike`, `Delete` o `Remove` tal como se ha descrito anteriormente |
+| Nombre del Campo | Obligatorio | Descripción                                                                                      |
+| ---------------- | ----------- | ------------------------------------------------------------------------------------------------ |
+| `object`         | si          | Cualquier actividad `Like`, `Dislike`, `Delete` o `Remove` tal como se ha descrito anteriormente |
 
 #### Agregar Moderador
 
@@ -645,11 +646,11 @@ Enviado automáticamente por la comunidad en respuesta a un `Follow`. Al mismo t
 }
 ```
 
-| Nombre del Campo | Obligatorio | Descripción |
-|---|---|---|
-| `actor` | si | La misma comunidad que en la actividad `Follow` |
-| `to` | no | ID del usuario que envió el `Follow` |
-| `object` | si | La actividad de `Follow` enviada anteriormente |
+| Nombre del Campo | Obligatorio | Descripción                                     |
+| ---------------- | ----------- | ----------------------------------------------- |
+| `actor`          | si          | La misma comunidad que en la actividad `Follow` |
+| `to`             | no          | ID del usuario que envió el `Follow`            |
+| `object`         | si          | La actividad de `Follow` enviada anteriormente  |
 
 #### Anuncio
 
@@ -669,13 +670,13 @@ Cuando la comunidad recibe una actividad publicación o comentario, lo envuelve 
 }
 ```
 
-| Nombre del Campo | Obligatorio | Descripción |
-|---|---|---|
-| `object` | si | Cualquier actividad `Create`, `Update`, `Like`, `Dislike`, `Delete`, `Remove` o `Undo` tal como se ha descrito en la sección [Usuario a Comunidad](#user-to-community) |
+| Nombre del Campo | Obligatorio | Descripción                                                                                                                                                            |
+| ---------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `object`         | si          | Cualquier actividad `Create`, `Update`, `Like`, `Dislike`, `Delete`, `Remove` o `Undo` tal como se ha descrito en la sección [Usuario a Comunidad](#user-to-community) |
 
 #### Remover o Eliminar Comunidad
 
-Un administrador de instancia puede remover la comunidad, o un mod puede eliminarla. 
+Un administrador de instancia puede remover la comunidad, o un mod puede eliminarla.
 
 ```json
 {
@@ -691,9 +692,9 @@ Un administrador de instancia puede remover la comunidad, o un mod puede elimina
 }
 ```
 
-| Nombre del Campo| Obligatorio | Descripción |
-|---|---|---|
-| `type` | si | Remover `Remove` o Eliminar `Delete` |
+| Nombre del Campo | Obligatorio | Descripción                          |
+| ---------------- | ----------- | ------------------------------------ |
+| `type`           | si          | Remover `Remove` o Eliminar `Delete` |
 
 #### Restaurar Comunidad Removida o Eliminada
 
@@ -723,9 +724,10 @@ Revierte la remoción o eliminación
 }
 
 ```
-| Nombre del Campo | Obligatorio | Descripción|
-|---|---|---|
-| `object.type` | si | Remover `Remove` o Eliminar `Delete` |
+
+| Nombre del Campo | Obligatorio | Descripción                          |
+| ---------------- | ----------- | ------------------------------------ |
+| `object.type`    | si          | Remover `Remove` o Eliminar `Delete` |
 
 ### Usuario a Usuario
 
@@ -744,10 +746,10 @@ Crea un nuevo mensaje privado entre dos usuarios.
 }
 ```
 
-| Nombre del Campo | Obligatorio| Descripción |
-|---|---|---|
-| `type` | si | Crear `Create` o Actualizar `Update` |
-| `object` | si | Un [Mensaje Privado](#private-message) |
+| Nombre del Campo | Obligatorio | Descripción                            |
+| ---------------- | ----------- | -------------------------------------- |
+| `type`           | si          | Crear `Create` o Actualizar `Update`   |
+| `object`         | si          | Un [Mensaje Privado](#private-message) |
 
 #### Eliminar Mensaje Privado
 

@@ -38,7 +38,8 @@ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 
 ### Otras instancias no pueden obtener objetos locales (comunidad, publicaciones, etc)
 
-Tu proxy reverso (ejemplo nginx) necesita reenviar las solicitudes con la cabecera `Accept: application/activity+json` al backend. Esto es manejado por las siguientes líneas: 
+Tu proxy reverso (ejemplo nginx) necesita reenviar las solicitudes con la cabecera `Accept: application/activity+json` al backend. Esto es manejado por las siguientes líneas:
+
 ```
 set $proxpass "http://0.0.0.0:{{ lemmy_ui_port }}";
 if ($http_accept = "application/activity+json") {
@@ -51,12 +52,14 @@ proxy_pass $proxpass;
 ```
 
 Puedes probar que funciona correctamente ejecutando los siguientes comandos, todos ellos deberían devolver JSON válido:
+
 ```
 curl -H "Accept: application/activity+json" https://your-instance.com/u/some-local-user
 curl -H "Accept: application/activity+json" https://your-instance.com/c/some-local-community
 curl -H "Accept: application/activity+json" https://your-instance.com/post/123 # the id of a local post
 curl -H "Accept: application/activity+json" https://your-instance.com/comment/123 # the id of a local comment
 ```
+
 ### La obtención de objetos remotos funciona, pero publicar/comentar en comunidades remotas falla
 
 Comprueba que la [federación está permitida en ambas instancias](../federation/administration.md#instance-allowlist-and-blocklist).

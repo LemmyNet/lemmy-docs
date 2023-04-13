@@ -10,9 +10,9 @@
   - Puntuaciones completas de los votos `(+/-)` como en el antiguo reddit.
   - Temas, incluidos los claros, los oscuros, y los solarizados.
   - Emojis con soporte de autocompletado. Empieza tecleando `:`
-    - *Ejemplo* `miau :cat:` => `miau 🐈`
+    - _Ejemplo_ `miau :cat:` => `miau 🐈`
   - Etiquetado de Usuarios con `@`, etiquetado de Comunidades con `!`.
-    - *Ejemplo* `@miguel@lemmy.ml me invitó a la comunidad !gaming@lemmy.ml`
+    - _Ejemplo_ `@miguel@lemmy.ml me invitó a la comunidad !gaming@lemmy.ml`
   - Carga de imágenes integrada tanto en las publicaciones como en los comentarios.
   - Una publicación puede consistir en un título y cualquier combinación de texto propio, una URL o nada más.
   - Notificaciones, sobre las respuestas a los comentarios y cuando te etiquetan.

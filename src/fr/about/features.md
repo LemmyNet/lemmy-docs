@@ -18,7 +18,7 @@
   - i18n / Prise en charge d l'internationalisation.
   - RSS / Flux Atom pour "Tous", "Abonnés", "Boîte de réception", "Utilisateur" et "Communauté".
 - Prise en charge du publipostage croisé.
-  - Une *recherche de messages similaires* lors de la création de nouveaux messages. Idéal pour les communautés de questions/réponses.
+  - Une _recherche de messages similaires_ lors de la création de nouveaux messages. Idéal pour les communautés de questions/réponses.
 - Capacités de modération.
   - Logs de modération publics.
   - Peut épingler des messages en haut des communautés.

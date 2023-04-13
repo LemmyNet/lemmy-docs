@@ -6,11 +6,12 @@ Cuando se utiliza docker o ansible, debe haber una carpeta llamada `volumes`, la
 
 ### Copia de seguridad incremental de la BD
 
-Para hacer una copia de seguridad incremental de una base de datos en archivo `.sql` puedes ejecutar: 
+Para hacer una copia de seguridad incremental de una base de datos en archivo `.sql` puedes ejecutar:
 
 ```bash
 docker-compose exec postgres pg_dumpall -c -U lemmy >  lemmy_dump_`date +%Y-%m-%d"_"%H_%M_%S`.sql
 ```
+
 ### Un ejemplo de script de copia de seguridad
 
 ```bash
@@ -42,7 +43,7 @@ docker exec -i FOLDERNAME_postgres_1 psql -U lemmy -c "alter user lemmy with pas
 Si aún no te has federado, puedes cambiar tu nombre de dominio en la base de datos.
 **Advertencia: no haga esto después de haber federado o romperás la federación.**
 
-Entra al `psql` de tu docker: 
+Entra al `psql` de tu docker:
 
 `docker-compose exec postgres psql -U lemmy`
 
@@ -74,5 +75,3 @@ update community set shared_inbox_url = replace (shared_inbox_url, 'old_domain',
 ## Más recursos
 
 - https://stackoverflow.com/questions/24718706/backup-restore-a-dockerized-postgresql-database
-
-
