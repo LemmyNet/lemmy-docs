@@ -1,10 +1,10 @@
+clone:
+  git:
+    image: woodpeckerci/plugin-git
+    settings:
+      recursive: true
+      submodule_update_remote: true
 pipeline:
-  fetch_git_submodules:
-    image: alpine/git
-    commands:
-      - git submodule init
-      - git submodule update --recursive --remote
-
   check_documentation_build:
     image: rust:1.61-slim-buster
     commands:
@@ -14,3 +14,7 @@ pipeline:
       - apt-get install git curl -y
       - ./update-includes.sh
       - mdbook build .
+  check_formatting:
+    image: alpine:3
+    commands:
+      - prettier -c src
