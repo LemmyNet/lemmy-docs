@@ -27,14 +27,18 @@ You can access the lemmy-ui at `http://localhost:80`
 To make Lemmy available outside the server, you need to setup a reverse proxy, like Nginx. You can use the following simple proxy:
 
 ```
-server_name your_domain;
-location / {
-    proxy_pass http://localhost:LEMMY_PORT;
-    include proxy_params;
+server {
+    listen 80;
+    server_name my_domain.tld;
+
+    location / {
+        proxy_pass http://localhost:LEMMY_PORT;
+        include proxy_params;
+    }
 }
 ```
 
-You can also setup TLS, for example with [Let's Encrypt](https://letsencrypt.org/). After this you need to restart Nginx to reload the config.
+You should also setup TLS, for example with [Let's Encrypt](https://letsencrypt.org/). [Here's a guide for setting up letsencrypt on Ubuntu](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-20-04).
 
 ## Updating
 
