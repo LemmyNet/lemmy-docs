@@ -26,7 +26,7 @@ Buka `docker-compose.yml` Anda dan pastikan `LEMMY_EXTERNAL_HOST` untuk `lemmy-u
 
 Jika Anda ingin kata sandi basis data yang berbeda, Anda harus menggantinya juga di `docker-compose.yml` **sebelum** pemulaian pertama Anda.
 
-Setelah ini, coba lihat ke [berkas konfigurasi](configuration.md) bernama `lemmy.hjson` dan coba sesuaikan, khususnya nama hos dan mungkin kata sandi basis data. Kemudian jalankan: 
+Setelah ini, coba lihat ke [berkas konfigurasi](configuration.md) bernama `lemmy.hjson` dan coba sesuaikan, khususnya nama hos dan mungkin kata sandi basis data. Kemudian jalankan:
 
 `docker-compose up -d`
 

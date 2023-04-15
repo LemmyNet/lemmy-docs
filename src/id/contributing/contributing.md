@@ -12,7 +12,6 @@ Informasi tentang berkontribusi ke Lemmy, entah itu penerjemahan, menguji, pende
 
 Periksa [Weblate Lemmy](https://weblate.yerbamate.ml/projects/lemmy/) untuk penerjemahan. Anda bisa juga membantu dengan [menerjemahkan dokumentasi ini](https://github.com/LemmyNet/lemmy-docs#adding-a-new-language).
 
-
 ## Arsitektur
 
 ### Antarmuka
@@ -25,13 +24,13 @@ Periksa [Weblate Lemmy](https://weblate.yerbamate.ml/projects/lemmy/) untuk pene
 ### Bagian-Belakang
 
 - Bagian-belakang dengan `Rust`, menggunakan `Diesel` dan `Actix`.
-- Kode peladen dibagi ke bagian utama di `src`. Mereka termasuk: 
-  - `db` - Aksi basis data tingkat rendah. 
-    - Penambahan basis data dilakukan menggunakan migrasi Diesel. Jalankan `diesel migration generate xxxxx` untuk menambahkan sesuatu yang baru. 
-  - `api` - Interaksi pengguna tingkat tinggi (hal seperti `CreateComment`) 
+- Kode peladen dibagi ke bagian utama di `src`. Mereka termasuk:
+  - `db` - Aksi basis data tingkat rendah.
+    - Penambahan basis data dilakukan menggunakan migrasi Diesel. Jalankan `diesel migration generate xxxxx` untuk menambahkan sesuatu yang baru.
+  - `api` - Interaksi pengguna tingkat tinggi (hal seperti `CreateComment`)
   - `routes` - Endpoint peladen.
   - `apub` - Konversi activitypub.
-  - `websocket` - Membuat peladen websocket. 
+  - `websocket` - Membuat peladen websocket.
 
 ## Linting/Pemformatan
 

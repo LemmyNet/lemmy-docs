@@ -1,10 +1,15 @@
+clone:
+  git:
+    image: woodpeckerci/plugin-git
+    settings:
+      recursive: true
+      submodule_update_remote: true
 pipeline:
-  fetch_git_submodules:
-    image: alpine/git
+  check_formatting:
+    image: alpine:3
     commands:
-      - git submodule init
-      - git submodule update --recursive --remote
-
+      - apk add prettier --repository=https://dl-cdn.alpinelinux.org/alpine/edge/testing
+      - prettier -c src
   check_documentation_build:
     image: rust:1.61-slim-buster
     commands:

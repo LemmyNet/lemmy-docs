@@ -6,11 +6,12 @@
 
 ### Инкрементное резервное копирование базы данных
 
-Для инкрементного резервного копирование БД в `.sql` файл, вы можете запустить: 
+Для инкрементного резервного копирование БД в `.sql` файл, вы можете запустить:
 
 ```bash
 docker-compose exec postgres pg_dumpall -c -U lemmy >  lemmy_dump_`date +%Y-%m-%d"_"%H_%M_%S`.sql
 ```
+
 ### Пример сценария резервного копирования
 
 ```bash
@@ -30,7 +31,7 @@ rsync -avP -zz --rsync-path="sudo rsync" MY_USER@MY_IP:/LEMMY_LOCATION/volumes ~
 # Сбросьте существующую БД
 docker exec -i FOLDERNAME_postgres_1 psql -U lemmy -c "DROP SCHEMA public CASCADE; CREATE SCHEMA public;"
 
-# Восстановите БД из резервного .sql 
+# Восстановите БД из резервного .sql
 cat db_dump.sql  |  docker exec -i FOLDERNAME_postgres_1 psql -U lemmy # restores the db
 
 # Возможно при импортировании БД, вам понадобится установить новый пароль, отличающийся от предыдущего.
@@ -41,7 +42,7 @@ docker exec -i FOLDERNAME_postgres_1 psql -U lemmy -c "alter user lemmy with pas
 
 Если вы еще не федерируетесь, вы можете изменить свое доменное имя в БД. **Внимание: не делайте этого после начала федерирования, иначе сломаете процесс федерации.**
 
-Зайдите в `psql` вашего docker : 
+Зайдите в `psql` вашего docker :
 
 `docker-compose exec postgres psql -U lemmy`
 

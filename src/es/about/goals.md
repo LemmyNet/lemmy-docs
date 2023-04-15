@@ -1,6 +1,6 @@
 # Metas
 
-*Esta sección contiene ideas y recursos del equipo que desarrolla Lemmy*. **Parecido a un bloc de notas**
+_Esta sección contiene ideas y recursos del equipo que desarrolla Lemmy_. **Parecido a un bloc de notas**
 
 - Piensa en un nombre / nombre clave.
 - Debe tener comunidades.
@@ -18,7 +18,7 @@
 - ¿Deberia permitir bots?
 - ¿Deberían los comentarios/votos ser estáticos, o sentirse como un chat, como [flowchat?](https://flow-chat.com).
   - Modelo de dos paneles - El panel derecho para comentarios en vivo, el panel izquierdo para la vista en árbol en vivo
-  - En el móvil, permite cambiar entre ellos. ¿Por defecto? 
+  - En el móvil, permite cambiar entre ellos. ¿Por defecto?
 
 # Recursos / Librerías potenciales
 

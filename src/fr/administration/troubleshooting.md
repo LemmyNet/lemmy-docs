@@ -52,12 +52,14 @@ proxy_pass $proxpass;
 ```
 
 Vous pouvez vérifier qu'il fonctionne correctement en exécutant les commandes suivantes, qui devraient toutes renvoyer un JSON valide :
+
 ```
 curl -H "Accept: application/activity+json" https://your-instance.com/u/some-local-user
 curl -H "Accept: application/activity+json" https://your-instance.com/c/some-local-community
 curl -H "Accept: application/activity+json" https://your-instance.com/post/123 # the id of a local post
 curl -H "Accept: application/activity+json" https://your-instance.com/comment/123 # the id of a local comment
 ```
+
 ### La récupération d'objets distants fonctionne, mais la publication/le commentaire dans les communautés distantes échoue.
 
 Vérifiez que [la fédération est autorisée sur les deux instances](../federation/administration.md#instance-allowlist-and-blocklist).

@@ -19,6 +19,7 @@
   - Просмотр с мобильных устройств, разрешить переключаться между ними. По умолчанию?
 
 # Источники / Потенциальные библиотеки
+
 - [Diesel в Postgres типов даты (анг.язык)](https://kotiri.com/2018/01/31/postgresql-diesel-rust-types.html)
 - [Примеры в diesel (анг.язык)](http://siciarz.net/24-days-rust-diesel/)
 - [Рекурсивный запрос списка смежности для вложенных комментариев (анг.язык)](https://stackoverflow.com/questions/192220/what-is-the-most-efficient-elegant-way-to-parse-a-flat-table-into-a-tree/192462#192462)

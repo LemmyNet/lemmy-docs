@@ -1,10 +1,10 @@
 # Краткое изложение
-	
-  - [О нас](about/about.md)
-  - [Возможности](about/features.md)
-  - [Цели](about/goals.md)
-  - [Посты и оценка комментариев](about/ranking.md)
-  - [Путеводитель](about/guide.md)
+
+- [О нас](about/about.md)
+- [Возможности](about/features.md)
+- [Цели](about/goals.md)
+- [Посты и оценка комментариев](about/ranking.md)
+- [Путеводитель](about/guide.md)
 - [Администрирование](administration/administration.md)
   - [Установить с помощью Docker](administration/install_docker.md)
   - [Установить с помощью Ansible](administration/install_ansible.md)

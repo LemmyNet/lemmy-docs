@@ -1,9 +1,11 @@
 # Pengembangan Lokal
 
 ### Pasang persyaratan penyusunan
+
 Pasang Rust menggunakan [opsi yang direkomendasikan di rust-lang.org](https://www.rust-lang.org/tools/install) (rustup).
 
 #### Distro berbasis Debian
+
 ```
 sudo apt install git cargo libssl-dev pkg-config libpq-dev yarn curl gnupg2 espeak
 # pasang yarn
@@ -13,6 +15,7 @@ sudo apt update && sudo apt install yarn
 ```
 
 #### Distro berbasis Arch
+
 ```
 sudo pacman -S git cargo libssl-dev pkg-config libpq-dev yarn curl gnupg2 espeak
 # pasang yarn (stabil)
@@ -20,6 +23,7 @@ curl -o- -L https://yarnpkg.com/install.sh | bash
 ```
 
 #### macOS
+
 Pasang [Homebrew](https://brew.sh/) jika Anda belum memasangnya.
 
 Terakhir, pasang Node dan Yarn.
@@ -29,6 +33,7 @@ brew install node yarn
 ```
 
 ### Dapatkan kode sumber bagian-belakang
+
 ```
 git clone https://github.com/LemmyNet/lemmy.git
 # atau alternatif dari gitea
@@ -36,18 +41,22 @@ git clone https://github.com/LemmyNet/lemmy.git
 ```
 
 ### Susun bagian-belakang (Rust)
+
 ```
 cargo build
 # untuk pengembangan, gunakan `cargo check`
 ```
 
 ### Dapatkan kode sumber antarmuka
+
 ```
 git clone https://github.com/LemmyNet/lemmy-ui.git --recurse-submodules
 ```
 
 ### Siapkan PostgreSQL
+
 #### Distro berbasis Debian
+
 ```
 sudo apt install postgresql
 sudo systemctl start postgresql
@@ -59,6 +68,7 @@ export LEMMY_DATABASE_URL=postgres://lemmy:password@localhost:5432/lemmy
 ```
 
 #### Distro berbasis Arch
+
 ```
 sudo pacman -S postgresql
 sudo systemctl start postgresql
@@ -70,6 +80,7 @@ export LEMMY_DATABASE_URL=postgres://lemmy:password@localhost:5432/lemmy
 ```
 
 #### macOS
+
 ```
 brew install postgresql
 brew services start postgresql
@@ -82,6 +93,7 @@ export LEMMY_DATABASE_URL=postgres://lemmy:password@localhost:5432/lemmy
 ```
 
 ### Jalankan sebuah peladen pengembangan lokal
+
 ```
 cd lemmy
 cargo run

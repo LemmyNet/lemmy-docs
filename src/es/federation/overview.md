@@ -7,9 +7,9 @@ Este documento es para cualquiera que quiera saber como funciona la federación 
 
 Para mantener las cosas simples, a veces verás cosas formateadas como Crear/Nota `Create/Note` o Eliminar/Evento `Delete/Event` o Deshacer/Seguir `Undo/Follow`. La cosa antes de la barra es la Actividad, y la cosa después de la barra es el Objeto dentro de la Actividad, una propiedad del objeto `objet`. Así que estos deben ser leídos como sigue:
 
-* `Create/Note`: una actividad `Create` que contiene una `Note` en el campo del `object`
-* `Delete/Event`: una actividad `Delete` que contiene un `Event` en el campo del `object`
-* `Undo/Follow`: una actividad `Undo` que contiene un `Follow` en el campo del `object`
+- `Create/Note`: una actividad `Create` que contiene una `Note` en el campo del `object`
+- `Delete/Event`: una actividad `Delete` que contiene un `Event` en el campo del `object`
+- `Undo/Follow`: una actividad `Undo` que contiene un `Follow` en el campo del `object`
 
 En Lemmy utilizamos algunos términos específicos para referirnos a los elementos de ActivityPub. Son esencialmente nuestras implementaciones específicas de conceptos conocidos de ActivityPub:
 
@@ -20,9 +20,9 @@ En Lemmy utilizamos algunos términos específicos para referirnos a los element
 
 Este documento tiene tres secciones principales:
 
-* __Filosofía de la federación:__ expone el modelo general de cómo se debe federar.
-* __Actividades del usuario:__ describen las acciones que un usuario puede realizar para interactuar.
-* __Actividades de la comunidad:__ describen lo que hace la comunidad en respuesta a determinadas acciones de los usuarios.
+- **Filosofía de la federación:** expone el modelo general de cómo se debe federar.
+- **Actividades del usuario:** describen las acciones que un usuario puede realizar para interactuar.
+- **Actividades de la comunidad:** describen lo que hace la comunidad en respuesta a determinadas acciones de los usuarios.
 
 ## Filosofía de la federación
 
@@ -80,7 +80,7 @@ Los mods pueden remover Publicaciones y Comentarios de sus Comunidades. Los admi
 
 Las remociones se envían a todos los seguidores de la Comunidad, por lo que también tienen efecto allí. La excepción es si un administrador elimina un elemento de una Comunidad que está alojada en una instancia diferente. En este caso, la eliminación sólo tiene efecto a nivel local.
 
-### Revertir una acción anterior 
+### Revertir una acción anterior
 
 **No eliminamos nada de nuestra base de datos, sólo lo ocultamos a los usuarios**. Las Comunidades/Publicaciones/Comentarios removidos o eliminados tienen un botón de "restauración". Este botón genera una actividad de Deshacer `Undo` que establece la actividad original de eliminar/remover como objeto, como Deshacer/Remover/Publicación `Undo/Remove/Post` o Deshacer/Eliminar/Comunidad `Undo/Delete/Community`.
 
@@ -113,7 +113,7 @@ Si la Comunidad recibe una actividad de Seguir `Follow`, responde automáticamen
 ### Dejar de seguir
 
 Al recibir un Deshacer/Seguir `Undo/Follow`, la Comunidad elimina al Usuario de su lista de seguidores.
- 
+
 ### Anunciar
 
 Si la Comunidad recibe cualquier actividad relacionada con una publicación o comentario (Crear, Actualizar, Me gusta, No me gusta, Eliminar, Borrar, Deshacer), lo anunciará a sus seguidores. Para ello, se crea un Anuncio con la Comunidad como actor, y la actividad recibida como objeto. De este modo, las instancias seguidoras se mantienen actualizadas sobre cualquier acción en las Comunidades que siguen.

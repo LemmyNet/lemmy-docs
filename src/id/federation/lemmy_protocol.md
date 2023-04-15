@@ -10,42 +10,42 @@ Sebelum membaca bagian ini, coba lihat pada [Tinjauan Federasi](overview.md) kam
 
 - [Context](#context)
 - [Actors](#actors)
-  * [Community](#community)
-  * [User](#user)
+  - [Community](#community)
+  - [User](#user)
 - [Objects](#objects)
-  * [Post](#post)
-  * [Comment](#comment)
-  * [Private Message](#private-message)
+  - [Post](#post)
+  - [Comment](#comment)
+  - [Private Message](#private-message)
 - [Collections](#collections)
-  * [Community Outbox](#community-outbox)
-  * [Community Followers](#community-followers)
-  * [Community Moderators](#community-moderators)
-  * [User Outbox](#user-outbox)
+  - [Community Outbox](#community-outbox)
+  - [Community Followers](#community-followers)
+  - [Community Moderators](#community-moderators)
+  - [User Outbox](#user-outbox)
 - [Activities](#activities)
-  * [User to Community](#user-to-community)
-    + [Follow](#follow)
-    + [Unfollow](#unfollow)
-    + [Report Post or Comment](#report-post-or-comment)
-  * [Community to User](#community-to-user)
-    + [Accept Follow](#accept-follow)
-    + [Announce](#announce)
-  * [Announcable](#announcable)
-    + [Create or Update Post](#create-or-update-post)
-    + [Create or Update Comment](#create-or-update-comment)
-    + [Like Post or Comment](#like-post-or-comment)
-    + [Dislike Post or Comment](#dislike-post-or-comment)
-    + [Undo Like or Dislike Post or Comment](#undo-like-or-dislike-post-or-comment)
-    + [Delete Post or Comment](#delete-post-or-comment)
-    + [Remove Post or Comment](#remove-post-or-comment)
-    + [Undo Delete or Remove](#undo-delete-or-remove)
-    + [Add Mod](#add-mod)
-    + [Remove Mod](#remove-mod)
-    + [Block User](#block-user)
-    + [Undo Block User](#undo-block-user)
-  * [User to User](#user-to-user)
-    + [Create or Update Private message](#create-or-update-private-message)
-    + [Delete Private Message](#delete-private-message)
-    + [Undo Delete Private Message](#undo-delete-private-message)
+  - [User to Community](#user-to-community)
+    - [Follow](#follow)
+    - [Unfollow](#unfollow)
+    - [Report Post or Comment](#report-post-or-comment)
+  - [Community to User](#community-to-user)
+    - [Accept Follow](#accept-follow)
+    - [Announce](#announce)
+  - [Announcable](#announcable)
+    - [Create or Update Post](#create-or-update-post)
+    - [Create or Update Comment](#create-or-update-comment)
+    - [Like Post or Comment](#like-post-or-comment)
+    - [Dislike Post or Comment](#dislike-post-or-comment)
+    - [Undo Like or Dislike Post or Comment](#undo-like-or-dislike-post-or-comment)
+    - [Delete Post or Comment](#delete-post-or-comment)
+    - [Remove Post or Comment](#remove-post-or-comment)
+    - [Undo Delete or Remove](#undo-delete-or-remove)
+    - [Add Mod](#add-mod)
+    - [Remove Mod](#remove-mod)
+    - [Block User](#block-user)
+    - [Undo Block User](#undo-block-user)
+  - [User to User](#user-to-user)
+    - [Create or Update Private message](#create-or-update-private-message)
+    - [Delete Private Message](#delete-private-message)
+    - [Undo Delete Private Message](#undo-delete-private-message)
 
 <!-- tocstop -->
 
@@ -65,34 +65,34 @@ Aktor terotomatisasi. Pengguna bisa mengirim pos atau komentar ke ini, yang mana
 
 Mengirim aktivitas ke pengguna: `Accept/Follow`, `Announce`.
 
-Menerima aktivitas dari pengguna: `Follow`, `Undo/Follow`, `Create`, `Update`, `Like`, `Dislike`, `Remove` (hanya admin/moderator), `Delete`  (hanya pembuat), Undo (hanya untuk tindakan sendiri)
+Menerima aktivitas dari pengguna: `Follow`, `Undo/Follow`, `Create`, `Update`, `Like`, `Dislike`, `Remove` (hanya admin/moderator), `Delete` (hanya pembuat), Undo (hanya untuk tindakan sendiri)
 
 ```json
 {{#include ../../../include/crates/apub/assets/lemmy/objects/group.json}}
 ```
 
-| Nama Bidang | Deskripsi |
-|---|---|
-| `preferredUsername` | Nama aktor |
-| `name` | Judul komunitas |
-| `sensitive` | True menunjukkan bahwa semua pos di komunitas adalah NSFW |
-| `attributedTo` | Pertama, pembuat komunitas, kemudian moderator lainnya |
-| `content` | Teks untuk bilah samping komunitas, biasanya memuat deskripsi dan peraturan |
-| `icon` | Ikon, ditampilkan di sebelah nama komunitas |
-| `image` | Gambar spanduk, ditampilkan di bagian atas halaman komunitas |
-| `inbox` | URL kotak masuk ActivityPub |
-| `outbox` | URL kotak keluar ActivityPub, hanya mengandung 20 pos terakhir, tidak ada komentar, pilihan suara, atau aktivitas lainnya |
-| `followers` | URL koleksi pengikut, hanya mengandung jumlah pengikut, tidak ada penunjuk terhadap pengikut individual |
-| `endpoints` | URL kotak masuk bersama |
-| `published` | Tanggal waktu komunitas dibuat |
-| `updated` | Tanggal waktu komunitas terakhir diubah |
-| `publicKey` | Kunci publik yang digunakan untuk memverifikasi tanda tangan dari aktor ini |
+| Nama Bidang         | Deskripsi                                                                                                                 |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `preferredUsername` | Nama aktor                                                                                                                |
+| `name`              | Judul komunitas                                                                                                           |
+| `sensitive`         | True menunjukkan bahwa semua pos di komunitas adalah NSFW                                                                 |
+| `attributedTo`      | Pertama, pembuat komunitas, kemudian moderator lainnya                                                                    |
+| `content`           | Teks untuk bilah samping komunitas, biasanya memuat deskripsi dan peraturan                                               |
+| `icon`              | Ikon, ditampilkan di sebelah nama komunitas                                                                               |
+| `image`             | Gambar spanduk, ditampilkan di bagian atas halaman komunitas                                                              |
+| `inbox`             | URL kotak masuk ActivityPub                                                                                               |
+| `outbox`            | URL kotak keluar ActivityPub, hanya mengandung 20 pos terakhir, tidak ada komentar, pilihan suara, atau aktivitas lainnya |
+| `followers`         | URL koleksi pengikut, hanya mengandung jumlah pengikut, tidak ada penunjuk terhadap pengikut individual                   |
+| `endpoints`         | URL kotak masuk bersama                                                                                                   |
+| `published`         | Tanggal waktu komunitas dibuat                                                                                            |
+| `updated`           | Tanggal waktu komunitas terakhir diubah                                                                                   |
+| `publicKey`         | Kunci publik yang digunakan untuk memverifikasi tanda tangan dari aktor ini                                               |
 
 ### Pengguna
 
 Orang, yang berinteraksi secara umum dengan komunitas, di mana ia mengirim dan menerima pos dan/atau komentar. Bisa juga membuat dan memoderasi komunitas dan mengirim pesan pribadi ke pengguna lain.
 
-Mengirim aktivitas ke komunitas: `Follow`, `Undo/Follow`, `Create`, `Update`, `Like`, `Dislike`, `Remove` (hanya admin/moderator), `Delete`  (hanya pembuat), `Undo` (hanya untuk tindakan sendiri).
+Mengirim aktivitas ke komunitas: `Follow`, `Undo/Follow`, `Create`, `Update`, `Like`, `Dislike`, `Remove` (hanya admin/moderator), `Delete` (hanya pembuat), `Undo` (hanya untuk tindakan sendiri).
 
 Menerima aktivitas dari komunitas: `Accept/Follow`, `Announce`
 
@@ -102,18 +102,18 @@ Menerima dan mengirim aktivitas dari/ke pengguna lain: `Create/Note`, `Update/No
 {{#include ../../../include/crates/apub/assets/lemmy/objects/person.json}}
 ```
 
-| Nama Bidang | Deskripsi |
-|---|---|
-| `preferredUsername` | Nama aktor |
-| `name` | Nama tampilan pengguna |
-| `content` | Bio pengguna |
-| `icon` | Avatar pengguna, ditampilkan di sebelah nama pengguna |
-| `image` | Spanduk pengguna, ditampilkan di bagian atas profil pengguna |
-| `inbox` | URL kotak masuk ActivityPub |
-| `endpoints` | URL kotak masuk bersama |
-| `published` | Tanggal waktu pengguna mendaftar |
-| `updated` | Tanggal waktu profil pengguna terakhir diubah |
-| `publicKey` | Kunci publik yang digunakan untuk memverifikasi tanda tangan dari aktor ini |
+| Nama Bidang         | Deskripsi                                                                   |
+| ------------------- | --------------------------------------------------------------------------- |
+| `preferredUsername` | Nama aktor                                                                  |
+| `name`              | Nama tampilan pengguna                                                      |
+| `content`           | Bio pengguna                                                                |
+| `icon`              | Avatar pengguna, ditampilkan di sebelah nama pengguna                       |
+| `image`             | Spanduk pengguna, ditampilkan di bagian atas profil pengguna                |
+| `inbox`             | URL kotak masuk ActivityPub                                                 |
+| `endpoints`         | URL kotak masuk bersama                                                     |
+| `published`         | Tanggal waktu pengguna mendaftar                                            |
+| `updated`           | Tanggal waktu profil pengguna terakhir diubah                               |
+| `publicKey`         | Kunci publik yang digunakan untuk memverifikasi tanda tangan dari aktor ini |
 
 Kotak masuk pengguna sebenarnya belum diimplementasikan dan hanya sebagai papan nama untuk implementasi ActivityPub yang membutuhkannya.
 
@@ -127,19 +127,19 @@ Halaman dengan judul, dan opsional ada URL dan konten teks. URL biasanya merujuk
 {{#include ../../../include/crates/apub/assets/lemmy/objects/page.json}}
 ```
 
-| Nama Bidang | Deskripsi |
-|---|---|
-| `attributedTo` | ID dari pengguna yang membuat pos tersebut |
-| `to` | ID dari komunitas di mana pos tersebut dipos |
-| `name` | Judul pos |
-| `content` | Badan/Konten pos |
-| `url` | Tautan apa pun untuk dibagian |
-| `image` | Keluku untuk `url`, hanya ada jika tautannya adalah tautan gambar |
-| `commentsEnabled` | False menunjukkan bahwa pos tersebut dikunci dan tidak ada komentar lagi yang bisa ditambahkan |
-| `sensitive` | True menandai pos tersebut sebagai NSFW, mengaburkan kelukunya, dan menyembunyikannya dari pengguna dari pengguna yang pengaturan NSFW-nya dimatikan |
-| `stickied` | True menunjukkan bahwa pos tersebut ditampilkan di bagian atas komunitas |
-| `published` | Tanggal waktu pos dibuat |
-| `updated` | Tanggal waktu pos disunting (tidak ada jika tidak pernah disunting) |
+| Nama Bidang       | Deskripsi                                                                                                                                            |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `attributedTo`    | ID dari pengguna yang membuat pos tersebut                                                                                                           |
+| `to`              | ID dari komunitas di mana pos tersebut dipos                                                                                                         |
+| `name`            | Judul pos                                                                                                                                            |
+| `content`         | Badan/Konten pos                                                                                                                                     |
+| `url`             | Tautan apa pun untuk dibagian                                                                                                                        |
+| `image`           | Keluku untuk `url`, hanya ada jika tautannya adalah tautan gambar                                                                                    |
+| `commentsEnabled` | False menunjukkan bahwa pos tersebut dikunci dan tidak ada komentar lagi yang bisa ditambahkan                                                       |
+| `sensitive`       | True menandai pos tersebut sebagai NSFW, mengaburkan kelukunya, dan menyembunyikannya dari pengguna dari pengguna yang pengaturan NSFW-nya dimatikan |
+| `stickied`        | True menunjukkan bahwa pos tersebut ditampilkan di bagian atas komunitas                                                                             |
+| `published`       | Tanggal waktu pos dibuat                                                                                                                             |
+| `updated`         | Tanggal waktu pos disunting (tidak ada jika tidak pernah disunting)                                                                                  |
 
 ### Komentar
 
@@ -149,14 +149,14 @@ Balasan kepada pos, atau balasan ke komentar lain. Hanya mengandung teks (termas
 {{#include ../../../include/crates/apub/assets/lemmy/objects/note.json}}
 ```
 
-| Nama Bidang | Deskripsi |
-|---|---|
-| `attributedTo` | ID dari pengguna yang membuat pos |
-| `to` | Komunitas di mana komentar tersebut dibuat |
-| `content` | Teks komentar |
-| `inReplyTo` | ID pos di mana komentar tersebut dibuat, dan komentar induk (jika ada). Jika komentar ini adalah komentar induk, bidang ini hanya berisi ID pos saja |
-| `published` | Tanggal waktu komentar dibuat |
-| `updated` | Tanggal waktu komentar disunting (tidak ada jika tidak pernah disunting) |
+| Nama Bidang    | Deskripsi                                                                                                                                            |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `attributedTo` | ID dari pengguna yang membuat pos                                                                                                                    |
+| `to`           | Komunitas di mana komentar tersebut dibuat                                                                                                           |
+| `content`      | Teks komentar                                                                                                                                        |
+| `inReplyTo`    | ID pos di mana komentar tersebut dibuat, dan komentar induk (jika ada). Jika komentar ini adalah komentar induk, bidang ini hanya berisi ID pos saja |
+| `published`    | Tanggal waktu komentar dibuat                                                                                                                        |
+| `updated`      | Tanggal waktu komentar disunting (tidak ada jika tidak pernah disunting)                                                                             |
 
 ### Pesan Pribadi
 
@@ -166,13 +166,13 @@ Pesan langsung dari satu pengguna ke pengguna lain. Tidak bisa ada pengguna keti
 {{#include ../../../include/crates/apub/assets/lemmy/objects/chat_message.json}}
 ```
 
-| Nama Bidang | Deskripsi |
-|---|---|
-| `attributedTo` | ID pengguna yang membuat pesan pribadi |
-| `to` | ID penerima |
-| `content` | Teks pesan pribadi |
-| `published` | Tanggal waktu pesan dibuat |
-| `updated` | Tanggal waktu pesan disunting (tidak ada jika tidak pernah disunting) |
+| Nama Bidang    | Deskripsi                                                             |
+| -------------- | --------------------------------------------------------------------- |
+| `attributedTo` | ID pengguna yang membuat pesan pribadi                                |
+| `to`           | ID penerima                                                           |
+| `content`      | Teks pesan pribadi                                                    |
+| `published`    | Tanggal waktu pesan dibuat                                            |
+| `updated`      | Tanggal waktu pesan disunting (tidak ada jika tidak pernah disunting) |
 
 ## Koleksi
 
@@ -210,7 +210,7 @@ Koleksi/Statistik pengikut hanya digunakan untuk menampilkan jumlah pengikut kom
 
 #### Ikuti
 
-Ketika pengguna mengklik "Langgan" di komunitas, aktivitas `Follow`  dikirim. Secara otomatis komunitas membalas dengan `Accept/Follow`.
+Ketika pengguna mengklik "Langgan" di komunitas, aktivitas `Follow` dikirim. Secara otomatis komunitas membalas dengan `Accept/Follow`.
 
 ```json
 {{#include ../../../include/crates/apub/assets/lemmy/activities/following/follow.json}}
@@ -223,7 +223,6 @@ Ketika pengguna mengklik "Berhenti Berlangganan" di komunitas, aktivitas `Undo/F
 ```json
 {{#include ../../../include/crates/apub/assets/lemmy/activities/following/undo_follow.json}}
 ```
-
 
 #### Lapor Pos atau Komentar
 

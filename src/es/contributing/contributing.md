@@ -10,7 +10,7 @@ Información sobre como contribuir a Lemmy, ya sea traduciendo, probando, diseñ
 
 ## Traduciendo
 
-Mira el  [Weblate de Lemmy](https://weblate.yerbamate.ml/projects/lemmy/) para las traducciones. Tú también puedes ayudar [traduciendo esta documentación](https://github.com/LemmyNet/lemmy-docs#adding-a-new-language).
+Mira el [Weblate de Lemmy](https://weblate.yerbamate.ml/projects/lemmy/) para las traducciones. Tú también puedes ayudar [traduciendo esta documentación](https://github.com/LemmyNet/lemmy-docs#adding-a-new-language).
 
 ## Arquitectura
 
@@ -24,13 +24,13 @@ Mira el  [Weblate de Lemmy](https://weblate.yerbamate.ml/projects/lemmy/) para l
 ### Back end
 
 - El back end está escrito en `rust`, usando `diesel`, y `actix`.
-- El código fuente del servidor está divido en secciones *main* in `src`. Estos incluyen:
+- El código fuente del servidor está divido en secciones _main_ in `src`. Estos incluyen:
   - `db` - Las acciones de bajo nivel de la base de datos.
     - Las adiciones a la base de datos se realizan mediante migraciones. Ejecuta `diesel migration generate xxxxx` para añadir cosas nuevas.
   - `api` - Las iteracciones de alto nivel del usuario (cosas como `CreateComment`)
   - `routes` - Los puntos finales (endpoints) del servidor.
   - `apub` - Las conversiones activitypub.
-  - `websocket` - Crea el sevidor del websocket. 
+  - `websocket` - Crea el sevidor del websocket.
 
 ## Linting / Formateo
 

@@ -11,8 +11,8 @@ Secara umum, pengelolaan kami terhadap cabang seperti yang dijelaskan pada [A st
 - Buat sebuah beta atau versi kandidat rilis menggunakan `docker/prod/deploy.sh`
 - Lakukan yang sama untuk `lemmy-ui`: `./deploy.sh 0.x.0-rc-x`
 - Terapkan ke peladen uji federasi
-    -  Menjaga satu peladen pada versi stabil terbaru untuk menguji kompatibilitas federasi (otomatisasi ini dengan Ansible)
-    -  `ansible-playbook -i federation playbooks/site.yml --vault-password-file vault_pass -e rc_version=0.x.0-rc.x`
+  - Menjaga satu peladen pada versi stabil terbaru untuk menguji kompatibilitas federasi (otomatisasi ini dengan Ansible)
+  - `ansible-playbook -i federation playbooks/site.yml --vault-password-file vault_pass -e rc_version=0.x.0-rc.x`
 - Uji coba bahwa seluruhnya bekerja sesuai yang diharapkan, buat rilis beta/rc baru jika dibutuhkan
 - Terapkan ke lemmy.ml, untuk menemukan masalah yang tersisa
 - Jika itu berjalan baik, buat rilis `0.x.0` yang resmi dengan `docker/prod/deploy.sh`

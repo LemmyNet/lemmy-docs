@@ -26,7 +26,7 @@ proxy_set_header Connection "upgrade";
 
 ### Ошибка ограничения скорости, когда на сайт заходят множество пользователей
 
-Убедитесь, что заголовки `X-Real-IP` и `X-Forwarded-For` отправляются в Lemmy посредством reverse proxy. В противном случае он будет считать все действия в соответствии с ограничением скорости IP-адреса обратного прокси-сервера. В nginx это должно выглядеть так: 
+Убедитесь, что заголовки `X-Real-IP` и `X-Forwarded-For` отправляются в Lemmy посредством reverse proxy. В противном случае он будет считать все действия в соответствии с ограничением скорости IP-адреса обратного прокси-сервера. В nginx это должно выглядеть так:
 
 ```
 proxy_set_header X-Real-IP $remote_addr;
@@ -36,9 +36,9 @@ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 
 ## Федерация
 
-### Другие инстансы не могут получать локальные объекты (сообщество, пост и т.д.) 
+### Другие инстансы не могут получать локальные объекты (сообщество, пост и т.д.)
 
-Ваш reverse proxy (например nginx) должен пересылать запросы с заголовком  `Accept: application/activity+json` в бэкэнд. Это обрабатывается следующими строками: 
+Ваш reverse proxy (например nginx) должен пересылать запросы с заголовком `Accept: application/activity+json` в бэкэнд. Это обрабатывается следующими строками:
 
 ```
 set $proxpass "http://0.0.0.0:{{ lemmy_ui_port }}";
@@ -52,12 +52,14 @@ proxy_pass $proxpass;
 ```
 
 Вы можете проверить, что он работает правильно, выполнив следующие команды, все они должны возвращать действительный JSON:
+
 ```
 curl -H "Accept: application/activity+json" https://your-instance.com/u/some-local-user
 curl -H "Accept: application/activity+json" https://your-instance.com/c/some-local-community
 curl -H "Accept: application/activity+json" https://your-instance.com/post/123 # the id of a local post
 curl -H "Accept: application/activity+json" https://your-instance.com/comment/123 # the id of a local comment
 ```
+
 ### Получение удаленных объектов работает, но публикации/комментирование в удаленных сообществах не успешны.
 
 Проверьте это [федерация разрешена в обоих случаях](../federation/administration.md#instance-allowlist-and-blocklist).

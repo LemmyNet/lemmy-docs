@@ -1,6 +1,6 @@
 # Objectifs
 
-*Cette section contient des idées et des ressources de l'équipe qui développe Lemmy*. Similaire à un bloc-notes
+_Cette section contient des idées et des ressources de l'équipe qui développe Lemmy_. Similaire à un bloc-notes
 
 - Trouver un nom / nom de code.
 - Doit avoir des communautés.

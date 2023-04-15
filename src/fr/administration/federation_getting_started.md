@@ -17,7 +17,7 @@ Vous pouvez voir la liste des instances liées en suivant le lien "Instances" au
 
 ## Recherche de communautés
 
-Si vous recherchez une communauté pour la première fois, 20 messages sont récupérés initialement. Ce n'est que si au moins un utilisateur de votre instance s'inscrit à la communauté distante que celle-ci enverra des mises à jour à votre instance. Les mises à jour incluent : 
+Si vous recherchez une communauté pour la première fois, 20 messages sont récupérés initialement. Ce n'est que si au moins un utilisateur de votre instance s'inscrit à la communauté distante que celle-ci enverra des mises à jour à votre instance. Les mises à jour incluent :
 
 - Nouveaux messages, commentaires
 - Votes

@@ -20,7 +20,7 @@ Langkah selanjutnya adalah membangun _image_ Docker dari antarmuka Anda. Jika An
       - LEMMY_INTERNAL_HOST=lemmy:8536
       - LEMMY_EXTERNAL_HOST=localhost:8536
       - LEMMY_HTTPS=false
-    depends_on: 
+    depends_on:
       - lemmy
 ```
 
@@ -45,17 +45,17 @@ Lemmy melakukan pembatasan untuk banyak tindakan berdasarkan IP klien. Tetapi, j
 Berikut adalah contoh potongan untuk NodeJS:
 
 ```javascript
-function setForwardedHeaders(
-  headers: IncomingHttpHeaders
-): { [key: string]: string } {
+function setForwardedHeaders(headers: IncomingHttpHeaders): {
+  [key: string]: string,
+} {
   let out = {
     host: headers.host,
   };
-  if (headers['x-real-ip']) {
-    out['x-real-ip'] = headers['x-real-ip'];
+  if (headers["x-real-ip"]) {
+    out["x-real-ip"] = headers["x-real-ip"];
   }
-  if (headers['x-forwarded-for']) {
-    out['x-forwarded-for'] = headers['x-forwarded-for'];
+  if (headers["x-forwarded-for"]) {
+    out["x-forwarded-for"] = headers["x-forwarded-for"];
   }
 
   return out;

@@ -27,6 +27,7 @@ Untuk mencoba bahwa federasi peladen Anda bekerja dengan benar, jalankan `curl -
 ## Penyertaan pada daftar peladen di join-lemmy.org
 
 Untuk dimasukkan pada daftar peladen Lemmy di [join-lemmy.org](https://join-lemmy.org/instances), Anda harus memenuhi persyaratan berikut:
+
 - [x] Terfederasi dengan paling tidak satu peladen dari daftar
 - [x] Mempunyai deskripsi dan ikon situs
 - [x] Bersabar dan menunggu situs untuk diperbarui, tidak ada jadwal pasti untuk itu
@@ -36,6 +37,7 @@ Sementara menunggu, Anda selalu bisa mempromosikan peladen Anda di jejaring sosi
 ## Selalu terkini
 
 Anda bisa berlangganan ke umpan RSS GitHub untuk diinformasikan tentang rilis terbaru:
+
 - [lemmy](https://github.com/LemmyNet/lemmy/releases.atom)
 - [lemmy-ui](https://github.com/LemmyNet/lemmy-ui/releases.atom)
 - [lemmy-js-client](https://github.com/LemmyNet/lemmy-js-client/releases.atom)

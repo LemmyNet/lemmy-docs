@@ -1,6 +1,6 @@
 # Instalación con Docker
 
-Asegúrate de tener instalados tanto docker como docker-compose(>=`1.24.0`). En Ubuntu, simplemente ejecuta `apt install docker-compose docker.io`. Siguiente, 
+Asegúrate de tener instalados tanto docker como docker-compose(>=`1.24.0`). En Ubuntu, simplemente ejecuta `apt install docker-compose docker.io`. Siguiente,
 
 ```bash
 # crea una carpeta para los archivos de lemmy. La ubicación no importa, puede ser en cualquier sitio

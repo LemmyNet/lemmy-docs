@@ -11,6 +11,7 @@ Untuk pencadangan DB bertahap ke berkas `.sql`, Anda bisa menjalankan:
 ```bash
 docker-compose exec postgres pg_dumpall -c -U lemmy >  lemmy_dump_`date +%Y-%m-%d"_"%H_%M_%S`.sql
 ```
+
 ### Contoh skrip pencadangan
 
 ```bash
@@ -24,7 +25,7 @@ rsync -avP -zz --rsync-path="sudo rsync" MY_USER@MY_IP:/LEMMY_LOCATION/volumes ~
 
 ### Memulihkan DB
 
-Jika Anda perlu untuk memulihkan dari berkas `pg_dumpall`, pertama-tama Anda perlu membersihkan basis data telah ada Anda. 
+Jika Anda perlu untuk memulihkan dari berkas `pg_dumpall`, pertama-tama Anda perlu membersihkan basis data telah ada Anda.
 
 ```bash
 # Drop the existing DB
@@ -41,7 +42,7 @@ docker exec -i FOLDERNAME_postgres_1 psql -U lemmy -c "alter user lemmy with pas
 
 Jika Anda belum terfederasi, Anda bisa mengubah nama domain Anda di DB. **Peringatan: jangan lakukan ini setelah Anda terfederasi atau itu akan merusak federasi.**
 
-Pergi ke `psql` dari Docker Anda: 
+Pergi ke `psql` dari Docker Anda:
 
 `docker-compose exec postgres psql -U lemmy`
 
@@ -73,5 +74,3 @@ update community set shared_inbox_url = replace (shared_inbox_url, 'old_domain',
 ## Lihat juga
 
 - https://stackoverflow.com/questions/24718706/backup-restore-a-dockerized-postgresql-database
-
-

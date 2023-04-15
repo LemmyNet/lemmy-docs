@@ -1,17 +1,16 @@
 # Tinjauan Federasi
 
-
 Dokumen ini untuk siapa saja yang ingin mengetahui bagaimana federasi Lemmy bekerja, tanpa terlalu teknis. Ini dimaksudkan untuk memberikan tinjauan umum tingkat tinggi terhadap federasi ActivityPub di Lemmy. Jika Anda mengimplementasikan ActivityPub sendiri dan ingin kompatibel dengan Lemmy, baca [Garis Besar API ActivityPub](contributing_apub_api_outline.md) kami.
 
 ## Konvensi dokumentasi
 
 Untuk mempermudah, kadang kala Anda akan melihat sesuatu diformat seperti `Create/Note` atau `Delete/Event` atau `Undo/Follow`. Hal sebelum garis miring adalah Aktivitas dan setelahnya adalah Objek di dalam Aktivitas, di properti `object`. Jadi itu dibaca sebagai berikut:
 
-* `Create/Note`: sebuah aktivitas `Create` yang mengandung `Note` di bidang `object`
-* `Delete/Event`: sebuah aktivitas `Delete` yang mengandung `Event` di bidang `object`
-* `Undo/Follow`: sebuah aktivitas `Undo` yang mengandung `Follow` di bidang `object`
+- `Create/Note`: sebuah aktivitas `Create` yang mengandung `Note` di bidang `object`
+- `Delete/Event`: sebuah aktivitas `Delete` yang mengandung `Event` di bidang `object`
+- `Undo/Follow`: sebuah aktivitas `Undo` yang mengandung `Follow` di bidang `object`
 
-Di Lemmy, kami menggunakan beberapa hal spesifik yang merujuk kepada item ActivityPub. Mereka sejatinya adalah implementasi kami terhadap konsep ActivityPub: 
+Di Lemmy, kami menggunakan beberapa hal spesifik yang merujuk kepada item ActivityPub. Mereka sejatinya adalah implementasi kami terhadap konsep ActivityPub:
 
 - Komunitas: `Group`
 - Pengguna: `Person`
@@ -20,15 +19,15 @@ Di Lemmy, kami menggunakan beberapa hal spesifik yang merujuk kepada item Activi
 
 Dokumentasi ini memiliki tiga bagian utama:
 
-* __Filosofi Federasi__ menjabarkan gambaran umum bagaimana ini ditujukan untuk federasi
-* __Aktivitas Pengguna__ menjelaskan tindakan apa yang Pengguna bisa lakukan untuk berinteraksi
-* __Aktivitas Komunitas__ menjelaskan apa yang Komunitas lakukan sebagai respons terhadap tindakan beberapa Pengguna
+- **Filosofi Federasi** menjabarkan gambaran umum bagaimana ini ditujukan untuk federasi
+- **Aktivitas Pengguna** menjelaskan tindakan apa yang Pengguna bisa lakukan untuk berinteraksi
+- **Aktivitas Komunitas** menjelaskan apa yang Komunitas lakukan sebagai respons terhadap tindakan beberapa Pengguna
 
 ## Filosofi Federasi
 
 Aktor utama di Lemmy adalah Komunitas. Setiap komunitas berada di suatu peladen tunggal dan terdiri dari daftar Pos dan daftar pengikut. Interaksi utama adalah Pengguna mengirim Pos atau Komentar terkait aktivitas ke kotak masuk Komunitas, yang kemudian mengumumkannya ke seluruh pengikutnya.
 
-Setiap Komunitas memiliki Pengguna pembuat tertentu, yang bertanggung jawab untuk mengatur peraturan, mengangkat moderator, dan menghapus konten yang melanggar peraturan. 
+Setiap Komunitas memiliki Pengguna pembuat tertentu, yang bertanggung jawab untuk mengatur peraturan, mengangkat moderator, dan menghapus konten yang melanggar peraturan.
 
 Selain moderasi di tingkat komunitas, setiap peladen memiliki seperangkat Pengguna administrator, yang mempunyai kekuasaan untuk melakukan penghapusan dan pelarangan tingkat situs.
 
@@ -42,7 +41,7 @@ Implementasi federasi kami sudah komplit fitur, tapi kami sampai saat ini belum 
 
 ### Mengikuti sebuah Komunitas
 
-Setiap halaman Komunitas memiliki tombol "Ikuti". Mengkliknya akan memicu sebuah aktivitas `Follow` untuk dikirim dari pengguna ke kotak masuk Komunitas. Komunitas akan secara otomatis merespons dengan aktivitas `Accept/Follow` ke kotak masuk pengguna. Itu juga akan menambahkan pengguna tersebut ke daftar pengikutnya dan mengirimkan setiap aktivitas terkait Pos/Komentar di Komunitas ke pengguna. 
+Setiap halaman Komunitas memiliki tombol "Ikuti". Mengkliknya akan memicu sebuah aktivitas `Follow` untuk dikirim dari pengguna ke kotak masuk Komunitas. Komunitas akan secara otomatis merespons dengan aktivitas `Accept/Follow` ke kotak masuk pengguna. Itu juga akan menambahkan pengguna tersebut ke daftar pengikutnya dan mengirimkan setiap aktivitas terkait Pos/Komentar di Komunitas ke pengguna.
 
 ### Batal Mengikuti Komunitas
 
@@ -54,7 +53,7 @@ Ketika pengguna membuat Pos di Komunitas tertentu, itu akan dikirim sebagai `Cre
 
 ### Membuat Komentar
 
-Ketika sebuah Komentar baru dibuat untuk sebuah Pos, baik ID Pos dan ID Komentar induk (jika ada) ditulis ke bidang `in_reply_to`. Ini memungkinkan untuk menetapkannya ke Pos yang benar dan membangun pohon Komentar. Kemudian itu dikirim ke kotak masuk Komunitas sebagai `Create/Note` 
+Ketika sebuah Komentar baru dibuat untuk sebuah Pos, baik ID Pos dan ID Komentar induk (jika ada) ditulis ke bidang `in_reply_to`. Ini memungkinkan untuk menetapkannya ke Pos yang benar dan membangun pohon Komentar. Kemudian itu dikirim ke kotak masuk Komunitas sebagai `Create/Note`
 
 Peladen asal juga memindai Komentar untuk sebutan Pengguna apa pun dan mengirim aktivitas `Create/Note` ke Pengguna tersebut.
 
@@ -108,12 +107,12 @@ Komunitas itu secara dasarnya adalah bot, yang hanya akan melakukan sesuatu seba
 
 ### Menerima Ikuti
 
-Jika komunitas menerima aktivitas `Follow`, maka komunitas akan secara otomatis membalas dengan `Accept/Follow`. Komunitas juga menambahkan pengguna tersebut ke daftar pengikutnya. 
+Jika komunitas menerima aktivitas `Follow`, maka komunitas akan secara otomatis membalas dengan `Accept/Follow`. Komunitas juga menambahkan pengguna tersebut ke daftar pengikutnya.
 
 ### Batal Ikuti
 
 Ketika menerima `Undo/Follow`, Komunitas menghapus Pengguna tersebut dari daftar pengikutnya.
- 
+
 ### Mengumumkan
 
 Jika Komunitas menerima aktivitas terkait Pos atau Komentar (Buat, Perbarui, Suka, Tidak Suka, Hapus, Bersihkan, Urung), Komunitas akan mengumumkannya ke pengikutnya. Untuk ini, Mengumumkan dibuat dengan Komunitas sebagai aktor dan aktivitas yang diterima sebagai objek. Karena itu, peladen tersebut dapat terus pembaruan terkait aktivitas di Komunitas yang diikutinya.

@@ -2,7 +2,7 @@
 
 La configuración está basada en el archivo [defaults.hjson](https://yerbamate.ml/LemmyNet/lemmy/src/branch/main/config/defaults.hjson). Este archivo también contiene la documentación de todas las opciones disponibles. Para anular los valores predeterminados, puedes copiar las opciones que deseas cambiar dentro de tu archivo local `config.hjson`.
 
-Los archivos `defaults.hjson` y `config.hjson` se encuentran en `config/defaults.hjson` y `config/config.hjson`, respectivamente. Para cambiar estas localizaciones predeterminadas, puedes establecer las siguientes variables de entorno: 
+Los archivos `defaults.hjson` y `config.hjson` se encuentran en `config/defaults.hjson` y `config/config.hjson`, respectivamente. Para cambiar estas localizaciones predeterminadas, puedes establecer las siguientes variables de entorno:
 
 - LEMMY_CONFIG_LOCATION # config.hjson
 - LEMMY_CONFIG_DEFAULTS_LOCATION # defaults.hjson
