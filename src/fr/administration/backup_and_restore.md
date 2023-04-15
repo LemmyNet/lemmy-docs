@@ -6,11 +6,12 @@ Lorsque vous utilisez docker ou ansible, il devrait y avoir un dossier `volumes`
 
 ### Sauvegarde incrémentale de la base de données
 
-Pour sauvegarder de manière incrémentielle la base de données dans un fichier `.sql`, vous pouvez exécuter : 
+Pour sauvegarder de manière incrémentielle la base de données dans un fichier `.sql`, vous pouvez exécuter :
 
 ```bash
 docker-compose exec postgres pg_dumpall -c -U lemmy >  lemmy_dump_`date +%Y-%m-%d"_"%H_%M_%S`.sql
 ```
+
 ### Un exemple de script de sauvegarde
 
 ```bash
@@ -41,7 +42,7 @@ docker exec -i FOLDERNAME_postgres_1 psql -U lemmy -c "alter user lemmy with pas
 
 Si vous ne vous êtes pas encore fédéré, vous pouvez changer votre nom de domaine dans la base de données. **Attention : ne faites pas cela après vous être fédéré, ou cela brisera la fédération.**
 
-Entrez dans `psql` pour votre docker : 
+Entrez dans `psql` pour votre docker :
 
 `docker-compose exec postgres psql -U lemmy`
 
@@ -73,5 +74,3 @@ update community set shared_inbox_url = replace (shared_inbox_url, 'ancien_domai
 ## Plus de ressources
 
 - https://stackoverflow.com/questions/24718706/backup-restore-a-dockerized-postgresql-database
-
-

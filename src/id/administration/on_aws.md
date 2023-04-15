@@ -8,20 +8,20 @@ Ini mengadung definisi infrastruktur yang diperlukan untuk memasang [Lemmy](http
 
 ### Termasuk:
 
-* Kluster fargate ECS
-  * Lemmy-UI
-  * Lemmy
-  * Pictrs
-* CDN CloudFront
-* Penyimpanan EFS untuk pengunggahan gambar
-* Basis Data Postgres Aurora Tanpa Peladen
-* Hos VPC Bastion
-* Penyeimbang beban untuk Lemmy
-* Rekaman DNS untuk situs Anda
+- Kluster fargate ECS
+  - Lemmy-UI
+  - Lemmy
+  - Pictrs
+- CDN CloudFront
+- Penyimpanan EFS untuk pengunggahan gambar
+- Basis Data Postgres Aurora Tanpa Peladen
+- Hos VPC Bastion
+- Penyeimbang beban untuk Lemmy
+- Rekaman DNS untuk situs Anda
 
 ## Mulai cepat
 
-Klon [Lemmy-CDK]( https://github.com/jetbridge/lemmy-cdk). 
+Klon [Lemmy-CDK](https://github.com/jetbridge/lemmy-cdk).
 
 Klon [Lemmy](https://github.com/LemmyNet/lemmy) dan [Lemmy-UI](https://github.com/LemmyNet/lemmy-ui) ke direktori di atas ini.
 
@@ -40,13 +40,14 @@ cdk deploy
 ```
 
 ## Harga
-Ini *bukan* cara termurah untuk menjalankan Lemmy. Basis Data Aurora Tanpa Peladen bisa membebani Anda ~$90/bulan jika tidak pergi tidur.
+
+Ini _bukan_ cara termurah untuk menjalankan Lemmy. Basis Data Aurora Tanpa Peladen bisa membebani Anda ~$90/bulan jika tidak pergi tidur.
 
 ## Perintah CDK yang Berguna
 
-* `npm run build`   susun typescript ke js
-* `npm run watch`   lacak perubahan dan susun
-* `npm run test`    laksanakan uji unit jest
-* `cdk deploy`      jalankan tumpukan (stack) ini ke akun/wilayah AWS baku Anda
-* `cdk diff`        bandingkan tumpukan yang jalan dengan kondisi saat ini
-* `cdk synth`       memancarkan templat CloudFormation yang disintesis
+- `npm run build` susun typescript ke js
+- `npm run watch` lacak perubahan dan susun
+- `npm run test` laksanakan uji unit jest
+- `cdk deploy` jalankan tumpukan (stack) ini ke akun/wilayah AWS baku Anda
+- `cdk diff` bandingkan tumpukan yang jalan dengan kondisi saat ini
+- `cdk synth` memancarkan templat CloudFormation yang disintesis

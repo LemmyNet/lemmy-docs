@@ -1,6 +1,7 @@
 # Referencia de la API
 
 Lemmy tiene dos APIs entrelazadas:
+
 - [WebSocket](https://join-lemmy.org/api/index.html)
 - [HTTP](http_api.md)
 
@@ -10,8 +11,8 @@ Esta página describe conceptos que son comúnes para ambas.
 
 - [Uso básico](#uso-básico)
 - [Tipos de datos](#tipos-de-datos)
-  * [Tipos de Lemmy](#tipos-de-lemmy)
-  * [Tipos de bajo nivel](#tipos-de-bajo-nivel)
+  - [Tipos de Lemmy](#tipos-de-lemmy)
+  - [Tipos de bajo nivel](#tipos-de-bajo-nivel)
 - [Límites de tarifa por defecto](#límites-de-tarifa-por-defecto)
 
 <!-- tocstop -->
@@ -31,8 +32,8 @@ Las cadenas de solicitud `request` y respuesta `response` están en [formato JSO
 
 ### Tipos de bajo nivel
 
-- `?` designa una opción que puede omitirse en las solicitudes y no estar presenet en las respuestas. Será de tipo ***SomeType*** (AlgúnTipo).
-- `[SomeType]` es una lista que contiene objetos del tipo ***SomeType***.
+- `?` designa una opción que puede omitirse en las solicitudes y no estar presenet en las respuestas. Será de tipo **_SomeType_** (AlgúnTipo).
+- `[SomeType]` es una lista que contiene objetos del tipo **_SomeType_**.
 - Las horas (times) y fechas (dates) son cadenas de marcas de tiempo (timestamp) en formato [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601). Timestamps serán UTC, tú cliente debe hacer la conversión de UTC a local.
 
 ## Límites de tasa por defecto

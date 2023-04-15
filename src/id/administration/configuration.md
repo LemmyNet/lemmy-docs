@@ -2,7 +2,7 @@
 
 Konfigurasi didasarkan pada berkas config.hjson, yang di mana ditempatkan secara baku di `config/config.hjson`. Untuk mengubah lokasi baku, Anda bisa mengatur variabel lingkungan `LEMMY_CONFIG_LOCATION`.
 
-Variabel lingkungan tambahan `LEMMY_DATABASE_URL` juga tersedia, yang bisa digunakan dengan string koneksi PostgreSQL seperti `postgres://lemmy:password@lemmy_db:5432/lemmy`, meneruskan semua detail koneksi sekaligus. 
+Variabel lingkungan tambahan `LEMMY_DATABASE_URL` juga tersedia, yang bisa digunakan dengan string koneksi PostgreSQL seperti `postgres://lemmy:password@lemmy_db:5432/lemmy`, meneruskan semua detail koneksi sekaligus.
 
 Jika kontainer Docker tidak digunakan, buat basis data yang disebutkan di atas secara manual dengan menjalankan perintah berikut:
 

@@ -8,12 +8,12 @@ Lemmy usa [Bootstrap v4](https://getbootstrap.com/), y algunas clases css custom
 
 ## Prueba
 
-- Para probar el tema, puedes también usar las herramientas del navegador web, o un plugin como *stylus* para copiar/pegar un tema, y verlo en Lemmy.
+- Para probar el tema, puedes también usar las herramientas del navegador web, o un plugin como _stylus_ para copiar/pegar un tema, y verlo en Lemmy.
 
 ## Subir / Publicar
 
-1. Haz un *fork* de [lemmy-ui](https://github.com/LemmyNet/lemmy-ui).
+1. Haz un _fork_ de [lemmy-ui](https://github.com/LemmyNet/lemmy-ui).
 1. Copia el archivo `{nombre-de-mi-tema}.min.css` a la carpeta `src/assets/css/themes`. (Aquí puedes copiar el archivo `_variables.scss` si lo deseas).
 1. Abre el archivo `src/shared/utils.ts` y agregas `{nombre-de-mi-tema}` a la lista de temas.
 1. Pruebalo localmente
-1. Haz *pull request* con los cambios que hiciste.
+1. Haz _pull request_ con los cambios que hiciste.

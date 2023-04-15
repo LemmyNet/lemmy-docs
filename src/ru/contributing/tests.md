@@ -22,6 +22,7 @@ psql -U lemmy -c "DROP SCHEMA public CASCADE; CREATE SCHEMA public;"
 ```
 
 Затем используйте следующий скрипт для запуска тестов:
+
 ```
 cd api_tests
 ./run-federation-test.bash

@@ -33,5 +33,5 @@ Pega la URL de una publicación en el campo de búsqueda de tu instancia de Lemm
 ## Búsqueda de comentarios
 
 Si encuentras un comentario interesante bajo una publicación en otra instancia, puedes encontrar debajo del comentario en el menú de 3 puntos el símbolo del enlace. Copia este enlace. Se parece a `https://lemmy.ml/post/56382/comment/40796`. Elimina la parte `post/XXX` y ponlo en tu barra de búsqueda. Para este ejemplo, busqua `https://lemmy.ml/comment/40796`. Este comentario, todos los comentarios padre, usuarios, la comunidad y la publicación correspondiente se obtienen de la instancia remota, si no se conocen localmente.
- 
+
 Los comentarios hermanos no se obtienen. Si quieres más comentarios de publicaciones anteriores, tienes que buscar cada uno de ellos como se ha descrito anteriormente.

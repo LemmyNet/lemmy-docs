@@ -39,6 +39,7 @@ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 ### Peladen lain tidak bisa mengambil konten lokal (komunitas, pos, dll.)
 
 Proksi-balik Anda (mis. nginx) perlu meneruskan permintaan dengan tajuk `Accept: application/activity+json` ke bagian-belakang. Itu ditangani oleh baris berikut:
+
 ```
 set $proxpass "http://0.0.0.0:{{ lemmy_ui_port }}";
 if ($http_accept = "application/activity+json") {
@@ -51,12 +52,14 @@ proxy_pass $proxpass;
 ```
 
 Anda bisa memeriksa bahwa itu bekerja dengan benar dengan menjalankan perintah berikut, semuanya seharusnya mengembalikan JSON yang valid:
+
 ```
 curl -H "Accept: application/activity+json" https://your-instance.com/u/some-local-user
 curl -H "Accept: application/activity+json" https://your-instance.com/c/some-local-community
 curl -H "Accept: application/activity+json" https://your-instance.com/post/123 # id dari sebuah pos lokal
 curl -H "Accept: application/activity+json" https://your-instance.com/comment/123 # id dari sebuah komentar lokal
 ```
+
 ### Mengambil konten jarak jauh bekerja, tapi mengepos/berkomentar di komunitas jarak jauh gagal
 
 Periksa bahwa [federasi dibolehkan pada kedua belah peladen](../federation/administration.md#instance-allowlist-and-blocklist).

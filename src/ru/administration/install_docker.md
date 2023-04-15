@@ -1,6 +1,6 @@
 # Установка Docker
 
-Убедитесь в наличии установленных docker и docker-compose (>=`1.24.0`) . В Ubunu, просто запустите `apt install docker-compose docker.io`. Далее, 
+Убедитесь в наличии установленных docker и docker-compose (>=`1.24.0`) . В Ubunu, просто запустите `apt install docker-compose docker.io`. Далее,
 
 ```bash
 # создайте папку для файлов lemmy. путь не имеет значения, размещайте файлы где угодно

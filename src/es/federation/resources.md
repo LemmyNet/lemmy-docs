@@ -1,4 +1,4 @@
-# Recursos de ActivityPub 
+# Recursos de ActivityPub
 
 ## Documentos Oficiales
 

@@ -18,6 +18,7 @@ ansible-playbook lemmy.yml --become
 ```
 
 Pour mettre à jour une nouvelle version, il suffit d'exécuter la commande suivante dans votre dépôt Lemmy local :
+
 ```bash
 git pull origin main
 cd ansible

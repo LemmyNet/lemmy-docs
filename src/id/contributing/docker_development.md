@@ -1,6 +1,7 @@
 # Pengembangan Docker
 
 ## Dependensi
+
 ### Distro berbasis Debian
 
 ```bash
@@ -26,9 +27,10 @@ cd docker/dev
 
 dan pergi ke http://localhost:1236
 
-*Catatan: banyak fitur (seperti dokumen dan gambar) tidak akan berfungsi tanpa menggunakan profil nginx seperti itu di `ansible/templates/nginx.conf`.
+\*Catatan: banyak fitur (seperti dokumen dan gambar) tidak akan berfungsi tanpa menggunakan profil nginx seperti itu di `ansible/templates/nginx.conf`.
 
 Untuk mempercepat pengompilasian Docker, tambahkan yang di bawah ini ke `/etc/docker/daemon.json` dan mulai ulang Docker.
+
 ```
 {
   "features": {

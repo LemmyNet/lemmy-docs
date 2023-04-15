@@ -18,7 +18,7 @@ Aunque es muy superior a la implementación de Reddit por su decaimiento de las 
 
 ### Lemmy
 
-Contrarresta el efecto de bola de nieve de los votos a lo largo del tiempo con una escala logarítmica.  Anula la ventaja inherente de los primeros comentarios y garantiza que los votos sigan siendo importantes a largo plazo, sin perjudicar los comentarios populares más antiguos.
+Contrarresta el efecto de bola de nieve de los votos a lo largo del tiempo con una escala logarítmica. Anula la ventaja inherente de los primeros comentarios y garantiza que los votos sigan siendo importantes a largo plazo, sin perjudicar los comentarios populares más antiguos.
 
 ```
 Rank = ScaleFactor * log(Max(1, 3 + Score)) / (Time + 2)^Gravity
@@ -27,6 +27,7 @@ Score = Upvotes - Downvotes
 Time = time since submission (in hours)
 Gravity = Decay gravity, 1.8 is default
 ```
+
 - Lemmy utiliza el mismo algoritmo `Rank` anterior, en dos tipos: `Active` y `Hot`.
   - El algoritmo "activo" utiliza los votos de las publicaciones y el tiempo de los últimos comentarios (limitado a dos días).
   - `Hot` utiliza los votos de las publicaciones, y la hora de publicación de los mismos.
@@ -41,6 +42,6 @@ Un gráfico del rango a lo largo de 24 horas, de puntuaciones de 1, 5, 10, 100, 
 
 #### Conteo de usuarios activos
 
-Lemmy también muestra el conteo de *usuarios activos* de tu sitio y sus comunidades. Estos se cuentan en el último día `day`, semana `week`, mes `month` y medio año `half year`, almacenándose en caché al iniciar Lemmy, y cada hora.
+Lemmy también muestra el conteo de _usuarios activos_ de tu sitio y sus comunidades. Estos se cuentan en el último día `day`, semana `week`, mes `month` y medio año `half year`, almacenándose en caché al iniciar Lemmy, y cada hora.
 
 Un usuario activo es alguien que ha publicado o comentado en nuestra instancia o comunidad en el último periodo de tiempo. Para el conteo de sitios, sólo se cuentan los usuarios locales. Para los conteos de la comunidad, se incluyen los usuarios federados.
