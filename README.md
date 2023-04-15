@@ -35,3 +35,7 @@ mdbook serve
 - We will merge a new language after it has been worked on regularly for at least a month, and at least some pages are finished.
 - After merging, we will add a label for the language, to help organising issues and pull requests by language.
 - The translator will also get maintainer rights in this repository, to allow managing contributions for their language.
+
+## Formatting
+
+To format your markdown files, install [prettier](https://prettier.io), then run `prettier -w src`
