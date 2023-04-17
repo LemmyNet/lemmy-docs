@@ -19,7 +19,7 @@
   - [Recursos](federation/resources.md)
   - [Protocolo de Lemmy](federation/lemmy_protocol.md)
 - [Desarrollo de clientes](client_development/client_development.md)
-  - [Guiá para Temas](client_development/theming.md)
+  - [Guía para Temas](client_development/theming.md)
   - [Referencia de la API](client_development/api_reference.md)
   - [API del WebSocket](client_development/websocket_api.md)
   - [API HTTP](client_development/http_api.md)
