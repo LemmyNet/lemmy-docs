@@ -17,7 +17,7 @@ pipeline:
       - prettier -c src
 
   check_documentation_build:
-    image: rust:1.68-slim-bullseye
+    image: rust:1.61-slim-buster
     commands:
       - cargo install mdbook --git https://github.com/Ruin0x11/mdBook.git --branch localization
             --rev 9d8147c --force --debug
