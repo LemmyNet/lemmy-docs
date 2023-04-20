@@ -5,12 +5,12 @@ Information about contributing to Lemmy, whether it is translating, testing, des
 ## Issue tracking / Repositories
 
 - [GitHub (for issues and pull requests)](https://github.com/LemmyNet/lemmy)
-- [Gitea (only for pull requests)](https://yerbamate.ml/LemmyNet/lemmy)
+- [Gitea (only for pull requests)](https://git.join-lemmy.org/LemmyNet/lemmy/)
 - [Codeberg](https://codeberg.org/LemmyNet/lemmy)
 
 ## Translating
 
-Check out [Lemmy's Weblate](https://weblate.yerbamate.ml/projects/lemmy/) for translations. You can also help by [translating this documentation](https://github.com/LemmyNet/lemmy-docs#adding-a-new-language).
+Check out [Lemmy's Weblate](https://weblate.join-lemmy.org/projects/lemmy/) for translations. You can also help by [translating this documentation](https://github.com/LemmyNet/lemmy-docs#adding-a-new-language).
 
 ## Architecture
 

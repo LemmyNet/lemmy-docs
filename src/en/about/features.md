@@ -1,6 +1,6 @@
 # Features
 
-- Open source, [AGPL License](/LICENSE).
+- Open source, [AGPL License](https://github.com/LemmyNet/lemmy/blob/main/LICENSE).
 - Self hostable, easy to deploy.
   - Comes with [Docker](#docker) and [Ansible](#ansible).
 - Clean, mobile-friendly interface.

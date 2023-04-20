@@ -5,13 +5,19 @@ clone:
       recursive: true
       submodule_update_remote: true
 pipeline:
+  dead_links:
+    image: becheran/mlc:latest
+    commands:
+      - mlc src/en --ignore-links "*localhost*" --ignore-links "*127.0.0.1*" --ignore-links /api
+
   check_formatting:
     image: alpine:3
     commands:
       - apk add prettier --repository=https://dl-cdn.alpinelinux.org/alpine/edge/testing
       - prettier -c src
+
   check_documentation_build:
-    image: rust:1.61-slim-buster
+    image: rust:1.68-slim-bullseye
     commands:
       - cargo install mdbook --git https://github.com/Ruin0x11/mdBook.git --branch localization
             --rev 9d8147c --force --debug

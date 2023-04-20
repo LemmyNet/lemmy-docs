@@ -37,6 +37,7 @@
 
 ## Examples and Libraries
 
+- [activitypub-federation-rust library](https://crates.io/crates/activitypub-federation)
 - [ActivityPub example server](https://github.com/tOkeshu/activitypub-example)
 - [ActivityStreams crate](https://docs.rs/activitystreams/)
-- [HTTP Signatures crate](https://git.asonix.dog/Aardwolf/http-signature-normalization)
+- [HTTP Signatures crate](https://git.asonix.dog/asonix/http-signature-normalization)
