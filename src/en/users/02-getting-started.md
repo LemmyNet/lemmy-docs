@@ -1,0 +1,72 @@
+## Choosing an instance
+
+If you are used to sites like Reddit, then Lemmy works in a fundamentally different way. Instead of a single website like reddit.com, there are many different websites (called *instances*). These are operated by different people, have different topics and rules. Nevertheless, posts created one instance can directly be seen by users who are registered on another. Its basically like email, but for social media.
+
+This means before using Lemmy and registering an account, you need to pick an instance. For this you can browse the [instance list](https://join-lemmy.org/instances) and look for one that matches your topics of interest. You can also see if the rules match your expectations, and how many users there are. It is better to avoid very big or very small instances. But don't worry too much about this choice, you can always create another account on a different instance later.
+
+[instance list screenshot]
+
+## Registration
+
+Once you chose an instance, it's time to create your account. To do this, click *sign up* in the top right of the page, or click the top right button on mobile to open a menu with *sign up* link. 
+
+[registration page screenshot]
+
+On the signup page you need to enter a few things:
+
+- **Username**: How do you want to be called? This name can not be changed and is unique within an instance. Later you can also set a *displayname* which can be freely changed. If your desired username is taken, consider choosing a different instance where it is still available.
+- **Email**: Your email address. This is used for password resets and notifications (if enabled). Providing an email address is usually optional, but admins may choose to make it mandatory. In this case you will have to wait for a confirmation mail and click the link after completing this form.
+- **Password**: The password for logging in to your account. Make sure to choose a long and unique password which isn't used on any other website.
+- **Verify password**: Repeat the same password from above to ensure that it was entered correctly.
+
+There are also a few optional fields, which you may need to fill in depending on the instance configuration:
+- **Question/Answer**: Instance admins can set an arbitrary question which needs to be answered in order to create an account. This is often used to prevent spam bots from signing up. After submitting the form, you will need to wait for some time until the answer is approved manually before you can login.
+- **Code**: A captcha which is easy to solve for humans but hard for bots. Enter the letters and numbers that you see in the text box, ignoring uppercase or lowercase. Click the refresh button if you are unable to read a character. The *play* button plays an audio version of the captcha.
+- **Show NSFW content**: Here you can choose if content that is "not safe for work" (or adult-only) should be shown.
+
+When you are done, press the *sign up* button.
+
+It depends on the instance configuration when you can login and start using the account. In case the email is mandatory, you need to wait for the confirmation email and click the link first. In case "Question/Answer" is present, you need to wait for an admin to manually review and approve your registration. If you have problems with the registration, try to get in contact with the admin for support. You can also choose a different instance to sign up if your primary choice does not work.
+
+## Following communities
+
+After logging in to your new account, its time to follow communities that you are interested in. For this you can click on the *communities* link at the top of the page (on mobile, you need to click the menu icon on the top right first). You will see a list of communities which can be filtered by subscribed, local or all. Local communities are those which are hosted on the same site where you are signed in, while *all* also contains federated communities from other instances. In any case you can directly subscribe to communities with the right-hand subscribe link. Or click on the community name to browse the community first, see what its posted and what the rules are before subscribing.
+
+Another way to find communities to subscribe to is by going to the front page and browsing the posts. If there is something that interests you, click on the post title to see more details and comments. Here you can subscribe to the community in the right-hand sidebar, or by clicking the "sidebar" button on mobile.
+
+These previous ways will only show communities that are already known to the instance. Especially if you joined a small or inactive Lemmy instance, there will be few communities to discover. You can find more communities by browsing different Lemmy instances, or using the [Lemmy Community Browser](https://browse.feddit.de/). When you found a community that you want to follow, enter its URL (e.g. `https://feddit.de/c/main`) or the identifier (e.g. `!main@feddit.de`) into the search field of your own Lemmy instance. Lemmy will then fetch the community from its original instance, and allow you to interact with it. The same method also works to fetch users, posts or comments from other instances.
+
+## Setting up your profile
+
+Before you start posting, its a good idea to provide some details about yourself. Open the top-right menu and go to "settings". Here the following settings are available for your public profile:
+
+- **Displayname**: An alternative username which can be changed at any time
+- **Bio**: Long description of yourself, can be formatted with Markdown
+- **Matrix User**: Your username on the decentralized [Matrix chat](https://matrix.org/)
+- **Avatar**: Profile picture that is shown next to all your posts
+- **Banner**: A header image for your profile page
+
+On this page you can also change the email and password. Additionally there are many other settings available, which allow customizing your browsing experience:
+
+- **Blocks** (tab at top of the page): Here you can block users and communities, so that their posts will be hidden.
+- **Interface language**: Which language the user interface should use.
+- **Languages**: Select the languages that you speak to see only content in these languages. This is a new feature and many posts don't specify a language yet, so be sure to select "Undetermined" to see them.
+- **Theme**: You can choose between different color themes for the user interface. Instance admins can add more themes.
+- **Type**: Which timeline you want to see by default on the frontpage; only posts from communities that you subscribe to, posts in local communities, or all posts including federated.
+- **Sort type**: How posts and comments should be sorted by default. See [05-votes-and-ranking] for details.
+- **Show NSFW content**: Whether or not you want to see content that is "not safe for work" (or adult-only).
+- **Show Scores**: Whether the number of upvotes and downvotes should be visible.
+- **Show Avatars**: Whether profile pictures of other users should be shown.
+- **Bot Account**: Enable this if you are using a script or program to create posts automatically
+- **Show Bot Accounts**: Disable this to hide posts that were created by bot accounts.
+- **Show Read Posts**: If this is disabled, posts that you already viewed are not shown in listings anymore. Useful if you want to find new content easily, but makes it difficult to follow ongoing discussion under existing posts.
+- **Show Notifications for New Posts**: Enable this to receive a popup notification for each new post that is created.
+- **Send notifications to Email**: Enable to receive notifications about new comment replies and private messages to your email address.
+
+## Start posting
+
+Finally its time to start posting! To do this it is always a good idea to read the community rules in the sidebar (below the *Subscribe* button). When you are ready, go to a post and type your comment in the box directly below for a top-level reply. You can also write a nested reply to an existing comment, by clicking the left-pointing arrow. 
+
+Other than commenting on existing posts, you can also create new posts. To do this, click the button *Create a post* in the sidebar. Here you can optionally supply an external link or upload an image. The title field is mandatory and should describe what you are posting. The body is again optional, and gives space for long texts. You can also embed additional images here. The *Community* dropdown below allows choosing a different community to post in. With *NSFW* posts can be marked as "not safe for work". Finally you can specify the language that the post is written in, and then click on *Create*.
+
+One more possibility is to write private messages to individual users. To do this, simply visit a user profile and click *Send message*. You will be notified about new private messages and comment replies with the bell icon in the top right.
