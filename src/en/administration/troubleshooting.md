@@ -2,7 +2,7 @@
 
 Different problems that can occur on a new instance, and how to solve them.
 
-Many Lemmy features depend on a correct reverse proxy configuration. Make sure yours is equivalent to our [nginx config](https://github.com/LemmyNet/lemmy/blob/main/ansible/templates/nginx.conf).
+Many Lemmy features depend on a correct reverse proxy configuration. Make sure yours is equivalent to our [nginx config](https://github.com/LemmyNet/lemmy-ansible/blob/main/templates/nginx.conf).
 
 ## General
 
@@ -62,7 +62,7 @@ curl -H "Accept: application/activity+json" https://your-instance.com/comment/12
 
 ### Fetching remote objects works, but posting/commenting in remote communities fails
 
-Check that [federation is allowed on both instances](../federation/administration.md#instance-allowlist-and-blocklist).
+Check that [federation is allowed on both instances](federation_getting_started.md).
 
 Also ensure that the time is accurately set on your server. Activities are signed with a timestamp, and will be discarded if it is off by more than 10 seconds.
 

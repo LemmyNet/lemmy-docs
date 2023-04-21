@@ -11,7 +11,7 @@
 
 [**Message the Moderation Team on Mastodon**](https://mastodon.social/@LemmyDev)
 
-[**Email The Moderation Team**](mailto:contact@lemmy.ml)
+[**Email The Moderation Team**](mailto:contact@join-lemmy.org)
 
 ## Moderation
 
@@ -30,6 +30,6 @@ In the Lemmy community we strive to go the extra step to look out for each other
 
 And if someone takes issue with something you said or did, resist the urge to be defensive. Just stop doing what it was they complained about and apologize. Even if you feel you were misinterpreted or unfairly accused, chances are good there was something you could’ve communicated better — remember that it’s your responsibility to make others comfortable. Everyone wants to get along and we are all here first and foremost because we want to talk about cool technology. You will find that people will be eager to assume good intent and forgive as long as you earn their trust.
 
-The enforcement policies listed above apply to all official Lemmy venues; including git repositories under [github.com/LemmyNet](https://github.com/LemmyNet) and [yerbamate.ml/LemmyNet](https://yerbamate.ml/LemmyNet), the [Matrix channel](https://matrix.to/#/!BZVTUuEiNmRcbFeLeI:matrix.org); [lemmy.ml](https://lemmy.ml) and other instances under that domain. For other projects adopting the Lemmy Code of Conduct, please contact the maintainers of those projects for enforcement. If you wish to use this code of conduct for your own project, consider explicitly mentioning your moderation policy or making a copy with your own moderation policy so as to avoid confusion.
+The enforcement policies listed above apply to all official Lemmy venues; including git repositories under [github.com/LemmyNet](https://github.com/LemmyNet) and [git.join-lemmy.org/LemmyNet](https://git.join-lemmy.org/LemmyNet/), the [Matrix chat](https://matrix.to/#/#lemmy-space:matrix.org); [lemmy.ml](https://lemmy.ml) and other instances under that domain. For other projects adopting the Lemmy Code of Conduct, please contact the maintainers of those projects for enforcement. If you wish to use this code of conduct for your own project, consider explicitly mentioning your moderation policy or making a copy with your own moderation policy so as to avoid confusion.
 
 Adapted from the [Rust Code of Conduct](https://www.rust-lang.org/policies/code-of-conduct), which is based on the [Node.js Policy on Trolling](http://blog.izs.me/post/30036893703/policy-on-trolling) as well as the [Contributor Covenant v1.3.0](https://www.contributor-covenant.org/version/1/3/0/).
