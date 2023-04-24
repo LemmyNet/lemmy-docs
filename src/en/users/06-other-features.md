@@ -8,7 +8,7 @@ Lemmy is written in Rust, which is an extremely fast language. Thats why it has 
 
 ## Language Tags
 
-Lemmy instances and communities can specify which languages can be used for posting. Consider an instance aimed at Spanish users, it would limit the posting language to Spanish so that other languages can't be used. Or an international instance which only allows languages that the admin team understands. Community languages work in the same way, and are restricted to a subset of the instance languages. By default all languages are allowed (including *undefined*).
+Lemmy instances and communities can specify which languages can be used for posting. Consider an instance aimed at Spanish users, it would limit the posting language to Spanish so that other languages can't be used. Or an international instance which only allows languages that the admin team understands. Community languages work in the same way, and are restricted to a subset of the instance languages. By default all languages are allowed (including _undefined_).
 
 Users can also specify which languages they speak, and will only see content in those languages. Lemmy tries to smartly select a default language for new posts if possible. Otherwise you have to specify the language manually.
 

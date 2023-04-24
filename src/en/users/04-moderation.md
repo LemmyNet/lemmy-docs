@@ -20,7 +20,7 @@ All moderation actions are taken on the context menu of posts or comments. Click
 ![moderation_02.png](moderation_02.png)
 
 | Action             | Result                                                                                                                                      | Permission level |
-|--------------------|---------------------------------------------------------------------------------------------------------------------------------------------|------------------|
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
 | Lock               | Prevents making new comments under the post                                                                                                 | Moderator        |
 | Sticky (Community) | Pin the publication to the top of the community listing                                                                                     | Moderator        |
 | Sticky (Local)     | Pin the publication to the top of the frontpage                                                                                             | Admin            |
@@ -29,5 +29,5 @@ All moderation actions are taken on the context menu of posts or comments. Click
 | Appoint as mod     | Gives the user moderator status                                                                                                             | Moderator        |
 | Ban from site      | Ban user from interacting with the community, but can still use the rest of the site. There is also an option to remove all existing posts. | Admin            |
 | Purge user         | Completely delete the user, including all posts and uploaded media. Use with caution.                                                       | Admin            |
-| Purge post/comment | Completely delete the post, including attached media.                                                                                       | Admin            |                                                                                                       
+| Purge post/comment | Completely delete the post, including attached media.                                                                                       | Admin            |
 | Appoint as admin   | Gives the user administrator status                                                                                                         | Admin            |
