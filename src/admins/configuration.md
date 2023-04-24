@@ -16,7 +16,7 @@ cd server
 ## Full config with default values
 
 ```hjson
-{{#include ../../../include/config/defaults.hjson}}
+{{#include ../../include/config/defaults.hjson}}
 ```
 
 ## Lemmy-UI configuration
