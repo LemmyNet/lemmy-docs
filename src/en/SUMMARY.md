@@ -1,15 +1,16 @@
 # Summary
 
+- [Introduction](introduction.md)
+
 # For Users
 
-- [Introduction](users/01-introduction.md)
-- [Getting Started](users/02-getting-started.md)
-- [Media](users/03-media.md)
-- [Votes and Ranking](users/04-votes-and-ranking.md)
-- [Moderation](users/05-moderation.md)
-- [Censorship Resistance](users/06-censorship-resistance.md)
-- [Other Features](users/07-other-features.md)
-- [History of Lemmy](users/08-history-of-lemmy.md)
+- [Getting Started](users/01-getting-started.md)
+- [Media](users/02-media.md)
+- [Votes and Ranking](users/03-votes-and-ranking.md)
+- [Moderation](users/04-moderation.md)
+- [Censorship Resistance](users/05-censorship-resistance.md)
+- [Other Features](users/06-other-features.md)
+- [History of Lemmy](users/07-history-of-lemmy.md)
 
 # For Admins
 

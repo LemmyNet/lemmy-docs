@@ -8,7 +8,7 @@ The first thing to do is to go to your admin panel, which can be found by clicki
 
 Take the time to browse through the entire page to discover the different options you have to customize your Lemmy instance, on the same page you can edit your [configuration file](configuration.md), where you can find information about your database, the email used by the server, the federation options or who is the main administrator.
 
-It is always good to define another administrator than yourself, in case it is necessary to take actions while you take your best nap. Take a look at the [moderation guide](../moderation/moderation.md) for more information on how to do this.
+It is always good to define another administrator than yourself, in case it is necessary to take actions while you take your best nap. Take a look at the [moderation guide](../users/04-moderation.md) for more information on how to do this.
 
 ## Check that everything is working properly
 
