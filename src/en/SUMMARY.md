@@ -1,22 +1,34 @@
 # Summary
 
-- [About](about/about.md)
-  - [Features](about/features.md)
-  - [Post and Comment Ranking](about/ranking.md)
-  - [Guide](about/guide.md)
-- [Administration](administration/administration.md)
-  - [Install with Docker](administration/install_docker.md)
-  - [Install with Ansible](administration/install_ansible.md)
-  - [Install from Scratch](administration/from_scratch.md)
-  - [Install on AWS](administration/on_aws.md)
-  - [First Steps](administration/first_steps.md)
-  - [Configuration](administration/configuration.md)
-  - [Theming Guide](administration/theming.md)
-  - [Getting started with Federation](administration/federation_getting_started.md)
-  - [Troubleshooting](administration/troubleshooting.md)
-  - [Backup and Restore](administration/backup_and_restore.md)
-  - [Using Caddy as a reverse proxy](administration/caddy.md)
-- [Moderation](moderation/moderation.md)
+- [Introduction](introduction.md)
+
+# For Users
+
+- [Getting Started](users/01-getting-started.md)
+- [Media](users/02-media.md)
+- [Votes and Ranking](users/03-votes-and-ranking.md)
+- [Moderation](users/04-moderation.md)
+- [Censorship Resistance](users/05-censorship-resistance.md)
+- [Other Features](users/06-other-features.md)
+- [History of Lemmy](users/07-history-of-lemmy.md)
+
+# For Admins
+
+- [Administration](admins/administration.md)
+- [Install with Docker](admins/install_docker.md)
+- [Install with Ansible](admins/install_ansible.md)
+- [Install from Scratch](admins/from_scratch.md)
+- [Install on AWS](admins/on_aws.md)
+- [First Steps](admins/first_steps.md)
+- [Configuration](admins/configuration.md)
+- [Theming Guide](admins/theming.md)
+- [Getting started with Federation](admins/federation_getting_started.md)
+- [Troubleshooting](admins/troubleshooting.md)
+- [Backup and Restore](admins/backup_and_restore.md)
+- [Using Caddy as a reverse proxy](admins/caddy.md)
+
+# For Developers
+
 - [Federation](federation/federation.md)
   - [Federation Overview](federation/overview.md)
   - [Lemmy Protocol](federation/lemmy_protocol.md)
@@ -31,4 +43,7 @@
   - [Federation Development](contributing/federation_development.md)
   - [Release Process](contributing/release_process.md)
   - [Resources](contributing/resources.md)
+
+# Code of Conduct
+
 - [Code of Conduct](code_of_conduct.md)
