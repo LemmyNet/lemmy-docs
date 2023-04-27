@@ -14,18 +14,18 @@
 
 # For Admins
 
-- [Administration](admins/administration.md)
-- [Install with Docker](admins/install_docker.md)
-- [Install with Ansible](admins/install_ansible.md)
-- [Install from Scratch](admins/from_scratch.md)
-- [Install on AWS](admins/on_aws.md)
-- [First Steps](admins/first_steps.md)
-- [Configuration](admins/configuration.md)
-- [Theming Guide](admins/theming.md)
-- [Getting started with Federation](admins/federation_getting_started.md)
-- [Troubleshooting](admins/troubleshooting.md)
-- [Backup and Restore](admins/backup_and_restore.md)
-- [Using Caddy as a reverse proxy](admins/caddy.md)
+- [Administration](administration/administration.md)
+- [Install with Docker](administration/install_docker.md)
+- [Install with Ansible](administration/install_ansible.md)
+- [Install from Scratch](administration/from_scratch.md)
+- [Install on AWS](administration/on_aws.md)
+- [First Steps](administration/first_steps.md)
+- [Configuration](administration/configuration.md)
+- [Theming Guide](administration/theming.md)
+- [Getting started with Federation](administration/federation_getting_started.md)
+- [Troubleshooting](administration/troubleshooting.md)
+- [Backup and Restore](administration/backup_and_restore.md)
+- [Using Caddy as a reverse proxy](administration/caddy.md)
 
 # For Developers
 
