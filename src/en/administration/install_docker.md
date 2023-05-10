@@ -33,12 +33,15 @@ server {
 
     location / {
         proxy_pass http://localhost:LEMMY_PORT;
+        proxy_set_header Host $host;
         include proxy_params;
     }
 }
 ```
 
 You should also setup TLS, for example with [Let's Encrypt](https://letsencrypt.org/). [Here's a guide for setting up letsencrypt on Ubuntu](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-20-04).
+
+For federation to work, it is important that you do not change any headers that form part of the signature. This includes the `Host` header - you may need to refer to the documentation for your proxy server to pass through the `Host` header unmodified.
 
 ## Updating
 
