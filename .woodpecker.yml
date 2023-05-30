@@ -13,9 +13,8 @@ pipeline:
       - git submodule init
       - git submodule update --recursive --remote
   check_formatting:
-    image: alpine:3
+    image: tmknom/prettier
     commands:
-      - apk add prettier --repository=https://dl-cdn.alpinelinux.org/alpine/edge/testing
       - prettier -c src
 
   check_documentation_build:
