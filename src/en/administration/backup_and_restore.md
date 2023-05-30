@@ -12,6 +12,8 @@ To incrementally backup the DB to an `.sql.gz` file, you can run:
 docker-compose exec postgres pg_dumpall -c -U lemmy | gzip > lemmy_dump_`date +%Y-%m-%d"_"%H_%M_%S`.sql.gz
 ```
 
+_For compression, you can use either gzip and gunzip, or xz and unxz._
+
 ### A Sample backup script
 
 ```bash
@@ -25,18 +27,26 @@ rsync -avP -zz --rsync-path="sudo rsync" MY_USER@MY_IP:/LEMMY_LOCATION/volumes ~
 
 ### Restoring the DB
 
-If you need to restore from a `pg_dumpall` file, you need to first clear out your existing database
+To restore, run:
+
+```bash
+docker-compose up -d postgres
+
+# Restore from the .sql.gz backup
+gunzip < db_dump.sql  |  docker-compose exec -T postgres psql -U lemmy
+```
+
+If you've accidentally already started the lemmy service, you need to clear out your existing database:
 
 ```bash
 # Drop the existing DB
 docker exec -i FOLDERNAME_postgres_1 psql -U lemmy -c "DROP SCHEMA public CASCADE; CREATE SCHEMA public;"
 
-# Restore from the .sql.gz backup
-gunzip < db_dump.sql  |  docker exec -i FOLDERNAME_postgres_1 psql -U lemmy # restores the db
-
 # This also might be necessary when doing a db import with a different password.
 docker exec -i FOLDERNAME_postgres_1 psql -U lemmy -c "alter user lemmy with password 'bleh'"
 ```
+
+Then run the restore commands above.
 
 ### Changing your domain name
 
@@ -46,7 +56,7 @@ Get into `psql` for your docker:
 
 `docker-compose exec postgres psql -U lemmy`
 
-```
+```sql
 -- Post
 update post set ap_id = replace (ap_id, 'old_domain', 'new_domain');
 update post set url = replace (url, 'old_domain', 'new_domain');
