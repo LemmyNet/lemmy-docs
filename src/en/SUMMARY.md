@@ -27,22 +27,14 @@
 - [Backup and Restore](administration/backup_and_restore.md)
 - [Using Caddy as a reverse proxy](administration/caddy.md)
 
-# For Developers
+# For Contributors
 
-- [Federation](federation/federation.md)
-  - [Federation Overview](federation/overview.md)
-  - [Lemmy Protocol](federation/lemmy_protocol.md)
-- [Client Development](client_development/client_development.md)
-  - [HTTP API extras](client_development/http_api_extras.md)
-  - [Rust API](client_development/rust_api.md)
-  - [Creating a Custom Frontend](client_development/custom_frontend.md)
-- [Contributing](contributing/contributing.md)
-  - [Docker Development](contributing/docker_development.md)
-  - [Local Development](contributing/local_development.md)
-  - [Tests](contributing/tests.md)
-  - [Federation Development](contributing/federation_development.md)
-  - [Release Process](contributing/release_process.md)
-  - [Resources](contributing/resources.md)
+- [Overview](contributors/01-overview.md)
+- [Local Development](contributors/02-local-development.md)
+- [Docker Development](contributors/03-docker-development.md)
+- [API](contributors/04-api.md)
+- [Federation](contributors/05-federation.md)
+- [Resources](contributors/06-resources.md)
 
 # Code of Conduct
 
