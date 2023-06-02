@@ -14,7 +14,7 @@ Because Lemmy is decentralized, there is no single moderation team for the platf
 
 To get moderator powers, you either need to create a new community, or be appointed by an existing moderator. Similarly to become an admin, you need to create a new instance, or be appointed by an existing instance admin. Community moderation can be done over federation, you don't need to be registered on the same instance where the community is hosted. To be an instance administrator, you need an account on that specific instance. Admins and moderators are organized in a hierarchy, where the user who is listed first has the power to remove admins or mods who are listed later.
 
-All moderation actions are taken on the context menu of posts or comments. Click the three dot button to expand available mod actions, as shown in the screenshot below. All mod actions can be reverted in the same way.
+All moderation actions are taken on the context menu of posts or comments. Click the three dot button to expand available mod actions, as shown in the screenshot below. All actions can be reverted in the same way.
 
 ![moderation_01.png](moderation_01.png)
 ![moderation_02.png](moderation_02.png)
@@ -27,7 +27,7 @@ All moderation actions are taken on the context menu of posts or comments. Click
 | Remove             | Delete the post                                                                                                                             | Moderator        |
 | Ban from community | Ban user from interacting with the community, but can still use the rest of the site. There is also an option to remove all existing posts. | Moderator        |
 | Appoint as mod     | Gives the user moderator status                                                                                                             | Moderator        |
-| Ban from site      | Ban user from interacting with the community, but can still use the rest of the site. There is also an option to remove all existing posts. | Admin            |
+| Ban from site      | Completely bans the account, so it can't login or interact at all. There is also an option to remove all existing posts.                    | Admin            |
 | Purge user         | Completely delete the user, including all posts and uploaded media. Use with caution.                                                       | Admin            |
 | Purge post/comment | Completely delete the post, including attached media.                                                                                       | Admin            |
 | Appoint as admin   | Gives the user administrator status                                                                                                         | Admin            |
