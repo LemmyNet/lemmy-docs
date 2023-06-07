@@ -38,12 +38,12 @@ systemctl start [service]
 ```
 
 ## Determine your hidden service's hostname
+
 ```
 cat /var/lib/tor/hidden_lemmy_service/hostname
 ```
 
 The `.onion` address contained in this file will be referred to as `HIDDEN_SERVICE_ADDR` from here on.
-
 
 # Configure your Lemmy instance
 
@@ -52,6 +52,7 @@ The `.onion` address contained in this file will be referred to as `HIDDEN_SERVI
 Forward port `80` from the `proxy` container to the hidden service port `127.0.0.1:10080` on the parent host's loopback interface.
 
 **docker-compose.yml**
+
 ```
 services:
   # ...
@@ -68,6 +69,7 @@ services:
 Append a new `server {...}` block to handle tor traffic, and add the `Onion-Location` header to the SSL encrypted entry point. Doing this will prompt users of Tor Browser that an equivalent `.onion` site exists on the Tor network.
 
 **nginx.conf**
+
 ```
 worker_processes 1;
 events {
@@ -280,4 +282,3 @@ lemmy-proxy-1  | 172.*.0.1 - -  # ...
 lemmy-proxy-1  | 172.*.0.1 - -  # ...
 lemmy-proxy-1  | 172.*.0.1 - -  # ...
 ```
-
