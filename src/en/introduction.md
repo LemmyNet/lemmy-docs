@@ -15,7 +15,7 @@ The fediverse ("federated universe") is the name for all instances that can comm
 - [Friendica](https://friendi.ca/) (multi-purpose)
 - and many more!
 
-In practical terms: Imagine if you could follow an Facebook group from your Reddit account and comment on its posts without leaving your account. If Facebook and Reddit were federated services that used the same protocol, that would be possible. With a Lemmy account, you can communicate with any other compatible instance, even if it is not running on Lemmy. All that is necessary is that the software support the same subset of the ActivityPub protocol.
+In practical terms: Imagine if you could follow a Facebook group from your Reddit account and comment on its posts without leaving your account. If Facebook and Reddit were federated services that used the same protocol, that would be possible. With a Lemmy account, you can communicate with any other compatible instance, even if it is not running on Lemmy. All that is necessary is that the software support the same subset of the ActivityPub protocol.
 
 Unlike proprietary services, anyone has the complete freedom to run, examine, inspect, copy, modify, distribute, and reuse the Lemmy source code. Just like how users of Lemmy can choose their service provider, you as an individual are free to contribute features to Lemmy or publish a modified version of Lemmy that includes different features. These modified versions, also known as software forks, are required to also uphold the same freedoms as the original Lemmy project. Because Lemmy is libre software that respects your freedom, personalizations are not only allowed but encouraged.
 
