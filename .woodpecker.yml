@@ -19,9 +19,9 @@ pipeline:
       - prettier -c src
 
   check_typos:
-    image: rust:1.70-slim-buster
+    image: rust:1.70-slim-bookworm
     commands:
-      - cargo install typos-cli@1.14.3
+      - cargo install typos-cli
       - typos src/en
 
   check_documentation_build:
