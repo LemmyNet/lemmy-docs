@@ -34,6 +34,13 @@ docker-compose up -d postgres
 
 # Restore from the .sql.gz backup
 gunzip < db_dump.sql  |  docker-compose exec -T postgres psql -U lemmy
+
+# Note: You may need to change the permissions on the postgres directory
+chown -R $USER volumes
+docker-compose restart postgres
+
+# Continue with the startup
+docker-compose up -d
 ```
 
 If you've accidentally already started the lemmy service, you need to clear out your existing database:
