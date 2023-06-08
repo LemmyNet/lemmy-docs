@@ -12,10 +12,17 @@ pipeline:
         #- git fetch --tags
       - git submodule init
       - git submodule update --recursive --remote
+
   check_formatting:
     image: tmknom/prettier
     commands:
       - prettier -c src
+
+  check_typos:
+    image: rust:1.61-slim-buster
+    commands:
+      - cargo install typos-cli
+      - typos src/en
 
   check_documentation_build:
     image: rust:1.61-slim-buster
@@ -26,12 +33,6 @@ pipeline:
       - apt-get install git curl -y
       - ./update-includes.sh
       - mdbook build .
-
-  check_typos:
-    image: rust:1.61-slim-buster
-    commands:
-      - cargo install typos-cli
-      - typos src/en
 
   dead_links:
     image: becheran/mlc:latest
