@@ -111,7 +111,7 @@ A page with title, and optional URL and text content. The attachment URL often l
 | `attachment`      | A single website or image link                                                                      |
 | `image`           | Thumbnail for `url`, only present if it is an image link                                            |
 | `commentsEnabled` | False indicates that the post is locked, and no comments can be added                               |
-| `sensitive`       | True marks the post as NSFW, blurs the thumbnail and hides it from users with NSFW settign disabled |
+| `sensitive`       | True marks the post as NSFW, blurs the thumbnail and hides it from users with NSFW setting disabled |
 | `stickied`        | True means that it is shown on top of the community                                                 |
 | `published`       | Datetime when the post was created                                                                  |
 | `updated`         | Datetime when the post was edited (not present if it was never edited)                              |

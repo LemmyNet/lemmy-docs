@@ -36,7 +36,7 @@ También es posible utilizar varios frontends para la misma instancia de Lemmy, 
 
 ## Traducciones
 
-Puedes añadir el repositorio [lemmy-translations](https://github.com/LemmyNet/lemmy-translations) a tu proyecto como un [submódulo git](https://git-scm.com/book/en/v2/Git-Tools-Submodules). De este modo, podrás aprovechar las mismas traducciones que se utilizan en el frontend oficial, y también recibirás las nuevas traducciones aportadas a través de [weblate](https://weblate.org/es/).
+Puedes añadir el repositorio [lemmy-translations](https://github.com/LemmyNet/lemmy-translations) a tu proyecto como un [submódulo git](https://git-scm.com/book/en/v2/Git-Tools-Submodules). De este modo, podrás aprovechar las mismas traducciones que se utilizan en el frontend oficial, y también recibirás las nuevas traducciones aportadas a través de [Weblate](https://weblate.org/es/).
 
 ## Limitación de la tasa
 

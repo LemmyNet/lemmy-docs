@@ -9,7 +9,7 @@ to AWS using their [Cloud Development Kit](https://docs.aws.amazon.com/cdk/lates
 
 ### Included:
 
-- ECS fargate cluster
+- ECS Fargate cluster
   - Lemmy-UI
   - Lemmy
   - Pictrs

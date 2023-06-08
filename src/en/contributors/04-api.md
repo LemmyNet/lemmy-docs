@@ -97,7 +97,7 @@ You can also look at the following real-world projects as examples:
 
 ### Creating a Custom Frontend
 
-The Lemmy backend and frontend are completely seperate projects. This creates a lot of potential for alternative frontends which can change much of the design and user experience of Lemmy. For example, it is possible to create a frontend in the style of a traditional forum like [phpBB](https://www.phpbb.com/), a question-and-answer site like [stackoverflow](https://stackoverflow.com/), a blogging platform or an image gallery. This way you don't have to write any SQL queries, federation logic, API code and so on, but can use the proven implementation from Lemmy. It is also possible to run multiple frontends for a single Lemmy instance.
+The Lemmy backend and frontend are completely separate projects. This creates a lot of potential for alternative frontends which can change much of the design and user experience of Lemmy. For example, it is possible to create a frontend in the style of a traditional forum like [phpBB](https://www.phpbb.com/), a question-and-answer site like [Stack Overflow](https://stackoverflow.com/), a blogging platform or an image gallery. This way you don't have to write any SQL queries, federation logic, API code and so on, but can use the proven implementation from Lemmy. It is also possible to run multiple frontends for a single Lemmy instance.
 
 #### Development
 
@@ -105,7 +105,7 @@ The easiest way to get started is by forking one of the [existing frontends](htt
 
 #### Translations
 
-You can add the [lemmy-translations](https://github.com/LemmyNet/lemmy-translations) repository to your project as a [git submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules). That way you can take advantage of same translations used in the official frontend, and you will also receive new translations contributed via weblate.
+You can add the [lemmy-translations](https://github.com/LemmyNet/lemmy-translations) repository to your project as a [git submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules). That way you can take advantage of same translations used in the official frontend, and you will also receive new translations contributed via Weblate.
 
 #### Rate limiting
 
