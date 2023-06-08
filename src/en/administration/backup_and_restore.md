@@ -35,7 +35,7 @@ docker-compose up -d postgres
 # Restore from the .sql.gz backup
 gunzip < db_dump.sql  |  docker-compose exec -T postgres psql -U lemmy
 
-# Note: You may need to change the permissions on the postgres directory
+# Note: You may need to change the permissions on the postgres directory, depending on your system.
 chown -R $USER volumes
 docker-compose restart postgres
 
