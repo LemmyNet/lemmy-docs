@@ -2,6 +2,9 @@
 authors = ["Felix Ableitner"]
 src = "src"
 
+[output.html]
+git-repository-url = "https://github.com/LemmyNet/lemmy-docs"
+
 [language.en]
 name = "English"
 title = "Lemmy Documentation"
