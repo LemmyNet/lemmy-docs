@@ -27,6 +27,12 @@ pipeline:
       - ./update-includes.sh
       - mdbook build .
 
+  check_typos:
+    image: rust:1.61-slim-buster
+    commands:
+      - cargo install typos-cli
+      - typos src/en
+
   dead_links:
     image: becheran/mlc:latest
     commands:
