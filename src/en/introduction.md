@@ -8,7 +8,7 @@ A Lemmy website can operate alone. Just like a traditional website, people sign 
 
 Lemmy uses a standardized, open protocol to implement federation which is called ActivityPub. Any software that likewise implements federation via ActivityPub can seamlessly communicate with Lemmy, just like Lemmy instances communicate with one another.
 
-The fediverse ("federated universe") is the name for all instances that can communicate with each other over ActivityPub and the World Wide Web. That includes all Lemmy servers, but also other implementations:
+The fediverse ("federated universe") is teh name for all instances that can communicate with each other over ActivityPub and the World Wide Web. That includes all Lemmy servers, but also other implementations:
 
 - [Mastodon](https://joinmastodon.org/) (microblogging)
 - [PeerTube](https://joinpeertube.org/) (videos)
