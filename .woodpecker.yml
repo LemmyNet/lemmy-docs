@@ -12,10 +12,18 @@ pipeline:
         #- git fetch --tags
       - git submodule init
       - git submodule update --recursive --remote
+
   check_formatting:
     image: tmknom/prettier
     commands:
       - prettier -c src
+
+  check_typos:
+    image: alpine:3
+    commands:
+      - wget -O typos.tar.gz https://github.com/crate-ci/typos/releases/download/v1.14.12/typos-v1.14.12-x86_64-unknown-linux-musl.tar.gz
+      - tar -xzf typos.tar.gz
+      - ./typos src/en
 
   check_documentation_build:
     image: rust:1.61-slim-buster
