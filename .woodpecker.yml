@@ -21,7 +21,6 @@ pipeline:
   check_typos:
     image: imunew/typos-cli
     commands:
-      - rustc --version #check rust version
       - typos src/en
 
   check_documentation_build:
