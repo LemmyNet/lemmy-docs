@@ -19,6 +19,6 @@ In practical terms: Imagine if you could follow a Facebook group from your Reddi
 
 Unlike proprietary services, anyone has the complete freedom to run, examine, inspect, copy, modify, distribute, and reuse the Lemmy source code. Just like how users of Lemmy can choose their service provider, you as an individual are free to contribute features to Lemmy or publish a modified version of Lemmy that includes different features. These modified versions, also known as software forks, are required to also uphold the same freedoms as the original Lemmy project. Because Lemmy is libre software that respects your freedom, personalizations are not only allowed but encouraged.
 
-<sub>You can contribute to this documentation in the [git repository](https://github.com/LemmyNet/lemmy-docs/pull/172).</sub>
+<sub>You can contribute to this documentation in the [git repository](https://github.com/LemmyNet/lemmy-docs).</sub>
 
 <sub>This page is adapted from [Mastodon documentation](https://docs.joinmastodon.org/) under CC BY-SA 4.0.</sub>
