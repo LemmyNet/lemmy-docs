@@ -21,9 +21,10 @@ pipeline:
   check_typos:
     image: rust:1.70-slim-buster
     commands:
+      - rustc --version #check rust version
       - rustup update # trying this because it says rust version is old
-      - cargo install typos-cli
-      - typos src/en
+#       - cargo install typos-cli
+#       - typos src/en
 
   check_documentation_build:
     image: rust:1.61-slim-buster
