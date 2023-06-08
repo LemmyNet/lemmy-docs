@@ -19,8 +19,9 @@ pipeline:
       - prettier -c src
 
   check_typos:
-    image: imunew/typos-cli
+    image: rust:1.70-slim-buster
     commands:
+      - cargo install typos-cli@1.14.3
       - typos src/en
 
   check_documentation_build:
