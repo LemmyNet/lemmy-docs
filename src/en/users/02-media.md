@@ -26,4 +26,4 @@ The main type of content in Lemmy is text which can be formatted with Markdown. 
 
 Lemmy also allows sharing of images and videos. To upload an image, go to the _Create post_ page and click the little image icon under the _URL_ field. This allows you to select a local image. If you made a mistake, a popup message allows you to delete the image. The same image button also allows uploading of videos in .gif format. Instead of uploading a local file, you can also simply paste the URL of an image or video from another website.
 
-Note that this functionality is not meant to share large images or videos, because that would require too many server resources. Instead, upload them on another platform like [Peertube](https://joinpeertube.org/) or [Pixelfed](https://pixelfed.org/), and share the link on Lemmy.
+Note that this functionality is not meant to share large images or videos, because that would require too many server resources. Instead, upload them on another platform like [PeerTube](https://joinpeertube.org/) or [Pixelfed](https://pixelfed.org/), and share the link on Lemmy.

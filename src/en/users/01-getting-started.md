@@ -54,7 +54,7 @@ On this page you can also change the email and password. Additionally there are 
 - **Languages**: Select the languages that you speak to see only content in these languages. This is a new feature and many posts don't specify a language yet, so be sure to select "Undetermined" to see them.
 - **Theme**: You can choose between different color themes for the user interface. Instance admins can add more themes.
 - **Type**: Which timeline you want to see by default on the frontpage; only posts from communities that you subscribe to, posts in local communities, or all posts including federated.
-- **Sort type**: How posts and comments should be sorted by default. See [05-votes-and-ranking] for details.
+- **Sort type**: How posts and comments should be sorted by default. See [Votes and Ranking](03-votes-and-ranking.md) for details.
 - **Show NSFW content**: Whether or not you want to see content that is "not safe for work" (or adult-only).
 - **Show Scores**: Whether the number of upvotes and downvotes should be visible.
 - **Show Avatars**: Whether profile pictures of other users should be shown.

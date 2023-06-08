@@ -4,7 +4,7 @@ Lemmy is a selfhosted, federated social link aggregation and discussion forum. I
 
 Federation is a form of decentralization. Instead of a single central service that everyone uses, there are multiple services that any number of people can use.
 
-A Lemmy website can operate alone. Just like a traditional website, people sign up on it, post messages, upload pictures and talk to each other. Unlike a traditional website, Lemmy instances can interoperate, letting their users communicate with each other; just like you can send an email from your Gmail account to someone from Outlook, Fastmail, Protonmail, or any other email provider, as long as you know their email address, you can mention or message anyone on any website using their address.
+A Lemmy website can operate alone. Just like a traditional website, people sign up on it, post messages, upload pictures and talk to each other. Unlike a traditional website, Lemmy instances can interoperate, letting their users communicate with each other; just like you can send an email from your Gmail account to someone from Outlook, Fastmail, Proton Mail, or any other email provider, as long as you know their email address, you can mention or message anyone on any website using their address.
 
 Lemmy uses a standardized, open protocol to implement federation which is called ActivityPub. Any software that likewise implements federation via ActivityPub can seamlessly communicate with Lemmy, just like Lemmy instances communicate with one another.
 
@@ -19,6 +19,6 @@ In practical terms: Imagine if you could follow a Facebook group from your Reddi
 
 Unlike proprietary services, anyone has the complete freedom to run, examine, inspect, copy, modify, distribute, and reuse the Lemmy source code. Just like how users of Lemmy can choose their service provider, you as an individual are free to contribute features to Lemmy or publish a modified version of Lemmy that includes different features. These modified versions, also known as software forks, are required to also uphold the same freedoms as the original Lemmy project. Because Lemmy is libre software that respects your freedom, personalizations are not only allowed but encouraged.
 
-<sub>You can contribute to this documentation in the [git repository](https://github.com/LemmyNet/lemmy-docs/pull/172).</sub>
+<sub>You can contribute to this documentation in the [git repository](https://github.com/LemmyNet/lemmy-docs).</sub>
 
 <sub>This page is adapted from [Mastodon documentation](https://docs.joinmastodon.org/) under CC BY-SA 4.0.</sub>
