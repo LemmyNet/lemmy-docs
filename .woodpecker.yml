@@ -21,7 +21,7 @@ pipeline:
   check_typos:
     image: alpine:3
     commands:
-      - curl -o typos.tar.gz https://github.com/crate-ci/typos/releases/download/v1.14.12/typos-v1.14.12-x86_64-unknown-linux-musl.tar.gz
+      - wget -O typos.tar.gz https://github.com/crate-ci/typos/releases/download/v1.14.12/typos-v1.14.12-x86_64-unknown-linux-musl.tar.gz
       - tar -xzf typos.tar.gz
       - ./typos src/en
 
