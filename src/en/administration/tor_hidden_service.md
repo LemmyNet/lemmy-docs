@@ -1,6 +1,12 @@
-# Install TOR
+# Tor Hidden Services
 
-## **Centos 8+ / Fedora**
+[Tor](https://torproject.org) ("The Onion Router") is software designed to circumvent censorship and prevent bad actors from monitoring your activity on the internet by encrypting and distributing network traffic through a decentralized pool of relay servers run by volunteers all over the world.
+
+A Tor hidden service is only accessible through the Tor network using the `.onion` top-level domain with the official [Tor Browser](https://www.torproject.org/download/), or any client capable of communicating over a SOCKS5 proxy. Hosting a service on the Tor network is a good way to promote digital privacy and internet freedom.
+
+# Install Tor
+
+**Centos 8+ / Fedora**
 
 ```
 dnf install -y epel-release
