@@ -19,7 +19,7 @@ pipeline:
       - prettier -c src
 
   check_typos:
-    image: rust:1.70-slim-buster
+    image: rust:1.70-buster
     commands:
       - rustc --version #check rust version
       - rustup update # trying this because it says rust version is old
