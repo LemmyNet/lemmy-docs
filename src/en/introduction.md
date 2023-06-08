@@ -4,7 +4,7 @@ Lemmy is a selfhosted, federated social link aggregation and discussion forum. I
 
 Federation is a form of decentralization. Instead of a single central service that everyone uses, there are multiple services that any number of people can use.
 
-A Lemmy website can operate alone. Just like a traditional website, people sign up on it, post messages, upload pictures and talk to each other. Unlike a traditional website, Lemmy instances can interoperate, letting their users communicate with each other; just like you can send an email from your Gmail account to someone from Outlook, Fastmail, Protonmail, or any other email provider, as long as you know their email address, you can mention or message anyone on any website using their address.
+A Lemmy website can operate alone. Just like a traditional website, people sign up on it, post messages, upload pictures and talk to each other. Unlike a traditional website, Lemmy instances can interoperate, letting their users communicate with each other; just like you can send an email from your Gmail account to someone from Outlook, Fastmail, Proton Mail, or any other email provider, as long as you know their email address, you can mention or message anyone on any website using their address.
 
 Lemmy uses a standardized, open protocol to implement federation which is called ActivityPub. Any software that likewise implements federation via ActivityPub can seamlessly communicate with Lemmy, just like Lemmy instances communicate with one another.
 

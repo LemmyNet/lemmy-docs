@@ -32,7 +32,7 @@ brew install node yarn
 
 ### Setup PostgreSQL database
 
-Debian-based disto:
+Debian-based distro:
 
 ```bash
 sudo apt install postgresql
@@ -92,7 +92,7 @@ Run Rust unit tests:
 ./scripts/test.sh
 ```
 
-To run federation/API tests, first add the follwing lines to `/etc/hosts`:
+To run federation/API tests, first add the following lines to `/etc/hosts`:
 
 ```
 127.0.0.1       lemmy-alpha
