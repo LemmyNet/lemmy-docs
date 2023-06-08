@@ -19,7 +19,7 @@ pipeline:
       - prettier -c src
 
   check_typos:
-    image: rust:1.61-slim-buster
+    image: rust:1.70-slim-buster
     commands:
       - cargo install typos-cli
       - typos src/en
