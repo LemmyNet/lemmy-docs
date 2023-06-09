@@ -38,7 +38,6 @@ The package repository only supports `amd64`, `arm64`, and `i386` architectures.
 
 ```
 dpkg --print-architecture
-
 ```
 
 If your architecture is not supported you may want to consider installing Tor [from source](https://community.torproject.org/onion-services/setup/install/#installing-tor-from-source).
