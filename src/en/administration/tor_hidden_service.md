@@ -63,7 +63,7 @@ bash -c 'dist=$(lsb_release -s -c); /bin/echo -e "deb [signed-by=/usr/share/keyr
 wget -qO- https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --dearmor | tee /usr/share/keyrings/tor-archive-keyring.gpg >/dev/null
 ```
 
-The signing key ensures the package retreived from the server was created by `deb.torproject.org`.
+The signing key ensures the package retrieved from the server was created by `deb.torproject.org`.
 
 **Install tor**
 
@@ -270,7 +270,7 @@ http {
 
 # Apply the configuration(s)
 
-Restart all services assocated with your Lemmy instance:
+Restart all services associated with your Lemmy instance:
 
 ```
 docker compose down
