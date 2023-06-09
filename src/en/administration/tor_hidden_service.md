@@ -54,13 +54,20 @@ apt install -y apt-transport-https ca-certificates gpg lsb-release wget
 Configure `apt` to pull packages from `deb.torproject.org`.
 
 ```
-bash -c 'dist=$(lsb_release -s -c); /bin/echo -e "deb [signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org $dist main\ndeb-src [signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org $dist main" > /etc/apt/sources.list.d/tor.list'
+bash -c 'dist=$(lsb_release -s -c); /bin/echo -e \
+"deb [signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] \
+https://deb.torproject.org/torproject.org $dist main\n\
+deb-src [signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] \
+https://deb.torproject.org/torproject.org $dist main" \
+> /etc/apt/sources.list.d/tor.list'
 ```
 
 **Import deb.torproject.org's GPG signing key**
 
 ```
-wget -qO- https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --dearmor | tee /usr/share/keyrings/tor-archive-keyring.gpg >/dev/null
+wget -qO- https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc \
+    | gpg --dearmor \
+    | tee /usr/share/keyrings/tor-archive-keyring.gpg >/dev/null
 ```
 
 The signing key ensures the package retrieved from the server was created by `deb.torproject.org`.
