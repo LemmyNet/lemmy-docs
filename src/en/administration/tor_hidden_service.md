@@ -82,7 +82,7 @@ apt update && apt install -y tor
 Create a new hidden service directory:
 
 ```
-sudo mkdir /var/lib/tor/hidden_lemmy_service
+mkdir /var/lib/tor/hidden_lemmy_service
 ```
 
 Append the following to `/etc/tor/torrc` to tie the hidden service directory to the `tor` daemon:
