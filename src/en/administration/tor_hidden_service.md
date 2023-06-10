@@ -159,6 +159,9 @@ http {
         }
     }
 
+    # Establish a rate limit for the hidden service address
+    limit_req_zone $binary_remote_addr zone=HIDDEN_SERVICE_ADDR_ratelimit:10m rate=1r/s;
+
     # Add tor-specific upstream aliases as a visual aid to
     # avoid editing the incorrect server block in the future
     upstream lemmy-tor {
