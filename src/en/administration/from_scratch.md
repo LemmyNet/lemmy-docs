@@ -39,6 +39,8 @@ sudo -iu postgres psql -c "CREATE DATABASE lemmy WITH OWNER lemmy;"
 adduser lemmy --system --disabled-login --no-create-home --group
 ```
 
+Note that currently Lemmy only supports non-SSL connections to databases. More info [here](https://github.com/LemmyNet/lemmy/issues/3007).
+
 Minimal Lemmy config, put this in `/etc/lemmy/lemmy.hjson` (see [here](https://github.com/LemmyNet/lemmy/blob/main/config/config.hjson) for more config options). Run `chown lemmy:lemmy /etc/lemmy/ -R` to set the correct owner.
 
 ```hjson
