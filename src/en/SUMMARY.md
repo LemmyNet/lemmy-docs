@@ -11,7 +11,6 @@
 - [Censorship Resistance](users/05-censorship-resistance.md)
 - [Other Features](users/06-other-features.md)
 - [History of Lemmy](users/07-history-of-lemmy.md)
-- [Ranking Algorithm](users/08-ranking-algo.md)
 
 # For Admins
 
@@ -36,6 +35,7 @@
 - [API](contributors/04-api.md)
 - [Federation](contributors/05-federation.md)
 - [Resources](contributors/06-resources.md)
+- [Ranking Algorithm](users/07-ranking-algo.md)
 
 # Code of Conduct
 
