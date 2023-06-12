@@ -10,7 +10,7 @@ It is built from source, so this may take a while, especially on slow devices. F
 
 Install Rust by following the instructions on [Rustup](https://rustup.rs/).
 
-Lemmy supports image hosting using [pict-rs](https://git.asonix.dog/asonix/pict-rs/). We need to install a couple of dependencies for this. You can also skip these steps if you don't require image hosting.
+Lemmy supports image hosting using [pict-rs](https://git.asonix.dog/asonix/pict-rs/). We need to install a couple of dependencies for this. You can also skip these steps if you don't require image hosting. **NOTE: Lemmy-ui will still allow users to attempt uploading images even if pict-rs is not configured, in this situation, the upload will fail and users will receive technical error messages.**
 
 Pict-rs requires the `magick` command which comes with Imagemagick version 7, but Ubuntu 20.04 only comes with Imagemagick 6. So you need to install that command manually, eg from the [official website](https://imagemagick.org/script/download.php#linux).
 
@@ -38,6 +38,8 @@ sudo -iu postgres psql -c "CREATE USER lemmy WITH PASSWORD 'db-passwd';"
 sudo -iu postgres psql -c "CREATE DATABASE lemmy WITH OWNER lemmy;"
 adduser lemmy --system --disabled-login --no-create-home --group
 ```
+
+Note that currently Lemmy only supports non-SSL connections to databases. More info [here](https://github.com/LemmyNet/lemmy/issues/3007).
 
 Minimal Lemmy config, put this in `/etc/lemmy/lemmy.hjson` (see [here](https://github.com/LemmyNet/lemmy/blob/main/config/config.hjson) for more config options). Run `chown lemmy:lemmy /etc/lemmy/ -R` to set the correct owner.
 
