@@ -35,6 +35,7 @@
 - [API](contributors/04-api.md)
 - [Federation](contributors/05-federation.md)
 - [Resources](contributors/06-resources.md)
+- [Ranking Algorithm](contributors/07-ranking-algo.md)
 
 # Code of Conduct
 
