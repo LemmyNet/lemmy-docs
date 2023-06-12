@@ -26,3 +26,5 @@ Comments can be sorted in the following ways. These all keep the indentation int
 - **Old**: Shows oldest comments first
 
 Additionally there is a sort option **Chat**. This eliminates the hierarchy, and puts all comments on the top level, with newest comments shown at the top. It is useful to see new replies at any point in the conversation, but makes it difficult to see the context.
+
+The ranking algorithm is described in detail [here](contributors/07-ranking-algo.md).
