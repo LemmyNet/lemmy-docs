@@ -8,9 +8,8 @@ mkdir /lemmy
 cd /lemmy
 
 # télécharger les fichiers de configuration par défaut
-wget https://raw.githubusercontent.com/LemmyNet/lemmy/main/docker/prod/docker-compose.yml
+wget https://raw.githubusercontent.com/LemmyNet/lemmy/main/docker/docker-compose.yml
 wget https://raw.githubusercontent.com/LemmyNet/lemmy/main/docker/lemmy.hjson
-wget https://raw.githubusercontent.com/LemmyNet/lemmy/main/docker/iframely.config.local.js
 
 # Définir les permissions correctes pour le dossier pictrs
 mkdir -p volumes/pictrs
