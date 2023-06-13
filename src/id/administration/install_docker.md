@@ -8,7 +8,7 @@ mkdir /lemmy
 cd /lemmy
 
 # unduh berkas konfigurasi baku
-wget https://raw.githubusercontent.com/LemmyNet/lemmy/main/docker/prod/docker-compose.yml
+wget https://raw.githubusercontent.com/LemmyNet/lemmy/main/docker/docker-compose.yml
 wget https://raw.githubusercontent.com/LemmyNet/lemmy/main/docker/lemmy.hjson
 
 # atur izin yang benar untuk folder pictrs
