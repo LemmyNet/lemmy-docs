@@ -111,5 +111,5 @@ Then run the following script:
 
 ```bash
 cd api_tests
-./run-federation-test.bash
+./run-federation-test.sh
 ```
