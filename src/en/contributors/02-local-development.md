@@ -17,9 +17,7 @@ sudo apt update && sudo apt install yarn
 Arch-based distro:
 
 ```bash
-sudo pacman -S git cargo libssl-dev pkg-config libpq-dev curl
-# install yarn (stable)
-curl -o- -L https://yarnpkg.com/install.sh | bash
+sudo pacman -S git cargo openssl pkg-config postgresql-libs curl yarn
 ```
 
 macOS:
