@@ -26,14 +26,11 @@ pipeline:
       - ./typos src/en
 
   check_documentation_build:
-    image: rust:1.61-slim-buster
+    image: alpine:3
     commands:
-      - cargo install mdbook --git https://github.com/Ruin0x11/mdBook.git --branch localization
-            --rev 9d8147c --force --debug
-      - apt-get update
-      - apt-get install git curl -y
-      - ./update-includes.sh
-      - mdbook build .
+      - wget -O https://github.com/rust-lang/mdBook/releases/download/v0.4.30/mdbook-v0.4.30-aarch64-unknown-linux-musl.tar.gz mdbook.tar.gz
+      - tar -xzf mdbook.tar.gz
+      - ./mdbook build .
 
   dead_links:
     image: becheran/mlc:latest

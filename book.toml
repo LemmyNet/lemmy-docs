@@ -4,19 +4,3 @@ src = "src"
 
 [output.html]
 git-repository-url = "https://github.com/LemmyNet/lemmy-docs"
-
-[language.en]
-name = "English"
-title = "Lemmy Documentation"
-
-[language.es]
-name = "Español"
-title = "Documentación Lemmy"
-
-[language.ru]
-name = "Русский"
-title = "Документация Lemmy"
-
-[language.id]
-name = "Indonesia"
-title = "Dokumentasi Lemmy"
