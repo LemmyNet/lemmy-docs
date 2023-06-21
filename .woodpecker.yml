@@ -30,7 +30,7 @@ pipeline:
     commands:
       - wget -O mdbook.tar.gz https://github.com/rust-lang/mdBook/releases/download/v0.4.30/mdbook-v0.4.30-x86_64-unknown-linux-gnu.tar.gz
       - tar -xzf mdbook.tar.gz
-      - ls
+      - ls -la mdbook
       - ./mdbook build .
 
   dead_links:
