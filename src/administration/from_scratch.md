@@ -12,7 +12,7 @@ Install Rust by following the instructions on [Rustup](https://rustup.rs/).
 
 Lemmy supports image hosting using [pict-rs](https://git.asonix.dog/asonix/pict-rs/). We need to install a couple of dependencies for this. You can also skip these steps if you don't require image hosting. **NOTE: Lemmy-ui will still allow users to attempt uploading images even if pict-rs is not configured, in this situation, the upload will fail and users will receive technical error messages.**
 
-Pict-rs requires the `magick` command which comes with Imagemagick version 7, but Ubuntu 20.04 only comes with Imagemagick 6. So you need to install that command manually, eg from the [official website](https://imagemagick.org/script/download.php#linux).
+Depending on preference, pict-rs can be installed as a standalone application, or it can be embedded within Lemmy itself (see below). In both cases, pict-rs requires the `magick` command which comes with Imagemagick version 7, but Ubuntu 20.04 only comes with Imagemagick 6. So you need to install that command manually, eg from the [official website](https://imagemagick.org/script/download.php#linux).
 
 ```bash
 apt install ffmpeg exiftool libgexiv2-dev --no-install-recommends
