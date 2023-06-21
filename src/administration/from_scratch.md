@@ -41,7 +41,13 @@ adduser lemmy --system --disabled-login --no-create-home --group
 
 Note:  
 * Lemmy currently only supports non-SSL connections to databases. More info [here](https://github.com/LemmyNet/lemmy/issues/3007).
-* Your postgres config might need to be edited to allow password authentication instead of peer authentication. More info [here](https://github.com/LemmyNet/lemmy-docs/issues/220).
+* Your postgres config might need to be edited to allow password authentication instead of peer authentication. Simply add:
+  ```
+  local   lemmy           lemmy                                   md5
+  # Add the line above.
+  # Do not add the line below, it should already exist in your pg_hba.conf in some form.
+  local   all             all                                     peer
+  ``` 
 
 Minimal Lemmy config, put this in `/etc/lemmy/lemmy.hjson` (see [here](https://github.com/LemmyNet/lemmy/blob/main/config/config.hjson) for more config options). Run `chown lemmy:lemmy /etc/lemmy/ -R` to set the correct owner.
 
@@ -120,7 +126,7 @@ yarn build:prod
 exit
 ```
 
-Add another systemd unit file, this time for lemmy-ui. You need to replace example.com with your actual domain. Put the file in `/etc/systemd/system/lemmy-ui.service`, then run `systemctl enable lemmy-ui` and `systemctl start lemmy-ui`. Note that some of the environment variables `LEMMY_*` are subject to change, and you should use the most up to date variable names, as [found here](https://github.com/LemmyNet/lemmy-ui#configuration)
+Add another systemd unit file, this time for lemmy-ui. You need to replace example.com with your actual domain. Put the file in `/etc/systemd/system/lemmy-ui.service`, then run `systemctl enable lemmy-ui` and `systemctl start lemmy-ui`. More UI-related variables can be [found here](https://github.com/LemmyNet/lemmy-ui#configuration).
 
 ```
 [Unit]
@@ -135,6 +141,7 @@ ExecStart=/usr/bin/node dist/js/server.js
 Environment=LEMMY_UI_LEMMY_INTERNAL_HOST=localhost:8536
 Environment=LEMMY_UI_LEMMY_EXTERNAL_HOST=example.com
 Environment=LEMMY_UI_HTTPS=true
+Environment=RUST_LOG=info
 Restart=on-failure
 
 # Hardening
