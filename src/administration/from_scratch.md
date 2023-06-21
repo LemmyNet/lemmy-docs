@@ -39,15 +39,16 @@ sudo -iu postgres psql -c "CREATE DATABASE lemmy WITH OWNER lemmy;"
 adduser lemmy --system --disabled-login --no-create-home --group
 ```
 
-Note:  
-* Lemmy currently only supports non-SSL connections to databases. More info [here](https://github.com/LemmyNet/lemmy/issues/3007).
-* Your postgres config might need to be edited to allow password authentication instead of peer authentication. Simply add:
+Note:
+
+- Lemmy currently only supports non-SSL connections to databases. More info [here](https://github.com/LemmyNet/lemmy/issues/3007).
+- Your postgres config might need to be edited to allow password authentication instead of peer authentication. Simply add:
   ```
   local   lemmy           lemmy                                   md5
   # Add the line above.
   # Do not add the line below, it should already exist in your pg_hba.conf in some form.
   local   all             all                                     peer
-  ``` 
+  ```
 
 Minimal Lemmy config, put this in `/etc/lemmy/lemmy.hjson` (see [here](https://github.com/LemmyNet/lemmy/blob/main/config/config.hjson) for more config options). Run `chown lemmy:lemmy /etc/lemmy/ -R` to set the correct owner.
 
