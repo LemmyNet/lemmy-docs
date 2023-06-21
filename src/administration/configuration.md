@@ -3,8 +3,9 @@
 The configuration is based on the file config.hjson, which is located by default at `config/config.hjson`. To change the default location, you can set the environment variable `LEMMY_CONFIG_LOCATION`.
 
 Additional environment variable are available:
- - `LEMMY_DATABASE_URL`, which can be used with a PostgreSQL connection string like `postgres://lemmy:password@lemmy_db:5432/lemmy`, passing all connection details at once,  
- - `LEMMY_SMTP_PASSWORD`, which can be used to set the password to authenticate with the SMTP server.
+
+- `LEMMY_DATABASE_URL`, which can be used with a PostgreSQL connection string like `postgres://lemmy:password@lemmy_db:5432/lemmy`, passing all connection details at once,
+- `LEMMY_SMTP_PASSWORD`, which can be used to set the password to authenticate with the SMTP server.
 
 Those environment variables will override values if specified in the config file.
 
