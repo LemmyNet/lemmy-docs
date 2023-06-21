@@ -28,7 +28,7 @@ pipeline:
   check_documentation_build:
     image: alpine:3
     commands:
-      - wget -O mdbook.tar.gz https://github.com/rust-lang/mdBook/releases/download/v0.4.30/mdbook-v0.4.30-aarch64-unknown-linux-musl.tar.gz
+      - wget -O mdbook.tar.gz https://github.com/rust-lang/mdBook/releases/download/v0.4.30/mdbook-v0.4.30-x86_64-unknown-linux-gnu.tar.gz
       - tar -xzf mdbook.tar.gz
       - ./mdbook build .
 
