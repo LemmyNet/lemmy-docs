@@ -213,7 +213,7 @@ cd /var/lib/pictrs-source
 git checkout main
 git pull --tags
 # check docker-compose.yml for pict-rs version used by lemmy
-# https://github.com/LemmyNet/lemmy-ansible/blob/main/templates/docker-compose.yml#L40
+# https://github.com/LemmyNet/lemmy-ansible/blob/main/templates/docker-compose.yml#L43
 git checkout v0.2.6-r2
 # or simply add the bin folder to your $PATH
 $HOME/.cargo/bin/cargo build --release
