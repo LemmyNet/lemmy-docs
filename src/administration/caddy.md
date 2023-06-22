@@ -3,6 +3,19 @@
 If you prefer to use Caddy instead of Nginx - you could use this template to fit into your needs:
 
 ```
+(caddy-common) {
+    encode gzip
+    header {
+        -Server
+        Strict-Transport-Security "max-age=31536000; include-subdomains;"
+        X-XSS-Protection "1; mode=block"
+        X-Frame-Options "DENY"
+        X-Content-Type-Options nosniff
+        Referrer-Policy  no-referrer-when-downgrade
+        X-Robots-Tag "none"
+    }
+}
+
 lemmy-site.com {
         import caddy-common
         reverse_proxy   http://lemmy_lemmy-ui_1:1234
