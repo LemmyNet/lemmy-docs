@@ -217,6 +217,9 @@ systemctl restart lemmy-ui
 
 ### Pict-rs
 
+If you did **not** use the `--features embed-pictrs` flag, then this script below is necessary for installing/updating Pict-rs as a standalone server.
+Otherwise, pict-rs should update with lemmy_server.
+
 ```bash
 rustup update
 cd /var/lib/pictrs-source
@@ -224,7 +227,7 @@ git checkout main
 git pull --tags
 # check docker-compose.yml for pict-rs version used by lemmy
 # https://github.com/LemmyNet/lemmy-ansible/blob/main/templates/docker-compose.yml#L43
-git checkout v0.2.6-r2
+git checkout v0.2.6-r2  # replace with the version you want to install
 # or simply add the bin folder to your $PATH
 $HOME/.cargo/bin/cargo build --release
 cp target/release/pict-rs /usr/bin/
