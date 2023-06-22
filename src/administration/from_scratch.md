@@ -12,7 +12,7 @@ Install Rust by following the instructions on [Rustup](https://rustup.rs/).
 
 Lemmy supports image hosting using [pict-rs](https://git.asonix.dog/asonix/pict-rs/). We need to install a couple of dependencies for this. You can also skip these steps if you don't require image hosting. **NOTE: Lemmy-ui will still allow users to attempt uploading images even if pict-rs is not configured, in this situation, the upload will fail and users will receive technical error messages.**
 
-Pict-rs requires the `magick` command which comes with Imagemagick version 7, but Ubuntu 20.04 only comes with Imagemagick 6. So you need to install that command manually, eg from the [official website](https://imagemagick.org/script/download.php#linux).
+Depending on preference, pict-rs can be installed as a standalone application, or it can be embedded within Lemmy itself (see below). In both cases, pict-rs requires the `magick` command which comes with Imagemagick version 7, but Ubuntu 20.04 only comes with Imagemagick 6. So you need to install that command manually, eg from the [official website](https://imagemagick.org/script/download.php#linux).
 
 ```bash
 apt install ffmpeg exiftool libgexiv2-dev --no-install-recommends
@@ -39,7 +39,16 @@ sudo -iu postgres psql -c "CREATE DATABASE lemmy WITH OWNER lemmy;"
 adduser lemmy --system --disabled-login --no-create-home --group
 ```
 
-Note that currently Lemmy only supports non-SSL connections to databases. More info [here](https://github.com/LemmyNet/lemmy/issues/3007).
+Note:
+
+- Lemmy currently only supports non-SSL connections to databases. More info [here](https://github.com/LemmyNet/lemmy/issues/3007).
+- Your postgres config might need to be edited to allow password authentication instead of peer authentication. Simply add:
+  ```
+  local   lemmy           lemmy                                   md5
+  # Add the line above.
+  # Do not add the line below, it should already exist in your pg_hba.conf in some form.
+  local   all             all                                     peer
+  ```
 
 Minimal Lemmy config, put this in `/etc/lemmy/lemmy.hjson` (see [here](https://github.com/LemmyNet/lemmy/blob/main/config/config.hjson) for more config options). Run `chown lemmy:lemmy /etc/lemmy/ -R` to set the correct owner.
 
@@ -118,7 +127,7 @@ yarn build:prod
 exit
 ```
 
-Add another systemd unit file, this time for lemmy-ui. You need to replace example.com with your actual domain. Put the file in `/etc/systemd/system/lemmy-ui.service`, then run `systemctl enable lemmy-ui` and `systemctl start lemmy-ui`.
+Add another systemd unit file, this time for lemmy-ui. You need to replace example.com with your actual domain. Put the file in `/etc/systemd/system/lemmy-ui.service`, then run `systemctl enable lemmy-ui` and `systemctl start lemmy-ui`. More UI-related variables can be [found here](https://github.com/LemmyNet/lemmy-ui#configuration).
 
 ```
 [Unit]
@@ -130,9 +139,10 @@ Before=nginx.service
 User=lemmy
 WorkingDirectory=/var/lib/lemmy-ui
 ExecStart=/usr/bin/node dist/js/server.js
-Environment=LEMMY_INTERNAL_HOST=localhost:8536
-Environment=LEMMY_EXTERNAL_HOST=example.com
-Environment=LEMMY_HTTPS=true
+Environment=LEMMY_UI_LEMMY_INTERNAL_HOST=localhost:8536
+Environment=LEMMY_UI_LEMMY_EXTERNAL_HOST=example.com
+Environment=LEMMY_UI_HTTPS=true
+Environment=RUST_LOG=info
 Restart=on-failure
 
 # Hardening
@@ -207,6 +217,9 @@ systemctl restart lemmy-ui
 
 ### Pict-rs
 
+If you did **not** use the `--features embed-pictrs` flag, then this script below is necessary for installing/updating Pict-rs as a standalone server.
+Otherwise, pict-rs should update with lemmy_server.
+
 ```bash
 rustup update
 cd /var/lib/pictrs-source
@@ -214,7 +227,7 @@ git checkout main
 git pull --tags
 # check docker-compose.yml for pict-rs version used by lemmy
 # https://github.com/LemmyNet/lemmy-ansible/blob/main/templates/docker-compose.yml#L43
-git checkout v0.2.6-r2
+git checkout v0.2.6-r2  # replace with the version you want to install
 # or simply add the bin folder to your $PATH
 $HOME/.cargo/bin/cargo build --release
 cp target/release/pict-rs /usr/bin/
