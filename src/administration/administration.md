@@ -26,6 +26,7 @@ In some cases, it might be necessary to use different installation methods.
 - [From Scratch](from_scratch.md)
 - [YunoHost](https://install-app.yunohost.org/?app=lemmy) ([source code](https://github.com/YunoHost-Apps/lemmy_ynh))
 - [On Amazon Web Services (AWS)](on_aws.md)
+- [Cosmos](https://cosmos-cloud.io/proxy#cosmos-ui/market-listing/cosmos-cloud/Lemmy) ([source code](https://github.com/azukaar/cosmos-servapps-official/blob/master/servapps/Lemmy/cosmos-compose.json))
 
 ### You could use any other reverse proxy
 
