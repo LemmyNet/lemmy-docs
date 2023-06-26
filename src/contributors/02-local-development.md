@@ -54,7 +54,7 @@ macOS:
 ```bash
 brew install postgresql
 brew services start postgresql
-/usr/local/opt/postgres/bin/createuser -s postgres
+$(brew --prefix postgresql)/bin/createuser -s postgres
 ```
 
 Either execute `scripts/db-init.sh`, or manually initialize the postgres database:
