@@ -10,7 +10,7 @@ cd /lemmy
 
 ## Download default config files
 
-These two files contain `{{ }}` braces for variables, such as passwords, and your domain.
+These files contain `{{ }}` braces for variables, such as passwords and your domain.
 
 Edit them before starting up lemmy for the first time.
 
@@ -19,6 +19,7 @@ The images will likely be: [dessalines/lemmy:VERSION](https://hub.docker.com/r/d
 ```bash
 wget https://raw.githubusercontent.com/LemmyNet/lemmy-ansible/main/templates/docker-compose.yml
 wget https://raw.githubusercontent.com/LemmyNet/lemmy-ansible/main/examples/config.hjson -O lemmy.hjson
+wget https://raw.githubusercontent.com/LemmyNet/lemmy-ansible/main/templates/nginx_internal.conf
 ```
 
 If you'd like further customization, have a look at the [config file](configuration.md) named `lemmy.hjson`, and adjust it accordingly.
