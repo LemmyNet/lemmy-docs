@@ -82,7 +82,7 @@ After making changes, you need to format the code with `cargo +nightly fmt --all
 
 ### Frontend development
 
-Install dependencies by running `yarn`. Then run `yarn start` to launch lemmy-ui locally. It automatically connects to the Lemmy backend on `localhost:8536`. Open [localhost:1234](http://localhost:1234) in your browser. The project is rebuilt automatically when you change any files.
+Install dependencies by running `yarn`. Then run `yarn dev` to launch lemmy-ui locally. It automatically connects to the Lemmy backend on `localhost:8536`. Open [localhost:1234](http://localhost:1234) in your browser. The project is rebuilt automatically when you change any files.
 
 Note that this setup doesn't support image uploads. If you want to test those, you need to use the
 [Docker development](03-docker-development.md).
