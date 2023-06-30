@@ -23,20 +23,36 @@ mv magick /usr/bin/
 chmod 755 /usr/bin/magick
 ```
 
-Compile and install Lemmy, setup database:
+Install dependencies and setup database:
 
 ```bash
 apt install pkg-config libssl-dev libpq-dev postgresql
-# installs latest release, you can also specify one with --version
-# The --locked argument uses the exact versions of dependencies specified in
-# `cargo.lock`at release time. Running it without the flag will use newer minor
-# release versions of those dependencies, which are not always guaranteed to compile.
-# Remove the parameter `--features embed-pictrs` if you don't require image hosting.
-cargo install lemmy_server --target-dir /usr/bin/ --locked --features embed-pictrs
-# replace db-passwd with a randomly generated password
+
+# replace db-passwd with a unique password of your choice
 sudo -iu postgres psql -c "CREATE USER lemmy WITH PASSWORD 'db-passwd';"
 sudo -iu postgres psql -c "CREATE DATABASE lemmy WITH OWNER lemmy;"
+# NOTE: this may be required by migration, depending on version of Lemmy
+#   sudo -iu postgres psql -c "ALTER USER lemmy WITH SUPERUSER;"
+# create user account on Linux for the lemmy_server application
 adduser lemmy --system --disabled-login --no-create-home --group
+```
+
+Tune your PostgreSQL settings to match your hardware via https://pgtune.leopard.in.ua/#/
+
+Compile and install Lemmy, given the from-scratch intention, this will be done via GitHub checkout:
+
+```bash
+# protobuf-compiler may be required for Ubuntu installs, report testing in lemmy-docs issues
+apt install protobuf-compiler
+git clone https://github.com/LemmyNet/lemmy.git lemmy
+cd lemmy
+git checkout 0.18.0
+git submodule init
+git submodule update --recursive --remote
+echo "pub const VERSION: &str = \"$(git describe --tag)\";" > "crates/utils/src/version.rs"
+cargo build --release --features embed-pictrs
+# copy compiled binary to destination
+cp target/release/lemmy_server /usr/bin/lemmy_server
 ```
 
 Note:
