@@ -1,6 +1,6 @@
 # From Scratch
 
-These instructions are written for Ubuntu 20.04.
+These instructions are written for Ubuntu 20.04 / Ubuntu 22.04.
 
 ## Installation
 
@@ -85,6 +85,7 @@ Environment=LEMMY_CONFIG_LOCATION=/etc/lemmy/lemmy.hjson
 # remove these two lines if you don't need pict-rs
 Environment=PICTRS_PATH=/var/lib/pictrs
 Environment=PICTRS_ADDR=127.0.0.1:8080
+Environment=RUST_LOG=info
 Restart=on-failure
 
 # Hardening
@@ -101,7 +102,7 @@ If you did everything right, the Lemmy logs from `journalctl -u lemmy` should sh
 
 ### Install lemmy-ui (web frontend)
 
-Install dependencies (nodejs and yarn in Ubuntu 20.04 repos are too old)
+Install dependencies (nodejs and yarn in Ubuntu 20.04 / Ubuntu 22.04 repos are too old)
 
 ```bash
 # https://classic.yarnpkg.com/en/docs/install/#debian-stable
@@ -112,7 +113,7 @@ curl -fsSL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 sudo apt install nodejs yarn
 ```
 
-Clone the git repo, checkout the version you want (0.16.7 in this case), and compile it.
+Clone the git repo, checkout the version you want (0.18.0 in this case), and compile it.
 
 ```bash
 mkdir /var/lib/lemmy-ui
@@ -121,7 +122,7 @@ chown lemmy:lemmy .
 # dont compile as admin
 sudo -u lemmy bash
 git clone https://github.com/LemmyNet/lemmy-ui.git --recursive .
-git checkout 0.16.7 # replace with the version you want to install
+git checkout 0.18.0 # replace with the version you want to install
 yarn install --pure-lockfile
 yarn build:prod
 exit
@@ -142,7 +143,6 @@ ExecStart=/usr/bin/node dist/js/server.js
 Environment=LEMMY_UI_LEMMY_INTERNAL_HOST=localhost:8536
 Environment=LEMMY_UI_LEMMY_EXTERNAL_HOST=example.com
 Environment=LEMMY_UI_HTTPS=true
-Environment=RUST_LOG=info
 Restart=on-failure
 
 # Hardening
@@ -207,7 +207,7 @@ cd /var/lib/lemmy-ui
 sudo -u lemmy
 git checkout main
 git pull --tags
-git checkout 0.12.2 # replace with the version you want to install
+git checkout 0.18.0 # replace with the version you want to install
 git submodule update
 yarn install --pure-lockfile
 yarn build:prod
