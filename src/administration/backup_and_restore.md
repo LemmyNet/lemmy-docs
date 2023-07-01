@@ -4,9 +4,9 @@
 
 When using docker or ansible, there should be a `volumes` folder, which contains both the database, and all the pictures. Copy this folder to the new instance to restore your data.
 
-### Incremental Database backup
+### Full Database backup
 
-To incrementally backup the DB to an `.sql.gz` file, you can run:
+To take a complete backup of the DB to a `.sql.gz` file, you can run:
 
 ```bash
 docker-compose exec postgres pg_dumpall -c -U lemmy | gzip > lemmy_dump_`date +%Y-%m-%d"_"%H_%M_%S`.sql.gz
