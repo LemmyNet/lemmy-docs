@@ -38,4 +38,4 @@ pipeline:
   dead_links:
     image: becheran/mlc:latest
     commands:
-      - mlc src/en --offline --ignore-links "*localhost*" --ignore-links "*127.0.0.1*" --ignore-links /api
+      - mlc src/ --ignore-links "*localhost*" --ignore-links "*127.0.0.1*" --ignore-links /api
