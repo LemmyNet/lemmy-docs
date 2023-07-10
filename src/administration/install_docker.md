@@ -5,7 +5,7 @@ Make sure you have both docker and docker-compose(>=`1.24.0`) installed. On Ubun
 ```bash
 # Create a folder for the lemmy files. the location doesnt matter, you can put this anywhere you want
 mkdir lemmy
-cd /lemmy
+cd lemmy
 ```
 
 ## Download default config files
