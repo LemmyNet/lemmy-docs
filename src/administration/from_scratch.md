@@ -41,7 +41,10 @@ adduser lemmy --system --disabled-login --no-create-home --group
 
 Note:
 
-- Lemmy currently only supports non-SSL connections to databases. More info [here](https://github.com/LemmyNet/lemmy/issues/3007).
+- Lemmy currently supports TLS connections to databases with `sslmode=require`.
+  - By default `tls_enabled` will be false, so using SSL connections is entirely opt-in.
+  - However, when `tls_enabled` is enabled, the server identity will not be verified.
+  - More info [here](https://github.com/LemmyNet/lemmy/pull/3189).
 - Your postgres config might need to be edited to allow password authentication instead of peer authentication. Simply add:
   ```
   local   lemmy           lemmy                                   md5
