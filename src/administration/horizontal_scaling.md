@@ -17,11 +17,11 @@ outweighs any benefits.**
 
 ## Breakdown of Lemmy components
 
+See [Lemmy components](administration.md#lemmy-components) for a high level overview of what each component does.
+
 ### Lemmy-ui
 
-Lemmy-ui is the main frontend for Lemmy. It consists of an expressjs based server-side process (necessary for SSR) and
-client code which run in the browser. It does not use a lot of resources and will happily run on quite low powered
-servers.
+Lemmy-ui can be horizontally scaled, but make sure you read the following section for information about rolling upgrades.
 
 #### Rolling upgrades
 
@@ -68,15 +68,14 @@ There are a few ways to work around this issue:
 2. An alternative option is to configure sticky sessions in your load balancer. This will ensure that subsequent requests
    all end up on the same Lemmy-ui server, and as long as your sticky sessions last longer than your upgrade process,
    most clients should remain functional.
-3. A third option is to just employ downtime and upgrade all servers at once (but that's not very fun!)
+3. Similarly to sticky sessions, another possibility is to configure ip hash based load balancing.
+4. There is always the option to just employ downtime and upgrade all servers at once (but that's not very fun!)
 
 ### Lemmy_server
 
-Lemmy_server is the backend process, which handles:
+Lemmy_server can be horizontally scaled, with a few caveats.
 
-- Incoming HTTP requests (both from Lemmy clients and incoming federation from other servers)
-- Outgoing federation
-- Scheduled tasks (most notably, constant hot rank calculations, which keep the front page fresh)
+#### Scheduled tasks
 
 By default, a Lemmy_server process will always run background scheduled tasks, which are intended to be run only on one
 server. Launching multiple processes with the default configuration will result in multiple duplicated scheduled tasks
@@ -91,14 +90,14 @@ there are two approaches:
 2. Run one load balanced Lemmy server without the flag, and all other load balanced servers with the flag.
 
 Option 1 might have a few tiny advantages (easier to isolate logs for the scheduled tasks, and expensive scheduled tasks
-won't compete with HTTP requests for system resources), but requires a whole extra server.
+won't compete with HTTP requests for system resources), but requires an extra process.
 
 #### Rolling upgrades
 
 For most versions, rolling releases have been completely OK, but there have been some cases where a database migration
 slips in which is NOT backwards compatible (causing any servers running the older version of Lemmy to potentially start
-generating errors). To be safe, you should always first take a look at what database migrations are included in a new
-version, and evaluate whether the changes are for sure safe to apply with running servers.
+generating errors). To be safe, you should always first take a look at [what database migrations are included in a new
+version](https://github.com/LemmyNet/lemmy/tree/main/migrations), and evaluate whether the changes are for sure safe to apply with running servers.
 
 Note that even if there are no backwards incompatible migrations between immediate version upgrades (version 1 -> 2 is
 safe and 2 -> 3 is safe), doing bigger upgrades might cause these same migrations to become backwards incompatible
@@ -110,16 +109,14 @@ duration during an upgrade, but shutting the old one down before starting the ne
 
 ### Pict-rs
 
-Pict-rs is a service which does image processing. It handles user-uploaded images as well as downloading thumbnails for
-external images.
-
 Pict-rs does not scale horizontally as of writing this document. This is due to a dependency on a Sled database, which
 is a disk based database file.
 
 The developer of pict-rs has mentioned plans to eventually add Postgres support (which should in theory enable
 horizontal scaling), but work on this has not yet started.
 
-Note that by caching pict-rs images in a CDN, you can really minimize load on the pict-rs server!
+Note that by caching pict-rs images (for example, with nginx, or with a CDN), you can really minimize load on the
+pict-rs server!
 
 ## Other tips
 
