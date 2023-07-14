@@ -35,9 +35,7 @@ An Example [Caddy configuration](caddy.md).
 
 ### Lemmy-ui
 
-Lemmy-ui is the main frontend for Lemmy. It consists of an expressjs based server-side process (necessary for SSR) and
-client code which run in the browser. It does not use a lot of resources and will happily run on quite low powered
-servers.
+Lemmy-ui is the main frontend for Lemmy. It consists of an expressjs based server-side process (necessary for SSR) and client code which run in the browser. It does not use a lot of resources and will happily run on quite low powered servers.
 
 ### Lemmy_server
 
@@ -49,5 +47,4 @@ Lemmy_server is the backend process, which handles:
 
 ### Pict-rs
 
-Pict-rs is a service which does image processing. It handles user-uploaded images as well as downloading thumbnails for
-external images.
+Pict-rs is a service which does image processing. It handles user-uploaded images as well as downloading thumbnails for external images.
