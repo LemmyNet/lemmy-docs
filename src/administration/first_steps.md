@@ -49,4 +49,4 @@ You can subscribe to the Github RSS feeds to be informed of the latest releases:
 - [lemmy-js-client](https://github.com/LemmyNet/lemmy-js-client/releases.atom)
 - [joinlemmy-site](https://github.com/LemmyNet/joinlemmy-site/releases.atom)
 
-There is also a [Matrix chat](https://matrix.to/#/!OwmdVYiZSXrXbtCNLw:matrix.org) for instance administrators that you can join. You'll find some really friendly people there who will help you (or at least try to) if you run into any issue.
+There is also a [Matrix chat](https://matrix.to/#/#lemmy-admin-support-topics:discuss.online) for instance administrators that you can join. You'll find some really friendly people there who will help you (or at least try to) if you run into any issue.
