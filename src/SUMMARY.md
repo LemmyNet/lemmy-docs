@@ -28,6 +28,7 @@
 - [Using Caddy as a reverse proxy](administration/caddy.md)
 - [Running a Tor Hidden Service](administration/tor_hidden_service.md)
 - [Prometheus Metrics](administration/prometheus.md)
+- [Horizontal Scaling](administration/horizontal_scaling.md)
 
 # For Contributors
 
