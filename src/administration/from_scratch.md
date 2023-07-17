@@ -46,7 +46,7 @@ Compile and install Lemmy, given the from-scratch intention, this will be done v
 apt install protobuf-compiler
 git clone https://github.com/LemmyNet/lemmy.git lemmy
 cd lemmy
-git checkout 0.18.0
+git checkout 0.18.2
 git submodule init
 git submodule update --recursive --remote
 echo "pub const VERSION: &str = \"$(git describe --tag)\";" > "crates/utils/src/version.rs"
@@ -129,7 +129,7 @@ curl -fsSL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 sudo apt install nodejs yarn
 ```
 
-Clone the git repo, checkout the version you want (0.18.0 in this case), and compile it.
+Clone the git repo, checkout the version you want (0.18.2 in this case), and compile it.
 
 ```bash
 mkdir /var/lib/lemmy-ui
@@ -138,7 +138,7 @@ chown lemmy:lemmy .
 # dont compile as admin
 sudo -u lemmy bash
 git clone https://github.com/LemmyNet/lemmy-ui.git --recursive .
-git checkout 0.18.0 # replace with the version you want to install
+git checkout 0.18.2 # replace with the version you want to install
 yarn install --pure-lockfile
 yarn build:prod
 exit
@@ -220,10 +220,10 @@ systemctl restart lemmy
 
 ```bash
 cd /var/lib/lemmy-ui
-sudo -u lemmy
+sudo -u lemmy bash
 git checkout main
 git pull --tags
-git checkout 0.18.0 # replace with the version you want to install
+git checkout 0.18.2 # replace with the version you want to install
 git submodule update
 yarn install --pure-lockfile
 yarn build:prod
