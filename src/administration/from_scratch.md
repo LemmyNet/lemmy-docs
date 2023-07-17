@@ -231,8 +231,6 @@ cargo build --release
 sudo -- sh -c 'systemctl stop lemmy && cp target/release/lemmy_server /usr/bin/lemmy_server && systemctl start lemmy'
 ```
 
-NOTE: 
-
 ### Lemmy UI
 
 ```bash
