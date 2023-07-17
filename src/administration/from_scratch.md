@@ -215,11 +215,13 @@ Now open your Lemmy domain in the browser, and it should show you a configuratio
 
 ### Lemmy
 
-Compile and install Lemmy changes. This can be done by a normal unprivledged user (using the same Linux account you used for rustup and first install of Lemmy). 
+Compile and install lemmy_server changes. This compile can be done by a normal unprivledged user (using the same Linux account you used for rustup and first install of Lemmy). 
 
 ```bash
+rustup update
 cd lemmy
-git pull
+git checkout main
+git pull --tags
 git checkout 0.18.2 # replace with version you are updating to
 git submodule update --recursive --remote
 echo "pub const VERSION: &str = \"$(git describe --tag)\";" > "crates/utils/src/version.rs"
