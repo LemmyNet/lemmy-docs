@@ -31,3 +31,21 @@ In some cases, it might be necessary to use different installation methods.
 ### You could use any other reverse proxy
 
 An Example [Caddy configuration](caddy.md).
+
+## Lemmy components
+
+### Lemmy-ui
+
+Lemmy-ui is the main frontend for Lemmy. It consists of an expressjs based server-side process (necessary for SSR) and client code which run in the browser. It does not use a lot of resources and will happily run on quite low powered servers.
+
+### Lemmy_server
+
+Lemmy_server is the backend process, which handles:
+
+- Incoming HTTP requests (both from Lemmy clients and incoming federation from other servers)
+- Outgoing federation
+- Scheduled tasks (most notably, constant hot rank calculations, which keep the front page fresh)
+
+### Pict-rs
+
+Pict-rs is a service which does image processing. It handles user-uploaded images as well as downloading thumbnails for external images.
