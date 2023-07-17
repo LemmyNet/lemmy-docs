@@ -89,7 +89,7 @@ Append the following to `/etc/tor/torrc` to tie the hidden service directory to 
 
 ```
 HiddenServiceDir /var/lib/tor/hidden_lemmy_service/
-HiddenServicePort 10080 127.0.0.1:80
+HiddenServicePort 80 127.0.0.1:10080
 ```
 
 `HiddenServiceDir [path]` is where `tor` will store data related to the hidden service, and `HiddenServicePort [hidden_service_port] [host_ip:port]` binds a port on the host to a hidden service port on the Tor network.
@@ -114,7 +114,7 @@ The `.onion` address contained in this file will be referred to as `HIDDEN_SERVI
 
 ## Docker compose
 
-Forward port `80` from the `proxy` container to the hidden service port `127.0.0.1:10080`. This exposes `10080/tcp` to the local host, and will not be directly accessible from the internet. For context `"80:80"` binds port `80/tcp` (HTTP) to `0.0.0.0:80` on the host. Unless a firewall is configured to block incoming traffic to `80` this will be exposed to other hosts on the local area network (LAN) and/or the open internet.
+Forward port `10080` from the `proxy` container to the hidden service port `127.0.0.1:10080`. This exposes `10080/tcp` to the local host, and will not be directly accessible from the internet. For context `"80:80"` binds port `80/tcp` (HTTP) to `0.0.0.0:80` on the host. Unless a firewall is configured to block incoming traffic to `80` this will be exposed to other hosts on the local area network (LAN) and/or the open internet.
 
 **docker-compose.yml**
 
@@ -126,7 +126,7 @@ services:
     ports:
       - "80:80"
       - "443:443"
-      - "127.0.0.1:10080:80"
+      - "127.0.0.1:10080:10080"
 ```
 
 ## Configure NGINX
@@ -192,9 +192,6 @@ http {
         gzip on;
         gzip_types text/css application/javascript image/svg+xml;
         gzip_vary on;
-
-        # Only connect to this site via HTTPS for the two years
-        add_header Strict-Transport-Security "max-age=63072000";
 
         # Various content security headers
         add_header Referrer-Policy "same-origin";
@@ -320,8 +317,6 @@ X-Powered-By: Express
 Content-Security-Policy: default-src 'self'; manifest-src *; connect-src *; img-src * data:; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; form-action 'self'; base-uri 'self'; frame-src *
 < ETag: W/"180b7-EC9iFYAIlbnN8zHCayBwL3wAm64"
 ETag: W/"180b7-EC9iFYAIlbnN8zHCayBwL3wAm64"
-< Strict-Transport-Security: max-age=63072000
-Strict-Transport-Security: max-age=63072000
 < Referrer-Policy: same-origin
 Referrer-Policy: same-origin
 < X-Content-Type-Options: nosniff
