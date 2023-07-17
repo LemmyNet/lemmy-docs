@@ -42,7 +42,7 @@ sudo adduser lemmy --system --disabled-login --no-create-home --group
 
 Tune your PostgreSQL settings to match your hardware via https://pgtune.leopard.in.ua/#/
 
-Compile and install Lemmy, given the from-scratch intention, this will be done via GitHub checkout. This can be done by a normal unprivledged user (using the same Linux account you used for rustup). 
+Compile and install Lemmy, given the from-scratch intention, this will be done via GitHub checkout. This can be done by a normal unprivledged user (using the same Linux account you used for rustup).
 
 ```bash
 # protobuf-compiler may be required for Ubuntu 22.04.2 installs, please report testing in lemmy-docs issues
@@ -215,7 +215,7 @@ Now open your Lemmy domain in the browser, and it should show you a configuratio
 
 ### Lemmy
 
-Compile and install lemmy_server changes. This compile can be done by a normal unprivledged user (using the same Linux account you used for rustup and first install of Lemmy). 
+Compile and install lemmy_server changes. This compile can be done by a normal unprivledged user (using the same Linux account you used for rustup and first install of Lemmy).
 
 ```bash
 rustup update
