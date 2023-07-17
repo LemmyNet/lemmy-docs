@@ -14,8 +14,7 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/source
 sudo apt update && sudo apt install yarn
 ```
 
-NOTE: you may find it is useful to reference the - [Install from Scratch](../administration/from_scratch.md)
- steps for Debian/Ubuntu, as production servers are assumed to be same.
+NOTE: you may find it is useful to reference the - [Install from Scratch](../administration/from_scratch.md) steps for Debian/Ubuntu, as production servers are assumed to be same.
 
 Arch-based distro:
 
