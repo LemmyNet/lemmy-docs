@@ -108,7 +108,7 @@ To run federation/API tests, first add the following lines to `/etc/hosts`:
 127.0.0.1       lemmy-epsilon
 ```
 
-Then run the following script:
+You will need to hand-edit the api_tests/run-federation-test.sh script file, add your PostgreSQL lemmy password. Note, the LEMMY_DATABASE_URL environment variable inside that script file is not in the same format as normally required, the "/lemmy" database is not on the URL. Then run the following script:
 
 ```bash
 cd api_tests
