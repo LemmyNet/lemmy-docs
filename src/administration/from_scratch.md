@@ -12,7 +12,9 @@ For the Rust compiles, it is ideal to use a non-privledged Linux account on your
 
 Install Rust by following the instructions on [Rustup](https://rustup.rs/) (using a non-privledged Linux account, it will install file in that user's home folder for rustup and cargo).
 
-Lemmy supports image hosting using [pict-rs](https://git.asonix.dog/asonix/pict-rs/). We need to install a couple of dependencies for this. You can also skip these steps if you don't require image hosting. **NOTE: Lemmy-ui will still allow users to attempt uploading images even if pict-rs is not configured, in this situation, the upload will fail and users will receive technical error messages.**
+#### pic-rs options
+
+Lemmy supports image hosting using [pict-rs](https://git.asonix.dog/asonix/pict-rs/). We need to install a couple of dependencies for this. You can also skip these steps if you don't require image hosting. You have three options to choose from 1) no image hosting, 2) embeded pic-rs within lemmy_server, 3) external pic-rs called by lemmy_server. **NOTE: If you go with no image hosting, Lemmy-ui will still allow users to attempt uploading images even if pict-rs is not configured, in this situation, the upload will fail and users will receive technical error messages.**
 
 Depending on preference, pict-rs can be installed as a standalone application, or it can be embedded within Lemmy itself (see below). In both cases, pict-rs requires the `magick` command which comes with Imagemagick version 7, but Ubuntu 20.04 only comes with Imagemagick 6. So you need to install that command manually, eg from the [official website](https://imagemagick.org/script/download.php#linux).
 
@@ -70,6 +72,8 @@ Note:
   # Do not add the line below, it should already exist in your pg_hba.conf in some form.
   local   all             all                                     peer
   ```
+
+Now is a good time to compile pict-rs if you did not use embed-pictrs when compiling lemmy_server. At the bottom of the page there are steps to compile from source. Since this is the first time on the system (as opposed to an udpate), add a step to use git-checkout. **NOTE: FixMe: there are no steps heere to configure the service for picts-rs, there is no service to start following these directions.**
 
 Minimal Lemmy config, put this in `/etc/lemmy/lemmy.hjson` (see [here](https://github.com/LemmyNet/lemmy/blob/main/config/config.hjson) for more config options). Run `chown lemmy:lemmy /etc/lemmy/ -R` to set the correct owner.
 
@@ -250,19 +254,23 @@ systemctl restart lemmy-ui
 
 ### Pict-rs
 
-If you did **not** use the `--features embed-pictrs` flag, then this script below is necessary for installing/updating Pict-rs as a standalone server.
-Otherwise, pict-rs should update with lemmy_server.
+If you did **not** use the `--features embed-pictrs` flag, then these steps below are necessary for installing/updating Pict-rs as a standalone server. Otherwise, Pict-rs should update with lemmy_server when embeded. This compile can be done by a normal unprivledged user (using the same Linux account you used for rustup and first install of Lemmy).
 
 ```bash
 rustup update
-cd /var/lib/pictrs-source
+# using non-privledged user account, change to home directory
+cd ~
+# this next step is only done for the very first time:
+git clone https://git.asonix.dog/asonix/pict-rs pict-rs
+# FixMe: there are no steps in these instructions for setting up service on first-time compile.
+cd pict-rs
 git checkout main
 git pull --tags
 # check docker-compose.yml for pict-rs version used by lemmy
-# https://github.com/LemmyNet/lemmy-ansible/blob/main/templates/docker-compose.yml#L43
-git checkout v0.2.6-r2  # replace with the version you want to install
+# https://github.com/LemmyNet/lemmy-ansible/blob/main/templates/docker-compose.yml#L52
+git checkout v0.4.0  # replace with the version you want to install
 # or simply add the bin folder to your $PATH
-$HOME/.cargo/bin/cargo build --release
-cp target/release/pict-rs /usr/bin/
-systemctl restart pictrs
+cargo build --release
+sudo cp target/release/pict-rs /usr/bin/
+sudo systemctl restart pictrs
 ```
