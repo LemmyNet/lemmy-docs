@@ -1,42 +1,63 @@
 # From Scratch
 
-These instructions are written for Ubuntu 20.04.
+These instructions are written for Ubuntu 20.04 / Ubuntu 22.04.
 
 ## Installation
 
 ### Lemmy Backend
 
-It is built from source, so this may take a while, especially on slow devices. For example, Lemmy v0.12.2 takes 17 minutes to build on a dual core VPS. If you prefer prebuilt binaries, use Docker.
+It is built from source, so this may take a while, especially on slow devices. For example, Lemmy v0.12.2 takes 17 minutes to build on a dual core VPS. If you prefer prebuilt binaries, use Docker or Ansible install methods.
 
-Install Rust by following the instructions on [Rustup](https://rustup.rs/).
+For the Rust compiles, it is ideal to use a non-privledged Linux account on your system.
+
+Install Rust by following the instructions on [Rustup](https://rustup.rs/) (using a non-privledged Linux account, it will install file in that user's home folder for rustup and cargo).
 
 Lemmy supports image hosting using [pict-rs](https://git.asonix.dog/asonix/pict-rs/). We need to install a couple of dependencies for this. You can also skip these steps if you don't require image hosting. **NOTE: Lemmy-ui will still allow users to attempt uploading images even if pict-rs is not configured, in this situation, the upload will fail and users will receive technical error messages.**
 
 Depending on preference, pict-rs can be installed as a standalone application, or it can be embedded within Lemmy itself (see below). In both cases, pict-rs requires the `magick` command which comes with Imagemagick version 7, but Ubuntu 20.04 only comes with Imagemagick 6. So you need to install that command manually, eg from the [official website](https://imagemagick.org/script/download.php#linux).
 
 ```bash
-apt install ffmpeg exiftool libgexiv2-dev --no-install-recommends
+sudo apt install ffmpeg exiftool libgexiv2-dev --no-install-recommends
+# save the file to a working folder it can be verified before copying to /usr/bin/
 wget https://download.imagemagick.org/ImageMagick/download/binaries/magick
 # compare hash with the "message digest" on the official page linked above
 sha256sum magick
-mv magick /usr/bin/
-chmod 755 /usr/bin/magick
+sudo mv magick /usr/bin/
+sudo chmod 755 /usr/bin/magick
 ```
 
-Compile and install Lemmy, setup database:
+Install dependencies and setup database:
 
 ```bash
-apt install pkg-config libssl-dev libpq-dev postgresql
-# installs latest release, you can also specify one with --version
-# The --locked argument uses the exact versions of dependencies specified in
-# `cargo.lock`at release time. Running it without the flag will use newer minor
-# release versions of those dependencies, which are not always guaranteed to compile.
-# Remove the parameter `--features embed-pictrs` if you don't require image hosting.
-cargo install lemmy_server --target-dir /usr/bin/ --locked --features embed-pictrs
-# replace db-passwd with a randomly generated password
+sudo apt install pkg-config libssl-dev libpq-dev postgresql
+
+# replace db-passwd with a unique password of your choice
 sudo -iu postgres psql -c "CREATE USER lemmy WITH PASSWORD 'db-passwd';"
 sudo -iu postgres psql -c "CREATE DATABASE lemmy WITH OWNER lemmy;"
-adduser lemmy --system --disabled-login --no-create-home --group
+# NOTE: this may be required by migration, depending on version of Lemmy
+#   sudo -iu postgres psql -c "ALTER USER lemmy WITH SUPERUSER;"
+# create user account on Linux for the lemmy_server application
+sudo adduser lemmy --system --disabled-login --no-create-home --group
+```
+
+Tune your PostgreSQL settings to match your hardware via https://pgtune.leopard.in.ua/#/
+
+Compile and install Lemmy, given the from-scratch intention, this will be done via GitHub checkout. This can be done by a normal unprivledged user (using the same Linux account you used for rustup).
+
+```bash
+# protobuf-compiler may be required for Ubuntu 22.04.2 installs, please report testing in lemmy-docs issues
+sudo apt install protobuf-compiler
+git clone https://github.com/LemmyNet/lemmy.git lemmy
+cd lemmy
+git checkout 0.18.2
+git submodule init
+git submodule update --recursive --remote
+echo "pub const VERSION: &str = \"$(git describe --tag)\";" > "crates/utils/src/version.rs"
+# These instructions assume you build pictrs independent, but it is
+# OPTIONAL on next command: --features embed-pictrs
+cargo build --release
+# copy compiled binary to destination
+sudo cp target/release/lemmy_server /usr/bin/lemmy_server
 ```
 
 Note:
@@ -85,6 +106,7 @@ Environment=LEMMY_CONFIG_LOCATION=/etc/lemmy/lemmy.hjson
 # remove these two lines if you don't need pict-rs
 Environment=PICTRS_PATH=/var/lib/pictrs
 Environment=PICTRS_ADDR=127.0.0.1:8080
+Environment=RUST_LOG=info
 Restart=on-failure
 
 # Hardening
@@ -101,7 +123,7 @@ If you did everything right, the Lemmy logs from `journalctl -u lemmy` should sh
 
 ### Install lemmy-ui (web frontend)
 
-Install dependencies (nodejs and yarn in Ubuntu 20.04 repos are too old)
+Install dependencies (nodejs and yarn in Ubuntu 20.04 / Ubuntu 22.04 repos are too old)
 
 ```bash
 # https://classic.yarnpkg.com/en/docs/install/#debian-stable
@@ -112,7 +134,7 @@ curl -fsSL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 sudo apt install nodejs yarn
 ```
 
-Clone the git repo, checkout the version you want (0.16.7 in this case), and compile it.
+Clone the git repo, checkout the version you want (0.18.2 in this case), and compile it.
 
 ```bash
 mkdir /var/lib/lemmy-ui
@@ -121,7 +143,7 @@ chown lemmy:lemmy .
 # dont compile as admin
 sudo -u lemmy bash
 git clone https://github.com/LemmyNet/lemmy-ui.git --recursive .
-git checkout 0.16.7 # replace with the version you want to install
+git checkout 0.18.2 # replace with the version you want to install
 yarn install --pure-lockfile
 yarn build:prod
 exit
@@ -142,7 +164,6 @@ ExecStart=/usr/bin/node dist/js/server.js
 Environment=LEMMY_UI_LEMMY_INTERNAL_HOST=localhost:8536
 Environment=LEMMY_UI_LEMMY_EXTERNAL_HOST=example.com
 Environment=LEMMY_UI_HTTPS=true
-Environment=RUST_LOG=info
 Restart=on-failure
 
 # Hardening
@@ -194,20 +215,32 @@ Now open your Lemmy domain in the browser, and it should show you a configuratio
 
 ### Lemmy
 
+Compile and install lemmy_server changes. This compile can be done by a normal unprivledged user (using the same Linux account you used for rustup and first install of Lemmy).
+
 ```bash
-# installs latest release, you can also specify one with --version
-cargo install lemmy_server --target-dir /usr/bin/ --features embed-pictrs
-systemctl restart lemmy
+rustup update
+cd lemmy
+git checkout main
+git pull --tags
+git checkout 0.18.2 # replace with version you are updating to
+git submodule update --recursive --remote
+echo "pub const VERSION: &str = \"$(git describe --tag)\";" > "crates/utils/src/version.rs"
+# These instructions assume you build pictrs independent, but it is
+# OPTIONAL on next command: --features embed-pictrs
+cargo build --release
+# copy compiled binary to destination
+# the old file will be locked by the already running application, so this sequence is recommended:
+sudo -- sh -c 'systemctl stop lemmy && cp target/release/lemmy_server /usr/bin/lemmy_server && systemctl start lemmy'
 ```
 
 ### Lemmy UI
 
 ```bash
 cd /var/lib/lemmy-ui
-sudo -u lemmy
+sudo -u lemmy bash
 git checkout main
 git pull --tags
-git checkout 0.12.2 # replace with the version you want to install
+git checkout 0.18.2 # replace with the version you are updating to
 git submodule update
 yarn install --pure-lockfile
 yarn build:prod
