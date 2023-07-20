@@ -73,7 +73,7 @@ Note:
   local   all             all                                     peer
   ```
 
-Now is a good time to compile pict-rs if you did not use embed-pictrs when compiling lemmy_server. At the bottom of the page there are steps to compile from source. Since this is the first time on the system (as opposed to an udpate), add a step to use git-checkout. **NOTE: FixMe: there are no steps heere to configure the service for picts-rs, there is no service to start following these directions.**
+Now is a good time to compile pict-rs if you did not use embed-pictrs when compiling lemmy_server. At the bottom of the page there are steps to compile from source. Since this is the first time on the system (as opposed to an udpate), add a step to use git-checkout. **NOTE: FixMe: there are no steps here to configure the Linux service for picts-rs, no service to start following these directions.**
 
 Minimal Lemmy config, put this in `/etc/lemmy/lemmy.hjson` (see [here](https://github.com/LemmyNet/lemmy/blob/main/config/config.hjson) for more config options). Run `chown lemmy:lemmy /etc/lemmy/ -R` to set the correct owner.
 
