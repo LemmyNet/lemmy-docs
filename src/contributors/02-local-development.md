@@ -80,7 +80,7 @@ Use `cargo check` to find compilation errors. To start the Lemmy backend, run `c
 
 After making changes, you need to format the code with `cargo +nightly fmt --all` and run the linter with `./scripts/fix-clippy.sh`.
 
-If you are working on the PostgreSQL schema and database statements, cargo `install diesel_cli` gives you [a way to work with the migrations from a shell](https://github.com/diesel-rs/diesel/tree/master/diesel_cli).
+If you are working on the PostgreSQL schema and database statements, `cargo install diesel_cli --no-default-features --features postgres` gives you [a way to work with the migrations from a shell](https://github.com/diesel-rs/diesel/tree/master/diesel_cli). 
 
 ### Frontend development
 
