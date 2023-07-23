@@ -31,6 +31,7 @@ pipeline:
       - wget -O mdbook.tar.gz https://github.com/rust-lang/mdBook/releases/download/v0.4.30/mdbook-v0.4.30-x86_64-unknown-linux-musl.tar.gz
       - tar -xzf mdbook.tar.gz
       - ls -la mdbook
+      - ./update-includes.sh
       - ./mdbook build .
 
   dead_links:
