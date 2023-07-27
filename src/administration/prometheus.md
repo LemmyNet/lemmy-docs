@@ -1,35 +1,15 @@
 # Prometheus
 
 Lemmy supports the export of metrics in the [Prometheus](https://prometheus.io/)
-format. This document outlines how to enable the feature and begin collecting
+format. This document outlines how to configure the feature and begin collecting
 metrics.
-
-## Build
-
-A cargo feature flag gates the inclusion of the Prometheus components in the
-Lemmy server. To build Lemmy with the Prometheus components included, enable the
-`prometheus-metrics` feature.
-
-```shell
-cargo build --features prometheus-metrics
-```
-
-If using the `docker-compose.yml` from the [Lemmy
-repository](https://github.com/LemmyNet/lemmy/blob/main/docker/docker-compose.yml),
-enable the feature flag through the `CARGO_BUILD_FEATURES` build arg.
-
-```yaml
-lemmy:
-  build:
-    args:
-      CARGO_BUILD_FEATURES: prometheus-metrics
-```
 
 ## Configuration
 
 Configuration of the Prometheus endpoint is contained under the optional
 `prometheus` object in the `lemmy.hjson` file. In this configuration block, the
-`bind` address and `port` of the Prometheus metrics server can be configured.
+`bind` address and `port` of the Prometheus metrics server can be configured. If
+the block is absent, the Prometheus endpoint will not be available.
 
 By default, it will serve on `127.0.0.1:10002`. If running inside a container,
 it should instead bind on all addresses as below.
@@ -43,8 +23,9 @@ prometheus: {
 
 ## Scrape
 
-After Lemmy has been built and deployed, test that it is serving properly
-(substitute the correct hostname if not running locally).
+After the configuration file has been updated and Lemmy started, test that it is
+serving properly using the command below substituting the correct hostname if not
+running locally.
 
 ```shell
 curl localhost:10002/metrics
@@ -56,7 +37,6 @@ Below is a minimal configuration on the Prometheus server's side that will
 scrape the metrics from Lemmy.
 
 ```yaml
-global:
 scrape_configs:
   - job_name: lemmy
     scrape_interval: 1m
@@ -75,7 +55,6 @@ If Lemmy was deployed using the `docker-compose.yml`, then use the following
 configurations instead.
 
 ```yaml
-global:
 scrape_configs:
   - job_name: lemmy
     scrape_interval: 1m
