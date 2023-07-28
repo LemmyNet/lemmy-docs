@@ -16,7 +16,7 @@ Install Rust by following the instructions on [Rustup](https://rustup.rs/) (usin
 
 Lemmy supports image hosting using [pict-rs](https://git.asonix.dog/asonix/pict-rs/). We need to install a couple of dependencies for this. You can also skip these steps if you don't require image hosting. You have three options to choose from 1) no image hosting, 2) embeded pic-rs within lemmy_server, 3) external pic-rs called by lemmy_server. **NOTE: If you go with no image hosting, Lemmy-ui will still allow users to attempt uploading images even if pict-rs is not configured, in this situation, the upload will fail and users will receive technical error messages.**
 
-Depending on preference, pict-rs can be installed as a standalone application, or it can be embedded within Lemmy itself (see below). In both cases, pict-rs requires the `magick` command which comes with Imagemagick version 7, but Ubuntu 20.04 only comes with Imagemagick 6. So you need to install that command manually, eg from the [official website](https://imagemagick.org/script/download.php#linux).
+Depending on preference, pict-rs can be installed as a standalone application, or it can be embedded within Lemmy itself (see below). In both cases, pict-rs requires the `magick` command which comes with Imagemagick version 7, but Ubuntu 20.04 only comes with Imagemagick 6. So you need to install that command manually, eg from the [official website](https://imagemagick.org/script/download.php#linux). Also of note is that Ubuntu 20.04 comes with PostgreSQL 13.x, and Lemmy 0.18.3 and later requires newer versions.
 
 ```bash
 sudo apt install ffmpeg exiftool libgexiv2-dev --no-install-recommends
@@ -220,6 +220,9 @@ Now open your Lemmy domain in the browser, and it should show you a configuratio
 ### Lemmy
 
 Compile and install lemmy_server changes. This compile can be done by a normal unprivledged user (using the same Linux account you used for rustup and first install of Lemmy).
+
+IMPORTANT NOTE: Ubuntu 20.04 comes with PostgreSQL 13.x, and Lemmy 0.18.3 and later requires newer versions. It may be best to consult Lemmy support forums on the topic of ugprades using From Scratch if you need help confirming PostgreSQL compatibility.
+
 
 ```bash
 rustup update
