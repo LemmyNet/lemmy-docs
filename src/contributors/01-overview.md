@@ -8,7 +8,7 @@ These are the main repositories which are relevant for contributors:
 - [lemmy-ui](https://github.com/LemmyNet/lemmy-ui): The main frontend for Lemmy. It provides the user interface that you see when viewing a Lemmy instance. Written in Typescript and CSS with the Inferno framework.
 - [lemmy-ansible](https://github.com/LemmyNet/lemmy-ansible): Automated installation method which is recommended for users without technical knowledge.
 - [joinlemmy-site](https://github.com/LemmyNet/joinlemmy-site): Source code for the official project website [join-lemmy.org](https://join-lemmy.org/). Landing page for new users which includes general information and a list of instances.
-- [lemmy-js-client](https://github.com/LemmyNet): Client for the Lemmy API which is used by lemmy-ui. Can also be used by other projects to get started more easily.
+- [lemmy-js-client](https://github.com/LemmyNet/lemmy-js-client): Client for the Lemmy API which is used by lemmy-ui. Can also be used by other projects to get started more easily.
 - [activitypub-federation-rust](https://github.com/LemmyNet/activitypub-federation-rust): High-level framework for ActivityPub federation in Rust. Was originally part of the Lemmy code, but was extracted and made more generic so that other projects can use it too.
 
 There are many different ways to contribute, depending on your skills and interests:
