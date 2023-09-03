@@ -1,6 +1,6 @@
 ## Text
 
-The main type of content in Lemmy is text which can be formatted with Markdown. Refer to the table below for supported formatting rules. The Lemmy user interface also provides buttons for formatting, so it's not necessary to remember all of it. You can also follow the interactive [CommonMark tutorial](https://commonmark.org/help/tutorial/) to get started.
+The main type of content in Lemmy is text, which can be formatted with Markdown. Refer to the table below for supported formatting rules. The Lemmy user interface also provides buttons for formatting, so it's not necessary to remember all of it. You can also follow the interactive [CommonMark tutorial](https://commonmark.org/help/tutorial/) to get started.
 
 | Type                                                                                     | Or                                                                             | … to Get                                                                                             |
 | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- |
