@@ -6,6 +6,8 @@ Lemmy has an HTTP API for clients and frontends. See the [API documentation](/ap
 - https://ds9.lemmy.ml/
 - https://voyager.lemmy.ml/
 
+A more clearly arranged, unofficial API documentation is available at [https://lemmy.readme.io/](lemmy.readme.io).
+
 ### Curl Examples
 
 **GET example**
