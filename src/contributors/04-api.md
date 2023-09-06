@@ -7,6 +7,7 @@ Lemmy has an HTTP API for clients and frontends. See the [API documentation](/ap
 - https://voyager.lemmy.ml/
 
 More clearly arranged, unofficial API documentation is available at:
+
 - [lemmy.readme.io](https://lemmy.readme.io/)
 - [mv-gh.github.io/lemmy_openapi_spec](https://mv-gh.github.io/lemmy_openapi_spec/)
 
