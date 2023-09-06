@@ -6,6 +6,7 @@ When browsing the frontpage or a community, you can choose between the following
 
 - **Active** (default): Calculates a rank based on the score and time of the latest comment, with decay over time
 - **Hot**: Like active, but uses time when the post was published
+- **Scaled**: Like hot, but gives a boost to less active communities
 - **New**: Shows most recent posts first
 - **Old**: Shows oldest posts first
 - **Most Comments**: Shows posts with highest number of comments first
