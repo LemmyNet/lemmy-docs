@@ -20,6 +20,7 @@ The images will likely be: [dessalines/lemmy:VERSION](https://hub.docker.com/r/d
 wget https://raw.githubusercontent.com/LemmyNet/lemmy-ansible/main/templates/docker-compose.yml
 wget https://raw.githubusercontent.com/LemmyNet/lemmy-ansible/main/examples/config.hjson -O lemmy.hjson
 wget https://raw.githubusercontent.com/LemmyNet/lemmy-ansible/main/templates/nginx_internal.conf
+wget https://raw.githubusercontent.com/LemmyNet/lemmy-ansible/main/files/proxy_params
 ```
 
 If you'd like further customization, have a look at the [config file](configuration.md) named `lemmy.hjson`, and adjust it accordingly.
