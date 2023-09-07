@@ -9,7 +9,7 @@ When browsing the frontpage or a community, you can choose between the following
 - **New**: Shows most recent posts first
 - **Old**: Shows oldest posts first
 - **Most Comments**: Shows posts with highest number of comments first
-- **New Comments**: Bumps posts to the top when they receive a new reply analogous to the sorting of traditional forums
+- **New Comments**: Bumps posts to the top when they are created or receive a new reply, analogous to the sorting of traditional forums
 - **Top Day**: Highest scoring posts during the last 24 hours
 - **Top Week**: Highest scoring posts during the last 7 days
 - **Top Month**: Highest scoring posts during the last 30 days
