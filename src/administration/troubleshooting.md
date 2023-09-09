@@ -68,4 +68,23 @@ Also ensure that the time is accurately set on your server. Activities are signe
 
 ### Other instances don't receive actions reliably
 
-Lemmy uses a queue to send out activities. The size of this queue is specified by the config value `federation.worker_count`. Very large instances might need to increase this value. Search the logs for "Activity queue stats", if it is consistently larger than the worker_count (default: 64), the count needs to be increased.
+Lemmy uses one queue per federated instance to send out activities. Search the logs for "Federation state" for summaries. Errors will also be logged.
+
+For details, execute this SQL query:
+
+```sql
+select domain,currval('sent_activity_id_seq') as latest_id, last_successful_id,fail_count,last_retry from federation_queue_state
+join instance on instance_id = instance.id order by last_successful_id asc;
+```
+
+You will see a table like the following:
+
+| domain                     | latest_id | last_successful_id | fail_count | last_retry                    |
+| -------------------------- | ----------| ------------------ | ---------- | ----------------------------- |
+| toad.work                  | 6837196   | 6832351            | 14         | 2023-07-12 21:42:22.642379+00 |
+| lemmy.deltaa.xyz           | 6837196   | 6837196            | 0          | 1970-01-01 00:00:00+00        |
+| battleangels.net           | 6837196   | 6837196            | 0          | 1970-01-01 00:00:00+00        |
+| social.fbxl.net            | 6837196   | 6837196            | 0          | 1970-01-01 00:00:00+00        |
+| mastodon.coloradocrest.net | 6837196   | 6837196            | 0          | 1970-01-01 00:00:00+00        |
+
+This will show you exactly which instances are up to date or not.

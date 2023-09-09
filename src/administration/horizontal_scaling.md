@@ -58,16 +58,36 @@ There are a few ways to work around this issue:
 
 Lemmy_server can be horizontally scaled, with a few caveats.
 
+Here's a quick example on how you could start 3 web servers, 3 federation servers and one scheduled task process:
+
+```
+lemmy_server --http-server=false --federate-activities=false # scheduled tasks
+lemmy_server --http-server=true --federate-activities=false --disable-scheduled-task # http server 1  
+lemmy_server --http-server=true --federate-activities=false --disable-scheduled-task # http server 2
+lemmy_server --http-server=true --federate-activities=false --disable-scheduled-task # http server 3
+
+# federation server 1/3
+lemmy_server --http-server=false --federate-activities=true --federate-process-index=1 --federate-process-count=1 --disable-scheduled-tasks
+# federation server 2/3
+lemmy_server --http-server=false --federate-activities=true --federate-process-index=1 --federate-process-count=2 --disable-scheduled-tasks
+# federation server 3/3
+lemmy_server --http-server=false --federate-activities=true --federate-process-index=1 --federate-process-count=3 --disable-scheduled-tasks
+```
+
 #### Scheduled tasks
 
-By default, a Lemmy_server process will always run background scheduled tasks, which are intended to be run only on one server. Launching multiple processes with the default configuration will result in multiple duplicated scheduled tasks all starting at the same moment and trying to do the same thing at once. At best, it will be a waste of resources, but it could potentially end up causing some weird glitches as well.
+By default, a Lemmy_server process will run background scheduled tasks, which must be run only on one server. Launching multiple processes with the default configuration will result in multiple duplicated scheduled tasks all starting at the same moment and trying to do the same thing at once.
 
-To solve this, Lemmy can be started with the `--disable-scheduled-tasks` flag on all but one instance. In general, there are two approaches:
+To solve this, Lemmy must be started with the `--disable-scheduled-tasks` flag on all but one instance. In general, there are two approaches:
 
 1. Run all your load balanced Lemmy servers with the `--disable-scheduled-tasks` flag, and run one additional Lemmy server without this flag which is not in your load balancer and does not accept any HTTP traffic.
 2. Run one load balanced Lemmy server without the flag, and all other load balanced servers with the flag.
 
-Option 1 might have a few tiny advantages (easier to isolate logs for the scheduled tasks, and expensive scheduled tasks won't compete with HTTP requests for system resources), but requires an extra process.
+#### Federation queue
+
+The persistent federation queue (since 0.19) is split by federated domain and can be processed in equal-size parts run in separate processes. To split the queue up into N processes numbered 1...N, use the arguments `--federate-process-index=i --federate-process-count=N` on each. It is important that each index is is given to exactly one process, otherwise you will get undefined behaviour (missing, dupe federation, crashes).
+
+Federation processes can be started and stopped at will. They will restart federation to each instance from the last transmitted activity regardless of downtime.
 
 #### Rolling upgrades
 
