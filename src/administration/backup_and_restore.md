@@ -64,6 +64,9 @@ Get into `psql` for your docker:
 `docker-compose exec postgres psql -U lemmy`
 
 ```sql
+-- Instance
+update instance set domain = replace (domain, 'old_domain', 'new_domain');
+
 -- Post
 update post set ap_id = replace (ap_id, 'old_domain', 'new_domain');
 update post set url = replace (url, 'old_domain', 'new_domain');
@@ -74,17 +77,27 @@ update post set thumbnail_url = replace (thumbnail_url, 'old_domain', 'new_domai
 update comment set ap_id = replace (ap_id, 'old_domain', 'new_domain');
 update comment set content = replace (content, 'old_domain', 'new_domain');
 
+-- Private messages
+update private_message set ap_id = replace (ap_id, 'old_domain', 'new_domain');
+
 -- User
-update user_ set actor_id = replace (actor_id, 'old_domain', 'new_domain');
-update user_ set inbox_url = replace (inbox_url, 'old_domain', 'new_domain');
-update user_ set shared_inbox_url = replace (shared_inbox_url, 'old_domain', 'new_domain');
-update user_ set avatar = replace (avatar, 'old_domain', 'new_domain');
+update person set actor_id = replace (actor_id, 'old_domain', 'new_domain');
+update person set inbox_url = replace (inbox_url, 'old_domain', 'new_domain');
+update person set shared_inbox_url = replace (shared_inbox_url, 'old_domain', 'new_domain');
+update person set bio = replace (bio, 'old_domain', 'new_domain');
+update person set avatar = replace (avatar, 'old_domain', 'new_domain');
+update person set banner = replace (banner, 'old_domain', 'new_domain');
 
 -- Community
 update community set actor_id = replace (actor_id, 'old_domain', 'new_domain');
 update community set followers_url = replace (followers_url, 'old_domain', 'new_domain');
 update community set inbox_url = replace (inbox_url, 'old_domain', 'new_domain');
 update community set shared_inbox_url = replace (shared_inbox_url, 'old_domain', 'new_domain');
+update community set moderators_url = replace (moderators_url, 'old_domain', 'new_domain');
+update community set featured_url = replace (featured_url, 'old_domain', 'new_domain');
+update community set description = replace (description, 'old_domain', 'new_domain');
+update community set icon = replace (icon, 'old_domain', 'new_domain');
+update community set banner = replace (banner, 'old_domain', 'new_domain');
 
 ```
 
