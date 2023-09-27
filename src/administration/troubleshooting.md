@@ -80,7 +80,7 @@ join instance on instance_id = instance.id order by last_successful_id asc;
 You will see a table like the following:
 
 | domain                     | latest_id | last_successful_id | fail_count | last_retry                    |
-| -------------------------- | ----------| ------------------ | ---------- | ----------------------------- |
+| -------------------------- | --------- | ------------------ | ---------- | ----------------------------- |
 | toad.work                  | 6837196   | 6832351            | 14         | 2023-07-12 21:42:22.642379+00 |
 | lemmy.deltaa.xyz           | 6837196   | 6837196            | 0          | 1970-01-01 00:00:00+00        |
 | battleangels.net           | 6837196   | 6837196            | 0          | 1970-01-01 00:00:00+00        |
