@@ -67,6 +67,11 @@ Get into `psql` for your docker:
 -- Instance
 update instance set domain = replace (domain, 'old_domain', 'new_domain');
 
+-- Site
+update site set actor_id = replace (actor_id, 'old_domain', 'new_domain');
+update site set inbox_url = replace (inbox_url, 'old_domain', 'new_domain');
+update site set sidebar = replace (sidebar, 'old_domain', 'new_domain');
+
 -- Post
 update post set ap_id = replace (ap_id, 'old_domain', 'new_domain');
 update post set url = replace (url, 'old_domain', 'new_domain');
@@ -79,6 +84,7 @@ update comment set content = replace (content, 'old_domain', 'new_domain');
 
 -- Private messages
 update private_message set ap_id = replace (ap_id, 'old_domain', 'new_domain');
+update private_message set content = replace (content, 'old_domain', 'new_domain');
 
 -- User
 update person set actor_id = replace (actor_id, 'old_domain', 'new_domain');
@@ -98,6 +104,9 @@ update community set featured_url = replace (featured_url, 'old_domain', 'new_do
 update community set description = replace (description, 'old_domain', 'new_domain');
 update community set icon = replace (icon, 'old_domain', 'new_domain');
 update community set banner = replace (banner, 'old_domain', 'new_domain');
+
+--- Custom Emoji
+update custom_emoji set image_url = replace (image_url, 'old_domain', 'new_domain');
 
 ```
 
