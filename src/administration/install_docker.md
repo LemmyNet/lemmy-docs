@@ -16,7 +16,7 @@ Edit them before starting up lemmy for the first time.
 
 The images will likely be: [dessalines/lemmy:VERSION](https://hub.docker.com/r/dessalines/lemmy) and [dessalines/lemmy-ui:VERSION](https://hub.docker.com/r/dessalines/lemmy-ui)
 
-Using `latest` is not advisable as changes can break your instance. Make sure you are using a specific version number.
+[Tracking Issue](https://github.com/LemmyNet/lemmy/issues/3996): For now, using `latest` is not advisable as changes can break your instance. Make sure you are using a specific version number. This is temporary and will be fixed.
 
 ```bash
 wget https://raw.githubusercontent.com/LemmyNet/lemmy-ansible/main/templates/docker-compose.yml
