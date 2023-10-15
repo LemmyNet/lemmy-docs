@@ -1,6 +1,6 @@
 # Docker Installation
 
-Make sure you have both docker and docker-compose(>=`1.24.0`) installed. On Ubuntu, just run `apt install docker-compose docker.io`. Next,
+Make sure you have both docker and docker-compose(>=`2.0`) installed. On Ubuntu, just run `apt install docker-compose-v2 docker.io`. Next,
 
 ```bash
 # Create a folder for the lemmy files. the location doesnt matter, you can put this anywhere you want
@@ -46,7 +46,7 @@ sudo chown -R 991:991 volumes/pictrs
 
 Finally, run:
 
-`docker-compose up -d`
+`docker compose up -d`
 
 lemmy-ui is accessible on the server at `http://localhost:{{ lemmy_port }}`
 
@@ -77,5 +77,5 @@ To update to the newest version, you can manually change the version in `docker-
 ```bash
 wget https://raw.githubusercontent.com/LemmyNet/lemmy-ansible/main/templates/docker-compose.yml
 # Then replace the {{ }} vars again
-docker-compose up -d
+docker compose up -d
 ```

@@ -10,9 +10,9 @@ Many Lemmy features depend on a correct reverse proxy configuration. Make sure y
 
 For frontend issues, check the [browser console](https://webmasters.stackexchange.com/a/77337) for any error messages.
 
-For server logs, run `docker-compose logs -f lemmy` in your installation folder. You can also do `docker-compose logs -f lemmy lemmy-ui pictrs` to get logs from different services.
+For server logs, run `docker compose logs -f lemmy` in your installation folder. You can also do `docker compose logs -f lemmy lemmy-ui pictrs` to get logs from different services.
 
-If that doesn't give enough info, try changing the line `RUST_LOG=error` in `docker-compose.yml` to `RUST_LOG=info` or `RUST_LOG=verbose`, then do `docker-compose restart lemmy`.
+If that doesn't give enough info, try changing the line `RUST_LOG=error` in `docker-compose.yml` to `RUST_LOG=info` or `RUST_LOG=verbose`, then do `docker compose restart lemmy`.
 
 ### Creating admin user doesn't work
 

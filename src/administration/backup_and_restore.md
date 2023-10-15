@@ -9,7 +9,7 @@ When using docker or ansible, there should be a `volumes` folder, which contains
 To take a complete backup of the DB to a `.sql.gz` file, you can run:
 
 ```bash
-docker-compose exec postgres pg_dumpall -c -U lemmy | gzip > lemmy_dump_`date +%Y-%m-%d"_"%H_%M_%S`.sql.gz
+docker compose exec postgres pg_dumpall -c -U lemmy | gzip > lemmy_dump_`date +%Y-%m-%d"_"%H_%M_%S`.sql.gz
 ```
 
 _For compression, you can use either gzip and gunzip, or xz and unxz._
@@ -19,7 +19,7 @@ _For compression, you can use either gzip and gunzip, or xz and unxz._
 ```bash
 #!/bin/sh
 # DB Backup
-ssh MY_USER@MY_IP "docker-compose exec postgres pg_dumpall -c -U lemmy" | gzip > ~/BACKUP_LOCATION/INSTANCE_NAME_dump_`date +%Y-%m-%d"_"%H_%M_%S`.sql.gz
+ssh MY_USER@MY_IP "docker compose exec postgres pg_dumpall -c -U lemmy" | gzip > ~/BACKUP_LOCATION/INSTANCE_NAME_dump_`date +%Y-%m-%d"_"%H_%M_%S`.sql.gz
 
 # Volumes folder Backup
 rsync -avP -zz --rsync-path="sudo rsync" MY_USER@MY_IP:/LEMMY_LOCATION/volumes ~/BACKUP_LOCATION/FOLDERNAME
@@ -30,17 +30,17 @@ rsync -avP -zz --rsync-path="sudo rsync" MY_USER@MY_IP:/LEMMY_LOCATION/volumes ~
 To restore, run:
 
 ```bash
-docker-compose up -d postgres
+docker compose up -d postgres
 
 # Restore from the .sql.gz backup
-gunzip < db_dump.sql  |  docker-compose exec -T postgres psql -U lemmy
+gunzip < db_dump.sql  |  docker compose exec -T postgres psql -U lemmy
 
 # Note: You may need to change the permissions on the postgres directory, depending on your system.
 chown -R $USER volumes
-docker-compose restart postgres
+docker compose restart postgres
 
 # Continue with the startup
-docker-compose up -d
+docker compose up -d
 ```
 
 If you've accidentally already started the lemmy service, you need to clear out your existing database:
@@ -61,7 +61,7 @@ If you haven't federated yet, you can change your domain name in the DB. **Warni
 
 Get into `psql` for your docker:
 
-`docker-compose exec postgres psql -U lemmy`
+`docker compose exec postgres psql -U lemmy`
 
 ```sql
 -- Instance
