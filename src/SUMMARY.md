@@ -18,7 +18,7 @@
 - [Install with Docker](administration/install_docker.md)
 - [Install with Ansible](administration/install_ansible.md)
 - [Install from Scratch](administration/from_scratch.md)
-- [Install on Elestio](adminitstration/)
+- [Install on Elestio](administration/)
 - [Install on AWS](administration/on_aws.md)
 - [First Steps](administration/first_steps.md)
 - [Configuration](administration/configuration.md)
