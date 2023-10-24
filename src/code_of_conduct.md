@@ -11,8 +11,6 @@
 
 [**Message the Moderation Team on Mastodon**](https://mastodon.social/@LemmyDev)
 
-[**Email The Moderation Team**](mailto:contact@join-lemmy.org)
-
 ## Moderation
 
 These are the policies for upholding our community’s standards of conduct. If you feel that a thread needs moderation, please contact the Lemmy moderation team .
