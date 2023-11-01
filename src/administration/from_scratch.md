@@ -73,7 +73,7 @@ Lemmy supports image hosting using [pict-rs](https://git.asonix.dog/asonix/pict-
 
 Depending on preference, pict-rs can be installed as a standalone application, or it can be embedded within Lemmy itself (see below). In both cases, pict-rs requires the `magick` command which comes with Imagemagick version 7, but Ubuntu 20.04 only comes with Imagemagick 6. So you need to install that command manually, eg from the [official website](https://imagemagick.org/script/download.php#linux).
 
-**NOTE: on standard LXC containers an AppImage-based ImageMagick installation [will not work properly](https://github.com/LemmyNet/lemmy/issues/4112) with both embdedded and standalone pict-rs. It uses FUSE which will emit "permission denied" errors when trying to upload an image through pict-rs. You must use alternative installation methods, such as [imei.sh](https://github.com/SoftCreatR/imei).**
+**NOTE: on standard LXC containers an AppImage-based ImageMagick installation [will not work properly](https://github.com/LemmyNet/lemmy/issues/4112) with both embedded and standalone pict-rs. It uses FUSE which will emit "permission denied" errors when trying to upload an image through pict-rs. You must use alternative installation methods, such as [imei.sh](https://github.com/SoftCreatR/imei).**
 
 #### AppImage-based installation of ImageMagick
 
