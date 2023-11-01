@@ -2,19 +2,21 @@
 
 These instructions are written for Ubuntu 20.04 / Ubuntu 22.04. They are particularly useful when you'd like to setup a Lemmy container (e.g. LXC on Proxmox) and cannot use Docker.
 
-Lemmy is built from source in this guide, so this may take a while, especially on slow devices. For example, Lemmy v0.18.5 takes around 7 minutes to build on a quad core VPS. 
+Lemmy is built from source in this guide, so this may take a while, especially on slow devices. For example, Lemmy v0.18.5 takes around 7 minutes to build on a quad core VPS.
 
 Installing and configuring Lemmy using this guide takes about 60-90 minutes. You might need to make yourself a fresh cup of coffee before you start.
 
-While is not an officially supported installation method for Lemmy, it is not that hard. Maybe someone will eventually create an Ansible script for this as well. 
+While is not an officially supported installation method for Lemmy, it is not that hard. Maybe someone will eventually create an Ansible script for this as well.
 
 ## Installation
 
 ### Database
-For Ubuntu 20.04 the shipped PostgreSQL version is 12 which is not supported by Lemmy. So let's set up a newer one. 
+
+For Ubuntu 20.04 the shipped PostgreSQL version is 12 which is not supported by Lemmy. So let's set up a newer one.
 The most recent stable version of PostgreSQL is 16 at the time of writing this guide.
 
 #### Install dependencies
+
 ```
 sudo apt install wget ca-certificates
 sudo apt install pkg-config libssl-dev libpq-dev postgresql
@@ -33,10 +35,12 @@ sudo -iu postgres psql -c "CREATE USER lemmy WITH PASSWORD 'db-passwd';"
 sudo -iu postgres psql -c "CREATE DATABASE lemmy WITH OWNER lemmy;"
 ```
 
-If you're migrating from an older version of Lemmy, the following might be required. 
+If you're migrating from an older version of Lemmy, the following might be required.
+
 ```
 sudo -iu postgres psql -c "ALTER USER lemmy WITH SUPERUSER;"
 ```
+
 Tune your PostgreSQL settings to match your hardware via [this guide](https://pgtune.leopard.in.ua/#/)
 
 #### Setup md5 auth
@@ -44,16 +48,19 @@ Tune your PostgreSQL settings to match your hardware via [this guide](https://pg
 Lemmy currently only supports only non-SSL connections to databases. More info [here](https://github.com/LemmyNet/lemmy/issues/3007).
 
 Your Postgres config might need to be edited to allow password authentication instead of peer authentication. Simply add the following to your `pg_hba.conf`:
+
 ```
 local   lemmy           lemmy                                   md5
 ```
 
 ### Install Rust
-For the Rust compiles, it is ideal to use a non-privledged Linux account on your system. 
+
+For the Rust compiles, it is ideal to use a non-privledged Linux account on your system.
 
 Install Rust by following the instructions on [Rustup](https://rustup.rs/) (using a non-privledged Linux account, it will install file in that user's home folder for rustup and cargo).
 
-protobuf-compiler may be required for Ubuntu 20.04 or 22.04 installs, please report testing in lemmy-docs issues. 
+protobuf-compiler may be required for Ubuntu 20.04 or 22.04 installs, please report testing in lemmy-docs issues.
+
 ```
 sudo apt install protobuf-compiler
 ```
@@ -62,13 +69,14 @@ sudo apt install protobuf-compiler
 
 You can skip this section if you don't require image hosting, but **NOTE that Lemmy-ui will still allow users to attempt uploading images even if pict-rs is not configured. In this situation, the upload will fail and users will receive technical error messages.**
 
-Lemmy supports image hosting using [pict-rs](https://git.asonix.dog/asonix/pict-rs/). We need to install a couple of dependencies for this. 
+Lemmy supports image hosting using [pict-rs](https://git.asonix.dog/asonix/pict-rs/). We need to install a couple of dependencies for this.
 
-Depending on preference, pict-rs can be installed as a standalone application, or it can be embedded within Lemmy itself (see below). In both cases, pict-rs requires the `magick` command which comes with Imagemagick version 7, but Ubuntu 20.04 only comes with Imagemagick 6. So you need to install that command manually, eg from the [official website](https://imagemagick.org/script/download.php#linux). 
+Depending on preference, pict-rs can be installed as a standalone application, or it can be embedded within Lemmy itself (see below). In both cases, pict-rs requires the `magick` command which comes with Imagemagick version 7, but Ubuntu 20.04 only comes with Imagemagick 6. So you need to install that command manually, eg from the [official website](https://imagemagick.org/script/download.php#linux).
 
 **NOTE: on standard LXC containers an AppImage-based ImageMagick installation [will not work properly](https://github.com/LemmyNet/lemmy/issues/4112) with both embdedded and standalone pict-rs. It uses FUSE which will emit "permission denied" errors when trying to upload an image through pict-rs. You must use alternative installation methods, such as [imei.sh](https://github.com/SoftCreatR/imei).**
 
 #### AppImage-based installation of ImageMagick
+
 ```bash
 sudo apt install ffmpeg exiftool libgexiv2-dev --no-install-recommends
 # save the file to a working folder it can be verified before copying to /usr/bin/
@@ -80,16 +88,21 @@ sudo chmod 755 /usr/bin/magick
 ```
 
 #### imei.sh-based installation of ImageMagick
+
 Follow the instructions from the [official imei.sh page on GitHub](https://github.com/SoftCreatR/imei)
 
 #### Standalone pict-rs installation
-Since we're building stuff from source here, let's do the same for pict-rs. Follow the [instructions here](https://git.asonix.dog/asonix/pict-rs/#user-content-compile-from-source). 
 
-However, as mentioned above, the embedded pict-rs installation should work just fine for you. 
+Since we're building stuff from source here, let's do the same for pict-rs. Follow the [instructions here](https://git.asonix.dog/asonix/pict-rs/#user-content-compile-from-source).
+
+However, as mentioned above, the embedded pict-rs installation should work just fine for you.
 
 ### Lemmy Backend
+
 #### Build the backend
+
 Create user account on Linux for the lemmy_server application
+
 ```
 sudo adduser lemmy --system --disabled-login --no-create-home --group
 ```
@@ -106,16 +119,19 @@ echo "pub const VERSION: &str = \"$(git describe --tag)\";" > "crates/utils/src/
 ```
 
 When using the embedded pict-rs, use the following build command:
+
 ```
 cargo build --release --features embed-pictrs
 ```
 
 Otherwise, just move forward with the following.
+
 ```
 cargo build --release
 ```
 
 #### Deployment
+
 Because we should [follow the Linux way](https://tldp.org/LDP/Linux-Filesystem-Hierarchy/html/opt.html), we should use the `/opt` directory to colocate the backend, frontend and pict-rs.
 
 ```
@@ -131,12 +147,14 @@ sudo chown -R lemmy:lemmy /opt/lemmy
 Note that it might not be the most obvious thing, but **creating the pictrs directories is not optional**.
 
 Then copy the binary.
+
 ```
 sudo cp target/release/lemmy_server /opt/lemmy-server/lemmy_server
 ```
 
 #### Configuration
-This is the minimal Lemmy config, put this in `/opt/lemmy/lemmy-server/lemmy.hjson` (see [here](https://github.com/LemmyNet/lemmy/blob/main/config/config.hjson) for more config options). 
+
+This is the minimal Lemmy config, put this in `/opt/lemmy/lemmy-server/lemmy.hjson` (see [here](https://github.com/LemmyNet/lemmy/blob/main/config/config.hjson) for more config options).
 
 ```hjson
 {
@@ -156,12 +174,15 @@ This is the minimal Lemmy config, put this in `/opt/lemmy/lemmy-server/lemmy.hjs
   }
 }
 ```
+
 Set the correct owner
+
 ```
 chown -R lemmy:lemmy /opt/lemmy/
 ```
 
 #### Server daemon
+
 Add a systemd unit file, so that Lemmy automatically starts and stops, logs are handled via journalctl etc. Put this file into /etc/systemd/system/lemmy.service.
 
 ```
@@ -189,24 +210,29 @@ WantedBy=multi-user.target
 ```
 
 If you need debug output in the logs, change the RUST_LOG line in the file above to
+
 ```
 Environment=RUST_LOG="debug,lemmy_server=debug,lemmy_api=debug,lemmy_api_common=debug,lemmy_api_crud=debug,lemmy_apub=debug,lemmy_db_schema=debug,lemmy_db_views=debug,lemmy_db_views_actor=debug,lemmy_db_views_moderator=debug,lemmy_routes=debug,lemmy_utils=debug,lemmy_websocket=debug"
 ```
 
 Then run
+
 ```
 sudo systemctl daemon-reload
 sudo systemctl enable lemmy
 sudo systemctl start lemmy
 ```
+
 If you did everything right, the Lemmy logs from `sudo journalctl -u lemmy` should show "Starting http server at 127.0.0.1:8536". You can also run `curl localhost:8536/api/v3/site` which should give a successful response, looking like `{"site_view":null,"admins":[],"banned":[],"online":0,"version":"unknown version","my_user":null,"federated_instances":null}`. For pict-rs, run `curl 127.0.0.1:8080` and ensure that it outputs nothing (particularly no errors).
 
 ### Lemmy Front-end (lemmy-ui)
+
 #### Install dependencies
-Nodejs and yarn in Ubuntu 20.04 / Ubuntu 22.04 repos are too old, so let's install Node 20. 
+
+Nodejs and yarn in Ubuntu 20.04 / Ubuntu 22.04 repos are too old, so let's install Node 20.
 
 ```
-# yarn 
+# yarn
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 
@@ -221,6 +247,7 @@ sudo apt install nodejs yarn
 ```
 
 #### Build the front-end
+
 Clone the git repo, checkout the version you want (0.18.5 in this case), and compile it.
 
 ```
@@ -236,6 +263,7 @@ exit
 ```
 
 #### UI daemon
+
 Add another systemd unit file, this time for lemmy-ui. You need to replace `example.com` with your actual domain. Put the file in `/etc/systemd/system/lemmy-ui.service`
 
 ```
@@ -265,6 +293,7 @@ WantedBy=multi-user.target
 More UI-related variables can be [found here](https://github.com/LemmyNet/lemmy-ui#configuration).
 
 Then run.
+
 ```
 sudo systemctl daemon-reload
 sudo systemctl enable lemmy-ui
@@ -336,15 +365,15 @@ server {
     location / {
       proxy_http_version 1.1;
 
-      set $proxpass "http://127.0.0.1:1234";  
+      set $proxpass "http://127.0.0.1:1234";
       if ($http_accept ~ "^application/.*$") {
           set $proxpass "http://localhost:8536";
       }
-                        
+
       if ($uri ~ "^(.*)/(api|pictrs|feeds|nodeinfo|.well-known)(.*)") {
           set $proxpass "http://127.0.0.1:8536";
       }
- 
+
       if ($request_method = POST) {
           set $proxpass "http://127.0.0.1:8536";
       }
