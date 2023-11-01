@@ -362,7 +362,7 @@ Now open your Lemmy domain in the browser, and it should show you a configuratio
 
 Compile and install lemmy_server changes. This compile can be done by a normal unprivledged user (using the same Linux account you used for rustup and first install of Lemmy).
 
-```bash
+```
 rustup update
 cd lemmy
 git checkout main
@@ -380,9 +380,9 @@ sudo -- sh -c 'systemctl stop lemmy && cp target/release/lemmy_server /opt/lemmy
 
 ### Lemmy UI
 
-```bash
-sudo -u lemmy bash
+```
 cd /opt/lemmy/lemmy-ui
+sudo -u lemmy bash
 git checkout main
 git pull --tags
 git checkout 0.18.5 # replace with the version you are updating to
