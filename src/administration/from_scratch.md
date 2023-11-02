@@ -6,8 +6,6 @@ Lemmy is built from source in this guide, so this may take a while, especially o
 
 Installing and configuring Lemmy using this guide takes about 60-90 minutes. You might need to make yourself a fresh cup of coffee before you start.
 
-While is not an officially supported installation method for Lemmy, it is not that hard. Maybe someone will eventually create an Ansible script for this as well.
-
 ## Installation
 
 ### Database
@@ -18,12 +16,10 @@ The most recent stable version of PostgreSQL is 16 at the time of writing this g
 #### Install dependencies
 
 ```
-sudo apt install wget ca-certificates
-sudo apt install pkg-config libssl-dev libpq-dev postgresql
+sudo apt install -y wget ca-certificates pkg-config libssl-dev libpq-dev postgresql
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" >> /etc/apt/sources.list.d/pgdg.list'
 sudo apt update
-sudo apt install pkg-config libssl-dev libpq-dev postgresql
 ```
 
 #### Setup Lemmy database
@@ -45,8 +41,6 @@ Tune your PostgreSQL settings to match your hardware via [this guide](https://pg
 
 #### Setup md5 auth
 
-Lemmy currently only supports only non-SSL connections to databases. More info [here](https://github.com/LemmyNet/lemmy/issues/3007).
-
 Your Postgres config might need to be edited to allow password authentication instead of peer authentication. Simply add the following to your `pg_hba.conf`:
 
 ```
@@ -55,9 +49,7 @@ local   lemmy           lemmy                                   md5
 
 ### Install Rust
 
-For the Rust compiles, it is ideal to use a non-privledged Linux account on your system.
-
-Install Rust by following the instructions on [Rustup](https://rustup.rs/) (using a non-privledged Linux account, it will install file in that user's home folder for rustup and cargo).
+For the Rust compiles, it is ideal to use a non-priviledged Linux account on your system. Install Rust by following the instructions on [Rustup](https://rustup.rs/) (using a non-privledged Linux account, it will install file in that user's home folder for rustup and cargo).
 
 protobuf-compiler may be required for Ubuntu 20.04 or 22.04 installs, please report testing in lemmy-docs issues.
 
@@ -71,13 +63,13 @@ You can skip this section if you don't require image hosting, but **NOTE that Le
 
 Lemmy supports image hosting using [pict-rs](https://git.asonix.dog/asonix/pict-rs/). We need to install a couple of dependencies for this.
 
-Depending on preference, pict-rs can be installed as a standalone application, or it can be embedded within Lemmy itself (see below). In both cases, pict-rs requires the `magick` command which comes with Imagemagick version 7, but Ubuntu 20.04 only comes with Imagemagick 6. So you need to install that command manually, eg from the [official website](https://imagemagick.org/script/download.php#linux).
+Depending on preference, pict-rs can be installed as a standalone application, or it can be embedded within Lemmy itself. In both cases, pict-rs requires the `magick` command which comes with Imagemagick version 7, but Ubuntu 20.04 only comes with Imagemagick 6. So you need to install that command manually, eg from the [official website](https://imagemagick.org/script/download.php#linux).
 
 **NOTE: on standard LXC containers an AppImage-based ImageMagick installation [will not work properly](https://github.com/LemmyNet/lemmy/issues/4112) with both embedded and standalone pict-rs. It uses FUSE which will emit "permission denied" errors when trying to upload an image through pict-rs. You must use alternative installation methods, such as [imei.sh](https://github.com/SoftCreatR/imei).**
 
 #### AppImage-based installation of ImageMagick
 
-```bash
+```
 sudo apt install ffmpeg exiftool libgexiv2-dev --no-install-recommends
 # save the file to a working folder it can be verified before copying to /usr/bin/
 wget https://download.imagemagick.org/ImageMagick/download/binaries/magick
@@ -95,7 +87,7 @@ Follow the instructions from the [official imei.sh page on GitHub](https://githu
 
 Since we're building stuff from source here, let's do the same for pict-rs. Follow the [instructions here](https://git.asonix.dog/asonix/pict-rs/#user-content-compile-from-source).
 
-However, as mentioned above, the embedded pict-rs installation should work just fine for you.
+However, the embedded pict-rs installation should work just fine for you.
 
 ### Lemmy Backend
 
@@ -154,7 +146,7 @@ sudo cp target/release/lemmy_server /opt/lemmy-server/lemmy_server
 
 #### Configuration
 
-This is the minimal Lemmy config, put this in `/opt/lemmy/lemmy-server/lemmy.hjson` (see [here](https://github.com/LemmyNet/lemmy/blob/main/config/config.hjson) for more config options).
+This is the minimal Lemmy config, put this in `/opt/lemmy/lemmy-server/lemmy.hjson` (see [here](https://github.com/LemmyNet/lemmy/blob/main/config/defaults.hjson) for more config options).
 
 ```hjson
 {
@@ -278,7 +270,7 @@ WorkingDirectory=/opt/lemmy/lemmy-ui
 ExecStart=/usr/bin/node dist/js/server.js
 Environment=LEMMY_UI_LEMMY_INTERNAL_HOST=localhost:8536
 Environment=LEMMY_UI_LEMMY_EXTERNAL_HOST=example.com
-Environment=LEMMY_UI_HTTPS=false
+Environment=LEMMY_UI_HTTPS=true
 Restart=on-failure
 
 # Hardening
@@ -322,46 +314,21 @@ Let's Encrypt certificates should be renewed automatically, so add the line belo
 @daily certbot certonly --nginx --cert-name example.com -d example.com --deploy-hook 'nginx -s reload'
 ```
 
-Finally, add the nginx config file. After downloading, you need to replace some variables in the file.
+Finally, add the Nginx virtual host config file. After downloading, you need to replace some variables in the file.
 
-```bash
-curl https://raw.githubusercontent.com/LemmyNet/lemmy-ansible/main/templates/nginx.conf \
+```
+sudo curl https://raw.githubusercontent.com/LemmyNet/lemmy-ansible/main/templates/nginx.conf \
     --output /etc/nginx/sites-enabled/lemmy.conf
 # put your actual domain instead of example.com
-sed -i -e 's/{{domain}}/example.com/g' /etc/nginx/sites-enabled/lemmy.conf
-sed -i -e 's/{{lemmy_port}}/8536/g' /etc/nginx/sites-enabled/lemmy.conf
-sed -i -e 's/{{lemmy_ui_port}}/1234/g' /etc/nginx/sites-enabled/lemmy.conf
-nginx -s reload
+sudo sed -i -e 's/{{domain}}/example.com/g' /etc/nginx/sites-enabled/lemmy.conf
+sudo sed -i -e 's/{{lemmy_port}}/8536/g' /etc/nginx/sites-enabled/lemmy.conf
+sudo sed -i -e 's/{{lemmy_ui_port}}/1234/g' /etc/nginx/sites-enabled/lemmy.conf
+sudo systemctl reload nginx
 ```
 
-If you don't need HTTPS on nginx, the below file can be used as an updated template. Otherwise, feel free to merge changes from it to your own version.
+The Nginx template in the [lemmy-ansible repo](https://raw.githubusercontent.com/LemmyNet/lemmy-ansible/main/templates/nginx.conf) might need some more tweaking for this setup. It is necessary to help Nginx differentiate between the calls to the Lemmy API and the UI. Use the following snippet in the `server` block that deals with HTTP connections to Nginx. Replace `8536` with the Lemmy backend port, '1234' with the UI one.
 
 ```
-limit_req_zone $binary_remote_addr zone=YOURDOMAIN.COM_ratelimit:10m rate=1r/s;
-proxy_cache_path /var/cache/nginx keys_zone=lemmy_cache_YOURDOMAIN.COM:1m;
-
-server {
-    listen 80;
-    server_name YOURDOMAIN.COM;
-    # Hide nginx version
-    server_tokens off;
-
-    # Upload limit, relevant for pictrs
-    client_max_body_size 20M;
-
-    # Enable compression for JS/CSS/HTML bundle, for improved client load times.
-    # It might be nice to compress JSON, but leaving that out to protect against potential
-    # compression+encryption information leak attacks like BREACH.
-    gzip on;
-    gzip_types text/css application/javascript image/svg+xml;
-    gzip_vary on;
-
-    # Various content security headers
-    add_header Referrer-Policy "same-origin";
-    add_header X-Content-Type-Options "nosniff";
-    add_header X-Frame-Options "DENY";
-    add_header X-XSS-Protection "1; mode=block";
-
     location / {
       proxy_http_version 1.1;
 
@@ -380,7 +347,6 @@ server {
 
       proxy_pass $proxpass;
     }
-}
 ```
 
 Now open your Lemmy domain in the browser, and it should show you a configuration screen. Use it to create the first admin user and the default community.
