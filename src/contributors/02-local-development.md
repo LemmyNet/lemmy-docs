@@ -78,7 +78,7 @@ git clone https://github.com/LemmyNet/lemmy-ui.git --recursive
 
 Use `cargo check` to find compilation errors. To start the Lemmy backend, run `cargo run`. It will bind to `0.0.0.0:8536`.
 
-After making changes, you need to format the code with `cargo +nightly fmt --all` and run the linter with `./scripts/fix-clippy.sh`.
+After making changes, you need to format the code with `cargo +nightly fmt --all` and run the linter with `./scripts/lint.sh`.
 
 ### Frontend development
 
