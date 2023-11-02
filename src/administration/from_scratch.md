@@ -49,7 +49,7 @@ local   lemmy           lemmy                                   md5
 
 ### Install Rust
 
-For the Rust compiles, it is ideal to use a non-priviledged Linux account on your system. Install Rust by following the instructions on [Rustup](https://rustup.rs/) (using a non-privledged Linux account, it will install file in that user's home folder for rustup and cargo).
+For the Rust compiles, it is ideal to use a non-privileged Linux account on your system. Install Rust by following the instructions on [Rustup](https://rustup.rs/) (using a non-privledged Linux account, it will install file in that user's home folder for rustup and cargo).
 
 protobuf-compiler may be required for Ubuntu 20.04 or 22.04 installs, please report testing in lemmy-docs issues.
 
