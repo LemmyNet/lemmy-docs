@@ -376,15 +376,13 @@ server {
     # frontend
     location / {
       # The default ports:
-      # lemmy_ui_port: 1235
-      # lemmy_port: 8536
-
-      set $proxpass "http://0.0.0.0:{{lemmy_ui_port}}";
+      
+      set $proxpass "http://0.0.0.0:1234";
       if ($http_accept ~ "^application/.*$") {
-        set $proxpass "http://0.0.0.0:{{lemmy_port}}";
+        set $proxpass "http://0.0.0.0:1234";
       }
       if ($request_method = POST) {
-        set $proxpass "http://0.0.0.0:{{lemmy_port}}";
+        set $proxpass "http://0.0.0.0:8536";
       }
       proxy_pass $proxpass;
 
@@ -398,7 +396,7 @@ server {
 
     # backend
     location ~ ^/(api|pictrs|feeds|nodeinfo|.well-known) {
-      proxy_pass http://0.0.0.0:{{lemmy_port}};
+      proxy_pass http://0.0.0.0:8536;
       proxy_http_version 1.1;
       proxy_set_header Upgrade $http_upgrade;
       proxy_set_header Connection "upgrade";
@@ -411,13 +409,6 @@ server {
       proxy_set_header Host $host;
       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
-
-
-    # Redirect pictshare images to pictrs
-    location ~ /pictshare/(.*)$ {
-      return 301 /pictrs/image/$1;
-    }
-
 }
 
 access_log /var/log/nginx/access.log combined;
@@ -427,8 +418,6 @@ And then replace some variables in the file. Put your actual domain instead of e
 
 ```
 sudo sed -i -e 's/{{domain}}/example.com/g' /etc/nginx/sites-enabled/lemmy.conf
-sudo sed -i -e 's/{{lemmy_port}}/8536/g' /etc/nginx/sites-enabled/lemmy.conf
-sudo sed -i -e 's/{{lemmy_ui_port}}/1234/g' /etc/nginx/sites-enabled/lemmy.conf
 sudo systemctl reload nginx
 ```
 
