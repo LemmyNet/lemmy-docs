@@ -376,7 +376,7 @@ server {
     # frontend
     location / {
       # The default ports:
-      
+
       set $proxpass "http://0.0.0.0:1234";
       if ($http_accept ~ "^application/.*$") {
         set $proxpass "http://0.0.0.0:1234";
