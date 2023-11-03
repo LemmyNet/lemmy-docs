@@ -432,29 +432,6 @@ sudo sed -i -e 's/{{lemmy_ui_port}}/1234/g' /etc/nginx/sites-enabled/lemmy.conf
 sudo systemctl reload nginx
 ```
 
-The Nginx template in the [lemmy-ansible repo](https://raw.githubusercontent.com/LemmyNet/lemmy-ansible/main/templates/nginx.conf) might need some more tweaking for this setup. It is necessary to help Nginx differentiate between the calls to the Lemmy API and the UI. Use the following snippet in the `server` block that deals with HTTP connections to Nginx. Replace `8536` with the Lemmy backend port, '1234' with the UI one.
-
-```
-    location / {
-      proxy_http_version 1.1;
-
-      set $proxpass "http://127.0.0.1:1234";
-      if ($http_accept ~ "^application/.*$") {
-          set $proxpass "http://localhost:8536";
-      }
-
-      if ($uri ~ "^(.*)/(api|pictrs|feeds|nodeinfo|.well-known)(.*)") {
-          set $proxpass "http://127.0.0.1:8536";
-      }
-
-      if ($request_method = POST) {
-          set $proxpass "http://127.0.0.1:8536";
-      }
-
-      proxy_pass $proxpass;
-    }
-```
-
 Now open your Lemmy domain in the browser, and it should show you a configuration screen. Use it to create the first admin user and the default community.
 
 ## Upgrading
