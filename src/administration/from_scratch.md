@@ -16,10 +16,11 @@ The most recent stable version of PostgreSQL is 16 at the time of writing this g
 #### Install dependencies
 
 ```
-sudo apt install -y wget ca-certificates pkg-config libssl-dev libpq-dev postgresql
+sudo apt install -y wget ca-certificates pkg-config
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" >> /etc/apt/sources.list.d/pgdg.list'
 sudo apt update
+sudo apt install libssl-dev libpq-dev postgresql
 ```
 
 #### Setup Lemmy database
@@ -314,12 +315,117 @@ Let's Encrypt certificates should be renewed automatically, so add the line belo
 @daily certbot certonly --nginx --cert-name example.com -d example.com --deploy-hook 'nginx -s reload'
 ```
 
-Finally, add the Nginx virtual host config file. After downloading, you need to replace some variables in the file.
+Finally, add the Nginx virtual host config file. Copy paste the file below to `/etc/nginx/sites-enabled/lemmy.conf`
 
 ```
-sudo curl https://raw.githubusercontent.com/LemmyNet/lemmy-ansible/main/templates/nginx.conf \
-    --output /etc/nginx/sites-enabled/lemmy.conf
-# put your actual domain instead of example.com
+limit_req_zone $binary_remote_addr zone={{domain}}_ratelimit:10m rate=1r/s;
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name {{domain}};
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+    }
+    location / {
+        return 301 https://$host$request_uri;
+    }
+}
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name {{domain}};
+
+    ssl_certificate /etc/letsencrypt/live/{{domain}}/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/{{domain}}/privkey.pem;
+
+    # Various TLS hardening settings
+    # https://raymii.org/s/tutorials/Strong_SSL_Security_On_nginx.html
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_prefer_server_ciphers on;
+    ssl_ciphers 'ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256';
+    ssl_session_timeout  10m;
+    ssl_session_cache shared:SSL:10m;
+    ssl_session_tickets on;
+    ssl_stapling on;
+    ssl_stapling_verify on;
+
+    # Hide nginx version
+    server_tokens off;
+
+    # Enable compression for JS/CSS/HTML bundle, for improved client load times.
+    # It might be nice to compress JSON, but leaving that out to protect against potential
+    # compression+encryption information leak attacks like BREACH.
+    gzip on;
+    gzip_types text/css application/javascript image/svg+xml;
+    gzip_vary on;
+
+    # Only connect to this site via HTTPS for the two years
+    add_header Strict-Transport-Security "max-age=63072000";
+
+    # Various content security headers
+    add_header Referrer-Policy "same-origin";
+    add_header X-Content-Type-Options "nosniff";
+    add_header X-Frame-Options "DENY";
+    add_header X-XSS-Protection "1; mode=block";
+
+    # Upload limit for pictrs
+    client_max_body_size 20M;
+
+    # frontend
+    location / {
+      # The default ports:
+      # lemmy_ui_port: 1235
+      # lemmy_port: 8536
+
+      set $proxpass "http://0.0.0.0:{{lemmy_ui_port}}";
+      if ($http_accept ~ "^application/.*$") {
+        set $proxpass "http://0.0.0.0:{{lemmy_port}}";
+      }
+      if ($request_method = POST) {
+        set $proxpass "http://0.0.0.0:{{lemmy_port}}";
+      }
+      proxy_pass $proxpass;
+
+      rewrite ^(.+)/+$ $1 permanent;
+
+      # Send actual client IP upstream
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header Host $host;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    # backend
+    location ~ ^/(api|pictrs|feeds|nodeinfo|.well-known) {
+      proxy_pass http://0.0.0.0:{{lemmy_port}};
+      proxy_http_version 1.1;
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection "upgrade";
+
+      # Rate limit
+      limit_req zone={{domain}}_ratelimit burst=30 nodelay;
+
+      # Add IP forwarding headers
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header Host $host;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+
+    # Redirect pictshare images to pictrs
+    location ~ /pictshare/(.*)$ {
+      return 301 /pictrs/image/$1;
+    }
+
+}
+
+access_log /var/log/nginx/access.log combined;
+```
+
+And then replace some variables in the file. Put your actual domain instead of example.com
+
+```
 sudo sed -i -e 's/{{domain}}/example.com/g' /etc/nginx/sites-enabled/lemmy.conf
 sudo sed -i -e 's/{{lemmy_port}}/8536/g' /etc/nginx/sites-enabled/lemmy.conf
 sudo sed -i -e 's/{{lemmy_ui_port}}/1234/g' /etc/nginx/sites-enabled/lemmy.conf
