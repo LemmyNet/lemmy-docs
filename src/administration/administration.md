@@ -31,6 +31,7 @@ In some cases, it might be necessary to use different installation methods.
 - [YunoHost](https://install-app.yunohost.org/?app=lemmy) ([source code](https://github.com/YunoHost-Apps/lemmy_ynh))
 - [On Amazon Web Services (AWS)](on_aws.md)
 - [Nomad](https://www.nomadproject.io/) ([see this external repo for examples](https://github.com/Cottand/lemmy-on-nomad-examples))
+- [Lemmy-Easy-Deploy](https://github.com/ubergeek77/Lemmy-Easy-Deploy)
 
 ### You could use any other reverse proxy
 
