@@ -15,7 +15,7 @@ More clearly arranged, unofficial API documentation is available at:
 
 **GET example**
 
-The current api `{version}` is [here](https://github.com/LemmyNet/lemmy-js-client/blob/main/src/types/others.ts#L1).
+The current API `{version}` is [here](https://github.com/LemmyNet/lemmy-js-client/blob/main/src/other_types.ts#L1).
 
 ```
 curl "https://lemmy.ml/api/{version}/community/list?sort=Hot"`
