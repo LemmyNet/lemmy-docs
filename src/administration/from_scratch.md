@@ -158,7 +158,6 @@ This is the minimal Lemmy config, put this in `/opt/lemmy/lemmy-server/lemmy.hjs
   # replace with your domain
   hostname: example.com
   bind: "127.0.0.1"
-  tls_enabled: true
   federation: {
     enabled: true
   }
