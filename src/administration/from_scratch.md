@@ -142,7 +142,7 @@ Note that it might not be the most obvious thing, but **creating the pictrs dire
 Then copy the binary.
 
 ```
-sudo cp target/release/lemmy_server /opt/lemmy-server/lemmy_server
+sudo cp target/release/lemmy_server /opt/lemmy/lemmy-server/lemmy_server
 ```
 
 #### Configuration
@@ -158,6 +158,7 @@ This is the minimal Lemmy config, put this in `/opt/lemmy/lemmy-server/lemmy.hjs
   # replace with your domain
   hostname: example.com
   bind: "127.0.0.1"
+  tls_enabled: true
   federation: {
     enabled: true
   }
@@ -186,7 +187,7 @@ After=network.target
 [Service]
 User=lemmy
 ExecStart=/opt/lemmy/lemmy-server/lemmy_server
-Environment=LEMMY_CONFIG_LOCATION=/opt/lemmy/server/lemmy.hjson
+Environment=LEMMY_CONFIG_LOCATION=/opt/lemmy/lemmy-server/lemmy.hjson
 Environment=PICTRS_ADDR=127.0.0.1:8080
 Environment=RUST_LOG="info"
 Restart=on-failure
@@ -379,7 +380,7 @@ server {
 
       set $proxpass "http://0.0.0.0:1234";
       if ($http_accept ~ "^application/.*$") {
-        set $proxpass "http://0.0.0.0:1234";
+        set $proxpass "http://0.0.0.0:8536";
       }
       if ($request_method = POST) {
         set $proxpass "http://0.0.0.0:8536";
