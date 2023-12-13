@@ -27,7 +27,7 @@ Scaled_Rank = Rank / log(2 + Users_Active_Month)
 Score = Upvotes - Downvotes
 Time = time since submission (in hours)
 Gravity = Decay gravity, 1.8 is default
-Users_Active_Month = The number of users in a given community who have posted / commented in the last month.
+Users_Active_Month = The number of users in a given community who have posted / commented / voted in the last month.
 ```
 
 - Lemmy uses the same `Rank` algorithm above, in three sorts: `Active`, `Hot`, and `Scaled`.
@@ -47,4 +47,4 @@ A plot of rank over 24 hours, of scores of 1, 5, 10, 100, 1000, with a scale fac
 
 Lemmy also shows counts of _active users_ for your site, and its communities. These are counted within the last `day`, `week`, `month`, and `half year`, and are cached on starting up lemmy, and every hour.
 
-An active user is someone who has posted or commented on our instance or community within the last given time frame. For site counts, only local users are counted. For community counts, federated users are included.
+An active user is someone who has posted, commented, or voted on our instance or community within the last given time frame. For site counts, only local users are counted. For community counts, federated users are included.
