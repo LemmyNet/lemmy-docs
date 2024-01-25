@@ -53,7 +53,7 @@ The federation test sets up 5 instances:
 | lemmy-delta   | lemmy_delta    | [127.0.0.1:8570](http://127.0.0.1:8570) | only allows federation with lemmy-beta  |
 | lemmy-epsilon | lemmy_epsilon  | [127.0.0.1:8580](http://127.0.0.1:8580) | uses blocklist, has lemmy-alpha blocked |
 
-You can log into each using the instance name, and `lemmy` as the password, IE (`lemmy_alpha`, `lemmy`).
+You can log into each using the instance name, and `lemmylemmy` as the password, IE (`lemmy_alpha`, `lemmylemmy`).
 
 To start federation between instances, visit one of them and search for a user, community or post, like this. Note that
 the Lemmy backend runs on a different port than the frontend, so you have to increment the port number from
