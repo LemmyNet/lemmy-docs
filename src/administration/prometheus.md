@@ -4,27 +4,6 @@ Lemmy supports the export of metrics in the [Prometheus](https://prometheus.io/)
 format. This document outlines how to enable the feature and begin collecting
 metrics.
 
-## Build
-
-A cargo feature flag gates the inclusion of the Prometheus components in the
-Lemmy server. To build Lemmy with the Prometheus components included, enable the
-`prometheus-metrics` feature.
-
-```shell
-cargo build --features prometheus-metrics
-```
-
-If using the `docker-compose.yml` from the [Lemmy
-repository](https://github.com/LemmyNet/lemmy/blob/main/docker/docker-compose.yml),
-enable the feature flag through the `CARGO_BUILD_FEATURES` build arg.
-
-```yaml
-lemmy:
-  build:
-    args:
-      CARGO_BUILD_FEATURES: prometheus-metrics
-```
-
 ## Configuration
 
 Configuration of the Prometheus endpoint is contained under the optional
@@ -43,7 +22,7 @@ prometheus: {
 
 ## Scrape
 
-After Lemmy has been built and deployed, test that it is serving properly
+After Lemmy has been deployed, test that it is serving properly
 (substitute the correct hostname if not running locally).
 
 ```shell
