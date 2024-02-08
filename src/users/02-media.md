@@ -27,3 +27,36 @@ The main type of content in Lemmy is text which can be formatted with Markdown. 
 Lemmy also allows sharing of images and videos. To upload an image, go to the _Create post_ page and click the little image icon under the _URL_ field. This allows you to select a local image. If you made a mistake, a popup message allows you to delete the image. The same image button also allows uploading of videos in .gif format. Instead of uploading a local file, you can also simply paste the URL of an image or video from another website.
 
 Note that this functionality is not meant to share large images or videos, because that would require too many server resources. Instead, upload them on another platform like [PeerTube](https://joinpeertube.org/) or [Pixelfed](https://pixelfed.org/), and share the link on Lemmy.
+
+## Torrents
+
+Since Lemmy doesn't host large videos or other media, users can share files using [BitTorrent](https://en.wikipedia.org/wiki/BitTorrent) links. In BitTorrent, files are shared not by a single user, but by _many users_ at the same time. This makes file sharing efficient, fast, and reliable, as long as several sources are sharing the files.
+
+Lemmy supports posting torrent magnet links (links that start with `magnet:`) in the post _URL_ field, or as markdown links within comments.
+
+With this, Lemmy can serve as an alternative to centralized media-centric services like YouTube and Spotify.
+
+### How to watch Torrents
+
+#### Beginner
+
+To easily stream videos and audio on Lemmy, you can use any of the following apps. After clicking on a torrent link in Lemmy, a dialog will pop up asking you to open the link in the app.
+
+- [Stremio](https://www.stremio.com/) (Desktop, Android)
+- [WebTorrent Desktop](https://webtorrent.io/desktop/) (Desktop)
+- [Popcorn Time](https://github.com/popcorn-official/popcorn-desktop) (Desktop)
+- [xTorrent](https://play.google.com/store/apps/details?id=com.gamemalt.streamtorrentvideos) (Android)
+
+#### Expert
+
+For those who would like to help share files, you can use any of the following torrent clients.
+
+- [qBittorrent](https://qbittorrent.org/) (Desktop)
+- [Deluge](https://www.deluge-torrent.org/) (Desktop)
+- [Transmission](https://transmissionbt.com/) (Desktop)
+- [LibreTorrent](https://gitlab.com/proninyaroslav/libretorrent) (Android)
+
+If you'd like, you can also set up a media server to view this content on any device. Some good options are:
+
+- [Jellyfin](https://jellyfin.org/) (Movies, TV, Music, Audiobooks)
+- [Navidrome](https://www.navidrome.org/) (Music)
