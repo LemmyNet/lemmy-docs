@@ -15,6 +15,8 @@ Sometimes you will see a notation like `Create/Note`. This refers to a `Create` 
 
 Below are explanations and examples for all actors, objects and activities from Lemmy. These include many optional fields which you can safely ignore.
 
+If you have trouble to make your project federate with Lemmy, feel free to [open an issue](https://github.com/LemmyNet/lemmy/issues). Make sure to include the specific federation messages you are sending, and any errors returned by Lemmy.
+
 ## Context
 
 ```json
