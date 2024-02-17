@@ -20,6 +20,7 @@ Lemmy uses roughly 150 MB of RAM in the default Docker installation. CPU usage i
 ### Managed Hostings
 
 - [Elestio](https://elest.io/open-source/lemmy)
+- [K&T Host](https://www.knthost.com/lemmy)
 
 ### Other installation methods
 
