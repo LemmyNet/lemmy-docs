@@ -70,9 +70,9 @@ lemmy_server --disable-activity-sending --disable-scheduled-tasks
 lemmy_server --disable-activity-sending --disable-scheduled-tasks
 
 # 3 servers for sending out federation activities
-lemmy_server --disable-http-server --disable-scheduled-tasks --federate-process-index=0 --federate-process-count=3
 lemmy_server --disable-http-server --disable-scheduled-tasks --federate-process-index=1 --federate-process-count=3
 lemmy_server --disable-http-server --disable-scheduled-tasks --federate-process-index=2 --federate-process-count=3
+lemmy_server --disable-http-server --disable-scheduled-tasks --federate-process-index=3 --federate-process-count=3
 ```
 
 #### Scheduled tasks
