@@ -62,17 +62,17 @@ Here's a quick example on how you could start 3 web servers, 3 federation server
 
 ```
 # scheduled tasks
-lemmy_server --disable_http_server --disable_activity_sending
+lemmy_server --disable-http-server --disable-activity-sending
 
 # 3 http servers
-lemmy_server --disable_activity_sending --disable-scheduled-tasks
-lemmy_server --disable_activity_sending --disable-scheduled-tasks
-lemmy_server --disable_activity_sending --disable-scheduled-tasks
+lemmy_server --disable-activity-sending --disable-scheduled-tasks
+lemmy_server --disable-activity-sending --disable-scheduled-tasks
+lemmy_server --disable-activity-sending --disable-scheduled-tasks
 
 # 3 servers for sending out federation activities
-lemmy_server --disable_http_server --disable_scheduled_tasks --federate-process-index=0 --federate-process-count=3
-lemmy_server --disable_http_server --disable_scheduled_tasks --federate-process-index=1 --federate-process-count=3
-lemmy_server --disable_http_server --disable_scheduled_tasks --federate-process-index=2 --federate-process-count=3
+lemmy_server --disable-http-server --disable-scheduled-tasks --federate-process-index=0 --federate-process-count=3
+lemmy_server --disable-http-server --disable-scheduled-tasks --federate-process-index=1 --federate-process-count=3
+lemmy_server --disable-http-server --disable-scheduled-tasks --federate-process-index=2 --federate-process-count=3
 ```
 
 #### Scheduled tasks
