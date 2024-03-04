@@ -8,24 +8,28 @@ Debian-based distro:
 
 ```bash
 sudo apt install git cargo libssl-dev pkg-config libpq-dev curl
-# install yarn
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-sudo apt update && sudo apt install yarn
 ```
 
 Arch-based distro:
 
 ```bash
-sudo pacman -S git cargo openssl pkg-config postgresql-libs curl yarn
+sudo pacman -S git cargo openssl pkg-config postgresql-libs curl
 ```
 
 macOS:
 
-Install [Homebrew](https://brew.sh/) if you don't already have it installed. Then install Node and Yarn.
+Install [Homebrew](https://brew.sh/) if you don't already have it installed. Then install Node and pnpm.
 
 ```bash
-brew install node yarn
+brew install node
+```
+
+### Install pnpm
+
+The install instructions are [here](https://pnpm.io/installation), or you can run
+
+```bash
+npm install -g pnpm
 ```
 
 ### Setup PostgreSQL database
@@ -82,7 +86,7 @@ After making changes, you need to format the code with `cargo +nightly fmt --all
 
 ### Frontend development
 
-Install dependencies by running `yarn`. Then run `yarn dev` to launch lemmy-ui locally. It automatically connects to the Lemmy backend on `localhost:8536`. Open [localhost:1234](http://localhost:1234) in your browser. The project is rebuilt automatically when you change any files.
+Install dependencies by running `pnpm i`. Then run `pnpm dev` to launch lemmy-ui locally. It automatically connects to the Lemmy backend on `localhost:8536`. Open [localhost:1234](http://localhost:1234) in your browser. The project is rebuilt automatically when you change any files.
 
 Note that this setup doesn't support image uploads. If you want to test those, you need to use the
 [Docker development](03-docker-development.md).
