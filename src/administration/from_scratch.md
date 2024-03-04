@@ -222,13 +222,9 @@ If you did everything right, the Lemmy logs from `sudo journalctl -u lemmy` shou
 
 #### Install dependencies
 
-Nodejs and yarn in Ubuntu 20.04 / Ubuntu 22.04 repos are too old, so let's install Node 20.
+Nodejs in Ubuntu 20.04 / Ubuntu 22.04 repos are too old, so let's install Node 20.
 
 ```
-# yarn
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-
 # nodejs
 sudo apt install -y ca-certificates curl gnupg
 sudo mkdir -p /etc/apt/keyrings
@@ -236,7 +232,11 @@ curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg 
 echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
 
 sudo apt update
-sudo apt install nodejs yarn
+sudo apt install nodejs
+
+# pnpm
+npm i -g pnpm
+
 ```
 
 #### Build the front-end
@@ -250,8 +250,8 @@ sudo -u lemmy bash
 git clone https://github.com/LemmyNet/lemmy-ui.git --recursive
 cd lemmy-ui
 git checkout 0.18.5 # replace with the version you want to install
-yarn install --pure-lockfile
-yarn build:prod
+pnpm i
+pnpm build:prod
 exit
 ```
 
@@ -454,8 +454,8 @@ git checkout main
 git pull --tags
 git checkout 0.18.5 # replace with the version you are updating to
 git submodule update
-yarn install --pure-lockfile
-yarn build:prod
+pnpm install
+pnpm build:prod
 exit
 sudo systemctl restart lemmy-ui
 ```
