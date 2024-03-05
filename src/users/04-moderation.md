@@ -31,3 +31,229 @@ All moderation actions are taken on the context menu of posts or comments. Click
 | Purge user         | Completely delete the user, including all posts and uploaded media. Use with caution.                                                       | Admin            |
 | Purge post/comment | Completely delete the post, including attached media.                                                                                       | Admin            |
 | Appoint as admin   | Gives the user administrator status                                                                                                         | Admin            |
+
+### Image Moderation
+
+> Attribution: This documentation was originally posted by Michael Altfield [here](https://tech.michaelaltfield.net/2024/03/04/lemmy-fediverse-gdpr/)
+
+Currently there is no WUI for deleting images in Lemmy. And deleting accounts does not delete the accounts' images. For more information, please see:
+
+-   [lemmy #4433: Deleted Account should delete uploaded media
+    (pictures) too](https://github.com/LemmyNet/lemmy/issues/4433)
+-   [lemmy #4441: Users unable to delete their images (pictrs
+    API)](https://github.com/LemmyNet/lemmy/issues/4441)
+-   [lemmy #4445: Create an interface for local users to view and remove
+    images](https://github.com/LemmyNet/lemmy/issues/4445)
+-   [lemmy-ui #2359: Allow users to delete images they
+    uploaded](https://github.com/LemmyNet/lemmy-ui/issues/2359)
+-   [lemmy-ui #2360: Allow admins to view & delete uploaded
+    images](https://github.com/LemmyNet/lemmy-ui/issues/2360)
+
+#### How to purge images in Lemmy
+
+[pict-rs](https://git.asonix.dog/asonix/pict-rs/) is a third-party
+simple image hosting service that runs along-side Lemmy for instances
+that allow users to upload media.
+
+At the time of writing, [there is no WUI for admins to find and delete
+images](https://github.com/LemmyNet/lemmy-ui/issues/2360). You have to
+manually query the pict-rs database and execute an API call from the
+command-line.
+
+For the purposes of this example, let\'s assume you\'re trying to delete
+the following image
+
+```
+https://monero.town/pictrs/image/001665df-3b25-415f-8a59-3d836bb68dd1.webp
+```
+
+There are two [API endpoints in
+pict-rs](https://git.asonix.dog/asonix/pict-rs/) that can be used to
+delete an image
+
+##### Method One: /image/delete/{delete_token}/{alias}
+
+This API call is publicly-accessible, but it first requires you to
+obtain the image\'s \``delete_token`\`
+
+The \``delete_token`\` is first returned by Lemmy when POSTing to the
+\``/pictrs/image`\` endpoint
+
+```
+{
+   "msg":"ok",
+   "files":[
+      {
+         "file":"001665df-3b25-415f-8a59-3d836bb68dd1.webp",
+         "delete_token":"d88b7f32-a56f-4679-bd93-4f334764d381"
+      }
+   ]
+}
+```
+
+Two pieces of information are returned here:
+
+1.  **file** (aka the \"alias\") is the *server* filename of the
+    uploaded image
+2.  **delete_token** is the token needed to delete the image
+
+Of course, if you didn\'t capture this image\'s \``delete_token`\` at
+upload-time, then you must fetch it from the postgres DB.
+
+First, open a shell on your running postgres container. If you installed
+Lemmy with docker compose, use \``docker compose ps`\` to get the
+\"SERVICE\" name of your postgres host, and then enter it with
+\``docker exec`\`
+
+```
+docker compose ps --format "table {{.Service}}\t{{.Image}}\t{{.Name}}"
+docker compose exec <docker_service_name> /bin/bash
+```
+
+For example:
+
+```
+user@host:/home/user/lemmy# docker compose ps --format "table {{.Service}}\t{{.Image}}\t{{.Name}}"
+SERVICE    IMAGE                            NAME
+lemmy      dessalines/lemmy:0.19.3          lemmy-lemmy-1
+lemmy-ui   dessalines/lemmy-ui:0.19.3       lemmy-lemmy-ui-1
+pictrs     docker.io/asonix/pictrs:0.5.4    lemmy-pictrs-1
+postfix    docker.io/mwader/postfix-relay   lemmy-postfix-1
+postgres   docker.io/postgres:15-alpine     lemmy-postgres-1
+proxy      docker.io/library/nginx          lemmy-proxy-1
+user@host:/home/user/lemmy# 
+
+user@host:/home/user/lemmy# docker compose exec postgres /bin/bash
+postgres:/# 
+```
+
+Connect to the database as the \``lemmy`\` user
+
+```
+psql -U lemmy
+```
+
+For example
+
+```
+postgres:/# psql -U lemmy
+psql (15.5)
+Type "help" for help.
+
+lemmy=# 
+```
+
+Query for the image by the \"alias\" (the filename)
+
+```
+select * from image_upload where pictrs_alias = '<image_filename>';
+```
+
+For example
+
+```
+lemmy=# select * from image_upload where pictrs_alias = '001665df-3b25-415f-8a59-3d836bb68dd1.webp';
+ local_user_id | pictrs_alias | pictrs_delete_token | published 
+---------------+--------------+---------------------+-----------
+1149 | 001665df-3b25-415f-8a59-3d836bb68dd1.webp | d88b7f32-a56f-4679-bd93-4f334764d381 | 2024-02-07 11:10:17.158741+00
+(1 row)
+
+lemmy=# 
+```
+
+Now, take the \``pictrs_delete_token`\` from the above output, and use
+it to delete the image.
+
+The following command should be able to be run on any computer connected
+to the internet.
+
+```
+curl -i "https://<instance_domain>/pictrs/image/delete/<pictrs_delete_token>/<image_filename>"
+```
+
+For example:
+
+```
+user@disp9140:~$ curl -i "https://monero.town/pictrs/image/delete/d88b7f32-a56f-4679-bd93-4f334764d381/001665df-3b25-415f-8a59-3d836bb68dd1.webp"
+
+HTTP/2 204 No Content
+server: nginx
+date: Fri, 09 Feb 2024 15:37:48 GMT
+vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
+cache-control: private
+referrer-policy: same-origin
+x-content-type-options: nosniff
+x-frame-options: DENY
+x-xss-protection: 1; mode=block
+X-Firefox-Spdy: h2
+user@disp9140:~$ 
+```
+
+> ⓘ Note: If you get an \``incorrect_login`\` error, then try \[a\]
+logging into the instance in your web browser and then \[b\] pasting the
+\"`https://<instance_domain>/pictrs/image/delete/<pictrs_delete_token>/<image_filename>`\"
+URL into your web browser.
+
+The image should be deleted.
+
+##### Method Two: /internal/purge?alias={alias}
+
+Alternatively, you could execute the deletion directly inside the pictrs
+container. This eliminates the need to fetch the \``delete_token`\`.
+
+First, open a shell on your running \``pictrs`\` container. If you
+installed Lemmy with docker compose, use \``docker compose ps`\` to get
+the \"SERVICE\" name of your postgres host, and then enter it with
+\``docker exec`\`
+
+```
+docker compose ps --format "table {{.Service}}\t{{.Image}}\t{{.Name}}"
+docker compose exec <docker_service_name> /bin/sh
+```
+
+For example:
+
+```
+user@host:/home/user/lemmy# docker compose ps --format "table {{.Service}}\t{{.Image}}\t{{.Name}}"
+SERVICE    IMAGE                            NAME
+lemmy      dessalines/lemmy:0.19.3          lemmy-lemmy-1
+lemmy-ui   dessalines/lemmy-ui:0.19.3       lemmy-lemmy-ui-1
+pictrs     docker.io/asonix/pictrs:0.5.4    lemmy-pictrs-1
+postfix    docker.io/mwader/postfix-relay   lemmy-postfix-1
+postgres   docker.io/postgres:15-alpine     lemmy-postgres-1
+proxy      docker.io/library/nginx          lemmy-proxy-1
+user@host:/home/user/lemmy# 
+
+user@host:/home/user/lemmy# docker compose exec pictrs /bin/sh
+~ $ 
+```
+
+Execute the following command inside the \``pictrs`\` container.
+
+```
+wget --server-response --post-data "" --header "X-Api-Token: ${PICTRS__SERVER__API_KEY}" "http://127.0.0.1:8080/internal/purge?alias=<image_filename>"
+```
+
+For example:
+
+```
+~ $ wget --server-response --post-data "" --header "X-Api-Token: ${PICTRS__SERVER__API_KEY}" "http://127.0.0.1:8080/internal/purge?alias=001665df-3b25-415f-8a59-3d836bb68dd1.webp"
+Connecting to 127.0.0.1:8080 (127.0.0.1:8080)
+HTTP/1.1 200 OK
+content-length: 67
+connection: close
+content-type: application/json
+date: Wed, 14 Feb 2024 12:56:24 GMT
+
+saving to 'purge?alias=001665df-3b25-415f-8a59-3d836bb68dd1.webp'
+purge?alias=001665df 100% |*****************************************************************************************************************************************************************************************************************************| 67 0:00:00 ETA
+'purge?alias=001665df-3b25-415f-8a59-3d836bb68dd1.webp' saved
+
+~ $ 
+```
+
+> ⓘ Note: There\'s an error in the pict-rs reference documentation. It
+says you can POST to \`/internal/delete\`, but that just returns
+`404 Not Found`.
+
+The image should be deleted
