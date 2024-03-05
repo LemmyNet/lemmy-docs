@@ -6,6 +6,7 @@ These are the main repositories which are relevant for contributors:
 
 - [lemmy](https://github.com/LemmyNet/lemmy): The backend which is the core of Lemmy. It implements SQL queries, provides the API and handles ActivityPub federation. Additionally it sends emails and provides RSS feeds. Written in Rust with actix-web and diesel. The issue tracker is also used for general enhancements which affect multiple repositories.
 - [lemmy-ui](https://github.com/LemmyNet/lemmy-ui): The main frontend for Lemmy. It provides the user interface that you see when viewing a Lemmy instance. Written in Typescript and CSS with the Inferno framework.
+- [lemmy-docs](https://github.com/LemmyNet/lemmy-docs): This documentation.
 - [lemmy-ansible](https://github.com/LemmyNet/lemmy-ansible): Automated installation method which is recommended for users without technical knowledge.
 - [joinlemmy-site](https://github.com/LemmyNet/joinlemmy-site): Source code for the official project website [join-lemmy.org](https://join-lemmy.org/). Landing page for new users which includes general information and a list of instances.
 - [lemmy-js-client](https://github.com/LemmyNet/lemmy-js-client): Client for the Lemmy API which is used by lemmy-ui. Can also be used by other projects to get started more easily.
