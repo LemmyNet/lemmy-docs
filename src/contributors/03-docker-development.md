@@ -29,6 +29,9 @@ Use these commands to create a custom container based on your local branch and t
 
 This is useful if you want to modify the source code of your instance to add some extra functionalities which are not available in the main release.
 
+Before you build, edit `docker/Dockerfile` and set `RUST_RELEASE_MODE=release` or the debugging will make the instance too slow.
+
+
 ```bash
 sudo docker build . -f docker/Dockerfile -t "lemmy:${git rev-parse --abbrev-ref HEAD}"
 ```
@@ -59,15 +62,15 @@ If you want a custom docker build to run on your instance via docker, you don't 
 The following commands will copy the file to your instance and then load it onto your server's container registry
 
 ```bash
-LEMMY_SRV=192.168.0.1 # Add the IP or hostname of your lemmy server here
+LEMMY_SRV=lemmy.example.com # Add the FQDN, IP or hostname of your lemmy server here
 # We store in /tmp to avoid putting it in our local branch and commiting it by mistake
-sudo docker save -o /tmp/customlemmy lemmy:${git rev-parse --abbrev-ref HEAD}
+sudo docker save -o /tmp/customlemmy.tar lemmy:${git rev-parse --abbrev-ref HEAD}
 # We change permissios to allow our normal user to read the file as root might not have ssh keys
 sudo chown ${whoami} /tmp/${git rev-parse --abbrev-ref HEAD}
-scp /tmp/customlemmy ${LEMMY_SRV}:
+scp /tmp/customlemmy.tar ${LEMMY_SRV}:
 ssh ${LEMMY_SRV}
 # This command should be run while in your lemmy server as the user you uploaded
-sudo docker load -i ${HOME}/customlemmy
+sudo docker load -i ${HOME}/customlemmy.tar
 ```
 
 After the container is in your registry, simply change the docker-compose to have your own tag in the `image` key

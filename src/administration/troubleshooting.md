@@ -99,7 +99,7 @@ Due to the lemmy queue, remove lemmy instances will be sending apub sync actions
 
 Typically the speed at which you process an incoming action should be less than 100ms. If this is higher, this might signify problems with your database performance or your networking setup.
 
-Note that even apub action ingestion speed which seems sufficient for most other instances, might become insufficient if the origin server is receiving actions faster than you can process them. I.e. if the origin server receives 10 actions per second, but you can only process 8 actions per second, you'll inevitably start falling behind that one server only.
+Note that even apub action ingestion speed which seems sufficient for most other instances, might become insufficient if the origin server is receiving actions from their userbase faster than you can process them. I.e. if the origin server receives 10 actions per second, but you can only process 8 actions per second, you'll inevitably start falling behind that one server only.
 
 These steps might help you diagnose this.
 
@@ -110,13 +110,16 @@ Check how long a request takes to process on the backend. In haproxy for example
 ```bash
 tail -f /var/log/haproxy.log | grep  "POST \/inbox"
 ```
+
+[See here for nginx](https://www.nginx.com/blog/using-nginx-logging-for-application-performance-monitoring/)
+
 If these actions take more than 100ms, you might want to investigate deeper.
 
 ####  Check your Database performance
 
 Ensure that it's not very high in CPU or RAM utilization. 
 
-Afterwards check for slow queries. If you regularly see common queries  with high max and mean exec time, it might signify your database is struggling. The below SQL query will show you all queries (you will need `pg_stat_statements` enabled)
+Afterwards check for slow queries. If you regularly see common queries  with high max and mean exec time, it might signify your database is struggling. The below SQL query will show you all queries (you will need `pg_stat_statements` [enabled](https://www.postgresql.org/docs/current/pgstatstatements.html))
 
 ```sql
 \x auto
@@ -145,3 +148,45 @@ if the `time` you see if above 1-2ms, this can start causing such delays. In tha
 
 Note that your external loadbalancer(s) (if any) do not necessarily need to be closer to the DB, as they do not do multiple small DB requests.
 
+## Downgrading
+
+If you upgraded your instance to a newer version (by mistake or planned) and need to downgrade it. Often you need to reverse database changes as well.
+
+First you need to figure out what SQL changes happened between your upgraded version, and the one you're downgrading. Then in that diff, check which files were added in the `migrations` dir.
+
+Let's say that for the migration you're doing, the following were added
+
+```
+2023-10-24-131607_proxy_links
+2023-10-27-142514_post_url_content_type
+2023-12-19-210053_tolerable-batch-insert-speed
+2023-12-22-040137_make-mixed-sorting-directions-work-with-tuple-comparison
+2024-01-05-213000_community_aggregates_add_local_subscribers
+2024-01-15-100133_local-only-community
+2024-01-22-105746_lemmynsfw-changes
+2024-01-25-151400_remove_auto_resolve_report_trigger
+2024-02-15-171358_default_instance_sort_type
+2024-02-27-204628_add_post_alt_text
+2024-02-28-144211_hide_posts
+```
+
+Each of these folders contains a `down.sql` file. We need to run that against our postgresql DB to rollback those DB changes.
+
+1. Stop your lemmy backend, and take a backup of your DB. 
+1. Copy the `migrations`  folder to your DB container or server
+1. Acquire a shell in your postgresql container or server and switch to the `postgres` user
+1. Run each relevant script with this command 
+   ```bash
+   downfolder=2024-02-28-144211_hide_posts
+   psql -d lemmy -a -f /path/to/migrations/${downfolder}/down.sql
+   ```
+   Alternatively, copy the content of the file and paste into a psql session
+1. You now need to clean the `__diesel_schema_migrations` table from the migration records, so that they will be correctly applied the next time you upgrade. You can use this command to sort them
+   ```sql
+   select * from __diesel_schema_migrations ORDER BY run_on ASC;
+   ```
+   You have to delete the entries in that table which match the current timestamp you appied them (This should typically be any time in the past few minutes)
+   ```sql
+   delete from __diesel_schema_migrations where version='20240228144211';
+   ```
+1. You should now be able to start your lemmy in the previous version
