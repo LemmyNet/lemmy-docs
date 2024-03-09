@@ -29,11 +29,8 @@ Use these commands to create a custom container based on your local branch and t
 
 This is useful if you want to modify the source code of your instance to add some extra functionalities which are not available in the main release.
 
-Before you build, edit `docker/Dockerfile` and set `RUST_RELEASE_MODE=release` or the debugging will make the instance too slow.
-
-
 ```bash
-sudo docker build . -f docker/Dockerfile -t "lemmy:${git rev-parse --abbrev-ref HEAD}"
+sudo docker build . -f docker/Dockerfile --build-arg RUST_RELEASE_MODE=release -t "lemmy:${git rev-parse --abbrev-ref HEAD}"
 ```
 
 #### Build Troubleshooting
@@ -43,6 +40,7 @@ In case the build fails, the following might help resolve it
 ##### Translations missing
 
 If you see an error like this
+
 ```
 Error: FileRead { file: "translations/email/en.json", source: Os { code: 2, kind: NotFound, message: "No such file or directory" } }
 ```

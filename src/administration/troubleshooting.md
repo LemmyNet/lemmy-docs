@@ -105,8 +105,8 @@ These steps might help you diagnose this.
 
 #### Check processing time on the loadbalancer
 
-Check how long a request takes to process on the backend. In haproxy for example, the following command will show you the time it takes for apub actions to complete 
-   
+Check how long a request takes to process on the backend. In haproxy for example, the following command will show you the time it takes for apub actions to complete
+
 ```bash
 tail -f /var/log/haproxy.log | grep  "POST \/inbox"
 ```
@@ -115,11 +115,11 @@ tail -f /var/log/haproxy.log | grep  "POST \/inbox"
 
 If these actions take more than 100ms, you might want to investigate deeper.
 
-####  Check your Database performance
+#### Check your Database performance
 
-Ensure that it's not very high in CPU or RAM utilization. 
+Ensure that it's not very high in CPU or RAM utilization.
 
-Afterwards check for slow queries. If you regularly see common queries  with high max and mean exec time, it might signify your database is struggling. The below SQL query will show you all queries (you will need `pg_stat_statements` [enabled](https://www.postgresql.org/docs/current/pgstatstatements.html))
+Afterwards check for slow queries. If you regularly see common queries with high max and mean exec time, it might signify your database is struggling. The below SQL query will show you all queries (you will need `pg_stat_statements` [enabled](https://www.postgresql.org/docs/current/pgstatstatements.html))
 
 ```sql
 \x auto
@@ -172,10 +172,10 @@ Let's say that for the migration you're doing, the following were added
 
 Each of these folders contains a `down.sql` file. We need to run that against our postgresql DB to rollback those DB changes.
 
-1. Stop your lemmy backend, and take a backup of your DB. 
-1. Copy the `migrations`  folder to your DB container or server
+1. Stop your lemmy backend, and take a backup of your DB.
+1. Copy the `migrations` folder to your DB container or server
 1. Acquire a shell in your postgresql container or server and switch to the `postgres` user
-1. Run each relevant script with this command 
+1. Run each relevant script with this command
    ```bash
    downfolder=2024-02-28-144211_hide_posts
    psql -d lemmy -a -f /path/to/migrations/${downfolder}/down.sql
