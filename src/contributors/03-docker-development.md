@@ -61,7 +61,7 @@ The following commands will copy the file to your instance and then load it onto
 
 ```bash
 LEMMY_SRV=lemmy.example.com # Add the FQDN, IP or hostname of your lemmy server here
-# We store in /tmp to avoid putting it in our local branch and commiting it by mistake
+# We store in /tmp to avoid putting it in our local branch and committing it by mistake
 sudo docker save -o /tmp/customlemmy.tar lemmy:${git rev-parse --abbrev-ref HEAD}
 # We change permissios to allow our normal user to read the file as root might not have ssh keys
 sudo chown ${whoami} /tmp/${git rev-parse --abbrev-ref HEAD}

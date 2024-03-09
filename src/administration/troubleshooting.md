@@ -95,7 +95,7 @@ https://phiresky.github.io/lemmy-federation-state/site
 
 ### You don't receive actions reliably
 
-Due to the lemmy queue, remove lemmy instances will be sending apub sync actions serially to you. If your server rate of processing them is slower than the rate the origin server is sending them, when visiting the [lemmy-federation-state](https://phiresky.github.io/lemmy-federation-state/site) for the remote server, you'll see your instance in the "lagging behing" section.
+Due to the lemmy queue, remove lemmy instances will be sending apub sync actions serially to you. If your server rate of processing them is slower than the rate the origin server is sending them, when visiting the [lemmy-federation-state](https://phiresky.github.io/lemmy-federation-state/site) for the remote server, you'll see your instance in the "lagging behind" section.
 
 Typically the speed at which you process an incoming action should be less than 100ms. If this is higher, this might signify problems with your database performance or your networking setup.
 
@@ -185,7 +185,7 @@ Each of these folders contains a `down.sql` file. We need to run that against ou
    ```sql
    select * from __diesel_schema_migrations ORDER BY run_on ASC;
    ```
-   You have to delete the entries in that table which match the current timestamp you appied them (This should typically be any time in the past few minutes)
+   You have to delete the entries in that table which match the current timestamp you applied them (This should typically be any time in the past few minutes)
    ```sql
    delete from __diesel_schema_migrations where version='20240228144211';
    ```
