@@ -23,6 +23,68 @@ Get the code with submodules:
 git clone https://github.com/LemmyNet/lemmy --recursive
 ```
 
+### Building
+
+Use these commands to create a custom container based on your local branch and tagged accordingly.
+
+This is useful if you want to modify the source code of your instance to add some extra functionalities which are not available in the main release.
+
+```bash
+sudo docker build . -f docker/Dockerfile --build-arg RUST_RELEASE_MODE=release -t "lemmy:${git rev-parse --abbrev-ref HEAD}"
+```
+
+#### Build Troubleshooting
+
+In case the build fails, the following might help resolve it
+
+##### Translations missing
+
+If you see an error like this
+
+```
+Error: FileRead { file: "translations/email/en.json", source: Os { code: 2, kind: NotFound, message: "No such file or directory" } }
+```
+
+Try these commands
+
+```bash
+git submodule init && git submodule update
+```
+
+Then try building again
+
+### Running custom build on your server
+
+If you want a custom docker build to run on your instance via docker, you don't need to upload to a container repository, you can upload directly from your PC through ssh.
+
+The following commands will copy the file to your instance and then load it onto your server's container registry
+
+```bash
+LEMMY_SRV=lemmy.example.com # Add the FQDN, IP or hostname of your lemmy server here
+# We store in /tmp to avoid putting it in our local branch and committing it by mistake
+sudo docker save -o /tmp/customlemmy.tar lemmy:${git rev-parse --abbrev-ref HEAD}
+# We change permissios to allow our normal user to read the file as root might not have ssh keys
+sudo chown ${whoami} /tmp/${git rev-parse --abbrev-ref HEAD}
+scp /tmp/customlemmy.tar ${LEMMY_SRV}:
+ssh ${LEMMY_SRV}
+# This command should be run while in your lemmy server as the user you uploaded
+sudo docker load -i ${HOME}/customlemmy.tar
+```
+
+After the container is in your registry, simply change the docker-compose to have your own tag in the `image` key
+
+```
+image: lemmy:your_branch_name
+```
+
+Finally, reinitiate the container
+
+```
+docker-compose up -d
+```
+
+You should now be running your custom docker container.
+
 ### Running
 
 ```bash
