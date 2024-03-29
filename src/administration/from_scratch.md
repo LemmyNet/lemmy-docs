@@ -55,7 +55,7 @@ For the Rust compiles, it is ideal to use a non-privileged Linux account on your
 protobuf-compiler may be required for Ubuntu 20.04 or 22.04 installs, please report testing in lemmy-docs issues.
 
 ```
-sudo apt install protobuf-compiler
+sudo apt install protobuf-compiler gcc
 ```
 
 ### Setup pict-rs (Optional)
