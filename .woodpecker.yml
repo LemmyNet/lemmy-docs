@@ -37,7 +37,7 @@ steps:
       - event: pull_request
 
   dead_links:
-    image: becheran/mlc:latest
+    image: becheran/mlc:0.16.3
     commands:
       - mlc src/en --offline --ignore-links "*localhost*" --ignore-links "*127.0.0.1*" --ignore-links /api
     when:
