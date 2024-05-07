@@ -39,6 +39,7 @@
 - [Federation](contributors/05-federation.md)
 - [Resources](contributors/06-resources.md)
 - [Ranking Algorithm](contributors/07-ranking-algo.md)
+- [Plugins](contributors/08-plugins.md)
 
 # Code of Conduct
 
