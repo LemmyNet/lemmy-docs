@@ -1,5 +1,7 @@
 # Lemmy Plugins
 
+A plugin system for Lemmy is currently in [experimental state](https://github.com/LemmyNet/lemmy/pull/4695). At this point the design is not final, so as plugin developer you can help us design a sensible API. You can post any experiences or problems with plugins in the pull request linked above. Only once there is some developer feedback will the plugin system be merged and released.
+
 To get started writing plugins, follow the instructions in [Local Development](https://join-lemmy.org/docs/contributors/02-local-development.html) to setup a local test instance from git. Checkout the `plugin-system` branch. See the [Extism documentation](https://github.com/extism/extism?tab=readme-ov-file#compile-webassembly-to-run-in-extism-hosts) for information how to write a plugin, and have a look at the [sample plugin in Golang](https://github.com/LemmyNet/lemmy/tree/ef76b48505661cea92d15cf46c40c9dc3496b746/plugins). To test your plugin, place the compiled `.wasm` file in the `plugins` folder and start Lemmy.
 
 Plugins are invoked on specific hooks. API hooks are defined based on the HTTP method and path, with the form `api_before_{method}_{path}`. You can find the name of specific plugin hooks by running Lemmy, invoking the desired API call and grepping the logs for `Calling plugin hook`. Then declare hook in your plugin code.
