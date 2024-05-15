@@ -32,7 +32,7 @@ Note that this functionality is not meant to share large images or videos, becau
 
 Since Lemmy doesn't host large videos or other media, users can share files using [BitTorrent](https://en.wikipedia.org/wiki/BitTorrent) links. In BitTorrent, files are shared not by a single user, but by _many users_ at the same time. This makes file sharing efficient, fast, and reliable, as long as several sources are sharing the files.
 
-Lemmy supports posting torrent magnet links (links that start with `magnet:`) in the post _URL_ field, or as markdown links within comments.
+Lemmy supports posting torrent magnet links (links that start with `magnet:`) in the post _URL_ field, or as Markdown links within comments.
 
 With this, Lemmy can serve as an alternative to centralized media-centric services like YouTube and Spotify.
 
