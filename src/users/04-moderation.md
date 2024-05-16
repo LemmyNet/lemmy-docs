@@ -2,7 +2,7 @@
 
 The internet is full of bots, trolls and other malicious actors. Sooner or later they will post unwanted content to any website that is open to the public. It is the task of administrators and moderators to remove such unwanted content. Lemmy provides many tools for this, from removing individual posts and issuing temporary bans, to removing all content submitted by an offending user.
 
-Moderation in Lemmy is divided between administrators (admins) and moderators (mods). Admins are responsible for the entire instance, and can take action on any content. They are also the only ones who can completely ban users. In contrast, moderators are only responsible for a single community. Whereas admins can ban a user from the entire instance, mods can only ban them from their community.
+Moderation in Lemmy is divided between administrators (_admins_) and moderators (_mods_). Admins are responsible for the entire instance, and can take action on any content. They are also the only ones who can completely ban users. In contrast, moderators are only responsible for a single community. Whereas admins can ban a user from the entire instance, mods can only ban them from their community.
 
 The most important thing that normal users can do if they notice a rule-breaking post is to use the report function. If you notice such a post, click the flag icon to notify mods and admins. This way they can take action quickly and remove the offending content. To find out about removals and other mod actions, you can use the mod log which is linked at the bottom of the page. In some cases there may be content that you personally dislike, but which doesn't violate any rules. For this, there is a block function which hides all posts from a given user or community.
 
