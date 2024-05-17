@@ -1,4 +1,4 @@
-## Text
+# Text
 
 The main type of content in Lemmy is text which can be formatted with Markdown. Refer to the table below for supported formatting rules. The Lemmy user interface also provides buttons for formatting, so it's not necessary to remember all of it. You can also follow the interactive [CommonMark tutorial](https://commonmark.org/help/tutorial/) to get started.
 
@@ -11,34 +11,34 @@ The main type of content in Lemmy is text which can be formatted with Markdown. 
 | \[Link\](http://a.com)                                                                   | \[Link\]\[1\]<br>⋮ <br>\[1\]: http://b.org                                     | [Link](https://commonmark.org/)                                                                      |
 | !\[Image\](http://url/a.png)                                                             | !\[Image\]\[1\]<br>⋮ <br>\[1\]: http://url/b.jpg                               | ![Markdown](https://commonmark.org/help/images/favicon.png)                                          |
 | \> Blockquote                                                                            |                                                                                | <blockquote>Blockquote</blockquote>                                                                  |
-| \* List <br>\* List <br>\* List                                                          | \- List <br>\- List <br>\- List <br>                                           | _ List <br>_ List <br>\* List <br>                                                                   |
-| 1\. One <br>2\. Two <br>3\. Three                                                        | 1) One<br>2) Two<br>3) Three                                                   | 1. One<br>2. Two<br>3. Three                                                                         |
+| \* List <br>\* List <br>\* List                                                          | \- List <br>\- List <br>\- List <br>                                           | <ul><li>List</li><li>List</li><li>List</li></ul>                                                     |
+| 1\. One <br>2\. Two <br>3\. Three                                                        | 1) One<br>2) Two<br>3) Three                                                   | <ol><li>One</li><li>Two</li><li>Three</li></ol>                                                      |
 | Horizontal Rule <br>\---                                                                 | Horizontal Rule<br>\*\*\*                                                      | Horizontal Rule <br><hr>                                                                             |
 | \`Inline code\` with backticks                                                           |                                                                                | `Inline code` with backticks                                                                         |
-| \`\`\`<br>\# code block <br>print '3 backticks or'<br>print 'indent 4 spaces' <br>\`\`\` | ····\# code block<br>····print '3 backticks or'<br>····print 'indent 4 spaces' | \# code block <br>print '3 backticks or'<br>print 'indent 4 spaces'                                  |
+| \`\`\`<br>\# code block <br>print '3 backticks or'<br>print 'indent 4 spaces' <br>\`\`\` | ····\# code block<br>····print '3 backticks or'<br>····print 'indent 4 spaces' | <pre><code># code block<br>print '3 backticks or'<br>print 'indent 4 spaces'</code></pre>            |
 | ::: spoiler hidden or nsfw stuff<br>_a bunch of spoilers here_<br>:::                    |                                                                                | <details><summary> hidden or nsfw stuff </summary><p><em>a bunch of spoilers here</em></p></details> |
 | Some \~subscript\~ text                                                                  |                                                                                | Some <sub>subscript</sub> text                                                                       |
 | Some \^superscript\^ text                                                                |                                                                                | Some <sup>superscript</sup> text                                                                     |
 
 [CommonMark Tutorial](https://commonmark.org/help/tutorial/)
 
-## Images and video
+# Images and Video
 
 Lemmy also allows sharing of images and videos. To upload an image, go to the _Create post_ page and click the little image icon under the _URL_ field. This allows you to select a local image. If you made a mistake, a popup message allows you to delete the image. The same image button also allows uploading of videos in .gif format. Instead of uploading a local file, you can also simply paste the URL of an image or video from another website.
 
 Note that this functionality is not meant to share large images or videos, because that would require too many server resources. Instead, upload them on another platform like [PeerTube](https://joinpeertube.org/) or [Pixelfed](https://pixelfed.org/), and share the link on Lemmy.
 
-## Torrents
+# Torrents
 
 Since Lemmy doesn't host large videos or other media, users can share files using [BitTorrent](https://en.wikipedia.org/wiki/BitTorrent) links. In BitTorrent, files are shared not by a single user, but by _many users_ at the same time. This makes file sharing efficient, fast, and reliable, as long as several sources are sharing the files.
 
-Lemmy supports posting torrent magnet links (links that start with `magnet:`) in the post _URL_ field, or as markdown links within comments.
+Lemmy supports posting torrent magnet links (links that start with `magnet:`) in the post _URL_ field, or as Markdown links within comments.
 
 With this, Lemmy can serve as an alternative to centralized media-centric services like YouTube and Spotify.
 
-### How to watch Torrents
+## How to Watch Torrents
 
-#### Beginner
+### Beginner
 
 To easily stream videos and audio on Lemmy, you can use any of the following apps. After clicking on a torrent link in Lemmy, a dialog will pop up asking you to open the link in the app.
 
@@ -47,7 +47,7 @@ To easily stream videos and audio on Lemmy, you can use any of the following app
 - [Popcorn Time](https://github.com/popcorn-official/popcorn-desktop) (Desktop)
 - [xTorrent](https://play.google.com/store/apps/details?id=com.gamemalt.streamtorrentvideos) (Android)
 
-#### Expert
+### Expert
 
 For those who would like to help share files, you can use any of the following torrent clients.
 

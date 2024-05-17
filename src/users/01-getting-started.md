@@ -1,4 +1,4 @@
-## Choosing an instance
+# Choosing an Instance
 
 If you are used to sites like Reddit, then Lemmy works in a fundamentally different way. Instead of a single website like reddit.com, there are many different websites (called _instances_). These are operated by different people, have different topics and rules. Nevertheless, posts created in one instance can directly be seen by users who are registered on another. Its basically like email, but for social media.
 
@@ -6,7 +6,7 @@ This means before using Lemmy and registering an account, you need to pick an in
 
 [instance list screenshot]
 
-## Registration
+# Registration
 
 Once you choose an instance, it's time to create your account. To do this, click _sign up_ in the top right of the page, or click the top right button on mobile to open a menu with _sign up_ link.
 
@@ -29,7 +29,7 @@ When you are done, press the _sign up_ button.
 
 It depends on the instance configuration when you can login and start using the account. In case the email is mandatory, you need to wait for the confirmation email and click the link first. In case "Question/Answer" is present, you need to wait for an admin to manually review and approve your registration. If you have problems with the registration, try to get in contact with the admin for support. You can also choose a different instance to sign up if your primary choice does not work.
 
-## Following communities
+# Following Communities
 
 After logging in to your new account, its time to follow communities that you are interested in. For this you can click on the _communities_ link at the top of the page (on mobile, you need to click the menu icon on the top right first). You will see a list of communities which can be filtered by subscribed, local or all. Local communities are those which are hosted on the same site where you are signed in, while _all_ also contains federated communities from other instances. In any case you can directly subscribe to communities with the right-hand subscribe link. Or click on the community name to browse the community first, see what its posted and what the rules are before subscribing.
 
@@ -37,7 +37,7 @@ Another way to find communities to subscribe to is by going to the front page an
 
 These previous ways will only show communities that are already known to the instance. Especially if you joined a small or inactive Lemmy instance, there will be few communities to discover. You can find more communities by browsing different Lemmy instances, or using the [Lemmy Community Browser](https://browse.feddit.de/). When you found a community that you want to follow, enter its URL (e.g. `https://feddit.de/c/main`) or the identifier (e.g. `!main@feddit.de`) into the search field of your own Lemmy instance. Lemmy will then fetch the community from its original instance, and allow you to interact with it. The same method also works to fetch users, posts or comments from other instances.
 
-## Setting up your profile
+# Setting up Your Profile
 
 Before you start posting, its a good idea to provide some details about yourself. Open the top-right menu and go to "settings". Here the following settings are available for your public profile:
 
@@ -53,7 +53,7 @@ On this page you can also change the email and password. Additionally there are 
 - **Interface language**: Which language the user interface should use.
 - **Languages**: Select the languages that you speak to see only content in these languages. This is a new feature and many posts don't specify a language yet, so be sure to select "Undetermined" to see them.
 - **Theme**: You can choose between different color themes for the user interface. Instance admins can add more themes.
-- **Type**: Which timeline you want to see by default on the frontpage; only posts from communities that you subscribe to, posts in local communities, or all posts including federated.
+- **Type**: Which timeline you want to see by default on the front page; only posts from communities that you subscribe to, posts in local communities, or all posts including federated.
 - **Sort type**: How posts and comments should be sorted by default. See [Votes and Ranking](03-votes-and-ranking.md) for details.
 - **Show NSFW content**: Whether or not you want to see content that is "not safe for work" (or adult-only).
 - **Show Scores**: Whether the number of upvotes and downvotes should be visible.
@@ -64,10 +64,10 @@ On this page you can also change the email and password. Additionally there are 
 - **Show Notifications for New Posts**: Enable this to receive a popup notification for each new post that is created.
 - **Send notifications to Email**: Enable to receive notifications about new comment replies and private messages to your email address.
 
-## Start posting
+# Start Posting
 
 Finally its time to start posting! To do this it is always a good idea to read the community rules in the sidebar (below the _Subscribe_ button). When you are ready, go to a post and type your comment in the box directly below for a top-level reply. You can also write a nested reply to an existing comment, by clicking the left-pointing arrow.
 
-Other than commenting on existing posts, you can also create new posts. To do this, click the button _Create a post_ in the sidebar. Here you can optionally supply an external link or upload an image. The title field is mandatory and should describe what you are posting. The body is again optional, and gives space for long texts. You can also embed additional images here. The _Community_ dropdown below allows choosing a different community to post in. With _NSFW_ posts can be marked as "not safe for work". Finally you can specify the language that the post is written in, and then click on _Create_.
+Other than commenting on existing posts, you can also create new posts. To do this, click the button _Create a post_ in the sidebar. Here you can optionally supply an external link or upload an image. The title field is mandatory and should describe what you are posting. The body is again optional, and gives space for long texts. You can also embed additional images here. The _Community_ dropdown below allows choosing a different community to post in. With _NSFW_, posts can be marked as "not safe for work". Finally you can specify the language that the post is written in, and then click on _Create_.
 
 One more possibility is to write private messages to individual users. To do this, simply visit a user profile and click _Send message_. You will be notified about new private messages and comment replies with the bell icon in the top right.
