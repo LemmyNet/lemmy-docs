@@ -64,20 +64,25 @@ Here's a quick example on how you could start 3 web servers, 3 federation server
 # scheduled tasks
 lemmy_server --disable-http-server --disable-activity-sending
 ```
+
 Or run the Docker container with the `-e LEMMY_DISABLE_HTTP_SERVER=true` and `-e LEMMY_DISABLE_ACTIVITY_SENDING=true` ENV parameters.
+
 ```
 # 3 http servers
 lemmy_server --disable-activity-sending --disable-scheduled-tasks
 lemmy_server --disable-activity-sending --disable-scheduled-tasks
 lemmy_server --disable-activity-sending --disable-scheduled-tasks
 ```
+
 Or run the Docker containers with the `-e LEMMY_DISABLE_ACTIVITY_SENDING=true` and `-e LEMMY_DISABLE_SCHEDULED_TASKS=true` ENV parameters.
+
 ```
 # 3 servers for sending out federation activities
 lemmy_server --disable-http-server --disable-scheduled-tasks --federate-process-index=1 --federate-process-count=3
 lemmy_server --disable-http-server --disable-scheduled-tasks --federate-process-index=2 --federate-process-count=3
 lemmy_server --disable-http-server --disable-scheduled-tasks --federate-process-index=3 --federate-process-count=3
 ```
+
 Or run the Docker containers with the `-e LEMMY_DISABLE_HTTP_SERVER=true`, `-e LEMMY_DISABLE_SCHEDULED_TASKS=true`, `-e LEMMY_FEDERATE_PROCESS_INDEX=1` and `-e LEMMY_FEDERATE_PROCESS_COUNT=3` ENV parameters.
 
 #### Scheduled tasks
