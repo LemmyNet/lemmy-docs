@@ -63,30 +63,40 @@ Here's a quick example on how you could start 3 web servers, 3 federation server
 ```
 # scheduled tasks
 lemmy_server --disable-http-server --disable-activity-sending
+```
 
+Or run the Docker container with the `-e LEMMY_DISABLE_HTTP_SERVER=true` and `-e LEMMY_DISABLE_ACTIVITY_SENDING=true` ENV parameters.
+
+```
 # 3 http servers
 lemmy_server --disable-activity-sending --disable-scheduled-tasks
 lemmy_server --disable-activity-sending --disable-scheduled-tasks
 lemmy_server --disable-activity-sending --disable-scheduled-tasks
+```
 
+Or run the Docker containers with the `-e LEMMY_DISABLE_ACTIVITY_SENDING=true` and `-e LEMMY_DISABLE_SCHEDULED_TASKS=true` ENV parameters.
+
+```
 # 3 servers for sending out federation activities
 lemmy_server --disable-http-server --disable-scheduled-tasks --federate-process-index=1 --federate-process-count=3
 lemmy_server --disable-http-server --disable-scheduled-tasks --federate-process-index=2 --federate-process-count=3
 lemmy_server --disable-http-server --disable-scheduled-tasks --federate-process-index=3 --federate-process-count=3
 ```
 
+Or run the Docker containers with the `-e LEMMY_DISABLE_HTTP_SERVER=true`, `-e LEMMY_DISABLE_SCHEDULED_TASKS=true`, `-e LEMMY_FEDERATE_PROCESS_INDEX=1` and `-e LEMMY_FEDERATE_PROCESS_COUNT=3` ENV parameters.
+
 #### Scheduled tasks
 
 By default, a Lemmy_server process will run background scheduled tasks, which must be run only on one server. Launching multiple processes with the default configuration will result in multiple duplicated scheduled tasks all starting at the same moment and trying to do the same thing at once.
 
-To solve this, Lemmy must be started with the `--disable-scheduled-tasks` flag on all but one instance. In general, there are two approaches:
+To solve this, Lemmy must be started with the `--disable-scheduled-tasks` flag (or `LEMMY_DISABLE_SCHEDULED_TASKS=true`) on all but one instance. In general, there are two approaches:
 
 1. Run all your load balanced Lemmy servers with the `--disable-scheduled-tasks` flag, and run one additional Lemmy server without this flag which is not in your load balancer and does not accept any HTTP traffic.
 2. Run one load balanced Lemmy server without the flag, and all other load balanced servers with the flag.
 
 #### Federation queue
 
-The persistent federation queue (since 0.19) is split by federated domain and can be processed in equal-size parts run in separate processes. To split the queue up into N processes numbered 1...N, use the arguments `--federate-process-index=i --federate-process-count=N` on each. It is important that each index is is given to exactly one process, otherwise you will get undefined behaviour (missing, dupe federation, crashes).
+The persistent federation queue (since 0.19) is split by federated domain and can be processed in equal-size parts run in separate processes. To split the queue up into N processes numbered 1...N, use the arguments `--federate-process-index=i --federate-process-count=N` on each (or `LEMMY_FEDERATE_PROCESS_INDEX=i` and `LEMMY_FEDERATE_PROCESS_COUNT=N` respectively). It is important that each index is is given to exactly one process, otherwise you will get undefined behaviour (missing, dupe federation, crashes).
 
 Federation processes can be started and stopped at will. They will restart federation to each instance from the last transmitted activity regardless of downtime.
 
