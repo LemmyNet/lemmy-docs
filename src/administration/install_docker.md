@@ -1,29 +1,24 @@
 # Docker Installation
 
-Make sure you have both docker and docker-compose(>=`2.0`) installed. On Ubuntu, just run `apt install docker-compose-v2 docker.io`. On Debian, you need to install Docker [using their official installation instructions and custom `apt` repo](https://docs.docker.com/engine/install/debian/). Next,
+Make sure you have both docker and docker-compose(>=`2.0`) installed. On Ubuntu, just run `apt install docker-compose-v2 docker.io`. On Debian, you need to install Docker [using their official installation instructions and custom `apt` repo](https://docs.docker.com/engine/install/debian/).
+
+Create a folder for the lemmy files. the location doesnt matter. You can put this anywhere you want, for example under `/srv/`:
 
 ```bash
-# Create a folder for the lemmy files. the location doesnt matter, you can put this anywhere you want
 mkdir lemmy
 cd lemmy
 ```
 
-## Download default config files
-
-These files contain `{{ }}` braces for variables, such as passwords and your domain.
-
-Edit them before starting up lemmy for the first time.
-
-The images will likely be: [dessalines/lemmy:VERSION](https://hub.docker.com/r/dessalines/lemmy) and [dessalines/lemmy-ui:VERSION](https://hub.docker.com/r/dessalines/lemmy-ui)
-
-[Tracking Issue](https://github.com/LemmyNet/lemmy/issues/3996): For now, using `latest` is not advisable as changes can break your instance. Make sure you are using a specific version number. This is temporary and will be fixed.
+Then download default config files:
 
 ```bash
-wget https://raw.githubusercontent.com/LemmyNet/lemmy-ansible/main/templates/docker-compose.yml
+wget https://raw.githubusercontent.com/LemmyNet/lemmy-docs/main/assets/docker-compose.yml
 wget https://raw.githubusercontent.com/LemmyNet/lemmy-ansible/main/examples/config.hjson -O lemmy.hjson
 wget https://raw.githubusercontent.com/LemmyNet/lemmy-ansible/main/templates/nginx_internal.conf
 wget https://raw.githubusercontent.com/LemmyNet/lemmy-ansible/main/files/proxy_params
 ```
+
+Edit `docker-compose.yml` and `lemmy.hjson` to replace all occurrences of `{{ domain }}` with your actual Lemmy domain, `{{ postgres_password }}` with a random password and `{{lemmy_port}}` with `10633`.
 
 If you'd like further customization, have a look at the [config file](configuration.md) named `lemmy.hjson`, and adjust it accordingly.
 
@@ -72,10 +67,9 @@ For federation to work, it is important that you do not change any headers that 
 
 # Updating
 
-To update to the newest version, you can manually change the version in `docker-compose.yml`. Alternatively, fetch the latest version from our [lemmy-ansible](https://github.com/LemmyNet/lemmy-ansible) repo:
+To update to the newest version, it is usually enough to change the version numbers in `docker-compose.yml`, eg `dessalines/lemmy:0.19.4` to `dessalines/lemmy:0.19.5`. If additional steps are required, these are explained in the respective release announcement. After changing the versions, run these commands:
 
 ```bash
-wget https://raw.githubusercontent.com/LemmyNet/lemmy-ansible/main/templates/docker-compose.yml
-# Then replace the {{ }} vars again
+docker compose pull
 docker compose up -d
 ```

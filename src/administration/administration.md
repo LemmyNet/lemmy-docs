@@ -2,7 +2,7 @@
 
 Information for Lemmy instance admins, and those who want to run a server.
 
-If you have any problems in the installation, you can ask for help in [!lemmy_support](https://lemmy.ml/c/lemmy_support). Do not use Github for support.
+If you have any problems in the installation, you can ask for help in [!lemmy_support](https://lemmy.ml/c/lemmy_support) or [Matrix](https://matrix.to/#/#lemmy-support-general:discuss.online). Do not open Github issues for support.
 
 ## Install
 
