@@ -19,6 +19,7 @@ The main type of content in Lemmy is text which can be formatted with Markdown. 
 | ::: spoiler hidden or nsfw stuff<br>_a bunch of spoilers here_<br>:::                    |                                                                                | <details><summary> hidden or nsfw stuff </summary><p><em>a bunch of spoilers here</em></p></details> |
 | Some \~subscript\~ text                                                                  |                                                                                | Some <sub>subscript</sub> text                                                                       |
 | Some \^superscript\^ text                                                                |                                                                                | Some <sup>superscript</sup> text                                                                     |
+| \~\~Strikethrough\~\~                                                                    |                                                                                | Some ~removed~ text                                                                                  |
 
 [CommonMark Tutorial](https://commonmark.org/help/tutorial/)
 
