@@ -61,3 +61,54 @@ If you'd like, you can also set up a media server to view this content on any de
 
 - [Jellyfin](https://jellyfin.org/) (Movies, TV, Music, Audiobooks)
 - [Navidrome](https://www.navidrome.org/) (Music)
+
+## How do I convert a youtube video to a torrent?
+
+There are _many_ possible ways to do this, this is only one example. It requires:
+
+- [yt-dlp](https://github.com/yt-dlp/yt-dlp) (To download the youtube videos locally)
+- [transmission-cli](https://transmissionbt.com/) (To create a `.torrent` file from the command line)
+- [qbittorrent-cli](https://github.com/ludviglundgren/qbittorrent-cli) (A command line tool to add this torrent to any qbitttorrent server)
+
+You can use the following script below, pasting in a youtube link.
+
+`./my_script "https://youtu.be/VIDEO_URL"`
+
+```
+#!/bin/bash
+set -e
+
+youtube_url=$1
+
+# Download the video
+# The format should be in mkv, not webm, see
+# https://github.com/Stremio/stremio-bugs/issues/900
+yt-dlp "$1" \
+  --remux-video "mkv"
+
+# Create torrents
+shopt -s nullglob
+for i in *.mp4 *.webm *.mkv; do
+  torrent="tmp.torrent"
+
+  # Create it
+  transmission-create "$i" -o $torrent \
+    -t udp://tracker.coppersurfer.tk:6969/announce \
+    -t udp://tracker.internetwarriors.net:1337/announce \
+    -t udp://tracker.opentrackr.org:1337/announce
+
+  # Move the video to your download dir
+  mv "$i" downloads/
+
+  # Add it to qbittorrent
+  qbt torrent add $torrent
+
+  # Print out the magnet link
+  echo "Magnet link:"
+  transmission-show $torrent -m
+
+  # Remove the tmp torrent
+  rm "$torrent"
+
+done
+```
