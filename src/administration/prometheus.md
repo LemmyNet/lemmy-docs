@@ -1,4 +1,4 @@
-# Prometheus
+# Prometheus Metrics
 
 Lemmy supports the export of metrics in the [Prometheus](https://prometheus.io/)
 format. This document outlines how to enable the feature and begin collecting

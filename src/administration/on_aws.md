@@ -1,4 +1,4 @@
-# Installing on AWS
+# Install on AWS
 
 > ⚠️ **Disclaimer:** this installation method is not recommended by the Lemmy developers. If you have any problems, you need to solve them yourself or ask the respective authors. If you notice any Lemmy bugs on an instance installed like this, please mention it in the bug report.
 

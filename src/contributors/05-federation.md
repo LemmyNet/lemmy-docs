@@ -1,4 +1,4 @@
-## Federation
+# Federation
 
 Lemmy uses the ActivityPub protocol for communication between servers. If you are unfamiliar with the protocol, you can start by reading the [resource links](06-resources.md#activitypub-resources). This document explains how to interact with it from other projects.
 

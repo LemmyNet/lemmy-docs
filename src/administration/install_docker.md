@@ -1,4 +1,4 @@
-# Docker Installation
+# Install with Docker
 
 Make sure you have both docker and docker-compose(>=`2.0`) installed. On Ubuntu, just run `apt install docker-compose-v2 docker.io`. On Debian, you need to install Docker [using their official installation instructions and custom `apt` repo](https://docs.docker.com/engine/install/debian/).
 

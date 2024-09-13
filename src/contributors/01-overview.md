@@ -1,4 +1,4 @@
-## Contributing
+# Overview
 
 Lemmy is an open source project and relies on community contributions to get better. Development happens mainly in the [Lemmy Github repositories](https://github.com/LemmyNet). Communication is done over [Matrix](https://matrix.to/#/#activitypub-community:codelutin.com).
 

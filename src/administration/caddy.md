@@ -1,4 +1,4 @@
-# Using Caddy as reverse proxy example
+# Using Caddy as reverse proxy
 
 If you prefer to use Caddy instead of Nginx - you could use this template to fit into your needs:
 

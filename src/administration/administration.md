@@ -1,4 +1,4 @@
-# Administration info
+# Administration
 
 Information for Lemmy instance admins, and those who want to run a server.
 
