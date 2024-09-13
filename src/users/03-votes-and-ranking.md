@@ -35,3 +35,7 @@ Comments can be sorted in the following ways. These all keep the indentation int
 Additionally there is a sort option **Chat**. This eliminates the hierarchy, and puts all comments on the top level, with newest comments shown at the top. It is useful to see new replies at any point in the conversation, but makes it difficult to see the context.
 
 The ranking algorithm is described in detail [here](../contributors/07-ranking-algo.md).
+
+# Vote Privacy
+
+Lemmy attempts to limit the visibility of votes to protect user privacy. But due to the way Lemmy works, votes cannot be completely private. Both instance admins and community moderators can see the names of users who voted on a given post or comment. This helps to fight against vote manipulation. Additionally, individual votes are federated over ActivityPub together with the corresponding username. This means that other federated platforms can freely choose how to display vote information, even going as far as publicly displaying individual votes.
