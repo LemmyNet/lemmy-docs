@@ -1,4 +1,4 @@
-# From Scratch
+# Install from Scratch
 
 These instructions are written for Ubuntu 20.04 / Ubuntu 22.04. They are particularly useful when you'd like to setup a Lemmy container (e.g. LXC on Proxmox) and cannot use Docker.
 

@@ -1,4 +1,4 @@
-# Administration First Steps
+# First Steps
 
 After you successfully installed Lemmy either [manually with Docker](install_docker.md) or [automatically with Ansible](install_ansible.md) here are some recommendations for a new administrator of a Lemmy server.
 

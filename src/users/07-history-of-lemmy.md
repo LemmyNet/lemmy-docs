@@ -1,4 +1,4 @@
-## History of Lemmy
+# History of Lemmy
 
 The idea to make Lemmy was a combination of factors.
 

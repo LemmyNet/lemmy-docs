@@ -1,4 +1,4 @@
-## Introduction
+# Introduction
 
 Lemmy is a selfhosted, federated social link aggregation and discussion forum. It consists of many different communities which are focused on different topics. Users can post text, links or images and discuss it with others. Voting helps to bring the most interesting items to the top. There are strong moderation tools to keep out spam and trolls. All this is completely free and open, not controlled by any company. This means that there is no advertising, tracking, or secret algorithms.
 

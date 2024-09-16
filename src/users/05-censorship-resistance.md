@@ -1,4 +1,4 @@
-## Censorship resistance
+# Censorship resistance
 
 Today's social media landscape is extremely centralized. The vast majority of users are concentrated on only a handful of platforms like Facebook, Reddit or Twitter. All of these are maintained by large corporations that are subject to profit motive and United States law. In recent years these platforms have increasingly censored users and entire communities, often with questionable justifications. It is only natural that those who are affected by this search for alternatives. This document is intended to help with the evaluation.
 

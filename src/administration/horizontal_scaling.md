@@ -1,4 +1,4 @@
-# Scaling Lemmy horizontally
+# Horizontal Scaling
 
 This is a collection of notes on scaling different Lemmy components horizontally. This is not meant as a step-by-step guide, rather as general tips and knowledge that might be useful to somebody who is already familiar with and horizontal scaling concepts and best practices. If you don't already know about concepts like load balancing, object storage, and reverse proxies, then this document will probably be hard (or impossible) to understand.
 

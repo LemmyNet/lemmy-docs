@@ -1,4 +1,4 @@
-# Federation
+# Getting started with Federation
 
 Lemmy has three types of federation:
 

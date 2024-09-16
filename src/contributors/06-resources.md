@@ -1,4 +1,4 @@
-# Resources / Libraries
+# Resources
 
 ## Rust
 

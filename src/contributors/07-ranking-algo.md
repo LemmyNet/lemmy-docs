@@ -1,4 +1,4 @@
-# Trending / Hot / Best Sorting algorithm
+# Ranking Algorithm
 
 ## Goals
 

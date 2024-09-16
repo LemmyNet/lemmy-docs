@@ -1,6 +1,6 @@
-## Docker Development
+# Docker Development
 
-### Dependencies
+## Dependencies
 
 Debian-based distro:
 
@@ -23,7 +23,7 @@ Get the code with submodules:
 git clone https://github.com/LemmyNet/lemmy --recursive
 ```
 
-### Building
+## Building
 
 Use these commands to create a custom container based on your local branch and tagged accordingly.
 

@@ -1,4 +1,4 @@
-# Tor Hidden Services
+# Running a Tor Hidden Service
 
 This guide assumes Lemmy has been installed using the official [Docker Compose](install_docker.md) method.
 
