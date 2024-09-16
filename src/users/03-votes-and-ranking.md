@@ -38,6 +38,6 @@ Additionally there is a sort option **Chat**. This eliminates the hierarchy, and
 
 The ranking algorithm is described in detail [here](../contributors/07-ranking-algo.md).
 
-# Vote Privacy
+## Vote Privacy
 
 Lemmy attempts to limit the visibility of votes to protect user privacy. But due to the way Lemmy works, votes cannot be completely private. Instance admins can see the names of everyone who voted on a given post or comment, and community moderators can see the names for the communities they moderate. This helps to fight against vote manipulation. Additionally, individual votes are federated over ActivityPub together with the corresponding username. This means that other federated platforms can freely choose how to display vote information, even going as far as publicly displaying individual votes.
