@@ -7,13 +7,13 @@ Install the latest Rust version using [rustup](https://www.rust-lang.org/tools/i
 Debian-based distro:
 
 ```bash
-sudo apt install git cargo libssl-dev pkg-config libpq-dev curl
+sudo apt install git cargo pkg-config libpq-dev curl
 ```
 
 Arch-based distro:
 
 ```bash
-sudo pacman -S git cargo openssl pkg-config postgresql-libs curl
+sudo pacman -S git cargo pkg-config postgresql-libs curl
 ```
 
 macOS:
