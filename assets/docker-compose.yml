@@ -67,7 +67,7 @@ services:
     logging: *default-logging
 
   postgres:
-    image: pgautoupgrade/pgautoupgrade:16-alpine
+    image: pgautoupgrade/pgautoupgrade:17-alpine
     hostname: postgres
     environment:
       - POSTGRES_USER=lemmy
