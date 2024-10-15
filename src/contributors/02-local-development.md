@@ -16,6 +16,12 @@ Arch-based distro:
 sudo pacman -S git cargo pkg-config postgresql-libs curl
 ```
 
+Fedora-based distro:
+
+```bash
+sudo dnf install git cargo pkg-config libpq-devel curl
+```
+
 macOS:
 
 Install [Homebrew](https://brew.sh/) if you don't already have it installed. Then install Node and pnpm.
