@@ -19,7 +19,7 @@ sudo pacman -S git cargo pkg-config postgresql-libs curl
 Fedora-based distro:
 
 ```bash
-sudo dnf install git cargo pkg-config libpq-devel curl
+sudo dnf install git cargo pkg-config libpq-devel curl postgresql-server postgresql-contrib
 ```
 
 macOS:
