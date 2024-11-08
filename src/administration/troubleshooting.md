@@ -70,7 +70,7 @@ It is possible that federation requests to `/inbox` are blocked by tools such as
 
 - Set `RUST_LOG=lemmy_federate=trace` for Lemmy
 - Reload the new configuration: `docker compose up -d`
-- Search for messages containing the target instance domain: `docker compose logs -f --tail=100 lemmy-federate |  grep lemm.ee -C 10`
+- Search for messages containing the target instance domain: `docker compose logs -f --tail=100 lemmy |  grep -F lemm.ee -C 10`
 - If you use a [separate container for outgoing federation](horizontal_scaling.md), you need to apply the previous steps to that container only
 - You also may have to reset the fail count for the target instance (see below)
 
@@ -80,8 +80,14 @@ If federation sending to a specific instance has been failing consistently, Lemm
 
 - Stop Lemmy, or specifically the container for outgoing federation `docker compose stop lemmy`
 - Enter SQL command line: `sudo docker compose exec postgres psql -U lemmy`
-- Find id of the target instance: `select * from instance where domain = 'lemm.ee';`
-- Reset failure count via SQL: `update federation_queue_state set fail_count = 0 where instance_id = 137189;`
+- Reset failure count via SQL:
+```sql
+update federation_queue_state
+set fail_count = 0
+from instance
+where instance.id = federation_queue_state.instance_id
+and instance.domain = 'lemm.ee'
+```
 - Exit SQL command line with `\q`, then restart Lemmy: `docker compose start lemmy`
 
 ### Other instances don't receive actions reliably
@@ -113,9 +119,9 @@ https://phiresky.github.io/lemmy-federation-state/site
 
 ### You don't receive actions reliably
 
-Due to the lemmy queue, remove lemmy instances will be sending apub sync actions serially to you. If your server rate of processing them is slower than the rate the origin server is sending them, when visiting the [lemmy-federation-state](https://phiresky.github.io/lemmy-federation-state/site) for the remote server, you'll see your instance in the "lagging behind" section.
+Due to the lemmy queue, remote lemmy instances will be sending apub sync actions serially to you. If your server rate of processing them is slower than the rate the origin server is sending them, when visiting the [lemmy-federation-state](https://phiresky.github.io/lemmy-federation-state/site) for the remote server, you'll see your instance in the "lagging behind" section.
 
-This can be avoided by setting the config value `federationconcurrent_sends_per_instance` to a value greater than 1 on the sending instance.
+This can be avoided by setting the config value `federation.concurrent_sends_per_instance` to a value greater than 1 on the sending instance.
 
 Typically the speed at which you process an incoming action should be less than 100ms. If this is higher, this might signify problems with your database performance or your networking setup.
 
