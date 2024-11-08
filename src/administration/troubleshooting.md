@@ -81,6 +81,7 @@ If federation sending to a specific instance has been failing consistently, Lemm
 - Stop Lemmy, or specifically the container for outgoing federation `docker compose stop lemmy`
 - Enter SQL command line: `sudo docker compose exec postgres psql -U lemmy`
 - Reset failure count via SQL:
+
 ```sql
 update federation_queue_state
 set fail_count = 0
@@ -88,6 +89,7 @@ from instance
 where instance.id = federation_queue_state.instance_id
 and instance.domain = 'lemm.ee';
 ```
+
 - Exit SQL command line with `\q`, then restart Lemmy: `docker compose start lemmy`
 
 ### Other instances don't receive actions reliably
