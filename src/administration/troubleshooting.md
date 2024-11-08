@@ -68,10 +68,10 @@ Also ensure that the time is correct on your server. Activities are signed with 
 
 It is possible that federation requests to `/inbox` are blocked by tools such as Cloudflare. The sending instance can find HTTP errors with the following steps:
 
+- If you use a [separate container for outgoing federation](horizontal_scaling.md), you need to apply the following steps to that container only
 - Set `RUST_LOG=lemmy_federate=trace` for Lemmy
 - Reload the new configuration: `docker compose up -d`
 - Search for messages containing the target instance domain: `docker compose logs -f --tail=100 lemmy |  grep -F lemm.ee -C 10`
-- If you use a [separate container for outgoing federation](horizontal_scaling.md), you need to apply the previous steps to that container only
 - You also may have to reset the fail count for the target instance (see below)
 
 ### Reset federation fail count for instance
@@ -86,7 +86,7 @@ update federation_queue_state
 set fail_count = 0
 from instance
 where instance.id = federation_queue_state.instance_id
-and instance.domain = 'lemm.ee'
+and instance.domain = 'lemm.ee';
 ```
 - Exit SQL command line with `\q`, then restart Lemmy: `docker compose start lemmy`
 
