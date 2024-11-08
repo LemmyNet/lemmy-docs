@@ -64,7 +64,25 @@ curl -H "Accept: application/activity+json" https://your-instance.com/comment/12
 
 Check that [federation is allowed on both instances](federation_getting_started.md).
 
-Also ensure that the time is accurately set on your server. Activities are signed with a timestamp, and will be discarded if it is off by more than 10 seconds.
+Also ensure that the time is correct on your server. Activities are signed with a timestamp, and will be discarded if it is off by more than one hour.
+
+It is possible that federation requests to `/inbox` are blocked by tools such as Cloudflare. The sending instance can find HTTP errors with the following steps:
+
+- Set `RUST_LOG=lemmy_federate=trace` for Lemmy
+- Reload the new configuration: `docker compose up -d`
+- Search for messages containing the target instance domain: `docker compose logs -f --tail=100 lemmy-federate |  grep lemm.ee -C 10`
+- If you use a [separate container for outgoing federation](horizontal_scaling.md), you need to apply the previous steps to that container only
+- You also may have to reset the fail count for the target instance (see below)
+
+### Reset federation fail count for instance
+
+If federation sending to a specific instance has been failing consistently, Lemmy will slow down sending using exponential backoff. For testing it can be useful to reset this and make Lemmy send activities immediately. To do this use the following steps:
+
+- Stop Lemmy, or specifically the container for outgoing federation `docker compose stop lemmy`
+- Enter SQL command line: `sudo docker compose exec postgres psql -U lemmy`
+- Find id of the target instance: `select * from instance where domain = 'lemm.ee';`
+- Reset failure count via SQL: `update federation_queue_state set fail_count = 0 where instance_id = 137189;`
+- Exit SQL command line with `\q`, then restart Lemmy: `docker compose start lemmy`
 
 ### Other instances don't receive actions reliably
 
@@ -96,6 +114,8 @@ https://phiresky.github.io/lemmy-federation-state/site
 ### You don't receive actions reliably
 
 Due to the lemmy queue, remove lemmy instances will be sending apub sync actions serially to you. If your server rate of processing them is slower than the rate the origin server is sending them, when visiting the [lemmy-federation-state](https://phiresky.github.io/lemmy-federation-state/site) for the remote server, you'll see your instance in the "lagging behind" section.
+
+This can be avoided by setting the config value `federationconcurrent_sends_per_instance` to a value greater than 1 on the sending instance.
 
 Typically the speed at which you process an incoming action should be less than 100ms. If this is higher, this might signify problems with your database performance or your networking setup.
 
