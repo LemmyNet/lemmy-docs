@@ -218,3 +218,34 @@ Each of these folders contains a `down.sql` file. We need to run that against ou
    delete from __diesel_schema_migrations where version='20240228144211';
    ```
 1. You should now be able to start your lemmy in the previous version
+
+## UI randomly slow or offline
+
+If you notice that your lemmy-ui sometimes becomes sluggish or unresponsive over a period of minutes/hours and then it passes, you might be getting targetted by scraper bots.
+
+There's a lot of scraper bots online and they can easily overwhelm your site when they're behaving too "greedily". 
+
+Unfortunately the existing lemmy-ui has a habit of falling over when polled too eagerly, while the backend still continues to work.
+
+One solution to deal with the scraping bots is to block their user agents. To do so, you can modify your nging_internal.conf to block some of the usual suspects, with this line under `server`
+
+```bash
+        if ($http_user_agent ~* " Bytedance|Bytespider|SemrushBot|Semrush|AhrefsBot|MJ12bot|YandexBot|YandexImages|MegaIndex.ru|BLEXbot|BLEXBot|ZoominfoBot|YaK|VelenPublicWebCrawler|SentiBot|Vagabondo|SEOkicks|SEOkicks-Robot|mtbot/1.1.0i|SeznamBot|DotBot|Cliqzbot|coccocbot|Scrap|SiteCheck-sitecrawl|MauiBot|GumGum|Clickagy|AspiegelBot|Yandex|TkBot|CCBot|Qwantify|MBCrawler|serpstatbot|AwarioSmartBot|Semantici|ScholarBot|proximic|MojeekBot|GrapeshotCrawler|IAScrawler|linkdexbot|contxbot|PlurkBot|PaperLiBot|BomboraBot|Leikibot|weborama-fetcher|NTENTbot|Screaming Frog SEO Spider|admantx-usaspb|Eyeotabot|VoluumDSP-content-bot|SirdataBot|adbeat_bot|TTD-Content|admantx|Nimbostratus-Bot|Mail.RU_Bot|Quantcastboti|Onespot-ScraperBot|Taboolabot|Baidu|Jobboerse|VoilaBot|Sogou|Jyxobot|Exabot|ZGrab|Proximi|Sosospider|Accoona|aiHitBot|Genieo|BecomeBot|ConveraCrawler|NerdyBot|OutclicksBot|findlinks|JikeSpider|Gigabot|CatchBot|Huaweisymantecspider|Offline Explorer|SiteSnagger|TeleportPro|WebCopier|WebReaper|WebStripper|WebZIP|Xaldon_WebSpider|BackDoorBot|AITCSRoboti|Arachnophilia|BackRub|BlowFishi|perl|CherryPicker|CyberSpyder|EmailCollector|Foobot|GetURL|HTTrack|LinkScan|Openbot|Snooper|SuperBot|URLSpiderPro|MAZBot|EchoboxBot|SerendeputyBot|LivelapBot|linkfluence.com|TweetmemeBot|LinkisBot|CrowdTanglebot|Amazonbot|ClaudeBot") { return 444; }
+```
+
+This is blocking of of the well-known scrapers, but there can be more.
+
+If you are still experiencing this issue even after adding this directive, you can use the following bash script at your lemmy backend (where your docker compose is) to enumerate any agents which are hitting you too http_upgrade
+
+```bash
+docker-compose logs --tail=10000 proxy | 
+    grep -o '"[^"]*"$' |     # Extract the last quoted string (user agent)
+    grep -v '^"$' |          # Remove empty quotes
+    tr -d '"' |              # Remove the quotes
+    sort |                   # Sort the user agents
+    uniq -c |               # Count unique occurrences
+    sort -rn |              # Sort numerically in reverse order
+    head -n 10              # Show top 10 results
+```
+
+This will parse the last 10K log entries in your nginx internal proxy and show the agents which cause the most hits. This should give a good indicator of which agents are potentially misbehaving and you can proceed to block those as well by adding them to the list above.
