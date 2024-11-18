@@ -230,12 +230,10 @@ Unfortunately the existing lemmy-ui has a habit of falling over when polled too 
 One solution to deal with the scraping bots is to block their user agents. To do so, you can modify your `nginx_internal.conf` to block some of the usual suspects, with this line under `server`
 
 ```bash
-        if ($http_user_agent ~* " Bytedance|Bytespider|SemrushBot|Semrush|AhrefsBot|MJ12bot|YandexBot|YandexImages|MegaIndex.ru|BLEXbot|BLEXBot|ZoominfoBot|YaK|VelenPublicWebCrawler|SentiBot|Vagabondo|SEOkicks|SEOkicks-Robot|mtbot/1.1.0i|SeznamBot|DotBot|Cliqzbot|coccocbot|Scrap|SiteCheck-sitecrawl|MauiBot|GumGum|Clickagy|AspiegelBot|Yandex|TkBot|CCBot|Qwantify|MBCrawler|serpstatbot|AwarioSmartBot|Semantici|ScholarBot|proximic|MojeekBot|GrapeshotCrawler|IAScrawler|linkdexbot|contxbot|PlurkBot|PaperLiBot|BomboraBot|Leikibot|weborama-fetcher|NTENTbot|Screaming Frog SEO Spider|admantx-usaspb|Eyeotabot|VoluumDSP-content-bot|SirdataBot|adbeat_bot|TTD-Content|admantx|Nimbostratus-Bot|Mail.RU_Bot|Quantcastboti|Onespot-ScraperBot|Taboolabot|Baidu|Jobboerse|VoilaBot|Sogou|Jyxobot|Exabot|ZGrab|Proximi|Sosospider|Accoona|aiHitBot|Genieo|BecomeBot|ConveraCrawler|NerdyBot|OutclicksBot|findlinks|JikeSpider|Gigabot|CatchBot|Huaweisymantecspider|Offline Explorer|SiteSnagger|TeleportPro|WebCopier|WebReaper|WebStripper|WebZIP|Xaldon_WebSpider|BackDoorBot|AITCSRoboti|Arachnophilia|BackRub|BlowFishi|perl|CherryPicker|CyberSpyder|EmailCollector|Foobot|GetURL|HTTrack|LinkScan|Openbot|Snooper|SuperBot|URLSpiderPro|MAZBot|EchoboxBot|SerendeputyBot|LivelapBot|linkfluence.com|TweetmemeBot|LinkisBot|CrowdTanglebot|Amazonbot|ClaudeBot") { return 444; }
+if ($http_user_agent ~* " Bytedance|Bytespider|Amazonbot|ClaudeBot") { return 444; }
 ```
 
-This is blocking of the well-known scrapers, but there can be more.
-
-If you are still experiencing this issue even after adding this directive, you can use the following bash script at your lemmy backend (where your docker compose is) to enumerate any agents which are hitting you too http_upgrade
+This is an example blocking some the well-known misbehaving bots, but there are many more more. To discover the ones affecting you, you can use the following bash script at your lemmy backend (where your docker compose is) to enumerate any agents which are hitting you too http_upgrade
 
 ```bash
 docker-compose logs --tail=10000 proxy | 
