@@ -218,3 +218,32 @@ Each of these folders contains a `down.sql` file. We need to run that against ou
    delete from __diesel_schema_migrations where version='20240228144211';
    ```
 1. You should now be able to start your lemmy in the previous version
+
+## UI randomly slow or offline
+
+If you notice that your lemmy-ui sometimes becomes sluggish or unresponsive over a period of minutes/hours and then it passes, you might be getting targeted by scraping bots.
+
+There's a lot of scraping bots online and they can easily overwhelm your site when they're behaving too "greedily".
+
+Unfortunately the existing lemmy-ui has a habit of falling over when polled too eagerly, while the backend still continues to work.
+
+One solution to deal with the scraping bots is to block their user agents. To do so, you can modify your `nginx_internal.conf` to block some of the usual suspects, with this line under `server`
+
+```bash
+if ($http_user_agent ~* " Bytedance|Bytespider|Amazonbot|ClaudeBot") { return 444; }
+```
+
+This is an example blocking some the well-known misbehaving bots, but there are many more more. To discover the ones affecting you, you can use the following bash script at your lemmy backend (where your docker compose is) to enumerate any agents which are hitting you too much.
+
+```bash
+docker-compose logs --tail=10000 proxy |
+    grep -o '"[^"]*"$' |     # Extract the last quoted string (user agent)
+    grep -v '^"$' |          # Remove empty quotes
+    tr -d '"' |              # Remove the quotes
+    sort |                   # Sort the user agents
+    uniq -c |               # Count unique occurrences
+    sort -rn |              # Sort numerically in reverse order
+    head -n 10              # Show top 10 results
+```
+
+This will parse the last 10K log entries in your nginx internal proxy and show the agents which cause the most hits. This should give a good indicator of which agents are potentially misbehaving and you can proceed to block those as well by adding their names to the list above.
