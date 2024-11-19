@@ -223,7 +223,7 @@ Each of these folders contains a `down.sql` file. We need to run that against ou
 
 If you notice that your lemmy-ui sometimes becomes sluggish or unresponsive over a period of minutes/hours and then it passes, you might be getting targetted by scraper bots.
 
-There's a lot of scraper bots online and they can easily overwhelm your site when they're behaving too "greedily". 
+There's a lot of scraper bots online and they can easily overwhelm your site when they're behaving too "greedily".
 
 Unfortunately the existing lemmy-ui has a habit of falling over when polled too eagerly, while the backend still continues to work.
 
@@ -236,7 +236,7 @@ if ($http_user_agent ~* " Bytedance|Bytespider|Amazonbot|ClaudeBot") { return 44
 This is an example blocking some the well-known misbehaving bots, but there are many more more. To discover the ones affecting you, you can use the following bash script at your lemmy backend (where your docker compose is) to enumerate any agents which are hitting you too
 
 ```bash
-docker-compose logs --tail=10000 proxy | 
+docker-compose logs --tail=10000 proxy |
     grep -o '"[^"]*"$' |     # Extract the last quoted string (user agent)
     grep -v '^"$' |          # Remove empty quotes
     tr -d '"' |              # Remove the quotes
