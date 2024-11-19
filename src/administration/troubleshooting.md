@@ -221,7 +221,7 @@ Each of these folders contains a `down.sql` file. We need to run that against ou
 
 ## UI randomly slow or offline
 
-If you notice that your lemmy-ui sometimes becomes sluggish or unresponsive over a period of minutes/hours and then it passes, you might be getting targetted by scraper bots.
+If you notice that your lemmy-ui sometimes becomes sluggish or unresponsive over a period of minutes/hours and then it passes, you might be getting targeted by scraper bots.
 
 There's a lot of scraper bots online and they can easily overwhelm your site when they're behaving too "greedily".
 
