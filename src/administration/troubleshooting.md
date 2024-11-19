@@ -233,7 +233,7 @@ One solution to deal with the scraping bots is to block their user agents. To do
 if ($http_user_agent ~* " Bytedance|Bytespider|Amazonbot|ClaudeBot") { return 444; }
 ```
 
-This is an example blocking some the well-known misbehaving bots, but there are many more more. To discover the ones affecting you, you can use the following bash script at your lemmy backend (where your docker compose is) to enumerate any agents which are hitting you too http_upgrade
+This is an example blocking some the well-known misbehaving bots, but there are many more more. To discover the ones affecting you, you can use the following bash script at your lemmy backend (where your docker compose is) to enumerate any agents which are hitting you too
 
 ```bash
 docker-compose logs --tail=10000 proxy | 
