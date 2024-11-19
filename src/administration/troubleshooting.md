@@ -223,11 +223,11 @@ Each of these folders contains a `down.sql` file. We need to run that against ou
 
 If you notice that your lemmy-ui sometimes becomes sluggish or unresponsive over a period of minutes/hours and then it passes, you might be getting targeted by scraping bots.
 
-There's a lot of scraping bots online and they can easily overwhelm your site when they're behaving too "greedily".
+There's a lot of scraping bots online and they can easily overwhelm your site when they're behaving too "greedily". Unfortunately the existing lemmy-ui has a habit of falling over when polled too eagerly, while the backend still continues to work.
 
-Unfortunately the existing lemmy-ui has a habit of falling over when polled too eagerly, while the backend still continues to work.
+A solution is to cache responses in nginx as seen in lemmy-ansible [here](https://github.com/LemmyNet/lemmy-ansible/blob/1.5.3/templates/nginx.conf#L2-L3) and [here](https://github.com/LemmyNet/lemmy-ansible/blob/1.5.3/templates/nginx.conf#L66-L71). This way lemmy-ui doens't have to generate all responses from scratch, which reduces CPU load.
 
-One solution to deal with the scraping bots is to block their user agents. To do so, you can modify your `nginx_internal.conf` to block some of the usual suspects, with this line under `server`
+Another option is to block the scraper's user agents. To do so, you can modify your `nginx_internal.conf` to block some of the usual suspects, with this line under `server`
 
 ```bash
 if ($http_user_agent ~* " Bytedance|Bytespider|Amazonbot|ClaudeBot") { return 444; }
