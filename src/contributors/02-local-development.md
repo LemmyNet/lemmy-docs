@@ -90,6 +90,16 @@ Use `cargo check` to find compilation errors. To start the Lemmy backend, run `c
 
 After making changes, you need to format the code with `cargo +nightly fmt --all` and run the linter with `./scripts/lint.sh`.
 
+If you'd like to speed up compilation times, you can add the following to `~/.cargo/config.toml` (requires nightly rust).
+
+```toml
+[unstable]
+codegen-backend = true
+
+[build]
+rustflags = ["-Clink-arg=-fuse-ld=lld", "-Zthreads=16"]
+```
+
 ### Frontend development
 
 Install dependencies by running `pnpm i`. Then run `pnpm dev` to launch lemmy-ui locally. It automatically connects to the Lemmy backend on `localhost:8536`. Open [localhost:1234](http://localhost:1234) in your browser. The project is rebuilt automatically when you change any files.
