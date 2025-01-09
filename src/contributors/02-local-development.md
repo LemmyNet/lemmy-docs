@@ -90,7 +90,7 @@ Use `cargo check` to find compilation errors. To start the Lemmy backend, run `c
 
 After making changes, you need to format the code with `cargo +nightly fmt --all` and run the linter with `./scripts/lint.sh`.
 
-If you'd like to speed up compilation times, you can install [mold](https://github.com/rui314/mold), and [sccache](https://github.com/mozilla/sccache), then add the following to `~/.cargo/config.toml` (requires nightly rust).
+If you'd like to speed up compilation times, you can install [mold](https://github.com/rui314/mold), and [sccache](https://github.com/mozilla/sccache), then add the following to `~/.cargo/config.toml`. Note that the parameter `-Zthreads=x` only works on nightly Rust.
 
 ```toml
 [build]
