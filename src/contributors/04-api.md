@@ -2,8 +2,6 @@
 
 Lemmy has `OpenAPI` and javascript client docs, for app and client developers.
 
-## OpenAPI docs
-
 | Version       | OpenAPI               | lemmy-js-client                          |
 | ------------- | --------------------- | ---------------------------------------- |
 | release/v0.19 | [OpenAPI](/api/v0.19) | [JS-client](/lemmy-js-client-docs/v0.19) |
