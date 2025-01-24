@@ -1,12 +1,21 @@
 # API
 
-Lemmy has an HTTP API for clients and frontends. See the [API documentation](/api) for more information. Instead of using the API directly you can use one of the existing [libraries](https://github.com/dbeley/awesome-lemmy#libraries). You can either interact with a local development instance via `http://localhost:8536`, or connect to a production instance. The following instances are available for testing purposes:
+Lemmy has `OpenAPI` and javascript client docs, for app and client developers.
+
+## OpenAPI docs
+
+| Version       | OpenAPI               | lemmy-js-client                          |
+| ------------- | --------------------- | ---------------------------------------- |
+| release/v0.19 | [OpenAPI](/api/v0.19) | [JS-client](/lemmy-js-client-docs/v0.19) |
+| main / dev    | [OpenAPI](/api/main)  | [JS-client](/lemmy-js-client-docs/main)  |
+
+Instead of using the API directly you can use one of the existing [libraries](https://github.com/dbeley/awesome-lemmy#libraries). You can either interact with a local development instance via `http://localhost:8536`, or connect to a production instance. The following instances are available for testing purposes:
 
 - https://enterprise.lemmy.ml/
 - https://ds9.lemmy.ml/
 - https://voyager.lemmy.ml/
 
-More clearly arranged, unofficial API documentation is available at:
+Other unofficial API documentation is available at:
 
 - [lemmy.readme.io](https://lemmy.readme.io/)
 - [mv-gh.github.io/lemmy_openapi_spec](https://mv-gh.github.io/lemmy_openapi_spec/)
