@@ -2,10 +2,10 @@
 
 Lemmy has `OpenAPI` and javascript client docs, for app and client developers.
 
-| Version       | OpenAPI               | lemmy-js-client                          |
-| ------------- | --------------------- | ---------------------------------------- |
-| release/v0.19 | [OpenAPI](/api/v0.19) | [JS-client](/lemmy-js-client-docs/v0.19) |
-| main / dev    | [OpenAPI](/api/main)  | [JS-client](/lemmy-js-client-docs/main)  |
+| Version       | OpenAPI              | lemmy-js-client                          |
+| ------------- | -------------------- | ---------------------------------------- |
+| release/v0.19 | Not available        | [JS-client](/lemmy-js-client-docs/v0.19) |
+| main / dev    | [OpenAPI](/api/main) | [JS-client](/lemmy-js-client-docs/main)  |
 
 Instead of using the API directly you can use one of the existing [libraries](https://github.com/dbeley/awesome-lemmy#libraries). You can either interact with a local development instance via `http://localhost:8536`, or connect to a production instance. The following instances are available for testing purposes:
 
