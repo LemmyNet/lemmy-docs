@@ -13,11 +13,6 @@ Instead of using the API directly you can use one of the existing [libraries](ht
 - https://ds9.lemmy.ml/
 - https://voyager.lemmy.ml/
 
-Other unofficial API documentation is available at:
-
-- [lemmy.readme.io](https://lemmy.readme.io/)
-- [mv-gh.github.io/lemmy_openapi_spec](https://mv-gh.github.io/lemmy_openapi_spec/)
-
 ### Curl Examples
 
 **GET example**
