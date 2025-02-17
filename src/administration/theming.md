@@ -12,11 +12,13 @@ After a theme is added, users can select it under `/settings`. Admins can set a 
 
 ## Default Theme Locations
 
-Default Lemmy themes are located in `/lemmy-ui/src/assets/css/themes`. Atom themes used for styling `<code>` are in `/lemmy-ui/src/assets/css/code-themes`.
+Default Lemmy themes are located in `/lemmy-ui/src/assets/css/themes`. Atom themes used for styling `<code>` are in `/lemmy-ui/src/assets/css/code-themes`. Custom css classes and changes to the default Bootstrap styles are in `/lemmy-ui/src/assets/css/main.css`.
 
 ## Making CSS themes with Sass and Bootstrap
 
 Some tips if making a theme based off the default Lemmy themes (recommended approach). 
+
+As users cannot currently upload their own themes in Settings (only Admin can do that), custom themes loaded with an external style sheet will need to take into account that users will have a pre-selected theme in Settings that may have conflicting styles with the custom theme. If a theme is developed from an existing theme, having the default theme selected in Settings can minimize style conflicts. 
 
 Every theme has these files: 
 
@@ -48,6 +50,7 @@ For the `darkly.css` theme, the bootstrap colours are used in the following cont
 ##### Grayscales
 
 - `bs-white` is used for `bs-emphasis`, `bs-table`, `border-white`, `text-light`
+- `bs-gray-200` is used for secondary button backgrounds
 - `bs-gray-300` is used for `bs-dark`, `bs-dark-emphasis`, and others
 - `bs-gray-500` is used for `bs-button-bg`, other button styles, `bs-button-disabled`, and some other inputs
 - `bs-gray-600` is used for the blockquote footer, disabled forms, disabled buttons, the dropdown heading colour, and `bs-gray`
