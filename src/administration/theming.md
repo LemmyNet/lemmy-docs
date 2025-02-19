@@ -77,4 +77,11 @@ Custom themes are appended to the bottom of the theme list.
 
 `build-themes-list.ts` will remove the file extension `.css` from the theme filename to display in Settings. For example, `darkly-compact.css` will appear as `darkly-compact`.
 
+## Build and Format Theme Files Quickly
 
+Some tips to save time which would be useful for theme developers or if you are submitting pull requests to [lemmy-ui (Github)](https://github.com/LemmyNet/lemmy-ui).
+
+After changing variables or Sass files:
+
+- run `pnpm themes:build` to automatically rebuild all Lemmy css theme files using Sass
+- run `npx prettier -w /lemmy-ui/src/assets/css/themes` to reformat the code in the themes directory with prettier
