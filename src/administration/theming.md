@@ -14,11 +14,9 @@ After a theme is added, users can select it under `/settings`. Admins can set a 
 
 Default Lemmy themes are located in `/lemmy-ui/src/assets/css/themes`. Atom themes used for styling `<code>` are in `/lemmy-ui/src/assets/css/code-themes`. Custom css classes and changes to the default Bootstrap styles are in `/lemmy-ui/src/assets/css/main.css`.
 
-## Making CSS themes with Sass and Bootstrap
+## Making CSS Themes with Sass and Bootstrap
 
-Some tips if making a theme based off the default Lemmy themes (recommended approach). 
-
-As users cannot currently upload their own themes in Settings (only Admin can do that), custom themes loaded with an external style sheet will need to take into account that users will have a pre-selected theme in Settings that may have conflicting styles with the custom theme. If a theme is developed from an existing theme, having the default theme selected in Settings can minimize style conflicts. 
+Some tips if making a theme based off the default Lemmy themes. 
 
 Every theme has these files: 
 
@@ -34,7 +32,7 @@ All `theme.scss` will import bootstrap variables from `"../../../../node_modules
 
 If you are new to Sass, keep in mind that `theme.scss` files are for css and Sass flavored css. `_variables.theme.scss` are for variables. 
 
-### Export Your CSS File 
+#### Export Your CSS File 
 
 To export your custom `.scss` and `_variables.theme.scss` files to a `.css` file open the command line in the same directory as your files and run:
 `sass theme.scss theme.css` which will generate the `.css` and `.css.map` files.
@@ -45,40 +43,23 @@ If you are new to Bootstrap, be aware that variables starting with a dollar sign
 
 #### Bootstrap Variables on Lemmy
 
-For the `darkly.css` theme, the bootstrap colours are used in the following contexts (not an exhaustive list):
-
-##### Grayscales
-
-- `bs-white` is used for `bs-emphasis`, `bs-table`, `border-white`, `text-light`
-- `bs-gray-200` is used for secondary button backgrounds
-- `bs-gray-300` is used for `bs-dark`, `bs-dark-emphasis`, and others
-- `bs-gray-500` is used for `bs-button-bg`, other button styles, `bs-button-disabled`, and some other inputs
-- `bs-gray-600` is used for the blockquote footer, disabled forms, disabled buttons, the dropdown heading colour, and `bs-gray`
-- `bs-700` is used for the card header background
-- `bs-800` is used for the card background and `bs-light`
-- `bs-gray-900` is the background colour
-
-##### Colours
-
-- `bs-red` is used as `bs-danger`
-- `bs-yellow` is used as `bs-warning`
-- `bs-cyan` is used for `bs-info` which is the link colour
+The Darkly and Litely themes use default Bootstrap variables to define the grayscales and colours. Inspecting the Bootstrap documentation for how colours are applied to elements is recommended, along with inspecting the CSS and output files.
 
 ##### Light and Dark Modes
 
 Even though `darkly.css` is a dark theme, it has in-built light and dark modes using media queries. The Bootstrap variables `$enable-dark-mode` and `$enable-light-mode` can be used to toggle this behaviour on or off.
 
-##### Grid Breakpoints
-
-You can change the grid breakpoints with the `$grid-breakpoints` variable. This might be important if you change the root font size or dramatically alter the layout.
-
-##### Everything else
+##### Overwriting Variables
 
 Most Lemmy theming is done with Bootstrap's default variables. Some variables are defined with `!important` which means if you have defined them in your custom theme that unless it also has `!important` it will be overwritten. To check, do a search in one of the default theme files or use the Developer Tools in your browser.
 
 To quickly test your theme if you do not own a Lemmy instance, you can use a browser add on to load your custom CSS file.
 
-## How CSS themes are added to Settings
+##### External Stylesheets
+
+As users cannot currently upload their own themes in Settings (only Admin can do that), custom themes loaded with an external style sheet will need to take into account that users will have a pre-selected theme in Settings that may have conflicting styles with the custom theme. If a theme is developed from an existing theme, having the default theme selected in Settings can minimize style conflicts. 
+
+## How CSS Themes are Added to Settings
 
 In short, given the css theme is the correct file format and in the correct theme directory, it will be appended to the bottom of the theme list in Settings. The name is the filename minus the file extension. Details are below.
 
