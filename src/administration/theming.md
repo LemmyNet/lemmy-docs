@@ -69,7 +69,7 @@ The Typescript file `theme-handler.ts` in `/lemmy-ui/src/server/handlers/` will 
 
 ### Building the Theme List
 
-If a custom css theme is found, the handler will call `themes-list-handler.ts` which will load `build-themes-list.ts` from `/lemmy-ui/src/server/utils/`. The file `buid-themes-list.ts` will search the directories for files ending in `.css` and build a list.
+If a custom css theme is found, the handler will call `themes-list-handler.ts` which will load `build-themes-list.ts` from `/lemmy-ui/src/server/utils/`. The file `build-themes-list.ts` will search the directories for files ending in `.css` and build a list.
 
 Custom themes are appended to the bottom of the theme list.
 
