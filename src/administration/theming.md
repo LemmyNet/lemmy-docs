@@ -16,9 +16,9 @@ Default Lemmy themes are located in `/lemmy-ui/src/assets/css/themes`. Atom them
 
 ## Making CSS Themes with Sass and Bootstrap
 
-Some tips if making a theme based off the default Lemmy themes. 
+Some tips if making a theme based off the default Lemmy themes.
 
-Every theme has these files: 
+Every theme has these files:
 
 - an output `theme.css`
 - an output `theme.css.map`
@@ -30,9 +30,9 @@ All `theme.scss` will import bootstrap variables from `"../../../../node_modules
 
 ### Using SCSS Files
 
-If you are new to Sass, keep in mind that `theme.scss` files are for css and Sass flavored css. `_variables.theme.scss` are for variables. 
+If you are new to Sass, keep in mind that `theme.scss` files are for css and Sass flavored css. `_variables.theme.scss` are for variables.
 
-#### Export Your CSS File 
+#### Export Your CSS File
 
 To export your custom `.scss` and `_variables.theme.scss` files to a `.css` file open the command line in the same directory as your files and run:
 `sass theme.scss theme.css` which will generate the `.css` and `.css.map` files.
@@ -57,7 +57,7 @@ To quickly test your theme if you do not own a Lemmy instance, you can use a bro
 
 ##### External Stylesheets
 
-As users cannot currently upload their own themes in Settings (only Admin can do that), custom themes loaded with an external style sheet will need to take into account that users will have a pre-selected theme in Settings that may have conflicting styles with the custom theme. If a theme is developed from an existing theme, having the default theme selected in Settings can minimize style conflicts. 
+As users cannot currently upload their own themes in Settings (only Admin can do that), custom themes loaded with an external style sheet will need to take into account that users will have a pre-selected theme in Settings that may have conflicting styles with the custom theme. If a theme is developed from an existing theme, having the default theme selected in Settings can minimize style conflicts.
 
 ## How CSS Themes are Added to Settings
 
@@ -69,9 +69,9 @@ The Typescript file `theme-handler.ts` in `/lemmy-ui/src/server/handlers/` will 
 
 ### Building the Theme List
 
-If a custom css theme is found, the handler will call `themes-list-handler.ts` which will load `build-themes-list.ts` from `/lemmy-ui/src/server/utils/`. The file `buid-themes-list.ts` will search the directories for files ending in `.css` and build a list. 
+If a custom css theme is found, the handler will call `themes-list-handler.ts` which will load `build-themes-list.ts` from `/lemmy-ui/src/server/utils/`. The file `buid-themes-list.ts` will search the directories for files ending in `.css` and build a list.
 
-Custom themes are appended to the bottom of the theme list. 
+Custom themes are appended to the bottom of the theme list.
 
 ### Theme Names
 
