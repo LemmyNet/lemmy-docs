@@ -107,7 +107,7 @@ git clone https://github.com/LemmyNet/lemmy.git lemmy
 cd lemmy
 git checkout 0.18.5
 git submodule init
-git submodule update --recursive --remote
+git submodule update
 ```
 
 When using the embedded pict-rs, use the following build command:
@@ -434,7 +434,7 @@ cd lemmy
 git checkout main
 git pull --tags
 git checkout 0.18.5 # replace with version you are updating to
-git submodule update --recursive --remote
+git submodule update
 # These instructions assume you build pictrs independent, but it is
 # OPTIONAL on next command: --features embed-pictrs
 cargo build --release
