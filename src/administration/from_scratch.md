@@ -107,7 +107,7 @@ git clone https://github.com/LemmyNet/lemmy.git lemmy
 cd lemmy
 git checkout 0.18.5
 git submodule init
-git submodule update --recursive --remote
+git submodule update
 ```
 
 When using the embedded pict-rs, use the following build command:
