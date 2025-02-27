@@ -434,7 +434,7 @@ cd lemmy
 git checkout main
 git pull --tags
 git checkout 0.18.5 # replace with version you are updating to
-git submodule update --recursive
+git submodule update
 # These instructions assume you build pictrs independent, but it is
 # OPTIONAL on next command: --features embed-pictrs
 cargo build --release
