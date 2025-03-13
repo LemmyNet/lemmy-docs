@@ -82,30 +82,7 @@ Uploaded content must be valid multipart/form-data with an image array located w
 
 ### Rust API
 
-If you want to develop a Rust application which interacts with Lemmy, you can directly pull in the relevant API structs. This uses the exact API structs used in Lemmy, but with most heavyweight dependencies disabled. API paths or HTTP client are not included, so you need to handle those aspects manually. To get started, run `cargo add lemmy_api_common` in your repository. You can then use the following code to make an API request:
-
-```rust
-use lemmy_api_common::post::{GetPosts, GetPostsResponse};
-use lemmy_db_schema::{ListingType, SortType};
-use ureq::Agent;
-
-pub fn list_posts() -> GetPostsResponse {
-    let params = GetPosts {
-        type_: Some(ListingType::Local),
-        sort: Some(SortType::New),
-        ..Default::default()
-    };
-    Agent::new()
-        .get("https://lemmy.ml/api/v3/post/list")
-        .send_json(&params).unwrap()
-        .into_json().unwrap()
-}
-```
-
-You can also look at the following real-world projects as examples:
-
-- [lemmyBB](https://github.com/LemmyNet/lemmyBB)
-- [lemmy-stats-crawler](https://github.com/LemmyNet/lemmy-stats-crawler)
+If you want to develop a Rust application which interacts with Lemmy, you can directly pull in the relevant API structs. This uses the exact API structs used in Lemmy, but with most heavyweight dependencies disabled. API paths or HTTP client are not included, so you need to handle those aspects manually. See the [readme](https://github.com/LemmyNet/lemmy/blob/main/crates/api_common/README.md) for details.
 
 ### Creating a Custom Frontend
 
