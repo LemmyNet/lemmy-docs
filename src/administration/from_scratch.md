@@ -62,11 +62,9 @@ sudo apt install protobuf-compiler gcc
 
 You can skip this section if you don't require image hosting, but **NOTE that Lemmy-ui will still allow users to attempt uploading images even if pict-rs is not configured. In this situation, the upload will fail and users will receive technical error messages.**
 
-Lemmy supports image hosting using [pict-rs](https://git.asonix.dog/asonix/pict-rs/). We need to install a couple of dependencies for this.
+Lemmy supports image hosting using [pict-rs](https://git.asonix.dog/asonix/pict-rs/). We need to install a couple of dependencies for this. It requires the `magick` command which comes with Imagemagick version 7, but Ubuntu 20.04 only comes with Imagemagick 6. So you need to install that command manually, eg from the [official website](https://imagemagick.org/script/download.php#linux).
 
-Depending on preference, pict-rs can be installed as a standalone application, or it can be embedded within Lemmy itself. In both cases, pict-rs requires the `magick` command which comes with Imagemagick version 7, but Ubuntu 20.04 only comes with Imagemagick 6. So you need to install that command manually, eg from the [official website](https://imagemagick.org/script/download.php#linux).
-
-**NOTE: on standard LXC containers an AppImage-based ImageMagick installation [will not work properly](https://github.com/LemmyNet/lemmy/issues/4112) with both embedded and standalone pict-rs. It uses FUSE which will emit "permission denied" errors when trying to upload an image through pict-rs. You must use alternative installation methods, such as [imei.sh](https://github.com/SoftCreatR/imei).**
+**NOTE: on standard LXC containers an AppImage-based ImageMagick installation [will not work properly](https://github.com/LemmyNet/lemmy/issues/4112). It uses FUSE which will emit "permission denied" errors when trying to upload an image through pict-rs. You must use alternative installation methods, such as [imei.sh](https://github.com/SoftCreatR/imei).**
 
 #### AppImage-based installation of ImageMagick
 
@@ -88,8 +86,6 @@ Follow the instructions from the [official imei.sh page on GitHub](https://githu
 
 Since we're building stuff from source here, let's do the same for pict-rs. Follow the [instructions here](https://git.asonix.dog/asonix/pict-rs/#user-content-compile-from-source).
 
-However, the embedded pict-rs installation should work just fine for you.
-
 ### Lemmy Backend
 
 #### Build the backend
@@ -110,13 +106,7 @@ git submodule init
 git submodule update
 ```
 
-When using the embedded pict-rs, use the following build command:
-
-```
-cargo build --release --features embed-pictrs
-```
-
-Otherwise, just move forward with the following.
+Then build Lemmy with the following command:
 
 ```
 cargo build --release
@@ -435,8 +425,6 @@ git checkout main
 git pull --tags
 git checkout 0.18.5 # replace with version you are updating to
 git submodule update
-# These instructions assume you build pictrs independent, but it is
-# OPTIONAL on next command: --features embed-pictrs
 cargo build --release
 # copy compiled binary to destination
 # the old file will be locked by the already running application, so this sequence is recommended:
@@ -460,4 +448,4 @@ sudo systemctl restart lemmy-ui
 
 ### Pict-rs
 
-If you used the `--features embed-pictrs` flag, pict-rs should update with lemmy_server. Otherwise, refer to [pict-rs documentation](https://git.asonix.dog/asonix/pict-rs) for instructions on upgrading.
+Refer to [pict-rs documentation](https://git.asonix.dog/asonix/pict-rs) for instructions on upgrading.
