@@ -40,4 +40,6 @@ You can download the `nginx_internal.conf` file by running:
 wget https://raw.githubusercontent.com/LemmyNet/lemmy-docs/main/assets/separate_subdomains/nginx/nginx_internal.conf
 ```
 
+Ensure you edit `nginx_internal.conf` and replace `{{ nginx_internal_resolver }}` with `127.0.0.11` (use `10.89.0.1` for RedHat distributions).
+
 Then continue installing with your preferred installation method. For example, [these are the Docker instructions](https://join-lemmy.org/docs/administration/install_docker.html). Ensure you use the `nginx_internal.conf` file provided on this page.
