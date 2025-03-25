@@ -1,6 +1,6 @@
 # Lemmy on Separate Subdomains
 
-This guide details hosting the Lemmy backend and frontend on diffrent domains. This is useful, for example, if you want users to have a webfinger (user handle) without a subdomain, but want to host services on the same domain.
+This guide details hosting the Lemmy backend and frontend on different domains. This is useful, for example, if you want users to have a webfinger (user handle) without a subdomain, but want to host services on the same domain.
 
 ## Placeholders
 
@@ -16,7 +16,7 @@ This guide details hosting the Lemmy backend and frontend on diffrent domains. T
 In theory, if this is changed in the future, this documentation will be updated to reflect the change. However, in practice that may not occur. If you are reading this page far into the future, it may be worthwhile to test this functionality again to see if it has been changed.
 
 - If there is another service using the `/api`, `/pictrs`, `/feeds`, `/nodeinfo`, `/.well-known`, `/inbox`, `/version`, and `/sitemap.xml` paths on `short.domain`, it will conflict with the Lemmy server. Similarly, if there is a service on `short.domain` listening for the `Accept: application/activity+json` HTTP header, it will also conflict with the Lemmy server.
-- If you still want to access the admin user interface, the paths `/login` and `/admin` will also need to be unused on `short.domain`. This is optional, however, and is not required if the `lemmy-ui` container is ommitted.
+- If you still want to access the admin user interface, the paths `/login` and `/admin` will also need to be unused on `short.domain`. This is optional, however, and is not required if the `lemmy-ui` container is omitted.
 
 ## Traefik
 
