@@ -11,7 +11,7 @@ This guide details hosting the Lemmy backend and frontend on diffrent domains. T
 
 ## Limitations
 
-- As of the time of writing this (March 25th, 2025), the Lemmy UI seems to be hardcoded to the domain on which it is hosted. For example, even if you set the `LEMMY_UI_LEMMY_EXTERNAL_HOST` environment variable to be `short.domain`, the UI will still try accessing `sub.longerdomain.com`.
+- As of the time of writing this (March 25th, 2025), the Lemmy UI seems to be hardcoded to the domain on which it is hosted. For example, even if you set the `LEMMY_UI_LEMMY_EXTERNAL_HOST` environment variable to be `short.domain`, the UI will still try accessing `sub.longerdomain.com` for API requests.
 
 In theory, if this is changed in the future, this documentation will be updated to reflect the change. However, in practice that may not occur. If you are reading this page far into the future, it may be worthwhile to test this functionality again to see if it has been changed.
 
