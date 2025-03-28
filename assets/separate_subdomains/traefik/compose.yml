@@ -83,7 +83,7 @@ services:
       - traefik.http.routers.lemmy-admin-ui-https.service=lemmy-admin-ui
       ## CHANGE `short.domain` HERE
       - traefik.http.routers.lemmy-admin-ui-https.rule=Host(`short.domain`) &&
-        PathPrefix(`/css`) || PathPrefix(`/login`) || PathPrefix(`/admin`)
+        PathPrefix(`/css`) || Host(`short.domain`) && PathPrefix(`/login`) || Host(`short.domain`) && PathPrefix(`/admin`)
       - traefik.http.routers.lemmy-admin-ui-https.tls=true
       ## CHANGE `myresolver` TO BE YOUR TLS CERT RESOLVER
       - traefik.http.routers.lemmy-admin-ui-https.tls.certresolver=myresolver
