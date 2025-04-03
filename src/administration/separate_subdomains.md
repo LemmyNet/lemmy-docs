@@ -2,6 +2,8 @@
 
 This guide details hosting the Lemmy backend and frontend on different domains. This is useful, for example, if you want users to have a webfinger (user handle) without a subdomain, but want to host services on the same domain.
 
+As a general overview, this works by handling federation requests on the short domain and forwarding them to the Lemmy backend. API and frontend requests however are handled on the long domain.
+
 ## Placeholders
 
 - `short.domain` represents the shortened domain you would like to use for user handles.
