@@ -36,32 +36,9 @@ services:
       - traefik.http.routers.lemmy-https.tls=true
       ## CHANGE `myresolver` TO BE YOUR TLS CERT RESOLVER
       - traefik.http.routers.lemmy-https.tls.certresolver=myresolver
-  # This is the frontend which users will access
-  alexandrite:
-    image: ghcr.io/sheodox/alexandrite:latest
-    networks:
-      - proxy
-    labels:
-      - traefik.enable=true
-      - traefik.http.services.lemmy-ui.loadbalancer.server.port=3000
-      - traefik.http.services.lemmy-ui.loadbalancer.server.scheme=http
-      - traefik.http.routers.lemmy-ui-https.entrypoints=websecure
-      - traefik.http.routers.lemmy-ui-https.service=lemmy-ui
-      ## CHANGE `sub.londerdomain.com` HERE
-      - traefik.http.routers.lemmy-ui-https.rule=Host(`sub.longerdomain.com`)
-      - traefik.http.routers.lemmy-ui-https.tls=true
-      ## CHANGE `myresolver` TO BE YOUR TLS CERT RESOLVER
-      - traefik.http.routers.lemmy-ui-https.tls.certresolver=myresolver
-    environment:
-      ## CHANGE `short.domain` HERE
-      - ALEXANDRITE_DEFAULT_INSTANCE=short.domain
-      - ALEXANDRITE_WELCOME_LEMMY_HELP=false
-      - ALEXANDRITE_WELCOME_INSTANCE_HELP=false
-      - ALEXANDRITE_FORCE_INSTANCE=short.domain
-  # This is the frontend where you can configure admin settings.
-  # This is optional.
+  # This is the Lemmy UI.
   lemmy-ui:
-    image: dessalines/lemmy-ui:0.19.10
+    # image: **UPDATE WITH THE FIXED LEMMY UI VERSION**
     environment:
       - LEMMY_UI_LEMMY_INTERNAL_HOST=lemmy:8536
       ## CHANGE `short.domain` HERE
@@ -77,16 +54,15 @@ services:
       - backend
     labels:
       - traefik.enable=true
-      - traefik.http.services.lemmy-admin-ui.loadbalancer.server.port=1234
-      - traefik.http.services.lemmy-admin-ui.loadbalancer.server.scheme=http
-      - traefik.http.routers.lemmy-admin-ui-https.entrypoints=websecure
-      - traefik.http.routers.lemmy-admin-ui-https.service=lemmy-admin-ui
-      ## CHANGE `short.domain` HERE
-      - traefik.http.routers.lemmy-admin-ui-https.rule=Host(`short.domain`) &&
-        PathPrefix(`/css`) || Host(`short.domain`) && PathPrefix(`/login`) || Host(`short.domain`) && PathPrefix(`/admin`)
-      - traefik.http.routers.lemmy-admin-ui-https.tls=true
+      - traefik.http.services.lemmy-ui.loadbalancer.server.port=1234
+      - traefik.http.services.lemmy-ui.loadbalancer.server.scheme=http
+      - traefik.http.routers.lemmy-ui-https.entrypoints=websecure
+      - traefik.http.routers.lemmy-ui-https.service=lemmy-ui
+      ## CHANGE `sub.longerdomain.com` HERE
+      - traefik.http.routers.lemmy-ui-https.rule=Host(`sub.longerdomain.com`)
+      - traefik.http.routers.lemmy-ui-https.tls=true
       ## CHANGE `myresolver` TO BE YOUR TLS CERT RESOLVER
-      - traefik.http.routers.lemmy-admin-ui-https.tls.certresolver=myresolver
+      - traefik.http.routers.lemmy-ui-https.tls.certresolver=myresolver
     logging: *a1
   pictrs:
     image: asonix/pictrs:0.5.16

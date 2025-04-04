@@ -13,12 +13,7 @@ As a general overview, this works by handling federation requests on the short d
 
 ## Limitations
 
-- As of the time of writing this (March 25th, 2025), the Lemmy UI seems to be hardcoded to the domain on which it is hosted. For example, even if you set the `LEMMY_UI_LEMMY_EXTERNAL_HOST` environment variable to be `short.domain`, the UI will still try accessing `sub.longerdomain.com` for API requests.
-
-In theory, if this is changed in the future, this documentation will be updated to reflect the change. However, in practice that may not occur. If you are reading this page far into the future, it may be worthwhile to test this functionality again to see if it has been changed.
-
 - If there is another service using the `/api`, `/pictrs`, `/feeds`, `/nodeinfo`, `/.well-known`, `/inbox`, `/version`, and `/sitemap.xml` paths on `short.domain`, it will conflict with the Lemmy server. Similarly, if there is a service on `short.domain` listening for the `Accept: application/activity+json` HTTP header, it will also conflict with the Lemmy server.
-- If you still want to access the admin user interface, the paths `/login` and `/admin` will also need to be unused on `short.domain`. This is optional, however, and is not required if the `lemmy-ui` container is omitted.
 
 ## Traefik
 
