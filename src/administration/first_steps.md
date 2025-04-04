@@ -31,6 +31,7 @@ To be included in the list of Lemmy instances on [join-lemmy.org](https://join-l
 - [x] Federate with at least one instance from the list
 - [x] Have a site description and icon
 - [x] Don't have closed sign-ups
+- [x] Make sure you require registration applications. This helps keep bots and trolls from using your server to spam the fediverse.
 - [x] Have at least 5 users who posted or commented at least once in the past month
 - [x] Be on the latest major version of Lemmy
 - [x] Be patient and wait the site to be updated, there's no fixed schedule for that
