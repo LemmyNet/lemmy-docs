@@ -1,0 +1,113 @@
+x-logging: &a1
+  driver: json-file
+  options:
+    max-size: 50m
+    max-file: "4"
+
+services:
+  lemmy:
+    image: dessalines/lemmy:0.19.10
+    hostname: lemmy
+    restart: always
+    logging: *a1
+    environment:
+      - RUST_LOG="warn"
+      # You can switch to the environment variable below to ensure federation is working correctly
+      # - RUST_LOG=lemmy_federate=trace
+    volumes:
+      # This volume mapping, and all others, should be configured to point to the correct location on your system
+      - ./lemmy.hjson:/config/config.hjson:Z
+    depends_on:
+      - postgres
+      - pictrs
+    # These should be changed to match your Traefik setup.
+    # Please refer to the "Placeholders" section in the documentation.
+    networks:
+      - proxy
+      - backend
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.lemmy.loadbalancer.server.port=8536
+      - traefik.http.services.lemmy.loadbalancer.server.scheme=http
+      - traefik.http.routers.lemmy-https.entrypoints=websecure
+      - traefik.http.routers.lemmy-https.service=lemmy
+      ## CHANGE `short.domain` HERE
+      - traefik.http.routers.lemmy-https.rule=Host(`short.domain`) && (PathPrefix(`/api`) || PathPrefix(`/pictrs`) || PathPrefix(`/feeds`) || PathPrefix(`/nodeinfo`) || PathPrefix(`/.well-known`) || PathPrefix(`/inbox`) || Path(`/version`) || Path(`/sitemap.xml`) || Method(`POST`) || HeaderRegexp(`Accept`,`^[Aa]pplication/.*`))
+      - traefik.http.routers.lemmy-https.tls=true
+      ## CHANGE `myresolver` TO BE YOUR TLS CERT RESOLVER
+      - traefik.http.routers.lemmy-https.tls.certresolver=myresolver
+  # This is the Lemmy UI.
+  lemmy-ui:
+    # image: **UPDATE WITH THE FIXED LEMMY UI VERSION**
+    environment:
+      - LEMMY_UI_LEMMY_INTERNAL_HOST=lemmy:8536
+      ## CHANGE `short.domain` HERE
+      - LEMMY_UI_LEMMY_EXTERNAL_HOST=short.domain
+      - LEMMY_UI_HTTPS=true
+    volumes:
+      - ./volumes/lemmy-ui/extra_themes:/app/extra_themes
+    depends_on:
+      - lemmy
+    restart: always
+    networks:
+      - proxy
+      - backend
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.lemmy-ui.loadbalancer.server.port=1234
+      - traefik.http.services.lemmy-ui.loadbalancer.server.scheme=http
+      - traefik.http.routers.lemmy-ui-https.entrypoints=websecure
+      - traefik.http.routers.lemmy-ui-https.service=lemmy-ui
+      ## CHANGE `sub.longerdomain.com` HERE
+      - traefik.http.routers.lemmy-ui-https.rule=Host(`sub.longerdomain.com`)
+      - traefik.http.routers.lemmy-ui-https.tls=true
+      ## CHANGE `myresolver` TO BE YOUR TLS CERT RESOLVER
+      - traefik.http.routers.lemmy-ui-https.tls.certresolver=myresolver
+    logging: *a1
+  pictrs:
+    image: asonix/pictrs:0.5.16
+    # This needs to match the pictrs url in lemmy.hjson
+    hostname: pictrs
+    # We can set options to pictrs like this, here we set max. image size and forced format for conversion
+    # entrypoint: /sbin/tini -- /usr/local/bin/pict-rs -p /mnt -m 4 --image-format webp
+    environment:
+      - PICTRS_OPENTELEMETRY_URL=http://otel:4137
+      ## SET YOUR POSTGRES PASSWORD HERE
+      - PICTRS__SERVER__API_KEY={{ postgres_password }}
+      - RUST_BACKTRACE=full
+      - PICTRS__MEDIA__VIDEO__VIDEO_CODEC=vp9
+      - PICTRS__MEDIA__ANIMATION__MAX_WIDTH=256
+      - PICTRS__MEDIA__ANIMATION__MAX_HEIGHT=256
+      - PICTRS__MEDIA__ANIMATION__MAX_FRAME_COUNT=400
+    user: 991:991
+    volumes:
+      - ./volumes/pictrs:/mnt:Z
+    restart: always
+    networks:
+      - backend
+    logging: *a1
+  postgres:
+    image: pgautoupgrade/pgautoupgrade:17-alpine
+    hostname: postgres
+    environment:
+      - POSTGRES_USER=lemmy
+      ## SET YOUR POSTGRES PASSWORD HERE
+      - POSTGRES_PASSWORD={{ postgres_password }}
+      - POSTGRES_DB=lemmy
+    # This should match the `shared_buffers` setting in customPostgresql.conf
+    shm_size: 1g
+    volumes:
+      - ./volumes/postgres:/var/lib/postgresql/data:Z
+      - ./customPostgresql.conf:/etc/postgresql.conf
+    restart: always
+    networks:
+      - backend
+    logging: *a1
+
+# Network configuration
+# Change this to match your setup
+networks:
+  proxy:
+    external: true
+  backend:
+    external: true
