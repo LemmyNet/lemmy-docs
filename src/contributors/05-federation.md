@@ -20,7 +20,10 @@ If you have trouble to make your project federate with Lemmy, feel free to [open
 ## Context
 
 ```json
-{{#include ../../include/crates/apub/assets/lemmy/context.json}}
+"@context": [
+    "https://join-lemmy.org/context.json",
+    "https://www.w3.org/ns/activitystreams"
+],
 ```
 
 The context is identical for all activities and objects.
@@ -32,7 +35,7 @@ The context is identical for all activities and objects.
 An automated actor. Users can send posts or comments to it, which the community forwards to its followers in the form of `Announce`.
 
 ```json
-{{#include ../../include/crates/apub/assets/lemmy/objects/group.json}}
+{{#include ../../lemmy/crates/apub/assets/lemmy/objects/group.json}}
 ```
 
 | Field Name          | Description                                                                                           |
@@ -57,7 +60,7 @@ An automated actor. Users can send posts or comments to it, which the community 
 A person, interacts primarily with the community where it sends and receives posts/comments. Can also create and moderate communities, and send private messages to other users. Can be followed from other platforms.
 
 ```json
-{{#include ../../include/crates/apub/assets/lemmy/objects/person.json}}
+{{#include ../../lemmy/crates/apub/assets/lemmy/objects/person.json}}
 ```
 
 | Field Name          | Description                                              |
@@ -78,7 +81,7 @@ A person, interacts primarily with the community where it sends and receives pos
 Represents a Lemmy instance, and is used to federate global data like the instance description or site bans. It can be fetched from the root path.
 
 ```json
-{{#include ../../include/crates/apub/assets/lemmy/objects/instance.json}}
+{{#include ../../lemmy/crates/apub/assets/lemmy/objects/instance.json}}
 ```
 
 | Field Name  | Description                                              |
@@ -101,7 +104,7 @@ Represents a Lemmy instance, and is used to federate global data like the instan
 A page with title, and optional URL and text content. The attachment URL often leads to an image, in which case a thumbnail is included. Each post belongs to exactly one community. Sent out as `Page`, but for receiving the types `Article`, `Note`, `Video` and `Event` are also accepted.
 
 ```json
-{{#include ../../include/crates/apub/assets/lemmy/objects/page.json}}
+{{#include ../../lemmy/crates/apub/assets/lemmy/objects/page.json}}
 ```
 
 | Field Name        | Description                                                                                         |
@@ -123,7 +126,7 @@ A page with title, and optional URL and text content. The attachment URL often l
 A reply to a post, or reply to another comment. Contains only text (including references to other users or communities). Lemmy displays comments in a tree structure.
 
 ```json
-{{#include ../../include/crates/apub/assets/lemmy/objects/note.json}}
+{{#include ../../lemmy/crates/apub/assets/lemmy/objects/note.json}}
 ```
 
 | Field Name     | Description                                                                                                                           |
@@ -140,7 +143,7 @@ A reply to a post, or reply to another comment. Contains only text (including re
 A direct message from one user to another. Can not include additional users. Threading is not implemented yet, so the `inReplyTo` field is missing.
 
 ```json
-{{#include ../../include/crates/apub/assets/lemmy/objects/chat_message.json}}
+{{#include ../../lemmy/crates/apub/assets/lemmy/objects/chat_message.json}}
 ```
 
 | Field Name     | Description                                                               |
@@ -156,7 +159,7 @@ A direct message from one user to another. Can not include additional users. Thr
 ### Community Outbox
 
 ```json
-{{#include ../../include/crates/apub/assets/lemmy/collections/group_outbox.json}}
+{{#include ../../lemmy/crates/apub/assets/lemmy/collections/group_outbox.json}}
 ```
 
 The outbox only contains `Create/Post` activities for now.
@@ -164,7 +167,7 @@ The outbox only contains `Create/Post` activities for now.
 ### Community Followers
 
 ```json
-{{#include ../../include/crates/apub/assets/lemmy/collections/group_followers.json}}
+{{#include ../../lemmy/crates/apub/assets/lemmy/collections/group_followers.json}}
 ```
 
 The followers collection is only used to expose the number of followers. Actor IDs are not included, to protect user privacy.
@@ -174,7 +177,7 @@ The followers collection is only used to expose the number of followers. Actor I
 List of moderators who can perform actions like removing posts or banning users.
 
 ```json
-{{#include ../../include/crates/apub/assets/lemmy/collections/group_moderators.json}}
+{{#include ../../lemmy/crates/apub/assets/lemmy/collections/group_moderators.json}}
 ```
 
 ### Community Featured Posts
@@ -182,7 +185,7 @@ List of moderators who can perform actions like removing posts or banning users.
 List of posts which are stickied in the community.
 
 ```json
-{{#include ../../include/crates/apub/assets/lemmy/collections/group_featured_posts.json}}
+{{#include ../../lemmy/crates/apub/assets/lemmy/collections/group_featured_posts.json}}
 ```
 
 ### User Outbox
@@ -190,7 +193,7 @@ List of posts which are stickied in the community.
 Only contains `totalItems` count, but no actual `items` for privacy reasons.
 
 ```json
-{{#include ../../include/crates/apub/assets/lemmy/collections/person_outbox.json}}
+{{#include ../../lemmy/crates/apub/assets/lemmy/collections/person_outbox.json}}
 ```
 
 ## Activities
@@ -202,7 +205,7 @@ Only contains `totalItems` count, but no actual `items` for privacy reasons.
 Each Community page has a "Follow" button. Clicking this triggers a `Follow` activity to be sent from the user to the Community inbox. The Community will automatically respond with an `Accept/Follow` activity to the user inbox. It will also add the user to its list of followers, and deliver any activities about Posts/Comments in the Community to the user.
 
 ```json
-{{#include ../../include/crates/apub/assets/lemmy/activities/following/follow.json}}
+{{#include ../../lemmy/crates/apub/assets/lemmy/activities/following/follow.json}}
 ```
 
 #### Unfollow
@@ -210,7 +213,7 @@ Each Community page has a "Follow" button. Clicking this triggers a `Follow` act
 After following a Community, the "Follow" button is replaced by "Unfollow". Clicking this sends an `Undo/Follow` activity to the Community inbox. The Community removes the User from its followers list and doesn't send any activities to it anymore.
 
 ```json
-{{#include ../../include/crates/apub/assets/lemmy/activities/following/undo_follow.json}}
+{{#include ../../lemmy/crates/apub/assets/lemmy/activities/following/undo_follow.json}}
 ```
 
 #### Create or Update Post
@@ -218,7 +221,7 @@ After following a Community, the "Follow" button is replaced by "Unfollow". Clic
 When a user creates a new post, it is sent to the respective community as `Create/Page`. Editing a previously created post sends an almost identical activity, except the `type` being `Update`.
 
 ```json
-{{#include ../../include/crates/apub/assets/lemmy/activities/create_or_update/create_page.json}}
+{{#include ../../lemmy/crates/apub/assets/lemmy/activities/create_or_update/create_page.json}}
 ```
 
 #### Create or Update Comment
@@ -229,7 +232,7 @@ The origin instance also scans the Comment for any User mentions, and sends the 
 those Users as well.
 
 ```json
-{{#include ../../include/crates/apub/assets/lemmy/activities/create_or_update/create_note.json}}
+{{#include ../../lemmy/crates/apub/assets/lemmy/activities/create_or_update/create_note.json}}
 ```
 
 #### Like Post or Comment
@@ -237,7 +240,7 @@ those Users as well.
 An upvote for a post or comment.
 
 ```json
-{{#include ../../include/crates/apub/assets/lemmy/activities/voting/like_note.json}}
+{{#include ../../lemmy/crates/apub/assets/lemmy/activities/voting/like_note.json}}
 ```
 
 #### Dislike Post or Comment
@@ -245,7 +248,7 @@ An upvote for a post or comment.
 A downvote for a post or comment.
 
 ```json
-{{#include ../../include/crates/apub/assets/lemmy/activities/voting/dislike_page.json}}
+{{#include ../../lemmy/crates/apub/assets/lemmy/activities/voting/dislike_page.json}}
 ```
 
 #### Undo Like or Dislike Post or Comment
@@ -253,7 +256,7 @@ A downvote for a post or comment.
 Revert a vote that was previously done by the same user.
 
 ```json
-{{#include ../../include/crates/apub/assets/lemmy/activities/voting/undo_like_note.json}}
+{{#include ../../lemmy/crates/apub/assets/lemmy/activities/voting/undo_like_note.json}}
 ```
 
 #### Delete Post or Comment
@@ -263,7 +266,7 @@ Mods can remove Posts and Comments from their Communities. Admins can remove any
 Removals are sent to all followers of the Community, so that they also take effect there. The exception is if an admin removes an item from a Community which is hosted on a different instance. In this case, the removal only takes effect locally.
 
 ```json
-{{#include ../../include/crates/apub/assets/lemmy/activities/deletion/delete_page.json}}
+{{#include ../../lemmy/crates/apub/assets/lemmy/activities/deletion/delete_page.json}}
 ```
 
 #### Undo Delete
@@ -271,7 +274,7 @@ Removals are sent to all followers of the Community, so that they also take effe
 Post or comment deletions can be reverted by the same user.
 
 ```json
-{{#include ../../include/crates/apub/assets/lemmy/activities/deletion/undo_delete_page.json}}
+{{#include ../../lemmy/crates/apub/assets/lemmy/activities/deletion/undo_delete_page.json}}
 ```
 
 #### Report Post, comment or private message
@@ -279,7 +282,7 @@ Post or comment deletions can be reverted by the same user.
 Reports content for rule violation, so that mods/admins can review it.
 
 ```json
-{{#include ../../include/crates/apub/assets/lemmy/activities/community/report_page.json}}
+{{#include ../../lemmy/crates/apub/assets/lemmy/activities/community/report_page.json}}
 ```
 
 #### Delete User
@@ -287,7 +290,7 @@ Reports content for rule violation, so that mods/admins can review it.
 Sent when a user deletes his own account.
 
 ```json
-{{#include ../../include/crates/apub/assets/lemmy/activities/deletion/delete_user.json}}
+{{#include ../../lemmy/crates/apub/assets/lemmy/activities/deletion/delete_user.json}}
 ```
 
 ### Community to User
@@ -297,7 +300,7 @@ Sent when a user deletes his own account.
 Automatically sent by the community in response to a `Follow`. At the same time, the community adds this user to its followers list.
 
 ```json
-{{#include ../../include/crates/apub/assets/lemmy/activities/following/accept.json}}
+{{#include ../../lemmy/crates/apub/assets/lemmy/activities/following/accept.json}}
 ```
 
 #### Announce
@@ -305,7 +308,7 @@ Automatically sent by the community in response to a `Follow`. At the same time,
 If the Community receives any Post or Comment related activity (Create, Update, Like, Dislike, Remove, Delete, Undo etc.), it will forward this to its followers. For this, an Announce is created with the Community as actor, and the received activity as object. This is sent to all followers, so they get updated in real time.
 
 ```json
-{{#include ../../include/crates/apub/assets/lemmy/activities/community/announce_create_page.json}}
+{{#include ../../lemmy/crates/apub/assets/lemmy/activities/community/announce_create_page.json}}
 ```
 
 ### Moderation
@@ -317,7 +320,7 @@ These actions can only be done by instance admins or community moderators. They 
 Removes a post or comment. The difference to delete is that remove activities have a summary field, which contains the reason for removal, as provided by the mod/admin.
 
 ```json
-{{#include ../../include/crates/apub/assets/lemmy/activities/deletion/remove_note.json}}
+{{#include ../../lemmy/crates/apub/assets/lemmy/activities/deletion/remove_note.json}}
 ```
 
 #### Block User
@@ -325,7 +328,7 @@ Removes a post or comment. The difference to delete is that remove activities ha
 Blocks a user so he can't participate anymore. The scope is determined by the `target` field: either a community, or a whole instance. The `removeData` field can optionally be set to indicate that all previous posts of the user should be deleted.
 
 ```json
-{{#include ../../include/crates/apub/assets/lemmy/activities/block/block_user.json}}
+{{#include ../../lemmy/crates/apub/assets/lemmy/activities/block/block_user.json}}
 ```
 
 #### Lock post
@@ -333,7 +336,7 @@ Blocks a user so he can't participate anymore. The scope is determined by the `t
 Posts can be locked so that no new comments can be created.
 
 ```json
-{{#include ../../include/crates/apub/assets/lemmy/activities/community/lock_page.json}}
+{{#include ../../lemmy/crates/apub/assets/lemmy/activities/community/lock_page.json}}
 ```
 
 #### Undo mod actions
@@ -341,11 +344,11 @@ Posts can be locked so that no new comments can be created.
 All previously listed mod actions can be reverted by wrapping the original activity in `Undo`. Note that Lemmy regenerates the inner activity with a new ID.
 
 ```json
-{{#include ../../include/crates/apub/assets/lemmy/activities/deletion/undo_remove_note.json}}
+{{#include ../../lemmy/crates/apub/assets/lemmy/activities/deletion/undo_remove_note.json}}
 ```
 
 ```json
-{{#include ../../include/crates/apub/assets/lemmy/activities/block/undo_block_user.json}}
+{{#include ../../lemmy/crates/apub/assets/lemmy/activities/block/undo_block_user.json}}
 ```
 
 #### Add or remove featured post
@@ -353,11 +356,11 @@ All previously listed mod actions can be reverted by wrapping the original activ
 Posts can be pinned so that they are always shown on top of the community. This is federated with the [Community featured posts](#community-featured-posts) collection.
 
 ```json
-{{#include ../../include/crates/apub/assets/lemmy/activities/community/add_featured_post.json}}
+{{#include ../../lemmy/crates/apub/assets/lemmy/activities/community/add_featured_post.json}}
 ```
 
 ```json
-{{#include ../../include/crates/apub/assets/lemmy/activities/community/remove_featured_post.json}}
+{{#include ../../lemmy/crates/apub/assets/lemmy/activities/community/remove_featured_post.json}}
 ```
 
 #### Add or remove mod
@@ -365,13 +368,13 @@ Posts can be pinned so that they are always shown on top of the community. This 
 Add a new mod to the community. Has to be sent by an existing community mod, or an admin of the community's instance.
 
 ```json
-{{#include ../../include/crates/apub/assets/lemmy/activities/community/add_mod.json}}
+{{#include ../../lemmy/crates/apub/assets/lemmy/activities/community/add_mod.json}}
 ```
 
 An existing mod can be removed in the same way.
 
 ```json
-{{#include ../../include/crates/apub/assets/lemmy/activities/community/remove_mod.json}}
+{{#include ../../lemmy/crates/apub/assets/lemmy/activities/community/remove_mod.json}}
 ```
 
 ### User to User
@@ -381,7 +384,7 @@ An existing mod can be removed in the same way.
 Users from other platforms can follow Lemmy users and receive all of their posts to the inbox. Note that users who are registered on Lemmy can only follow groups, not other users.
 
 ```json
-{{#include ../../include/crates/apub/assets/pleroma/activities/follow.json}}
+{{#include ../../lemmy/crates/apub/assets/pleroma/activities/follow.json}}
 ```
 
 #### Create or Update Private message
@@ -389,7 +392,7 @@ Users from other platforms can follow Lemmy users and receive all of their posts
 User profiles have a "Send Message" button, which opens a dialog permitting to send a private message to this user. It is sent as a `Create/ChatMessage` to the user inbox. Private messages can only be directed at a single User. They can also be edited with `Update/ChatMessage`.
 
 ```json
-{{#include ../../include/crates/apub/assets/lemmy/activities/create_or_update/create_private_message.json}}
+{{#include ../../lemmy/crates/apub/assets/lemmy/activities/create_or_update/create_private_message.json}}
 ```
 
 #### Delete Private Message
@@ -397,7 +400,7 @@ User profiles have a "Send Message" button, which opens a dialog permitting to s
 Deletes a previous private message.
 
 ```json
-{{#include ../../include/crates/apub/assets/lemmy/activities/deletion/delete_private_message.json}}
+{{#include ../../lemmy/crates/apub/assets/lemmy/activities/deletion/delete_private_message.json}}
 ```
 
 #### Undo Delete Private Message
@@ -405,5 +408,5 @@ Deletes a previous private message.
 Restores a previously deleted private message. The `object` is regenerated from scratch, as such the activity ID and other fields are different.
 
 ```json
-{{#include ../../include/crates/apub/assets/lemmy/activities/deletion/undo_delete_private_message.json}}
+{{#include ../../lemmy/crates/apub/assets/lemmy/activities/deletion/undo_delete_private_message.json}}
 ```
