@@ -78,7 +78,9 @@ export LEMMY_DATABASE_URL=postgres://lemmy:password@localhost:5432/lemmy
 ### Code formatting tools
 
 #### Taplo
+
 See installation instructions [here](https://taplo.tamasfe.dev/), or run
+
 ```bash
 cargo install taplo-cli --locked
 ```
@@ -90,11 +92,13 @@ Debian-based distro:
 ```bash
 sudo apt install pgformatter
 ```
+
 Arch-based distro:
 
 ```bash
 sudo pacman -S pgformatter
 ```
+
 macOS:
 
 ```bash
