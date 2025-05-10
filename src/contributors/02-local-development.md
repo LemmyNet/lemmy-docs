@@ -75,6 +75,32 @@ psql -c 'create database lemmy with owner lemmy;' -U postgres
 export LEMMY_DATABASE_URL=postgres://lemmy:password@localhost:5432/lemmy
 ```
 
+### Code formatting tools
+
+#### Taplo
+See installation instructions [here](https://taplo.tamasfe.dev/), or run
+```bash
+cargo install taplo-cli --locked
+```
+
+#### pg_format
+
+Debian-based distro:
+
+```bash
+sudo apt install pgformatter
+```
+Arch-based distro:
+
+```bash
+sudo pacman -S pgformatter
+```
+macOS:
+
+```bash
+brew install pgformatter
+```
+
 ### Get the code
 
 Clone frontend and backend code to local folders. Be sure to include `--recursive` to initialize git submodules.
