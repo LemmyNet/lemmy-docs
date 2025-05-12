@@ -5,7 +5,7 @@ The configuration is based on the file config.hjson, which is located by default
 ## Full config with default values
 
 ```hjson
-{{#include ../../include/config/defaults.hjson}}
+{{#include ../../lemmy/config/defaults.hjson}}
 ```
 
 ## Lemmy-UI configuration
