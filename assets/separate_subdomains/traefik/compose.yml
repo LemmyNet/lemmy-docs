@@ -65,7 +65,7 @@ services:
       - traefik.http.routers.lemmy-ui-https.tls.certresolver=myresolver
     logging: *a1
   pictrs:
-    image: asonix/pictrs:0.5.17
+    image: asonix/pictrs:0.5.18
     # This needs to match the pictrs url in lemmy.hjson
     hostname: pictrs
     # We can set options to pictrs like this, here we set max. image size and forced format for conversion
