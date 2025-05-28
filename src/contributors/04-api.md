@@ -44,6 +44,8 @@ https://lemmy.ml/api/{version}/comment/like
 
 ### RSS/Atom feeds
 
+_These links can added by clicking on RSS icons in lemmy-ui._
+
 | Type            | url                                    |
 | --------------- | -------------------------------------- |
 | All             | `/feeds/all.xml?sort=Hot`              |
