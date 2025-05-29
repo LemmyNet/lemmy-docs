@@ -44,9 +44,17 @@ https://lemmy.ml/api/{version}/comment/like
 
 ### RSS/Atom feeds
 
-- All - `/feeds/all.xml?sort=Hot`
-- Community - `/feeds/c/community-name.xml?sort=Hot`
-- User - `/feeds/u/user-name.xml?sort=Hot`
+_These links can added by clicking on RSS icons in lemmy-ui._
+
+| Type            | url                                    |
+| --------------- | -------------------------------------- |
+| All             | `/feeds/all.xml?sort=Hot`              |
+| Local           | `/feeds/local.xml?sort=Hot`            |
+| Community       | `/feeds/c/community-name.xml?sort=Hot` |
+| User            | `/feeds/u/user-name.xml?sort=Hot`      |
+| Your front page | `/feeds/front.xml/{jwt_token}`         |
+| Your inbox      | `/feeds/inbox.xml/{jwt_token}`         |
+| Your modlog     | `/feeds/modlog.xml/{jwt_token}`        |
 
 ### Images
 
