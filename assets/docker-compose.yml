@@ -21,7 +21,7 @@ services:
       - lemmy-ui
 
   lemmy:
-    image: dessalines/lemmy:0.19.11
+    image: dessalines/lemmy:0.19.12
     hostname: lemmy
     restart: always
     logging: *default-logging
