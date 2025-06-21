@@ -18,7 +18,7 @@ wget https://raw.githubusercontent.com/LemmyNet/lemmy-ansible/main/templates/ngi
 wget https://raw.githubusercontent.com/LemmyNet/lemmy-ansible/main/files/proxy_params
 ```
 
-Edit `docker-compose.yml` and `lemmy.hjson` to replace all occurrences of `{{ domain }}` with your actual Lemmy domain, `{{ postgres_password }}` with a random password and `{{lemmy_port}}` with `10633`.
+Edit `docker-compose.yml` and `lemmy.hjson` to replace all occurrences of `{{ domain }}` with your actual Lemmy domain, `{{ postgres_password }}` with a random password.
 
 Also edit `nginx_internal.conf` and replace `{{ nginx_internal_resolver }}` with `127.0.0.11` (use `10.89.0.1` for RedHat distributions).
 
