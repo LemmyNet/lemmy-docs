@@ -132,8 +132,10 @@ rustflags = ["-C", "link-arg=-fuse-ld=/usr/bin/mold", "-Z", "threads=16"]
 ```
 
 To make changes to the database schema:
+
 1. Add a new migration in the migrations folder. This is most easily done by running `diesel migration generate` then editing the added files.
 1. Run `./scripts/update_schema_file.sh`.
+
 ### Frontend development
 
 Install dependencies by running `pnpm i`. Then run `pnpm dev` to launch lemmy-ui locally. It automatically connects to the Lemmy backend on `localhost:8536`. Open [localhost:1234](http://localhost:1234) in your browser. The project is rebuilt automatically when you change any files.
