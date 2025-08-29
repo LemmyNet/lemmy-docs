@@ -5,8 +5,8 @@ fediverse can communicate between each other, too. The way Lemmy users' activity
 is handled by non-Lemmy instances depends on the software running on the latter.
 If you are interested in that, you should read the documentation of the
 software run by the non-Lemmy instance in question. Here, we only focus on how
-non-Lemmy users' activity is handled by Lemmy instances. There only a few things
-to keep in mind:
+non-Lemmy users' activity is handled by Lemmy instances. There are only a few
+things to keep in mind:
 
 - many fediverse-compatible social media have no notion of "group". These
   displays Lemmy communities as single users, e.g. `@meta@sopuli.xyz` rather
