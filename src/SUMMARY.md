@@ -9,8 +9,9 @@
 - [Votes and Ranking](users/03-votes-and-ranking.md)
 - [Moderation](users/04-moderation.md)
 - [Censorship Resistance](users/05-censorship-resistance.md)
-- [Other Features](users/06-other-features.md)
-- [History of Lemmy](users/07-history-of-lemmy.md)
+- [Fediverse Interaction](users/06-fediverse-interaction.md)
+- [Other Features](users/07-other-features.md)
+- [History of Lemmy](users/08-history-of-lemmy.md)
 
 # For Admins
 
