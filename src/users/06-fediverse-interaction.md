@@ -5,7 +5,7 @@ As mentioned in the introduction, Lemmy users and non-Lemmy users from the fediv
 - Many fediverse-compatible social media have no notion of "group". These display Lemmy communities as single users, e.g. `@meta@sopuli.xyz` rather than `!meta@sopuli.xyz`. Just open the community from your non-Lemmy instance to check the correct handle.
 - Users of link aggregators like Lemmy tend not to use hashtags and mentions, so consider limiting yourself to the bare minimum when posting or commenting, even if the rules of the Lemmy community/instance in question do not mention it.
 
-## Follow a Lemmy community.
+## Follow a Lemmy community
 
 You can freely follow any Lemmy community from non-Lemmy software.
 
