@@ -37,7 +37,7 @@ Note that this functionality is not meant to share large images or videos, becau
 
 Since Lemmy doesn't host large videos or other media, users can share files using [BitTorrent](https://en.wikipedia.org/wiki/BitTorrent) links. In BitTorrent, files are shared not by a single user, but by _many users_ at the same time. This makes file sharing efficient, fast, and reliable, as long as several sources are sharing the files.
 
-Lemmy supports posting torrent magnet links (links that start with `magnet:`) in the post _URL_ field, or as Markdown links within comments.
+Lemmy supports posting torrent magnet links (links that start with `magnet:`) in the post _URL_ field, or as Markdown links within comments. You can get a magnet link by clicking _copy magnet link_ in your torrent app.
 
 With this, Lemmy can serve as an alternative to centralized media-centric services like YouTube and Spotify.
 
@@ -52,16 +52,19 @@ To easily stream videos and audio on Lemmy, you can use any of the following app
 - [Popcorn Time](https://github.com/popcorn-official/popcorn-desktop) (Desktop)
 - [xTorrent](https://play.google.com/store/apps/details?id=com.gamemalt.streamtorrentvideos) (Android)
 
-#### Expert
+#### Advanced
 
-For those who would like to help share files, you can use any of the following torrent clients.
+For those who would like to help share files, you can use any of the following torrent clients:
 
 - [qBittorrent](https://qbittorrent.org/) (Desktop)
 - [Deluge](https://www.deluge-torrent.org/) (Desktop)
 - [Transmission](https://transmissionbt.com/) (Desktop)
 - [LibreTorrent](https://gitlab.com/proninyaroslav/libretorrent) (Android)
 
+Many of these support _streaming_ videos. To do this, make sure you check _sequential download_, wait for enough of the download to complete, then click to open the video file.
+
 If you'd like, you can also set up a media server to view this content on any device. Some good options are:
 
 - [Jellyfin](https://jellyfin.org/) (Movies, TV, Music, Audiobooks)
 - [Navidrome](https://www.navidrome.org/) (Music)
+- [audiobookshelf](https://www.audiobookshelf.org/) (Audiobooks)
