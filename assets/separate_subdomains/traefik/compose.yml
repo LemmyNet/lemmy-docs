@@ -87,7 +87,7 @@ services:
       - backend
     logging: *a1
   postgres:
-    image: pgautoupgrade/pgautoupgrade:17-alpine
+    image: pgautoupgrade/pgautoupgrade:18-alpine
     hostname: postgres
     environment:
       - POSTGRES_USER=lemmy
