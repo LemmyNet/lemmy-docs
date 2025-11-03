@@ -17,9 +17,10 @@ We recommend using Ansible, because it simplifies the installation and also make
 
 Lemmy uses roughly 150 MB of RAM in the default Docker installation. CPU usage is negligible.
 
-### Managed Hosting
+### Managed Hostings
 
 - [Elestio](https://elest.io/open-source/lemmy)
+- [Communick](https://communick.com/lemmy)
 
 ### Other installation methods
 
