@@ -12,6 +12,7 @@
 - [Fediverse Interaction](users/06-fediverse-interaction.md)
 - [Other Features](users/07-other-features.md)
 - [History of Lemmy](users/08-history-of-lemmy.md)
+- [Keyboard Shortcuts](users/09-keyboard-shortcuts.md)
 
 # For Admins
 
