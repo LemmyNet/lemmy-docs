@@ -75,7 +75,7 @@ services:
       - POSTGRES_DB=lemmy
     shm_size: 1g
     volumes:
-      - ./volumes/postgres:/var/lib/postgresql/data:Z
+      - ./volumes/postgres:/var/lib/postgresql:Z
       - ./customPostgresql.conf:/etc/postgresql.conf
     restart: always
     logging: *default-logging
