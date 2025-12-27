@@ -6,7 +6,7 @@ x-logging: &a1
 
 services:
   lemmy:
-    image: dessalines/lemmy:0.19.14
+    image: dessalines/lemmy:0.19.15
     hostname: lemmy
     restart: always
     logging: *a1
