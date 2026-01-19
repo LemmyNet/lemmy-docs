@@ -4,15 +4,13 @@
 
 If you are used to sites like Reddit, then Lemmy works in a fundamentally different way. Instead of a single website like reddit.com, there are many different websites (called _instances_). These are operated by different people, have different topics and rules. Nevertheless, posts created in one instance can directly be seen by users who are registered on another. Its basically like email, but for social media.
 
-This means before using Lemmy and registering an account, you need to pick an instance. For this you can browse the [instance list](https://join-lemmy.org/instances) and look for one that matches your topics of interest. You can also see if the rules match your expectations, and how many users there are. It is better to avoid very big or very small instances. But don't worry too much about this choice, you can always create another account on a different instance later.
+This means before using Lemmy and registering an account, you need to pick an instance. For this you can browse the instance list and look for one that matches your topics of interest. You can also see if the rules match your expectations, and how many users there are. It is better to avoid very big or very small instances. But don't worry too much about this choice, you can always create another account on a different instance later.
 
-[instance list screenshot]
+[**Instance List**](https://join-lemmy.org/instances)
 
 ## Registration
 
 Once you choose an instance, it's time to create your account. To do this, click _sign up_ in the top right of the page, or click the top right button on mobile to open a menu with _sign up_ link.
-
-[registration page screenshot]
 
 On the signup page you need to enter a few things:
 
