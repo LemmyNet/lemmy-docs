@@ -28,6 +28,7 @@ Consider the scenario where you have 2 Lemmy-ui servers, one is running on versi
 There are a few ways to work around this issue:
 
 1. The safest option is to ensure that all servers are able to serve static files for all currently active Lemmy-ui versions.
+
    - There are many ways to achieve this, the most obvious one being to upload your static files to object storage, and have reverse proxies route static file requests to your static files bucket.
    - Here's one possible example of how to do this with nginx:
 
