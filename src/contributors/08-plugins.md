@@ -45,5 +45,5 @@ Examples:
 
 ### Captcha Plugin
 
-- `get_captcha`
-- `validate_captcha`
+- `get_captcha` generates a new captcha, returns [CaptchaResponse](https://github.com/LemmyNet/lemmy/blob/main/crates/db_views/site/src/api.rs#L353)
+- `validate_captcha` takes [CaptchaAnswer](https://github.com/LemmyNet/lemmy/blob/141d12d9ab249b3e425313a9e4f59b2410f4b319/crates/db_views/registration_applications/src/api.rs#L69) and should return error if the answer is wrong
