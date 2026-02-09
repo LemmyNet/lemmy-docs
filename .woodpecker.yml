@@ -9,7 +9,7 @@ steps:
       - event: pull_request
 
   check_formatting:
-    image: tmknom/prettier
+    image: jauderho/prettier:3.7.3-alpine
     commands:
       - prettier -c src
     when:
