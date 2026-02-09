@@ -1,36 +1,49 @@
 # Lemmy Plugins
 
-A plugin system for Lemmy is currently in [experimental state](https://github.com/LemmyNet/lemmy/pull/4695). At this point the design is not final, so as plugin developer you can help us design a sensible API. You can post any experiences or problems with plugins in the pull request linked above. Only once there is some developer feedback will the plugin system be merged and released.
+Plugin support will be added in the upcoming 1.0 release. You can already start developing plugins now.
 
-To get started writing plugins, follow the instructions in [Local Development](https://join-lemmy.org/docs/contributors/02-local-development.html) to setup a local test instance from git. Checkout the `plugin-system` branch. See the [Extism documentation](https://github.com/extism/extism?tab=readme-ov-file#compile-webassembly-to-run-in-extism-hosts) for information how to write a plugin, and have a look at the [sample plugin in Golang](https://github.com/LemmyNet/lemmy/tree/ef76b48505661cea92d15cf46c40c9dc3496b746/plugins). To test your plugin, place the compiled `.wasm` file in the `plugins` folder and start Lemmy.
+Follow these steps:
 
-Plugins are invoked on specific hooks. API hooks are defined based on the HTTP method and path, with the form `api_before_{method}_{path}`. You can find the name of specific plugin hooks by running Lemmy, invoking the desired API call and grepping the logs for `Calling plugin hook`. Then declare hook in your plugin code.
+- Follow the normal [setup instructions](/docs/administration/administration.html), using `:nightly` tags to get the latest development version.
+- Specify plugins in `lemmy.hjson` ([docs](https://github.com/LemmyNet/lemmy/blob/main/config/defaults.hjson#L130)):
+
+```json
+plugins: [{
+  file: "https://github.com/LemmyNet/lemmy-plugins/releases/download/0.1.3/rust_lingua.wasm",
+  hash: "e1f58029f2ecca5127a4584609494120683b691fc63a543979ea071f32cf690f",
+  allowed_hosts: ["0.0.0.0"]
+}]
+```
+
+- You can skip the hash check by setting the env var `DANGER_PLUGIN_SKIP_HASH_CHECK`.
+
+Plugins are implemented using [Extism](https://extism.org/) and Webassembly. They can be written in any language that compiles to Wasm. Checkout the [documentation](https://extism.org/docs/quickstart/plugin-quickstart) for general development instructions.
+
+The [lemmy-plugins](https://github.com/LemmyNet/lemmy-plugins/) repo contains various example plugins written in different languages.
 
 ### API `before` hooks
 
-These are called before a given API endpoint is invoked, with the raw JSON data submitted by the user, and need to return data in the same format. At this point the data can be invalid, so the actions may still be rejected. These hooks are mainly useful to modify data before it is stored in the database. For example writing a slur filter, automatically marking posts as nsfw or permanently rewriting URLs.
+These are called before a given API endpoint is invoked, with the raw JSON data submitted by the user, and need to return data in the same format. Useful for moderation bots which can alter or reject posts.
 
 Examples:
 
-- `api_before_post` with [CreatePost](https://github.com/LemmyNet/lemmy/blob/main/crates/api_common/src/post.rs#L20)
-- `api_post_user_register` with [Register](https://github.com/LemmyNet/lemmy/blob/main/crates/api_common/src/person.rs#L39)
-- `api_post_community_delete` with [DeleteCommunity](https://github.com/LemmyNet/lemmy/blob/main/crates/api_common/src/community.rs#L174)
+- `local_post_before_create` with data [CreatePost](https://github.com/LemmyNet/lemmy/blob/main/crates/db_views/post/src/api.rs#L16)
+- `local_comment_before_update` with data [EditComment](https://github.com/LemmyNet/lemmy/blob/main/crates/db_views/comment/src/api.rs#L145)
+- `federated_post_before_receive` with [PostInsertForm](https://github.com/LemmyNet/lemmy/blob/main/crates/db_schema/src/source/post.rs#L97)
+- Search the code for `plugin_hook_before` to find all available hooks
 
 ### API `after` hooks
 
-Called after an endpoint was successfully invoked and gets passed the API return data. It also needs to return the same back, which allows temporarily modifying responses or adding extra data to responses. These hooks can also be used to trigger notifications or other external actions.
+Called after an endpoint was successfully invoked and gets passed the API return data. Useful for notifications.
 
 Examples:
 
-- `api_after_get_post_list` with [GetPostsResponse](https://github.com/LemmyNet/lemmy/blob/main/crates/api_common/src/post.rs#L93)
-- `api_after_post_comment_like` with [CommentResponse](https://github.com/LemmyNet/lemmy/blob/main/crates/api_common/src/comment.rs#L89)
-- `api_after_post_community_ban_user` with [BanFromCommunityResponse](https://github.com/LemmyNet/lemmy/blob/main/crates/api_common/src/community.rs#L112)
+- `local_post_after_create` with data [CreatePost](https://github.com/LemmyNet/lemmy/blob/main/crates/db_views/post/src/api.rs#L16)
+- `local_comment_after_update` with data [EditComment](https://github.com/LemmyNet/lemmy/blob/main/crates/db_views/comment/src/api.rs#L145)
+- `federated_post_after_receive` with [Post](https://github.com/LemmyNet/lemmy/blob/main/crates/db_schema/src/source/post.rs#L25)
+- Search the code for `plugin_hook_before` to find all available hooks
 
-### Federation hooks
+### Captcha Plugin
 
-The data structures for federation are completely different from those used in the API, which is why they have separate plugin hooks. Like with the API, there are `before` hooks which can be used to permanently change data before it is written to the database. There are also after hooks which can be used for notifications etc.
-
-At the moment only the following hook is available, more will be added later:
-
-- `federation_before_receive_post` with [PostInsertForm](https://github.com/LemmyNet/lemmy/blob/main/crates/db_schema/src/source/post.rs#L67)
-- `federation_after_receive_post` with [Post](https://github.com/LemmyNet/lemmy/blob/main/crates/db_schema/src/source/post.rs#L18)
+- `get_captcha` generates a new captcha, returns [CaptchaResponse](https://github.com/LemmyNet/lemmy/blob/main/crates/db_views/site/src/api.rs#L353)
+- `validate_captcha` takes [CaptchaAnswer](https://github.com/LemmyNet/lemmy/blob/141d12d9ab249b3e425313a9e4f59b2410f4b319/crates/db_views/registration_applications/src/api.rs#L69) and should return error if the answer is wrong
