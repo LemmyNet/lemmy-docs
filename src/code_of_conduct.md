@@ -1,6 +1,7 @@
 # Code of Conduct
 
 - We are committed to providing a friendly, safe and welcoming environment for all, regardless of level of experience, gender identity and expression, sexual orientation, disability, personal appearance, body size, race, ethnicity, age, religion, nationality, or other similar characteristic.
+- Use of so-called Artificial Intelligence (AI) is allowed only if it is explicitly mentioned. Additionally all LLM-generated text or code must be manually reviewed by the author before submission (no vibe coding allowed).
 - Please avoid using overtly sexual aliases or other nicknames that might detract from a friendly, safe and welcoming environment for all.
 - Please be kind and courteous. There’s no need to be mean or rude.
 - Respect that people have differences of opinion and that every design or implementation choice carries a trade-off and numerous costs. There is seldom a right answer.
@@ -9,7 +10,6 @@
 - Private harassment is also unacceptable. No matter who you are, if you feel you have been or are being harassed or made uncomfortable by a community member, please contact one of the channel ops or any of the Lemmy moderation team immediately. Whether you’re a regular contributor or a newcomer, we care about making this community a safe place for you and we’ve got your back.
 - Likewise any spamming, trolling, flaming, baiting or other attention-stealing behavior is not welcome.
 - [Entitlement](https://tylercipriani.com/blog/2023/01/15/entitlement-burnout-and-toxicity/), ie demanding or insulting behavior towards someone for not doing what you want them to do, or not doing it fast enough, will also not be tolerated.
-- Use of so-called Artificial Intelligence (AI) is allowed only if it is explicitly mentioned. Additionally all LLM-generated text or code must be manually reviewed by the author before submission (no vibe coding allowed).
 
 [**Message the Moderation Team on Mastodon**](https://mastodon.social/@LemmyDev)
 
