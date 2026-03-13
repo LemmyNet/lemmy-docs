@@ -8,7 +8,7 @@ Lemmy uses a voting system to sort post listings. On the left side of each post 
 
 When browsing the front page or a community, you can choose between the following sort types for posts:
 
-| sort             | description                                                                                                         |
+| Sort             | Description                                                                                                         |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------- |
 | Active (default) | Calculates a rank based on the score and time of the latest comment, with decay over time                           |
 | Hot              | Like active, but uses time when the post was published                                                              |
@@ -32,7 +32,7 @@ Comments are by default arranged in a hierarchy which shows at a glance who it i
 
 Comments can be sorted in the following ways. These all keep the indentation intact, so only replies to the same parent are shuffled around.
 
-| sort          | description                             |
+| Sort          | Description                             |
 | ------------- | --------------------------------------- |
 | Hot (default) | Equivalent to the _Hot_ sort for posts  |
 | Top           | Shows comments with highest score first |
