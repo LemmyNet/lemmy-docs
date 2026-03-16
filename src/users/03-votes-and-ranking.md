@@ -8,18 +8,21 @@ Lemmy uses a voting system to sort post listings. On the left side of each post 
 
 When browsing the front page or a community, you can choose between the following sort types for posts:
 
-- **Active** (default): Calculates a rank based on the score and time of the latest comment, with decay over time
-- **Hot**: Like active, but uses time when the post was published
-- **Scaled**: Like hot, but gives a boost to less active communities
-- **New**: Shows most recent posts first
-- **Old**: Shows oldest posts first
-- **Most Comments**: Shows posts with highest number of comments first
-- **New Comments**: Bumps posts to the top when they are created or receive a new reply, analogous to the sorting of traditional forums
-- **Top Day**: Highest scoring posts during the last 24 hours
-- **Top Week**: Highest scoring posts during the last 7 days
-- **Top Month**: Highest scoring posts during the last 30 days
-- **Top Year**: Highest scoring posts during the last 12 months
-- **Top All Time**: Highest scoring posts of all time
+| Sort             | Description                                                                                                         |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------- |
+| Active (default) | Calculates a rank based on the score and time of the latest comment, with decay over time                           |
+| Hot              | Like active, but uses time when the post was published                                                              |
+| Scaled           | Like hot, but gives a boost to less active communities                                                              |
+| Controversial    | Shows most controversial posts (many up and downvotes)                                                              |
+| New              | Shows most recent posts first                                                                                       |
+| Old              | Shows oldest posts first                                                                                            |
+| Most Comments    | Shows posts with highest number of comments first                                                                   |
+| New Comments     | Bumps posts to the top when they are created or receive a new reply, analogous to the sorting of traditional forums |
+| Top Day          | Highest scoring posts during the last 24 hours                                                                      |
+| Top Week         | Highest scoring posts during the last 7 days                                                                        |
+| Top Month        | Highest scoring posts during the last 30 days                                                                       |
+| Top Year         | Highest scoring posts during the last 12 months                                                                     |
+| Top All Time     | Highest scoring posts of all time                                                                                   |
 
 ## Comments
 
@@ -29,10 +32,12 @@ Comments are by default arranged in a hierarchy which shows at a glance who it i
 
 Comments can be sorted in the following ways. These all keep the indentation intact, so only replies to the same parent are shuffled around.
 
-- **Hot** (default): Equivalent to the _Hot_ sort for posts
-- **Top**: Shows comments with highest score first
-- **New**: Shows most recent comments first
-- **Old**: Shows oldest comments first
+| Sort          | Description                             |
+| ------------- | --------------------------------------- |
+| Hot (default) | Equivalent to the _Hot_ sort for posts  |
+| Top           | Shows comments with highest score first |
+| New           | Shows most recent comments first        |
+| Old           | Shows oldest comments first             |
 
 Additionally there is a sort option **Chat**. This eliminates the hierarchy, and puts all comments on the top level, with newest comments shown at the top. It is useful to see new replies at any point in the conversation, but makes it difficult to see the context.
 
