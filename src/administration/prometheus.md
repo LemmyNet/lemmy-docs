@@ -142,6 +142,13 @@ on the Grafana dashboard registry.
 
 Dashboard: [Lemmy – Grafana Dashboards](https://grafana.com/grafana/dashboards/25020-lemmy/)
 
+Before importing the dashboard, add Prometheus as a data source in Grafana:
+
+1. In Grafana, go to **Connections** → **Data sources**.
+2. Click **Add new data source**, and select **Prometheus**.
+3. Set the server URL to your Prometheus instance (e.g. `http://localhost:10002`).
+4. Click **Save & test** to confirm the connection.
+
 To use it:
 
 1. In your Grafana instance, go to **Dashboards** → **Import**.
