@@ -136,9 +136,7 @@ process_virtual_memory_bytes 206000128
 
 ## Visualizing Metrics
 
-[Grafana](https://grafana.com/) can be used to visualize the metrics collected
-by Prometheus. A community-maintained Grafana dashboard for Lemmy is available
-on the Grafana dashboard registry.
+[Grafana](https://grafana.com/) can be used to visualize the metrics collected by Prometheus. A community-maintained Grafana dashboard for Lemmy is available on the Grafana dashboard registry.
 
 Dashboard: [Lemmy – Grafana Dashboards](https://grafana.com/grafana/dashboards/25020-lemmy/)
 
@@ -155,6 +153,4 @@ To use it:
 2. Enter the ID `25020` or paste the dashboard URL.
 3. Select your Prometheus data source and click **Import**.
 
-The dashboard provides an overview of HTTP request rates and latencies,
-database connection pool usage, and process-level metrics such as CPU, memory,
-and open file descriptors.
+The dashboard provides an overview of HTTP request rates and latencies, database connection pool usage, and process-level metrics such as CPU, memory, and open file descriptors.
