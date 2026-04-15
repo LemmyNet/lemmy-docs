@@ -9,7 +9,7 @@ steps:
       - event: pull_request
 
   check_formatting:
-    image: jauderho/prettier:3.8.1-alpine
+    image: jauderho/prettier:3.8.3-alpine
     commands:
       - prettier -c src
     when:
