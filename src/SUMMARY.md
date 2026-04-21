@@ -21,6 +21,7 @@
 - [Install from Scratch](administration/from_scratch.md)
 - [Install on AWS](administration/on_aws.md)
 - [First Steps](administration/first_steps.md)
+- [1.0 Upgrade Instructions](administration/1.0_upgrade.md)
 - [Configuration](administration/configuration.md)
 - [Theming Guide](administration/theming.md)
 - [Getting started with Federation](administration/federation_getting_started.md)
