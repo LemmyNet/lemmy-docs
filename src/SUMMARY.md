@@ -43,6 +43,7 @@
 - [Resources](contributors/06-resources.md)
 - [Ranking Algorithm](contributors/07-ranking-algo.md)
 - [Plugins](contributors/08-plugins.md)
+- [API v4 Upgrade Guide](contributors/09-api-v4.md)
 
 # Code of Conduct
 
