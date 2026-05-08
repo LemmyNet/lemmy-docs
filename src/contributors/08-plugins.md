@@ -41,7 +41,7 @@ Examples:
 - `local_post_after_create` with data [CreatePost](https://github.com/LemmyNet/lemmy/blob/main/crates/db_views/post/src/api.rs#L16)
 - `local_comment_after_update` with data [EditComment](https://github.com/LemmyNet/lemmy/blob/main/crates/db_views/comment/src/api.rs#L145)
 - `federated_post_after_receive` with [Post](https://github.com/LemmyNet/lemmy/blob/main/crates/db_schema/src/source/post.rs#L25)
-- Search the code for `plugin_hook_before` to find all available hooks
+- Search the code for `plugin_hook_after` to find all available hooks
 
 ### Captcha Plugin
 
