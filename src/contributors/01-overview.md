@@ -21,6 +21,8 @@ You may notice different problems or potential improvements when using Lemmy. Yo
 
 Use [Weblate](https://weblate.join-lemmy.org/projects/lemmy/) to help translate Lemmy into different languages.
 
+Use @localizethedocs's [Crowdin](https://localizethedocs.crowdin.com/lemmy-docs-l10n) to help translate these docs.
+
 ### Programming and Design
 
 You can open a pull request to make changes to Lemmy. In case of bigger contributions it is recommended to discuss it in an issue first. See the next sections for instructions to compile and develop the projects.
