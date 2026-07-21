@@ -48,9 +48,9 @@ With this, Lemmy can serve as an alternative to centralized media-centric servic
 To easily stream videos and audio on Lemmy, you can use any of the following apps. After clicking on a torrent link in Lemmy, a dialog will pop up asking you to open the link in the app.
 
 - [Stremio](https://www.stremio.com/) (Desktop, Android)
+- [PikaTorrent](https://www.pikatorrent.com/)
 - [WebTorrent Desktop](https://webtorrent.io/desktop/) (Desktop)
 - [Popcorn Time](https://github.com/popcorn-official/popcorn-desktop) (Desktop)
-- [xTorrent](https://play.google.com/store/apps/details?id=com.gamemalt.streamtorrentvideos) (Android)
 
 #### Advanced
 
