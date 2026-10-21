@@ -1,7 +1,8 @@
 # Lemmy Plugins
 
-Plugin support will be added in the upcoming 1.0 release. You can already start developing plugins now.
+Lemmy 1.0 has experimental support for WASM plugins. Depending on feedback for the current implementation, there may be breaking changes to the plugin API after 1.0 is released. See the [plugins label](https://github.com/LemmyNet/lemmy/issues?q=state%3Aopen%20label%3A%22plugins%22) and report your own suggestions!
 
+To get started with plugins, check examples in the [lemmy-plugins](https://github.com/LemmyNet/lemmy-plugins) repo or read the documentation below.
 Follow these steps:
 
 - Follow the normal [setup instructions](/docs/administration/administration.html), using `:nightly` tags to get the latest development version.
